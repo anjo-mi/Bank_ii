@@ -1,6 +1,12 @@
 import express from "express";
 import cors from "cors";
-import homeRoutes from "./routes/home.js"
+import homeRoutes from "./routes/home.js";
+import connectDB from "./config/database.js";
+
+import dotenv from "dotenv";
+dotenv.config({path: './config/.env'});
+
+connectDB();
 
 const app = express();
 
@@ -12,6 +18,6 @@ app.use(cors());
 
 app.use('/', homeRoutes);
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log('server successfully running!')
 })
