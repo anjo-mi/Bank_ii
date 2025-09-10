@@ -16,6 +16,8 @@ const questionSchema = new mongoose.Schema({
 
     content: String,
 
+    isDefault: Boolean,
+
     title: String,
 
     // user: {
