@@ -1,30 +1,33 @@
 import mongoose from "mongoose";
 
 const questionSchema = new mongoose.Schema({
-    answer: {
-        type: String,
-        default: null,
+  answer: {
+    type: String,
+    default: null,
+  },
+
+  categories: [
+    {
+      type: String,
+      required: true,
     },
+  ],
+  // categories: [{
+  //     type: mongoose.Schema.Types.ObjectId,
+  //     ref: 'Category',
+  // }],
 
-    categories: [{
-        type: String,
-    }],
-    // categories: [{
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'Category',
-    // }],
+  content: {
+    type: String,
+    required: true,
+  },
 
-    content: String,
+  isDefault: Boolean,
 
-    isDefault: Boolean,
+  // user: {
+  //     type: mongoose.Schema.Types.ObjectId,
+  //     ref: 'User',
+  // },
+});
 
-    title: String,
-
-    // user: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'User',
-    // },
-
-})
-
-export default questionSchema;
+export default mongoose.model("Question", questionSchema);
