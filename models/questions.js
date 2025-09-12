@@ -12,10 +12,6 @@ const questionSchema = new mongoose.Schema({
       required: true,
     },
   ],
-  // categories: [{
-  //     type: mongoose.Schema.Types.ObjectId,
-  //     ref: 'Category',
-  // }],
 
   content: {
     type: String,
@@ -23,11 +19,6 @@ const questionSchema = new mongoose.Schema({
   },
 
   isDefault: Boolean,
-
-  // user: {
-  //     type: mongoose.Schema.Types.ObjectId,
-  //     ref: 'User',
-  // },
 });
 
 export default mongoose.model("Question", questionSchema);

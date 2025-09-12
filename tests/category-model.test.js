@@ -5,7 +5,7 @@ import { jest } from "@jest/globals";
 import dotenv from "dotenv";
 dotenv.config();
 beforeAll(async () => {
-  await mongoose.connect(process.env.DB_STR);
+  await mongoose.connect(process.env.DB_TEST_STR);
 });
 
 // jest.useFakeTimers();

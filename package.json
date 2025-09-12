@@ -10,6 +10,7 @@
     "dev": "npm-run-all --parallel start css:watch",
     "start": "nodemon server.js",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "seed": "node seeds/index.js",
     "css:watch": "npx postcss ./public/styles.css -o ./public/twind.css --watch"
   },
   "dependencies": {
