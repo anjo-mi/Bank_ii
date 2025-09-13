@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import models from "../models/index.js";
+import models from "../../models/index.js";
 const { Category } = models;
 import { jest } from "@jest/globals";
 import dotenv from "dotenv";

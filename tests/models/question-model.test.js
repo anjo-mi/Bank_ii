@@ -1,14 +1,15 @@
 import mongoose from "mongoose";
-import models from "../models/index.js";
+import models from "../../models/index.js";
 const { Question } = models;
 import { jest } from "@jest/globals";
 import dotenv from "dotenv";
 dotenv.config();
+
 beforeAll(async () => {
   await mongoose.connect(process.env.DB_TEST_STR);
 });
 afterAll(async () => {
-  await Question.deleteMany({});
+  // await Question.deleteMany({});
   await mongoose.connection.close();
 });
 // jest.useFakeTimers();

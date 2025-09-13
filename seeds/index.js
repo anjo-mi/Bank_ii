@@ -11,13 +11,13 @@ dotenv.config();
 const populateDB = async () => {
   try {
     await mongoose.connect(process.env.DB_TEST_STR);
+    await Question.deleteMany({});
     await Category.deleteMany({});
     await User.deleteMany({});
-    await Question.deleteMany({});
     console.log("removed any residual data");
 
-    await Category.insertMany(categories);
     await Question.insertMany(questions);
+    await Category.insertMany(categories);
     await User.insertMany(users);
     console.log("seed data placed into corresponding DBs");
   } catch (err) {
