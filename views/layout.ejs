@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/twind.css">
+</head>
+<body class="m-auto text-center">
+    <header class="mx-auto w-full max-w-9/10">
+        <nav class="nav mx-auto w-full max-w-9/10 text-center">
+            <ul class="flex gap-4 m-auto w-full max-w-10/10 place-content-around text-center">
+                <li class="m-auto bg-pink-500 hover:bg-pink-700 text-white py-2 px-2 rounded-full mt-5"><a href="/">Home</a></li>
+                <li class="m-auto bg-pink-500 hover:bg-pink-700 text-white py-2 px-4 rounded-full mt-5"><a href="/questions">All Questions</a></li>
+                <li class="m-auto bg-pink-500 hover:bg-pink-700 text-white py-2 px-4 rounded-full mt-5"><a href="/categories">Categories</a></li>
+                <li class="m-auto bg-pink-500 hover:bg-pink-700 text-white py-2 px-4 rounded-full mt-5"><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="m-auto">
+        <%- body %>
+    </main>
+</body>
+</html>
