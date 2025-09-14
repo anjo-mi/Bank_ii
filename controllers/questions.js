@@ -6,7 +6,7 @@ export default {
     try {
       const allQuestions = await Question.find();
       // console.log({ questions });
-      return res.render("/questions", { allQuestions });
+      res.render("questions", { allQuestions });
     } catch (e) {
       console.log({ e });
       res.status(400).send("at this point, its prolly a server error");

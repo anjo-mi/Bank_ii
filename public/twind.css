@@ -12,10 +12,10 @@
     --color-green-700: oklch(52.7% 0.154 150.069);
     --color-green-800: oklch(44.8% 0.119 151.328);
     --color-blue-300: oklch(80.9% 0.105 251.813);
-    --color-violet-500: oklch(60.6% 0.25 292.717);
     --color-pink-500: oklch(65.6% 0.241 354.308);
     --color-pink-700: oklch(52.5% 0.223 3.958);
     --color-gray-400: oklch(70.7% 0.022 261.325);
+    --color-gray-700: oklch(37.3% 0.034 259.733);
     --color-white: #fff;
     --spacing: 0.25rem;
     --text-3xl: 1.875rem;
@@ -174,17 +174,59 @@
   }
 }
 @layer utilities {
+  .col-span-1 {
+    grid-column: span 1 / span 1;
+  }
+  .col-span-3 {
+    grid-column: span 3 / span 3;
+  }
+  .col-span-5 {
+    grid-column: span 5 / span 5;
+  }
+  .col-start-5 {
+    grid-column-start: 5;
+  }
+  .col-start-6 {
+    grid-column-start: 6;
+  }
+  .row-span-1 {
+    grid-row: span 1 / span 1;
+  }
+  .row-span-2 {
+    grid-row: span 2 / span 2;
+  }
+  .row-span-3 {
+    grid-row: span 3 / span 3;
+  }
+  .row-span-4 {
+    grid-row: span 4 / span 4;
+  }
+  .row-start-0 {
+    grid-row-start: 0;
+  }
+  .row-start-1 {
+    grid-row-start: 1;
+  }
+  .row-start-2 {
+    grid-row-start: 2;
+  }
   .m-auto {
     margin: auto;
   }
   .mx-auto {
     margin-inline: auto;
   }
+  .-mt-2 {
+    margin-top: calc(var(--spacing) * -2);
+  }
+  .mt-1 {
+    margin-top: calc(var(--spacing) * 1);
+  }
   .mt-5 {
     margin-top: calc(var(--spacing) * 5);
   }
-  .mr-auto {
-    margin-right: auto;
+  .-mr-2 {
+    margin-right: calc(var(--spacing) * -2);
   }
   .mb-3 {
     margin-bottom: calc(var(--spacing) * 3);
@@ -192,14 +234,23 @@
   .mb-5 {
     margin-bottom: calc(var(--spacing) * 5);
   }
-  .ml-auto {
-    margin-left: auto;
+  .-ml-2 {
+    margin-left: calc(var(--spacing) * -2);
+  }
+  .-ml-3 {
+    margin-left: calc(var(--spacing) * -3);
+  }
+  .-ml-4 {
+    margin-left: calc(var(--spacing) * -4);
   }
   .flex {
     display: flex;
   }
   .grid {
     display: grid;
+  }
+  .h-20 {
+    height: calc(var(--spacing) * 20);
   }
   .w-full {
     width: 100%;
@@ -210,14 +261,23 @@
   .max-w-10\/10 {
     max-width: calc(10/10 * 100%);
   }
+  .grid-flow-col {
+    grid-auto-flow: column;
+  }
   .grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+  .grid-cols-6 {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+  .grid-rows-3 {
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+  }
+  .grid-rows-4 {
+    grid-template-rows: repeat(4, minmax(0, 1fr));
+  }
   .place-content-around {
     place-content: space-around;
-  }
-  .place-content-center {
-    place-content: center;
   }
   .gap-2 {
     gap: calc(var(--spacing) * 2);
@@ -225,8 +285,22 @@
   .gap-4 {
     gap: calc(var(--spacing) * 4);
   }
+  .rounded {
+    border-radius: 0.25rem;
+  }
   .rounded-full {
     border-radius: calc(infinity * 1px);
+  }
+  .border-2 {
+    border-style: var(--tw-border-style);
+    border-width: 2px;
+  }
+  .border-solid {
+    --tw-border-style: solid;
+    border-style: solid;
+  }
+  .border-gray-700 {
+    border-color: var(--color-gray-700);
   }
   .bg-gray-400 {
     background-color: var(--color-gray-400);
@@ -246,14 +320,11 @@
   .py-2 {
     padding-block: calc(var(--spacing) * 2);
   }
+  .py-4 {
+    padding-block: calc(var(--spacing) * 4);
+  }
   .text-center {
     text-align: center;
-  }
-  .align-baseline {
-    vertical-align: baseline;
-  }
-  .align-middle {
-    vertical-align: middle;
   }
   .text-3xl {
     font-size: var(--text-3xl);
@@ -271,6 +342,12 @@
   }
   .underline {
     text-decoration-line: underline;
+  }
+  .outline-offset-2 {
+    outline-offset: 2px;
+  }
+  .outline-green-700 {
+    outline-color: var(--color-green-700);
   }
   .hover\:bg-green-400 {
     &:hover {
@@ -308,6 +385,11 @@
     }
   }
 }
+@property --tw-border-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
+}
 @property --tw-font-weight {
   syntax: "*";
   inherits: false;
@@ -320,6 +402,7 @@
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
+      --tw-border-style: solid;
       --tw-font-weight: initial;
       --tw-outline-style: solid;
     }
