@@ -4,9 +4,9 @@ const { User, Caetgory, Question } = models;
 export default {
   getAllQuestions: async (req, res) => {
     try {
-      const questions = await Question.find({});
+      const allQuestions = await Question.find();
       // console.log({ questions });
-      return res.json({ questions });
+      return res.render("/questions", { allQuestions });
     } catch (e) {
       console.log({ e });
       res.status(400).send("at this point, its prolly a server error");

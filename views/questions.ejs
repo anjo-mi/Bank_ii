@@ -1,0 +1,17 @@
+<div class="mx-auto w-full max-w-9/10 mt-5 mb-3">
+    <ul class="m-auto grid grid-cols-3 gap-4 text-center">
+    <% allQuestions.forEach(question =>{ %>
+        <li class="grid grid-rows-4 grid-flow-col gap-2">
+            <p class="row-span-3 col-span-5"><%= question.content%></p>
+            <ul class="row-span-1 col-span-5">
+                <%= question.categories.forEach(cat => {%>
+                    <li><%= cat%></li>
+                <%= })%>
+            </ul>
+            <div class="row-span-4 col-span-1 mx-auto w-full max-w-9/10 text-center">
+                <button class="text-center bg-gray-400 active:bg-green-800 hover:bg-green-400 focus:outline-4 focus:outline-offset-2 focus:outline-green-700 text-white font-bold py-2 px-4 rounded-full">Answer</button>
+            </div>
+        </li>
+    <% }) %>
+    </ul>
+</div>
