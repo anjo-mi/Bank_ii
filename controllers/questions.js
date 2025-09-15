@@ -21,4 +21,19 @@ export default {
       res.status(400).send("at this point, its prolly a server error");
     }
   },
+  getQuestionsByCats: async (req, res) => {
+    try {
+      const allQuestions = await Question.find();
+      const query = req.query;
+      const requested = Array.from(query).length
+        ? allQuestions.filter((question) =>
+            question.categories.some((cat) => cat in query)
+          )
+        : allQuestions;
+      console.log({ requested, query });
+      res.render("questions", { allQuestions: requested });
+    } catch (e) {
+      console.log({ e });
+    }
+  },
 };

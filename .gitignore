@@ -1,5 +1,6 @@
 .env
 .env.test
+.excalidraw
 # Playwright
 node_modules/
 /test-results/
