@@ -1,5 +1,10 @@
+import models from "../models/index.js";
+const { User, Category, Question } = models;
+
 export default {
-    getHome: (req,res)=>{
-        res.render('index.ejs')
-    }
-}
+  getHome: async (req, res) => {
+    const allCats = await Category.find();
+    // console.log({ allCats });
+    res.render("index", { allCats });
+  },
+};

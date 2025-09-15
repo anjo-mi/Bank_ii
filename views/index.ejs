@@ -1,12 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/twind.css">
-</head>
-<body>
-    <h1 class="text-3xl text-blue-300 underline bg-green-200" >Hello, World!</h1>
-</body>
-</html>
+<h1 class="mx-auto w-full max-w-9/10 mt-5 mb-5 text-center text-3xl text-blue-300 underline bg-green-200" >Select Categories Pool</h1>
+
+<form action="/questions/categories" method="GET">
+    <div class="mx-auto w-full max-w-9/10 mt-5 mb-3">
+        <ul class="m-auto grid grid-cols-3 gap-4 text-center">
+        <% allCats.forEach(cat =>{ %>
+            <li>
+            <input type="checkbox" name="<%= cat.description%>" value="<%= cat.description%>" >
+            <label for="<%= cat.description%>"><%= cat.description%></label>
+            </li>
+        <% }) %>
+        </ul>
+    </div>
+
+    <div class="mx-auto w-full max-w-9/10 text-center">
+        <input type="submit" value="Get Questions" class="text-center bg-gray-400 active:bg-green-800 hover:bg-green-400 focus:outline-4 focus:outline-offset-2 focus:outline-green-700 text-white font-bold py-2 px-4 rounded-full">
+    </div>
+</form>
