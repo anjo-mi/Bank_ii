@@ -1,0 +1,38 @@
+<!-- question: {
+    _id: new ObjectId('68c7685f53638305cdaca7ed'),
+    answer: null,
+    categories: [ 'Behavioral' ],
+    content: 'Tell me about yourself',
+    isDefault: true,
+    __v: 0
+  } -->
+
+<div>
+    <div class="">
+        <ul class="flex gap-4 m-auto w-full place-content-around text-center">
+        <% question.categories.forEach(cat => {%>
+            <li class="bg-gray-200 text-blue-700 font-bold"><%= cat %></li>
+        <% })%>
+        </ul>
+    </div>
+    <div>
+        <h2 class="font-bold underline text-xl mb-3 mt-8">Question:</h2>
+        <p class="m-auto text-3xl"><%= question.content%></p>
+    </div>
+    <div class="w-95/100 m-auto" id="answerContainer">
+        <form action="/answerQuestion" method="POST">
+        <textarea class="w-90/100 h-120 mt-6 mb-6 outline-5 outline-blue-700" name="answer" id="answer"></textarea>
+        <ul class="flex gap-4 m-auto w-full place-content-around text-center">
+            <li class="m-auto rounded-full">
+                <button>View Previous Answer</button>
+            </li>
+            <li class="m-auto rounded-full">
+                <input type="submit" value="Submit Current Answer">
+            </li>
+            <li class="m-auto rounded-full">
+                <button>Record</button>
+            </li>
+        </ul>
+        </form>
+    </div>
+</div>
