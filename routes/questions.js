@@ -4,6 +4,6 @@ const router = express.Router();
 
 router.get("/", questionsController.getAllQuestions);
 router.get("/categories", questionsController.getQuestionsByCats);
-router.get("/byId", questionsController.getQuestionById);
+router.post("/byId", questionsController.getQuestionById);
 
 export default router;

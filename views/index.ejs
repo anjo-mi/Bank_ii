@@ -1,4 +1,4 @@
-<h1 class="mx-auto w-50/100 mt-5 mb-5 text-center text-3xl text-blue-300 underline bg-green-200" >Select Categories Pool</h1>
+<h1 class="mx-auto w-80/100 md:w-70/100 lg:w-50/100 text-lg md:text-lg lg:text:3xl mt-5 mb-5 text-center text-blue-300 underline bg-green-200" >Select Categories Pool</h1>
 
 <form action="/questions/categories" method="GET">
     <div class="mx-auto w-full max-w-9/10 mt-5 mb-3">
@@ -6,7 +6,7 @@
         <% allCats.forEach(cat =>{ %>
             <li>
             <input type="checkbox" name="<%= cat.description%>" value="<%= cat.description%>" >
-            <label for="<%= cat.description%>"><%= cat.description%></label>
+            <label class="text-xs md:text-md lg:text-2xl" for="<%= cat.description%>"><%= cat.description%></label>
             </li>
         <% }) %>
         </ul>

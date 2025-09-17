@@ -11,28 +11,28 @@
     <div class="">
         <ul class="flex gap-4 m-auto w-full place-content-around text-center">
         <% question.categories.forEach(cat => {%>
-            <li class="bg-gray-200 text-blue-700 font-bold"><%= cat %></li>
+            <li class="bg-gray-200 text-xs md:text-md lg:text-lg mt-3 md:mt-0 lg:mt-0 text-blue-700 font-bold"><%= cat %></li>
         <% })%>
         </ul>
     </div>
     <div>
-        <h2 class="font-bold underline text-xl mb-3 mt-8">Question:</h2>
-        <p class="m-auto text-3xl"><%= question.content%></p>
+        <h2 class="font-bold underline text:md md:text-lg lg:text-xl mt-2 mb-3 md:mt-8 lg:mt-8">Question:</h2>
+        <p class="m-auto font-bold text-lg md:text-xl lg:text-2xl"><%= question.content%></p>
     </div>
     <div class="w-95/100 m-auto" id="answerContainer">
         <form action="/answerQuestion" method="POST">
-        <textarea class="w-90/100 h-120 mt-6 mb-6 outline-5 outline-blue-700" name="answer" id="answer"></textarea>
-        <ul class="flex gap-4 m-auto w-full place-content-around text-center">
-            <li class="m-auto rounded-full">
+        <ul class="flex gap-4 m-auto w-full mt-2 place-content-around text-center">
+            <li class="m-auto w-3/10 text-xs md:text-lg lg:text-xl outline-2 outline-grey-200 hover:outline-green-400 active:outline-green-800 rounded-full">
                 <button>View Previous Answer</button>
             </li>
-            <li class="m-auto rounded-full">
+            <li class="m-auto w-3/10 text-xs md:text-lg lg:text-xl outline-2 outline-grey-200 hover:outline-green-400 active:outline-green-800 rounded-full">
                 <input type="submit" value="Submit Current Answer">
             </li>
-            <li class="m-auto rounded-full">
+            <li class="m-auto w-3/10 text-xs md:text-lg lg:text-xl outline-2 outline-grey-200 hover:outline-green-400 active:outline-green-800 rounded-full">
                 <button>Record</button>
             </li>
         </ul>
+        <textarea class="w-90/100 h-30 focus:h-120 mt-6 mb-6 outline-5 outline-blue-700" name="answer" id="answer"></textarea>
         </form>
     </div>
 </div>

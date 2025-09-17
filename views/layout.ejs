@@ -7,18 +7,18 @@
     <link rel="stylesheet" href="/twind.css">
 </head>
 <body class="m-auto font-mono text-center">
-    <header class="mx-auto w-full max-w-9/10">
+    <header class="mx-auto w-full">
         <nav class="nav mx-auto w-full max-w-9/10 text-center">
-            <ul class="flex gap-4 m-auto w-full max-w-10/10 place-content-around text-center">
-                <li class="m-auto bg-pink-500 hover:bg-pink-700 text-white py-2 px-2 rounded-full mt-5"><a href="/">Home</a></li>
-                <li class="m-auto bg-pink-500 hover:bg-pink-700 text-white py-2 px-4 rounded-full mt-5"><a href="/questions">All Questions</a></li>
-                <li class="m-auto bg-pink-500 hover:bg-pink-700 text-white py-2 px-4 rounded-full mt-5"><a href="/categories">Categories</a></li>
-                <li class="m-auto bg-pink-500 hover:bg-pink-700 text-white py-2 px-4 rounded-full mt-5"><a href="/logout">Logout</a></li>
+            <ul class="flex gap-4 m-auto w-full max-w-10/10 place-content-around text-xs md:text-md lg:text-2xl text-center">
+                <li class="m-auto w-fit bg-pink-500 hover:bg-pink-700 text-white py-2 px-2 rounded-full mt-5"><a class="w-fit" href="/">Home</a></li>
+                <li class="m-auto w-fit bg-pink-500 hover:bg-pink-700 text-white py-2 px-4 rounded-full mt-5"><a class="w-fit" href="/questions">Questions</a></li>
+                <li class="m-auto w-fit bg-pink-500 hover:bg-pink-700 text-white py-2 px-4 rounded-full mt-5"><a class="w-fit" href="/categories">Categories</a></li>
+                <li class="m-auto w-fit bg-pink-500 hover:bg-pink-700 text-white py-2 px-4 rounded-full mt-5"><a class="w-fit" href="/logout">Logout</a></li>
             </ul>
         </nav>
     </header>
-    <h1 class="m-auto mt-5 mb-5 w-50/100 text-teal-400 bg-purple-200 text-4xl">Bank-II.0</h1>
-    <main class="m-auto">
+    <h1 class="m-auto w-15/100 md:w-50/100 lg:w-50/100 fixed top-12 md:static lg:static mt-5 mb-5 text-md md:text-xl lg:text-4xl text-teal-400 bg-purple-200">Bank-II.0</h1>
+    <main class="m-auto w-95/100">
         <%- body %>
     </main>
 </body>
