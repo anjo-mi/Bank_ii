@@ -1,12 +1,25 @@
 <h1 class="mx-auto w-80/100 md:w-70/100 lg:w-50/100 text-lg md:text-lg lg:text:3xl mt-5 mb-5 text-center text-blue-300 underline bg-green-200" >Select Categories Pool</h1>
 
-<form action="/questions/categories" method="GET">
+<form action="/questions/byCategory" method="POST">
+    
+    <div class="mx-auto outline-2 outline-black-100 w-full max-w-9/10 mt-5 mb-3">
+        <ul class="m-auto flex place-content-center gap-10 text-center">
+            <li>
+                <input type="radio" name="matchAll" value="1" >
+                <label class="text-xs md:text-md lg:text-2xl" for="">Match All Slected Categories</label>
+            </li>
+            <li>
+                <input type="radio" name="matchAll" value="0" >
+                <label class="text-xs md:text-md lg:text-2xl" for="">Match Any Selected Category</label>
+            </li>
+        </ul>
+    </div>
     <div class="mx-auto w-full max-w-9/10 mt-5 mb-3">
         <ul class="m-auto grid grid-cols-3 gap-4 text-center">
         <% allCats.forEach(cat =>{ %>
             <li>
-            <input type="checkbox" name="<%= cat.description%>" value="<%= cat.description%>" >
-            <label class="text-xs md:text-md lg:text-2xl" for="<%= cat.description%>"><%= cat.description%></label>
+                <input type="checkbox" name="categori" value="<%= cat.description%>" >
+                <label class="text-xs md:text-md lg:text-2xl" for="<%= cat.description%>"><%= cat.description%></label>
             </li>
         <% }) %>
         </ul>

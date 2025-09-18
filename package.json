@@ -11,7 +11,7 @@
     "start": "nodemon server.js",
     "css:watch": "npx postcss ./public/styles.css -o ./public/twind.css --watch",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "test:reqs": "node --experimental-vm-modules node_modules/jest/bin/jest.js ./tests/requests",
+    "test:reqs": "node --experimental-vm-modules node_modules/jest/bin/jest.js ./tests/requests/questionsByCategory",
     "test:models": "npx playwright test ./tests/models",
     "test:nav": "npx playwright test ./tests/navigation",
     "test:setup": "npx playwright test ./tests/setup",
