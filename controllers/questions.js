@@ -35,19 +35,21 @@ export default {
       // convert any requests in the body to a Set, determine if there are any
       const cats = Array.isArray(body.categori) ? body.categori : [body.categori];
       const categori = new Set(cats);
+      console.log({cats,categori})
 
       if (!matchAll){
         // if there are no categories requested, respond with all questions,
           // otherwise extract all questions that contain ANY requested categories
           // maybe switch to "half strict"?
             // ???"some" -> "every" (single category will ones will pop up with exact matches)???
-        const requested = categori.size
+        console.log('category size:', categori.size)
+        const requested = body.categori && categori.size
           ? allQuestions.filter((question) =>{
               return question.categories.some((cat) => categori.has(cat))
             })
           : allQuestions;
-        // res.render("questions", { allQuestions: requested });
-        return res.json( { allQuestions: requested } );
+        res.render("questions", { allQuestions: requested });
+        // return res.json( { allQuestions: requested } );
       }else{
         // if user wants only questions with exact matches for requested categories
         
@@ -60,8 +62,8 @@ export default {
           return cats.every((cat) => question.categories.includes(cat));
 
         });
-        // res.render("questions", { allQuestions: requested });
-        return res.json( { allQuestions: requested } );
+        res.render("questions", { allQuestions: requested });
+        // return res.json( { allQuestions: requested } );
       }
     } catch (e) {
       console.log({ e });
