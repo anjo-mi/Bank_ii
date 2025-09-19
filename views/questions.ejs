@@ -1,20 +1,22 @@
 <div class="mx-auto w-full max-w-9/10 mt-5 mb-3">
     <div class="mx-auto w-full mt-5 text-center">
-        <button class="text-center max-w-9/10 bg-gray-400 active:bg-green-800 hover:bg-green-400 focus:outline-4 focus:outline-offset-2 focus:outline-green-700 text-white font-bold py-4 px-4 rounded-full">Randomize Order</button>
+        <!-- <button class="text-center max-w-9/10 bg-gray-400 active:bg-green-800 hover:bg-green-400 focus:outline-4 focus:outline-offset-2 focus:outline-green-700 text-white font-bold py-4 px-4 rounded-full">Randomize Order</button> -->
+         <p class="m-auto w-fit bg-green-400 hover:bg-green-600 active:bg-green-950 text-white py-2 px-5 rounded-full mt-5"><a class="w-fit" href="/questions">Clear All Filters</a></p>
     </div>
     <ul class="m-auto mt-5 border-solid border-black-500 grid grid-cols-3 gap-4 text-center">
     <% allQuestions.forEach(question =>{ %>
-        <li class="question-list-item h-20 w-full col-span-3 border-solid border-2 border-black-700">
-        <form action="/questions/byId" method="POST" class="grid grid-rows-3 grid-cols-6 gap-2">
-            <p class="question-content row-span-2 col-span-5"><%= question.content%></p>
-            <ul class="row-span-1 col-span-5 flex gap-4 m-auto w-full max-w-10/10 place-content-around text-center">
+        <li class="question-list-item p-2 h-fit w-full col-span-3 border-solid border-2 border-black-700">
+        <form action="/questions/byId" method="POST"
+        class="flex flex-col place-content-center gap-2 items-center">
+            <ul class="flex m-auto underline underline-offset-1 w-full max-w-10/10 place-content-around text-center">
                 <% question.categories.forEach(cat =>{ %>
-                    <li class="question-category m-auto rounded-full -mt-2"><%= cat%></li>
+                    <li class="question-category text-xs md:text-sm lg:text-md m-auto rounded-full"><%= cat%></li>
                 <% })%>
             </ul>
-            <div class="mx-auto -ml-3 w-full row-start-1 col-start-6 row-span-3 text-center">
+            <p class="question-content text-sm md:text-lg lg:text-2xl row-span-2 col-span-5"><%= question.content%></p>
+            <div class="m-auto text-center">
                 <input type="hidden" name="id" value="<%= question._id %>">
-                <input type="submit" class="text-center bg-gray-400 active:bg-green-800 hover:bg-green-400 focus:outline-4 focus:outline-offset-2 focus:outline-green-700 text-white font-bold py-4 px-4 rounded-full" value="Answer">
+                <input type="submit" class="text-center bg-green-400 active:bg-green-950 hover:bg-green-600 focus:outline-4 focus:outline-offset-2 focus:outline-green-700 text-white font-bold py-1 px-5 rounded-full" value="Answer">
             </div>
         </form>
         </li>
