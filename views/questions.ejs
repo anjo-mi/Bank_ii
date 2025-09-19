@@ -5,10 +5,10 @@
     </div>
     <ul class="m-auto mt-5 border-solid border-black-500 grid grid-cols-3 gap-4 text-center">
     <% allQuestions.forEach(question =>{ %>
-        <li class="question-list-item p-2 h-fit w-full col-span-3 border-solid border-2 border-black-700">
+        <li class="question-list-item rounded-md p-2 h-fit w-full col-span-3 border-solid border-2 border-black-700">
         <form action="/questions/byId" method="POST"
         class="flex flex-col place-content-center gap-2 items-center">
-            <ul class="flex m-auto underline underline-offset-1 w-full max-w-10/10 place-content-around text-center">
+            <ul class="flex m-auto border-b-1 border-dashed w-full max-w-10/10 place-content-around text-center">
                 <% question.categories.forEach(cat =>{ %>
                     <li class="question-category text-xs md:text-sm lg:text-md m-auto rounded-full"><%= cat%></li>
                 <% })%>

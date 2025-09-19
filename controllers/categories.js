@@ -6,10 +6,10 @@ export default {
     try {
       const categories = await Category.find({});
       // console.log({ categories });
-      await setTimeout(() => {
+      setTimeout(() => {
         console.log("you gota wait");
-      }, 9000);
-      return res.json({ categories });
+        return res.json({ categories });
+      }, 5000);
     } catch (e) {
       console.log({ e });
       res.status(400).send("at this point, its prolly a server error");
