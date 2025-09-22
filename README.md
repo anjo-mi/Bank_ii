@@ -1,11 +1,11 @@
 ### Table of Contents
-[Tech](#tech-stack)
-[Setup](#setup)
-[Running Tests](#running-tests)
-[Seeding](#seeding)
-[Performance](#performance)
-[Current Features](#current-features)
-[In the Works](#ensuing-updates)
+- [Tech](#tech-stack)
+- [Setup](#setup)
+- [Running Tests](#running-tests)
+- [Seeding](#seeding)
+- [Performance](#performance)
+- [Current Features](#current-features)
+- [In the Works](#ensuing-updates)
 
 
 ## Current Status
