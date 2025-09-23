@@ -7,6 +7,7 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
+    --color-orange-700: oklch(55.3% 0.195 38.402);
     --color-green-400: oklch(79.2% 0.209 151.711);
     --color-green-600: oklch(62.7% 0.194 149.214);
     --color-green-700: oklch(52.7% 0.154 150.069);
@@ -313,11 +314,23 @@
   .min-h-50 {
     min-height: calc(var(--spacing) * 50);
   }
+  .w-2\/10 {
+    width: calc(2/10 * 100%);
+  }
+  .w-3\/10 {
+    width: calc(3/10 * 100%);
+  }
   .w-4 {
     width: calc(var(--spacing) * 4);
   }
   .w-4\/10 {
     width: calc(4/10 * 100%);
+  }
+  .w-5\/10 {
+    width: calc(5/10 * 100%);
+  }
+  .w-7\/10 {
+    width: calc(7/10 * 100%);
   }
   .w-15\/100 {
     width: calc(15/100 * 100%);
@@ -348,6 +361,9 @@
   }
   .max-w-10\/10 {
     max-width: calc(10/10 * 100%);
+  }
+  .flex-3 {
+    flex: 3;
   }
   .resize-none {
     resize: none;
@@ -387,6 +403,9 @@
   }
   .gap-4 {
     gap: calc(var(--spacing) * 4);
+  }
+  .gap-5 {
+    gap: calc(var(--spacing) * 5);
   }
   .rounded-full {
     border-radius: calc(infinity * 1px);
@@ -453,6 +472,9 @@
   }
   .bg-indigo-950 {
     background-color: var(--color-indigo-950);
+  }
+  .bg-orange-700 {
+    background-color: var(--color-orange-700);
   }
   .bg-pink-500 {
     background-color: var(--color-pink-500);
@@ -612,6 +634,11 @@
       height: calc(var(--spacing) * 120);
     }
   }
+  .focus\:border-green-400 {
+    &:focus {
+      border-color: var(--color-green-400);
+    }
+  }
   .focus\:bg-slate-800 {
     &:focus {
       background-color: var(--color-slate-800);
@@ -678,6 +705,16 @@
   .md\:mt-0 {
     @media (width >= 48rem) {
       margin-top: calc(var(--spacing) * 0);
+    }
+  }
+  .md\:w-2\/10 {
+    @media (width >= 48rem) {
+      width: calc(2/10 * 100%);
+    }
+  }
+  .md\:w-7\/10 {
+    @media (width >= 48rem) {
+      width: calc(7/10 * 100%);
     }
   }
   .md\:w-50\/100 {
@@ -768,6 +805,11 @@
   .lg\:h-16 {
     @media (width >= 64rem) {
       height: calc(var(--spacing) * 16);
+    }
+  }
+  .lg\:w-2\/10 {
+    @media (width >= 64rem) {
+      width: calc(2/10 * 100%);
     }
   }
   .lg\:w-6\/10 {
