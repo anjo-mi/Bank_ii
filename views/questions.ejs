@@ -1,6 +1,10 @@
 <div class="mx-auto w-full max-w-9/10 mt-5 mb-3">
-    <div class="mx-auto w-full mt-5 text-center">
-        <!-- <button class="text-center max-w-9/10 bg-gray-400 active:bg-green-800 hover:bg-green-400 focus:outline-4 focus:outline-offset-2 focus:outline-green-700 text-white font-bold py-4 px-4 rounded-full">Randomize Order</button> -->
+    <div class="mx-auto flex gap-3 w-full mt-5 items-center text-center">
+         <div class="m-auto w-fit text-white py-2 px-5 rounded-full mt-5">
+            <input type="text" name="search" id="search-bar" placeholder="Search"
+            class="px-2">
+            <button class="p-2 border-1 border-gray-300" id="search-btn">Search</button>
+         </div>
          <p class="m-auto w-fit bg-green-400 hover:bg-green-600 active:bg-green-950 text-white py-2 px-5 rounded-full mt-5"><a class="w-fit" href="/questions">Clear All Filters</a></p>
     </div>
     <ul class="m-auto mt-5 border-solid border-black-500 grid grid-cols-3 gap-4 text-center">
@@ -26,3 +30,9 @@
         <button class="text-center max-w-9/10 bg-gray-400 active:bg-green-800 hover:bg-green-400 focus:outline-4 focus:outline-offset-2 focus:outline-green-700 text-white font-bold py-4 px-4 rounded-full">Randomize Order</button>
     </div>
 </div>
+
+
+
+
+<!-- <script>const searchedQuestions = <%- JSON.stringify(allQuestions)%> </script> -->
+<script src="../main.js"></script>
