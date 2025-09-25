@@ -3,6 +3,7 @@ let incomingSearch = document.getElementById('incomingSearch')
                       : null;
 const searchedQs = Array.from(document.querySelectorAll('.question-list-item'));
 const searchButton = document.getElementById('search-btn');
+const clearButton = document.getElementById('clear-btn');
 
 
 const filterSearch = () => {
@@ -51,8 +52,14 @@ const filterSearchEnter = (e) => {
   
   incomingSearch = null;
 }
+
+const clearFilters = () => {
+  searchedQs.forEach(question => question.style.display = 'block');
+}
+
 if (incomingSearch) filterSearch();
 console.log({incomingSearch})
 
 document.addEventListener('keydown', filterSearchEnter);
 searchButton.addEventListener('click', filterSearch);
+clearButton.addEventListener('click', clearFilters);
