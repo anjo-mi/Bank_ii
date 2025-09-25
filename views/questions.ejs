@@ -31,8 +31,16 @@
         </li>
     <% }) %>
     </ul>
-    <div class="mx-auto w-full mt-5 text-center">
-        <button class="text-center max-w-9/10 bg-gray-400 active:bg-green-800 hover:bg-green-400 focus:outline-4 focus:outline-offset-2 focus:outline-green-700 text-white font-bold py-4 px-4 rounded-full">Randomize Order</button>
+    <div id="noResultsBox" class="no-results-box mx-auto border-1 border-gray-400 flex items-center h-fit w-full text-center py-1 pb-5 px-5">
+        <p
+        class="m-auto text-lg md:text-xl lg:text-xl text-center text-orange-800 h-full w-full">
+        No Results Matched Your Query. You May Try:
+        </p>
+        <div class="mx-auto flex flex-col gap-3 h-fit w-full mt-5 items-center text-center">
+            <p class="m-auto text-sm md:text-lg lg:text-lg w-60/100 h-full bg-green-400 hover:bg-green-600 active:bg-green-950 text-white py-2 px-5 rounded-full mt-5"><a class="w-fit" href="/questions">Clear All Filters</a></p>
+            <p class="m-auto w-60/100 text-sm md:text-lg lg:text-lg bg-green-400 hover:bg-green-600 text-white py-2 px-5 rounded-full mt-5"><a class="block" href="/">Return Home</a></p>
+            <button id="clear-btn-two" class="m-auto text-sm md:text-lg lg:text-lg w-60/100 h-full bg-green-400 hover:bg-green-600 active:bg-green-950 text-white py-2 px-3 rounded-full mt-5">Clear Keyword Search</button>
+        </div>
     </div>
 </div>
 

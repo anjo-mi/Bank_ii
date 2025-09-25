@@ -13,6 +13,7 @@
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "test:reqs": "node --experimental-vm-modules node_modules/jest/bin/jest.js ./tests/requests/questionsByCategory",
     "test:displays": "npx playwright test ./tests/displays",
+    "test:errors": "npx playwright test ./tests/errors",
     "test:filters": "npx playwright test ./tests/filters",
     "test:models": "npx playwright test ./tests/models",
     "test:nav": "npx playwright test ./tests/navigation",

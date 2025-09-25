@@ -4,6 +4,8 @@ let incomingSearch = document.getElementById('incomingSearch')
 const searchedQs = Array.from(document.querySelectorAll('.question-list-item'));
 const searchButton = document.getElementById('search-btn');
 const clearButton = document.getElementById('clear-btn');
+const clearButtonTwo = document.getElementById('clear-btn-two');
+const noResultsMessage = document.getElementById('noResultsBox');
 
 
 const filterSearch = () => {
@@ -26,6 +28,7 @@ const filterSearch = () => {
   fail.forEach(question => question.style.display = 'none');
   
   incomingSearch = null;
+  handleNoResults();
 }
 
 
@@ -51,15 +54,35 @@ const filterSearchEnter = (e) => {
   fail.forEach(question => question.style.display = 'none');
   
   incomingSearch = null;
+  handleNoResults();
 }
 
 const clearFilters = () => {
   searchedQs.forEach(question => question.style.display = 'block');
+  handleNoResults();
+}
+
+const handleNoResults = () => {
+  const visibleItemsCount = countVisibleQuestions();
+  console.log({visibleItemsCount})
+  if (visibleItemsCount) noResultsMessage.style.display = 'none';
+  else noResultsMessage.style.display = 'block';
+}
+
+const countVisibleQuestions = () => {
+  let visibleCount = 0;
+  searchedQs.forEach(question => {
+    console.log({question})
+    if (question.style.display !== 'none') visibleCount++;
+  });
+
+  return visibleCount;
 }
 
 if (incomingSearch) filterSearch();
-console.log({incomingSearch})
 
 document.addEventListener('keydown', filterSearchEnter);
 searchButton.addEventListener('click', filterSearch);
 clearButton.addEventListener('click', clearFilters);
+clearButtonTwo.addEventListener('click', clearFilters);
+window.addEventListener('load', handleNoResults);
