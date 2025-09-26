@@ -100,3 +100,44 @@ test("too specific from /index should show results after clearing search params"
 });
 
 
+test("no category matches box should show, while no results box should be hidden", async ({
+  page,
+}) => {
+  await page.goto("http://localhost:3000/");
+
+  await page.locator('input[value="Communication"]').check();
+  await page.locator('input[value="Problem Solving"]').check();
+  await page.locator('input[value="Technical"]').check();
+  await page.locator('input[value="1"]').check();
+  await page.fill('input[name="search"]', 'appeared');
+  await page.click("text=Get Questions");
+  
+  await expect(page.locator(".question-list-item:visible")).toHaveCount(0);
+  await expect(page.locator(".no-results-box:visible")).toHaveCount(0);
+  await expect(page.locator(".too-strict-box:visible")).toHaveCount(1);
+  await expect(page).toHaveURL("http://localhost:3000/questions/byCategory");
+});
+
+test("category match with too many search params, should no results box, then all category questions after button click", async ({
+  page,
+}) => {
+  await page.goto("http://localhost:3000/");
+
+  await page.locator('input[value="Communication"]').check();
+  await page.locator('input[value="1"]').check();
+  await page.fill('input[name="search"]', 'around');
+  await page.click("text=Get Questions");
+  
+  await expect(page.locator(".question-list-item:visible")).toHaveCount(0);
+  await expect(page.locator(".no-results-box:visible")).toHaveCount(1);
+  await expect(page.locator(".too-strict-box:visible")).toHaveCount(0);
+  await expect(page).toHaveURL("http://localhost:3000/questions/byCategory");
+  
+  await page.click("button[id='clear-btn']");
+  await page.waitForSelector(".no-results-box", { state: 'hidden' });
+  await expect(page.locator(".question-list-item:visible")).toHaveCount(3);
+  await expect(page.locator(".no-results-box:visible")).toHaveCount(0);
+  await expect(page.locator(".too-strict-box:visible")).toHaveCount(0);
+});
+
+

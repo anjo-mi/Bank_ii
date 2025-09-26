@@ -6,6 +6,7 @@ const searchButton = document.getElementById('search-btn');
 const clearButton = document.getElementById('clear-btn');
 const clearButtonTwo = document.getElementById('clear-btn-two');
 const noResultsMessage = document.getElementById('noResultsBox');
+const tooStrictMessage = document.getElementById('tooStrictBox');
 
 
 const filterSearch = () => {
@@ -65,8 +66,18 @@ const clearFilters = () => {
 const handleNoResults = () => {
   const visibleItemsCount = countVisibleQuestions();
   console.log({visibleItemsCount})
-  if (visibleItemsCount) noResultsMessage.style.display = 'none';
-  else noResultsMessage.style.display = 'block';
+  if (visibleItemsCount){
+    noResultsMessage.style.display = 'none';
+    tooStrictMessage.style.display = 'none';
+  }
+  else if(!searchedQs.length){
+    noResultsMessage.style.display = 'none';
+    tooStrictMessage.style.display = 'block';
+  }
+  else {
+    tooStrictMessage.style.display = 'none';
+    noResultsMessage.style.display = 'block';
+  }
 }
 
 const countVisibleQuestions = () => {
