@@ -15,7 +15,6 @@ const filterSearch = () => {
                       : document.getElementById('search-bar').value.split(' ');
   document.getElementById('search-bar').value = '';
   const search = searchItems.map(word => word.toLowerCase().trim()).filter(Boolean);
-  // if (!search.length) return;
   
   const pass = searchedQs.filter(question => {
     return search.every(item => question.textContent.toLowerCase().includes(item));
