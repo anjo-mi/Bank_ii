@@ -15,7 +15,7 @@ const filterSearch = () => {
                       : document.getElementById('search-bar').value.split(' ');
   document.getElementById('search-bar').value = '';
   const search = searchItems.map(word => word.toLowerCase().trim()).filter(Boolean);
-  if (!search.length) return;
+  // if (!search.length) return;
   
   const pass = searchedQs.filter(question => {
     return search.every(item => question.textContent.toLowerCase().includes(item));
@@ -25,11 +25,27 @@ const filterSearch = () => {
     return search.some(item => !question.textContent.toLowerCase().includes(item));
   });
   
-  pass.forEach(question => question.style.display = 'block');
-  fail.forEach(question => question.style.display = 'none');
+  handleResults();
+
+  searchedQs.forEach(question => question.classList.remove('opacity-100'))
+  setTimeout(() => {
+    searchedQs.forEach(question => question.style.display = 'none');
+  }, 300)
+  setTimeout(() => {
+    pass.forEach(question => question.style.display = 'block');
+    setTimeout(() => {
+      pass.forEach(question => question.classList.add('opacity-100'))
+    }, 100)
+  },300)
+
   
+  // if (!pass.length) searchedQs.forEach(question => question.classList.add('opacity-100'));
+
   incomingSearch = null;
-  handleNoResults();
+  setTimeout(() => {
+    handleNoResults();
+  }, 300)
+  return pass.length;
 }
 
 
@@ -41,7 +57,7 @@ const filterSearchEnter = (e) => {
                       : document.getElementById('search-bar').value.split(' ');
   document.getElementById('search-bar').value = '';
   const search = searchItems.map(word => word.toLowerCase().trim()).filter(Boolean);
-  if (!search.length) return;
+  if (!search.length) return [];
   
   const pass = searchedQs.filter(question => {
     return search.every(item => question.textContent.toLowerCase().includes(item));
@@ -50,50 +66,98 @@ const filterSearchEnter = (e) => {
   const fail = searchedQs.filter(question => {
     return search.some(item => !question.textContent.toLowerCase().includes(item));
   });
+
+  handleResults();
   
-  pass.forEach(question => question.style.display = 'block');
-  fail.forEach(question => question.style.display = 'none');
+  searchedQs.forEach(question => question.classList.remove('opacity-100'))
+  setTimeout(() => {
+    searchedQs.forEach(question => question.style.display = 'none');
+  }, 300)
+  setTimeout(() => {
+    pass.forEach(question => question.style.display = 'block');
+    setTimeout(() => {
+      pass.forEach(question => question.classList.add('opacity-100'))
+    }, 100)
+  },300)
   
   incomingSearch = null;
-  handleNoResults();
+  setTimeout(() => {
+    handleNoResults();
+  }, 300)
+  return pass;
 }
 
 const clearFilters = () => {
-  searchedQs.forEach(question => question.style.display = 'block');
-  handleNoResults();
+  handleResults();
+  searchedQs.forEach(question => question.classList.remove('opacity-100'))
+  setTimeout(() => {
+    searchedQs.forEach(question => question.style.display = 'none');
+  }, 300)
+  setTimeout(() => {
+    searchedQs.forEach(question => question.style.display = 'block');
+    setTimeout(() => {
+      searchedQs.forEach(question => question.classList.add('opacity-100'))
+    }, 100)
+  },300)
+}
+
+const handleResults = () => {
+  noResultsMessage.classList.remove('opacity-100');
+  tooStrictMessage.classList.remove('opacity-100');
+  setTimeout(() =>{
+    noResultsMessage.style.display = 'none';
+    tooStrictMessage.style.display = 'none';
+  }, 300);
 }
 
 const handleNoResults = () => {
   const visibleItemsCount = countVisibleQuestions();
-  console.log({visibleItemsCount})
   if (visibleItemsCount){
-    noResultsMessage.style.display = 'none';
-    tooStrictMessage.style.display = 'none';
+    noResultsMessage.classList.remove('opacity-100');
+    tooStrictMessage.classList.remove('opacity-100');
+    setTimeout(() =>{
+      noResultsMessage.style.display = 'none';
+      tooStrictMessage.style.display = 'none';
+    }, 300);
   }
   else if(!searchedQs.length){
-    noResultsMessage.style.display = 'none';
+    noResultsMessage.classList.remove('opacity-100');
+    setTimeout(() => {
+      noResultsMessage.style.display = 'none';
+    }, 300)
     tooStrictMessage.style.display = 'block';
+    setTimeout(() => {
+      tooStrictMessage.classList.add('opacity-100');
+    }, 300)
   }
   else {
-    tooStrictMessage.style.display = 'none';
     noResultsMessage.style.display = 'block';
+    setTimeout(() => {
+      noResultsMessage.classList.add('opacity-100');
+    }, 300)
   }
 }
 
 const countVisibleQuestions = () => {
   let visibleCount = 0;
   searchedQs.forEach(question => {
-    console.log({question})
     if (question.style.display !== 'none') visibleCount++;
   });
 
   return visibleCount;
 }
 
-if (incomingSearch) filterSearch();
+const pass = filterSearch();
+
+if (pass.length) {
+  setTimeout(() => {
+    pass.forEach(question => question.classList.add('opacity-100'))
+  }, 300)
+}else setTimeout(() => {
+    handleNoResults();
+  }, 300)
 
 document.addEventListener('keydown', filterSearchEnter);
 searchButton.addEventListener('click', filterSearch);
 clearButton.addEventListener('click', clearFilters);
 clearButtonTwo.addEventListener('click', clearFilters);
-window.addEventListener('load', handleNoResults);
