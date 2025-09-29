@@ -66,7 +66,8 @@ Interchange these files in the package.json script to run accordingly:
 - Open HTML File in Default Browser
 
 <details>
-  <summary>###Performance Configuration</summary>
+  <summary>Performance Configuration</summary>
+  ###Performance Configuration
 🤦 After installing all dependencies, the generated .pb files were getting caught in `/node_modules/@platformatic/flame/bin`
   - Fixing this involves going into `/node_modules/@platformatic/flame/bin` and altering flame.js to this:
   
