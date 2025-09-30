@@ -10,6 +10,7 @@ import logger from "morgan";
 import homeRoutes from "./routes/home.js";
 import categoriesRoutes from "./routes/category.js";
 import questionsRoutes from "./routes/questions.js";
+import practiceRoutes from "./routes/practice.js";
 
 // database connection logic
 import connectDB from "./config/database.js";
@@ -34,6 +35,7 @@ app.use(cors());
 app.use("/", homeRoutes);
 app.use("/categories", categoriesRoutes);
 app.use("/questions", questionsRoutes);
+app.use("/practice", practiceRoutes);
 
 app.listen(process.env.PORT || 3000, () => {
   console.log("server successfully running!");
