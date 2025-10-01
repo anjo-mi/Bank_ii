@@ -4,20 +4,18 @@ const { User, Category, Question } = models;
 export default {
   getCategories: async (req, res) => {
     const allCats = await Category.find();
-    // res.render("practice", { allCats });
-    res.json({
-      allCats
-    })
+    res.render("practice", { allCats });
+    // res.json({allCats})
   },
 
   startPractice: async (req,res) => {
     let {categori, limit} = req.body;
     const questions = await Question.find();
-    limit = limit && limit > 0 ? limit : 7;
+    limit = limit && limit > 0 ? Math.floor(limit) : 7;
 
     // poor time complexity, but both variables should theoretically be small
     //    (categories per question, categories included in an interview)
-    const matchingQuestions = categori.length 
+    const matchingQuestions = categori && categori.length 
           ? questions.filter(q => q.categories.some(cat => categori.includes(cat)))
           : questions;
 
@@ -40,13 +38,27 @@ export default {
     const message = sufficient
                     ? null
                     : `Your search yielded ${randomizedQuestions.length} results, while the interview was intended to contain ${limit} questions. Would you like to proceed?`;
-
-    res.json({
+    res.render('startPractice', {
       questions: randomizedQuestions,
       current: -1,
       requestedLength: limit,
       sufficient,
       message,
     })
+    // res.json({
+    //   questions: randomizedQuestions,
+    //   current: -1,
+    //   requestedLength: limit,
+    //   sufficient,
+    //   message,
+    // })
+  },
+
+  showNext: async (req,res) => {
+    let {questions, current} = req.body;
+    questions = JSON.parse(questions);
+    current = +current + 1;
+    if (current === questions.length) res.render('completed');
+    else res.render('practiceQuestion', {questions,current});
   }
 };
