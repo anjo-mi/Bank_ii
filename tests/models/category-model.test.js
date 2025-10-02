@@ -7,8 +7,10 @@ dotenv.config();
 beforeAll(async () => {
   await mongoose.connect(process.env.DB_TEST_STR);
 });
-
-// jest.useFakeTimers();
+afterAll(async () => {
+  await Category.deleteMany({});
+  await mongoose.connection.close();
+});
 
 const category1 = {
   desc: "Behavioral",

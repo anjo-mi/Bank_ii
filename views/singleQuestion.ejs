@@ -1,0 +1,44 @@
+<!-- question: {
+    _id: new ObjectId('68c7685f53638305cdaca7ed'),
+    answer: null,
+    categories: [ 'Behavioral' ],
+    content: 'Tell me about yourself',
+    isDefault: true,
+    __v: 0
+  } -->
+
+<div class="">
+    <div class="">
+        <form action="/questions/byCategory" method="POST">
+            <ul class="flex flex-wrap border-1 border-dashed border-gray-400 rounded-sm gap-1 m-auto mt-5 ml-18 p-1 py-2 w-80/100 justify-end md:justify-evenly items-center text-center">
+            <% question.categories.forEach(cat => {%>
+                <input type="hidden" name="categori" value="<%= cat%>">
+                <input  type="submit" value="<%= cat %>" class="bg-slate-700 p-1 rounded-lg border-1 border-gray-200 text-xs md:text-lg lg:text-lg md:mt-0 lg:mt-0 text-sky-200 font-bold">
+                </form>
+            <% })%>
+            </ul>
+        </form>
+    </div>
+   
+    <div class="w-95/100 m-auto mt-4 flex flex-col" id="answerContainer">
+        <form action="/answerQuestion" method="POST"
+        class="flex flex-col lg:sticky lg:-top-12">
+             <div>
+                <h2 class="font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3">Question:</h2>
+                <p class="m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg text-lg md:text-xl lg:text-2xl"><%= question.content%></p>
+            </div>
+            <ul class="flex order-2 transition-all duration-400 gap-4 m-auto w-full h-12 lg:h-16 mt-3 mb-3 place-content-around text-center">
+                <li class="m-auto px-2 py-1 h-full w-32/100 text-xs md:text-lg lg:text-xl outline-2 outline-grey-200 hover:outline-green-400 active:outline-green-800 rounded-full">
+                    <button class="m-auto h-full w-full items-center">View Previous Answer</button>
+                </li>
+                <li class="m-auto px-2 py-1 h-fit w-32/100 text-xs md:text-lg lg:text-xl outline-2 outline-grey-200 hover:outline-green-400 active:outline-green-800 rounded-full">
+                    <input class="m-auto inline-block h-full w-full items-center" type="submit" value="Submit Current&#13;&#10;Answer">
+                </li>
+                <li class="m-auto px-2 py-1 h-full w-32/100 text-xs md:text-lg lg:text-xl outline-2 outline-grey-200 hover:outline-green-400 active:outline-green-800 rounded-full">
+                    <button class="m-auto h-full w-full items-center">Record</button>
+                </li>
+            </ul>
+            <textarea class="w-90/100 text-xs md:text-lg lg:text-lg order-3 h-15 focus:mt-5 focus:h-120 lg:focus:h-80 transition-all duration-300 resize-none px-2 py-1 mx-auto mb-6 border-2 border-gray-700 outline-0 focus:outline-2 focus:outline-blue-600 focus:bg-slate-800 rounded-lg fixed focus:static bottom-0 left-0 right-0 " name="answer" id="answer"></textarea>
+        </form>
+    </div>
+</div>

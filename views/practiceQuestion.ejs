@@ -1,0 +1,24 @@
+<div class="">
+   
+    <div class="w-95/100 m-auto mt-4 flex flex-col" id="answerContainer">
+        <form action="/practice/next" method="POST"
+        class="flex flex-col lg:sticky lg:-top-12">
+        <input type="hidden" name="questions" value="<%= JSON.stringify(questions) %>">
+        <input type="hidden" name="current" value="<%= current %>">
+        <input type="hidden" name="answers" value="<%= JSON.stringify(answers) %>">
+             <div>
+                <h2 class="font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3">Question <span id="questionNumber" class="inline-block text-center p-2 border-1 bg-slate-800 text-white"><%= current + 1%></span> of <span id="totalQuestions" class="inline-block p-2 border-1 bg-slate-800 text-white"><%= questions.length%></span></h2>
+                <p class="question-content m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg text-lg md:text-xl lg:text-2xl"><%= questions[current].content%></p>
+            </div>
+            <ul class="flex order-2 transition-all duration-400 gap-4 m-auto w-full h-12 lg:h-16 mt-3 mb-3 place-content-around text-center">
+                <li class="m-auto px-2 py-1 h-12 w-32/100 font-bold text-sm md:text-lg lg:text-xl bg-green-400 hover:bg-green-600 active:bg-green-950 outline-2 outline-grey-200 hover:outline-green-400 active:outline-green-800 rounded-full">
+                    <input class="m-auto inline-block h-full w-full items-center" type="submit" value="End Response">
+                </li>
+                <li class="m-auto px-2 py-1 h-12 w-32/100 text-sm md:text-lg lg:text-xl bg-green-400 hover:bg-green-600 active:bg-green-950 outline-2 outline-grey-200 hover:outline-green-400 active:outline-green-800 rounded-full">
+                    <button class="m-auto h-full w-full items-center">Record</button>
+                </li>
+            </ul>
+            <textarea class="w-90/100 text-xs md:text-lg lg:text-lg order-3 h-15 focus:mt-5 focus:h-120 lg:focus:h-80 transition-all duration-300 resize-none px-2 py-1 mx-auto mb-6 border-2 border-gray-700 outline-0 focus:outline-2 focus:outline-blue-600 focus:bg-slate-800 rounded-lg fixed focus:static bottom-0 left-0 right-0 " name="answer" id="answer"></textarea>
+        </form>
+    </div>
+</div>

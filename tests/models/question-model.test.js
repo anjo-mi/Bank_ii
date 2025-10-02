@@ -10,6 +10,7 @@ beforeAll(async () => {
 });
 afterAll(async () => {
   // await Question.deleteMany({});
+  await Question.deleteMany({});
   await mongoose.connection.close();
 });
 // jest.useFakeTimers();
