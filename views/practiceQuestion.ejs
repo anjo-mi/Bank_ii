@@ -1,7 +1,7 @@
 <div class="">
    
     <div class="w-95/100 m-auto mt-4 flex flex-col" id="answerContainer">
-        <form action="/practice/next" method="POST"
+        <form id="answerSubmission" action="/practice/next" method="POST"
         class="flex flex-col lg:sticky lg:-top-12">
         <input type="hidden" name="questions" value="<%= JSON.stringify(questions) %>">
         <input type="hidden" name="current" value="<%= current %>">
@@ -18,7 +18,9 @@
                     <button class="m-auto h-full w-full items-center">Record</button>
                 </li>
             </ul>
-            <textarea class="w-90/100 text-xs md:text-lg lg:text-lg order-3 h-15 focus:mt-5 focus:h-120 lg:focus:h-80 transition-all duration-300 resize-none px-2 py-1 mx-auto mb-6 border-2 border-gray-700 outline-0 focus:outline-2 focus:outline-blue-600 focus:bg-slate-800 rounded-lg fixed focus:static bottom-0 left-0 right-0 " name="answer" id="answer"></textarea>
+            <textarea class="w-90/100 text-xs md:text-lg lg:text-lg order-3 h-25 mt-10 focus:mt-30 focus:h-140 lg:focus:h-80 transition-all duration-300 resize-none px-2 py-1 mx-auto mb-6 border-2 border-gray-700 outline-0 focus:outline-2 focus:outline-blue-600 focus:bg-slate-800 rounded-lg" name="answer" id="answer"></textarea>
         </form>
     </div>
 </div>
+
+<script src="../practice.js"></script>

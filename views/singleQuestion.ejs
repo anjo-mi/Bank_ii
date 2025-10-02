@@ -9,15 +9,15 @@
 
 <div class="">
     <div class="">
-        <form action="/questions/byCategory" method="POST">
-            <ul class="flex flex-wrap border-1 border-dashed border-gray-400 rounded-sm gap-1 m-auto mt-5 ml-18 p-1 py-2 w-80/100 justify-end md:justify-evenly items-center text-center">
+        <ul class="flex flex-wrap border-1 border-dashed border-gray-400 rounded-sm gap-1 m-auto mt-5 ml-18 p-1 py-2 w-80/100 justify-end md:justify-evenly items-center text-center">
             <% question.categories.forEach(cat => {%>
+            <form action="/questions/byCategory" method="POST">
                 <input type="hidden" name="categori" value="<%= cat%>">
                 <input  type="submit" value="<%= cat %>" class="bg-slate-700 p-1 rounded-lg border-1 border-gray-200 text-xs md:text-lg lg:text-lg md:mt-0 lg:mt-0 text-sky-200 font-bold">
                 </form>
+            </form>
             <% })%>
             </ul>
-        </form>
     </div>
    
     <div class="w-95/100 m-auto mt-4 flex flex-col" id="answerContainer">
@@ -38,7 +38,7 @@
                     <button class="m-auto h-full w-full items-center">Record</button>
                 </li>
             </ul>
-            <textarea class="w-90/100 text-xs md:text-lg lg:text-lg order-3 h-15 focus:mt-5 focus:h-120 lg:focus:h-80 transition-all duration-300 resize-none px-2 py-1 mx-auto mb-6 border-2 border-gray-700 outline-0 focus:outline-2 focus:outline-blue-600 focus:bg-slate-800 rounded-lg fixed focus:static bottom-0 left-0 right-0 " name="answer" id="answer"></textarea>
+            <textarea class="w-90/100 text-xs md:text-lg lg:text-lg order-3 h-25 mt-10 focus:mt-30 focus:h-140 lg:focus:h-80 transition-all duration-300 resize-none px-2 py-1 mx-auto mb-6 border-2 border-gray-700 outline-0 focus:outline-2 focus:outline-blue-600 focus:bg-slate-800 rounded-lg" name="answer" id="answer"></textarea>
         </form>
     </div>
 </div>

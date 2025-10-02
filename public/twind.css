@@ -226,15 +226,6 @@
   .top-12 {
     top: calc(var(--spacing) * 12);
   }
-  .right-0 {
-    right: calc(var(--spacing) * 0);
-  }
-  .bottom-0 {
-    bottom: calc(var(--spacing) * 0);
-  }
-  .left-0 {
-    left: calc(var(--spacing) * 0);
-  }
   .order-2 {
     order: 2;
   }
@@ -267,6 +258,9 @@
   }
   .mt-5 {
     margin-top: calc(var(--spacing) * 5);
+  }
+  .mt-10 {
+    margin-top: calc(var(--spacing) * 10);
   }
   .mb-2 {
     margin-bottom: calc(var(--spacing) * 2);
@@ -309,6 +303,9 @@
   }
   .h-20 {
     height: calc(var(--spacing) * 20);
+  }
+  .h-25 {
+    height: calc(var(--spacing) * 25);
   }
   .h-30 {
     height: calc(var(--spacing) * 30);
@@ -700,19 +697,14 @@
       }
     }
   }
-  .focus\:static {
+  .focus\:mt-30 {
     &:focus {
-      position: static;
+      margin-top: calc(var(--spacing) * 30);
     }
   }
-  .focus\:mt-5 {
+  .focus\:h-140 {
     &:focus {
-      margin-top: calc(var(--spacing) * 5);
-    }
-  }
-  .focus\:h-120 {
-    &:focus {
-      height: calc(var(--spacing) * 120);
+      height: calc(var(--spacing) * 140);
     }
   }
   .focus\:bg-slate-800 {
@@ -854,12 +846,6 @@
     @media (width >= 48rem) {
       font-size: var(--text-lg);
       line-height: var(--tw-leading, var(--text-lg--line-height));
-    }
-  }
-  .md\:text-sm {
-    @media (width >= 48rem) {
-      font-size: var(--text-sm);
-      line-height: var(--tw-leading, var(--text-sm--line-height));
     }
   }
   .md\:text-xl {
