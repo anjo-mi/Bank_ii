@@ -13,7 +13,12 @@
 
 ## Overview
 - Learning Platform for Studying Questions
-- Store Questions with associate Categories
+- Store Questions with Associated Categories
+- Guest features enabled
+  - Practice Session Mode
+    - Category Selection
+    - Question and Answer Mode
+    - Results Page
 - User-focused Searches for Questions by Category or ID
 
 ### Tech Stack
@@ -42,7 +47,7 @@
 Interchange these files in the package.json script to run accordingly:
    * /questionByCategory
    * /questionById
-- All Jest Test Suites are ran via the same command: `npm run test`
+- All Other Jest Test Suites are ran via the same command: `npm run test`
 - Playwright Tests are ran by Category
    * Displays: `npm run test:displays`
    * Errors: `npm run test:errors`
@@ -52,6 +57,7 @@ Interchange these files in the package.json script to run accordingly:
    * Navigation: `npm run test:nav`
    * Setup: `npm run test:setup`
    * Routes: `npm run test:routes`
+   * Practice: `npm run test:practice`
    * Playwright Requests: `npm run test:pwreqs`
  
 ## Seeding
@@ -65,10 +71,15 @@ Interchange these files in the package.json script to run accordingly:
    * .pb files will be processed into .html files and placed in the root of the project with its accompanying .js file
 - Open HTML File in Default Browser
 
-<details>
+<details markdown="1">
+
   <summary>Performance Configuration</summary>
-  ###Performance Configuration
+
+
+###Performance Configuration
+
 🤦 After installing all dependencies, the generated .pb files were getting caught in `/node_modules/@platformatic/flame/bin`
+
   - Fixing this involves going into `/node_modules/@platformatic/flame/bin` and altering flame.js to this:
   
 ```

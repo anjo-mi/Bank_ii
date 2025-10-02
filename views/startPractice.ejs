@@ -2,7 +2,7 @@
   <% if (!sufficient){%>
   <div id="proceedMessage" class="bg-slate-800 border-1 w-8/10 p-3 m-auto border-gray-300 rounded-lg">
     <p class="p-1 md:p-2 lg:p-3 text-white"><%= message %></p>
-    <button class="m-auto w-65/100 bg-green-400 hover:bg-green-600 active:bg-green-950 text-white py-1 px-1 rounded-full mt-5"><a class="block" href="/practice">Reset Parameters</a></button>
+    <button class="m-auto w-65/100 bg-green-400 hover:bg-green-600 active:bg-green-950 text-white py-1 px-1 rounded-full mt-5"><a class="block" href="/practice">Walk Out</a></button>
     <form action="/practice/next" method="POST">
       <input type="hidden" name="questions" value="<%= JSON.stringify(questions) %>">
       <input type="hidden" name="current" value="<%= current %>">
@@ -13,7 +13,7 @@
   <%}else{%>
   <div id="beginMessage" class="bg-slate-800 border-1 w-8/10 p-3 m-auto border-gray-300 rounded-lg">
     <p class="p-1 md:p-2 lg:p-3 text-white">Good <i>time of day</i>. I hope things are going well. Please, have a seat and we'll begin.</p>
-    <button class="m-auto w-65/100 bg-green-400 hover:bg-green-600 active:bg-green-950 text-white py-1 px-1 rounded-full mt-5"><a class="block" href="/practice">Reset Parameters</a></button>
+    <button class="m-auto w-65/100 bg-green-400 hover:bg-green-600 active:bg-green-950 text-white py-1 px-1 rounded-full mt-5"><a class="block" href="/practice">Walk Out</a></button>
     <form action="/practice/next" method="POST">
       <input type="hidden" name="questions" value="<%= JSON.stringify(questions) %>">
       <input type="hidden" name="current" value="<%= current %>">
