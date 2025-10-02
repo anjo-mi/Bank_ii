@@ -11,7 +11,12 @@ export default {
   startPractice: async (req,res) => {
     let {categori, limit} = req.body;
     const questions = await Question.find();
-    limit = limit && limit > 0 ? Math.floor(limit) : 7;
+    const arab = new Set([0,1,2,3,4,5,6,7,8,9,]);
+    limit = limit 
+            && limit > 0
+            && limit.toString().split('').map(Number).every(dig => arab.has(dig)) 
+                ? Math.floor(limit)
+                : 7;
 
     // poor time complexity, but both variables should theoretically be small
     //    (categories per question, categories included in an interview)
@@ -58,7 +63,23 @@ export default {
     let {questions, current} = req.body;
     questions = JSON.parse(questions);
     current = +current + 1;
-    if (current === questions.length) res.render('completed');
-    else res.render('practiceQuestion', {questions,current});
+
+    const answers = req.body.answers ? JSON.parse(req.body.answers) : [];
+    const answer = req.body.answer;
+
+    if (answer || answer === '') answers.push(answer);
+    console.log({answer,answers})    
+    if (current === questions.length) {
+      const results = {};
+      for (let i = 0 ; i < questions.length ; i++){
+        results['Question ' + (i+1)] = {
+          question: questions[i].content,
+          categories: questions[i].categories,
+          answer: answers[i],
+        }
+      }
+      res.render('practiceCompleted', {results});
+    }
+    else res.render('practiceQuestion', {questions,current,answers});
   }
 };

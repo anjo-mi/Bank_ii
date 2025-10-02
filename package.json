@@ -20,6 +20,7 @@
     "test:nav": "npx playwright test ./tests/navigation",
     "test:setup": "npx playwright test ./tests/setup",
     "test:routes": "npx playwright test ./tests/routes",
+    "test:practice": "npx playwright test ./tests/pw-practice",
     "test:pwreqs": "npx playwright test ./tests/requests/pw-searchByCat",
     "fire": "flame run server.js",
     "fire:convert": "node ./flamegraph/platflame.js",

@@ -1,0 +1,24 @@
+<div class="exit-interview mx-auto w-7/10 h-30 flex items-center text-center">
+  <ul class="flex py-5 px-1 gap-4 m-auto w-full max-w-10/10 border-1 border-gray-300 rounded-lg bg-zinc-800 place-content-around items-center text-xs md:text-xl lg:text-2xl text-center">
+    <li class="nav-item m-auto w-30/100 bg-green-500 hover:bg-green-700 border-1 border-fuchsia-500 text-white py-2 px-1 rounded-full"><a class="block" href="/">Return Home</a></li>
+    <li class="nav-item m-auto w-30/100 bg-green-500 hover:bg-green-700 text-white py-2 px-1 border-1 border-fuchsia-500 rounded-full"><a class="block" href="/questions">All Questions</a></li>
+    <li class="nav-item m-auto w-30/100 bg-green-500 hover:bg-green-700 text-white py-2 px-1 border-1 border-fuchsia-500 rounded-full"><a class="block" href="/practice">New Session</a></li>
+  </ul>
+</div>
+
+
+
+<section id="resultCarousel" class="result-card-carousel m-auto flex flex-col w-85/100 border-1 rounded-lg border-gray-300 p-3 gap-6 items-center place-content-center">
+  <h1 class="m-auto p-3 w-70/100 border-1 border-gray-300 rounded-lg bg-orange-800 text-white">Interview Results:</h1>
+  <% for (const question in results){ %>
+  <div class="result-card">
+    <div class="question-portion">
+      <h2 class="font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3"><%= question %>:</h2>
+      <p class="m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg text-lg md:text-xl lg:text-2xl"><%= results[question]['question']%></p>
+    </div>
+    <div class="answer-portion">
+      <p class="m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg text-lg md:text-xl lg:text-2xl"><%= results[question]['answer']%></p>
+    </div>
+  </div>
+  <%} %>
+</section>
