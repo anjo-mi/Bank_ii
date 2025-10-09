@@ -11,6 +11,7 @@ import homeRoutes from "./routes/home.js";
 import categoriesRoutes from "./routes/category.js";
 import questionsRoutes from "./routes/questions.js";
 import practiceRoutes from "./routes/practice.js";
+import authRoutes from "./routes/auth.js";
 
 // database connection logic
 import connectDB from "./config/database.js";
@@ -36,6 +37,7 @@ app.use("/", homeRoutes);
 app.use("/categories", categoriesRoutes);
 app.use("/questions", questionsRoutes);
 app.use("/practice", practiceRoutes);
+app.use("/auth", authRoutes);
 
 app.listen(process.env.PORT || 3000, () => {
   console.log("server successfully running!");
