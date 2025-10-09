@@ -2,8 +2,8 @@ import models from "../models/index.js";
 const { User, Category, Question } = models;
 
 export default {
-  getLogin: async (req, res) => {
-    res.render('auth');
+  getRegisterPage: async (req, res) => {
+    res.render('register');
   },
 
   registerNewUser: async (req,res) => {
@@ -30,7 +30,14 @@ export default {
       const user = await User.create({email,username,password});
       return res.status(201).json(user)
     }
-    catch (e){return res.status(400).json({message: e.message})}
+    catch (e){
+      let message = e.message;
+      if (e.code === 11000){
+        if (e.keyPattern.email) message = 'Email already Registered'
+        if (e.keyPattern.username) message = 'Username is already Taken'
+      }
+      return res.status(400).json({ message })
+    }
 
   },
 
