@@ -42,6 +42,8 @@ export default {
   },
 
   login: async (req,res) => {
+    const {email, username, password} = req.body;
+    req.body.provided = email || username;
     res.json({fight:"me"});
   },
 };

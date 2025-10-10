@@ -34,10 +34,10 @@ app.use(logger("combined"));
 app.use(cors());
 
 app.use("/", homeRoutes);
-app.use("/categories", categoriesRoutes);
-app.use("/questions", questionsRoutes);
-app.use("/practice", practiceRoutes);
 app.use("/auth", authRoutes);
+app.use("/categories", categoriesRoutes);
+app.use("/practice", practiceRoutes);
+app.use("/questions", questionsRoutes);
 
 app.listen(process.env.PORT || 3000, () => {
   console.log("server successfully running!");
