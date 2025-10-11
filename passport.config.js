@@ -1,7 +1,7 @@
 import passport from 'passport';
 import LocalStrategy from 'passport-local';
-import models from "../models/index.js";
-const {User, Category, Question} = models;
+import User from "./models/users.js";
+
 
 passport.use(new LocalStrategy(
   {usernameField: "provided"},
@@ -15,7 +15,7 @@ passport.use(new LocalStrategy(
       })
       if (!user) return done(null, false, {message: "invalid credentials"});
 
-      const isMatch = user.comparePassword(password);
+      const isMatch = await user.comparePassword(password);
       if (!isMatch) return done(null,false,{message: "invalid password"});
 
       return done(null,user);

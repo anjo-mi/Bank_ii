@@ -48,7 +48,7 @@ document.getElementById('register-form').addEventListener('submit', async (e) =>
     const data = await response.json();
     console.log({data,response})
 
-    if (response.ok) window.location.href = '/practice'
+    if (response.ok) window.location.href = '/auth'
     else showError(data.message);
   }
   catch(e){

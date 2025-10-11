@@ -2,6 +2,7 @@
 import express from "express";
 import expressLayouts from "express-ejs-layouts";
 import passport from "passport";
+import "./passport.config.js";
 import session from "express-session";
 import MongoStore from "connect-mongo";
 

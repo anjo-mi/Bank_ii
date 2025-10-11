@@ -1,9 +1,38 @@
+import passport from "passport";
 import models from "../models/index.js";
 const { User, Category, Question } = models;
 
 export default {
+  getLoginPage: async (req, res) => {
+    res.render('login');
+  },
+  
   getRegisterPage: async (req, res) => {
     res.render('register');
+  },
+  
+  login: (req,res,next) => {
+    passport.authenticate('local', (err, user, info) => {
+      if (err) return next(err);
+      console.log({user})
+      if (!user) {
+        // req.flash('error', info.message);
+        return res.redirect('/auth');
+      }
+
+      req.login(user, (err) => {
+        console.log({user,err})
+        if (err) return next(err);
+        return res.redirect('/practice');
+      });
+    })(req, res, next);
+  },
+
+  logout: (req,res,next) => {
+    req.logout((e) => {
+      if (e) return next(e);
+      res.redirect('/');
+    })
   },
 
   registerNewUser: async (req,res) => {
@@ -41,9 +70,4 @@ export default {
 
   },
 
-  login: async (req,res) => {
-    const {email, username, password} = req.body;
-    req.body.provided = email || username;
-    res.json({fight:"me"});
-  },
 };
