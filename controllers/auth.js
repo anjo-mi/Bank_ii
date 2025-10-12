@@ -53,7 +53,10 @@ export default {
 
     try {
       const user = await User.create({email,username,password});
-      return res.status(201).json(user)
+      req.login(user,(err) => {
+        if (err) return res.status(500).json({message:"the registration succeeded, but the login failed"});
+        return res.status(201).json(user)
+      })
     }
     catch (e){
       let message = e.message;

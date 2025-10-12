@@ -57,7 +57,7 @@ if (registerForm){
 
       const data = await response.json();
 
-      if (response.ok) window.location.href = '/auth'
+      if (response.ok) window.location.href = '/practice'
       else showError(data.message);
       document.getElementById('load-indicator').style.display = 'none';
       document.getElementById('submit').style.display = 'block';

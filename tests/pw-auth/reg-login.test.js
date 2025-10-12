@@ -28,7 +28,7 @@ test.beforeEach(async () => {
   await fetch('http://localhost:3000/test/clearLimits', {method: 'POST'});
 })
 
-test("valid SIGN UP then login w/ EMAIL should take you to practice page", async ({
+test("valid SIGN UP should take you to practice page", async ({
   page,
 }) => {
   
@@ -49,19 +49,19 @@ test("valid SIGN UP then login w/ EMAIL should take you to practice page", async
   await page.waitForLoadState('domcontentloaded');
   await page.waitForTimeout(500);
   
-  await page.waitForURL("http://localhost:3000/auth");
-  await page.fill('input[name="provided"]', `thisshouldwork${i}@gmail.com`);
-  await page.fill('input[name="password"]', `solidpassword`);
-  await page.click("input[value='Log In']");
+  // await page.waitForURL("http://localhost:3000/auth");
+  // await page.fill('input[name="provided"]', `thisshouldwork${i}@gmail.com`);
+  // await page.fill('input[name="password"]', `solidpassword`);
+  // await page.click("input[value='Log In']");
 
-  await page.waitForLoadState('domcontentloaded');
-  await page.waitForTimeout(500);
+  // await page.waitForLoadState('domcontentloaded');
+  // await page.waitForTimeout(500);
   
   await page.waitForURL("http://localhost:3000/practice");
   
 });
 
-test("valid SIGN UP then login w/ USERNAME should take you to practice page", async ({
+test("valid SIGN UP should take you to practice page, again", async ({
   page,
 }) => {
   
@@ -82,13 +82,13 @@ test("valid SIGN UP then login w/ USERNAME should take you to practice page", as
   await page.waitForLoadState('domcontentloaded');
   await page.waitForTimeout(500);
   
-  await page.waitForURL("http://localhost:3000/auth");
-  await page.fill('input[name="provided"]', `avaliduser${i}`);
-  await page.fill('input[name="password"]', `solidpassword`);
-  await page.click("input[value='Log In']");
+  // await page.waitForURL("http://localhost:3000/auth");
+  // await page.fill('input[name="provided"]', `avaliduser${i}`);
+  // await page.fill('input[name="password"]', `solidpassword`);
+  // await page.click("input[value='Log In']");
 
-  await page.waitForLoadState('domcontentloaded');
-  await page.waitForTimeout(500);
+  // await page.waitForLoadState('domcontentloaded');
+  // await page.waitForTimeout(500);
   
   await page.waitForURL("http://localhost:3000/practice");
   
@@ -195,13 +195,13 @@ test("valid login followed by logout should not be able to access /practice", as
   await page.waitForLoadState('domcontentloaded');
   await page.waitForTimeout(500);
   
-  await page.waitForURL("http://localhost:3000/auth");
-  await page.fill('input[name="provided"]', `thisshouldwork${i}@gmail.com`);
-  await page.fill('input[name="password"]', `solidpassword`);
-  await page.click("input[value='Log In']");
+  // await page.waitForURL("http://localhost:3000/auth");
+  // await page.fill('input[name="provided"]', `thisshouldwork${i}@gmail.com`);
+  // await page.fill('input[name="password"]', `solidpassword`);
+  // await page.click("input[value='Log In']");
   
-  await page.waitForLoadState('domcontentloaded');
-  await page.waitForTimeout(500);
+  // await page.waitForLoadState('domcontentloaded');
+  // await page.waitForTimeout(500);
   
   await page.waitForURL("http://localhost:3000/practice");
   await page.click("text=Log Out");

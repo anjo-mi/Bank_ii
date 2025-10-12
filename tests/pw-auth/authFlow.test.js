@@ -20,7 +20,7 @@ const users = {
 }
 
 
-test("valid SIGN UP should send you to the login page", async ({
+test("valid SIGN UP should send you to the practice page", async ({
   page,
 }) => {
  
@@ -41,7 +41,7 @@ test("valid SIGN UP should send you to the login page", async ({
   await page.waitForLoadState('domcontentloaded');
   await page.waitForTimeout(500);
   
-  await expect(page).toHaveURL("http://localhost:3000/auth");
+  await expect(page).toHaveURL("http://localhost:3000/practice");
   
 });
 
@@ -65,7 +65,7 @@ test("duplicate EMAIL should alert you of such", async ({
   await page.waitForLoadState('domcontentloaded');
   await page.waitForTimeout(500);
 
-  await expect(page).toHaveURL("http://localhost:3000/auth");
+  await expect(page).toHaveURL("http://localhost:3000/practice");
   await page.click("text=Log In");
   await page.click("text=Sign Up");
 
@@ -104,7 +104,7 @@ test("duplicate USERNAME should alert you of such", async ({
   await page.waitForLoadState('domcontentloaded');
   await page.waitForTimeout(500);
 
-  await expect(page).toHaveURL("http://localhost:3000/auth");
+  await expect(page).toHaveURL("http://localhost:3000/practice");
   await page.click("text=Log In");
   await page.click("text=Sign Up");
 
