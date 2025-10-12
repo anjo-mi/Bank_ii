@@ -104,8 +104,8 @@ if (loginForm){
 
       const data = await response.json();
 
-      if (response.ok) window.location.href = '/practice'
-      else showError(data.message);
+      if (response.ok) window.location.href = '/practice';
+      else showError(data.message || data.error);
       document.getElementById('load-indicator').style.display = 'none';
       document.getElementById('submit').style.display = 'block';
     }

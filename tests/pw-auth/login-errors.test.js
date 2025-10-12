@@ -1,6 +1,10 @@
 // @ts-check
 import { test, expect } from "@playwright/test";
 
+test.beforeEach(async () => {
+  await fetch('http://localhost:3000/test/clearLimits', {method: 'POST'});
+})
+
 test("this should theoretically work all 3 calls, but only register one user and stay on register for the others", async ({
   page,
 }) => {
@@ -77,7 +81,7 @@ test("valid email, invalid password should be invalid", async ({
   await page.waitForLoadState('domcontentloaded');
   await page.waitForTimeout(500);
   
-  await expect(page.locator("#error-message")).toHaveText('invalid password');
+  await expect(page.locator("#error-message")).toHaveText('invalid credentials');
   
   await expect(page).toHaveURL("http://localhost:3000/auth");
 

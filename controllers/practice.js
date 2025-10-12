@@ -4,7 +4,6 @@ const { User, Category, Question } = models;
 export default {
   getCategories: async (req, res) => {
     const allCats = await Category.find();
-    console.log({req})
     res.render("practice", { allCats });
     // res.json({allCats})
   },

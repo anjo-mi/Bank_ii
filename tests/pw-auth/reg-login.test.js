@@ -24,6 +24,9 @@ const users = {
   },
 }
 
+test.beforeEach(async () => {
+  await fetch('http://localhost:3000/test/clearLimits', {method: 'POST'});
+})
 
 test("valid SIGN UP then login w/ EMAIL should take you to practice page", async ({
   page,
@@ -62,7 +65,7 @@ test("valid SIGN UP then login w/ USERNAME should take you to practice page", as
   page,
 }) => {
   
-  const i = Date.now();
+  const i = Math.floor(Math.random() * 9999999999999);
   await page.goto("http://localhost:3000/");
   
   await page.click("text=Log In");

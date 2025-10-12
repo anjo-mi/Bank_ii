@@ -14,14 +14,11 @@ export default {
   login: (req,res,next) => {
     passport.authenticate('local', (err, user, info) => {
       if (err) return next(err);
-      console.log({user})
       if (!user) {
-        // req.flash('error', info.message);
         return res.status(401).json({message: info.message || `check yo'self`});
       }
 
       req.login(user, (err) => {
-        console.log({user,err})
         if (err) return next(err);
         return res.status(200).json({redirect:'/practice'});
       });
