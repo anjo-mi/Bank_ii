@@ -7,25 +7,25 @@ beforeAll(async () => {
   await User.deleteMany({});
 });
   
-  describe('POST /auth/register', () => {
-    test('registers user with valid data', async () => {
-      const response = await request(app)
-      .post('/auth/register')
-      .send({
-        email: 'cashMe@outside.com',
-        password: 'Password123!',
-        username: 'jabroni'
-      });
-      
-      const body = response.body;
-      console.log({body})
-      expect(response.status).toBe(201);
-      
-      const user = await User.findOne({ email: 'cashMe@outside.com' });
-      expect(user).toBeTruthy();
-      expect(user.username).toBe('jabroni');
-      expect(user).toHaveProperty("_id");
-      await User.deleteOne({username:'jabroni'});
+describe('POST /auth/register', () => {
+  test('registers user with valid data', async () => {
+    const response = await request(app)
+    .post('/auth/register')
+    .send({
+      email: 'cashMe@outside.com',
+      password: 'Password123!',
+      username: 'jabroni'
+    });
+    
+    const body = response.body;
+    console.log({body})
+    expect(response.status).toBe(201);
+    
+    const user = await User.findOne({ email: 'cashMe@outside.com' });
+    expect(user).toBeTruthy();
+    expect(user.username).toBe('jabroni');
+    expect(user).toHaveProperty("_id");
+    await User.deleteOne({username:'jabroni'});
   });
 
   test('prevents duplicate email registration', async () => {

@@ -141,7 +141,7 @@ test("invalid characters in the USERNAME should show", async ({
   await page.waitForLoadState('domcontentloaded');
   await page.waitForTimeout(500);
   
-  await expect(page.locator("#error-message")).toHaveText('Your username may only contain alpha-numeric characters or ,./+=-!@#$%^&*_, but no whitespace');
+  await expect(page.locator("#error-message")).toHaveText('Your username may only contain alpha-numeric characters or ,./+=-!@#$%^&*_');
   
   await expect(page).toHaveURL("http://localhost:3000/auth/signup");
 

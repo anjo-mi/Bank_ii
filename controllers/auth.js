@@ -17,13 +17,13 @@ export default {
       console.log({user})
       if (!user) {
         // req.flash('error', info.message);
-        return res.redirect('/auth');
+        return res.status(401).json({message: info.message || `check yo'self`});
       }
 
       req.login(user, (err) => {
         console.log({user,err})
         if (err) return next(err);
-        return res.redirect('/practice');
+        return res.status(200).json({redirect:'/practice'});
       });
     })(req, res, next);
   },
@@ -36,7 +36,6 @@ export default {
   },
 
   registerNewUser: async (req,res) => {
-    console.log('ive at least been accessed')
     const {
       email,
       password,
