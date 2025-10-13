@@ -3,6 +3,7 @@ import validator from "email-validator";
 import bcrypt from "bcrypt";
 
 const userSchema = new mongoose.Schema({
+  // in case html checks fail, add email validation to the Schema itself
   email: {
     type: String,
     unique: true,
@@ -13,14 +14,16 @@ const userSchema = new mongoose.Schema({
     }
   },
 
-  password: {
-    type: String,
-    required: true,
-  },
-
+  // v ^ both username and password must be unique
+  
   username: {
     type: String,
     unique: true,
+    required: true,
+  },
+
+  password: {
+    type: String,
     required: true,
   },
 
@@ -35,6 +38,7 @@ const userSchema = new mongoose.Schema({
   },
 },
 {
+  // add a compare method to be called with passports (Local Strat) login attempts
   methods: {
     comparePassword: async function(inputtedPassword){
       const user = this;
@@ -44,6 +48,7 @@ const userSchema = new mongoose.Schema({
   }
 });
 
+// before a user is saved in the database, encrypt their password
 userSchema.pre('save', async function(next) {
   const user = this;
 

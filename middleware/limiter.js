@@ -2,6 +2,9 @@ import { MemoryStore, rateLimit } from 'express-rate-limit'
 
 export const store = new MemoryStore();
 
+// export rate limiter for login and request attempts
+// will eventually be used for AI endpoints as well
+
 const limiter = rateLimit({
 	windowMs: 15 * 60 * 1000,
 	limit: 10,

@@ -1,3 +1,4 @@
+// still catering to EJS's needy ass, incomingSearch needs to be defined
 let incomingSearch = document.getElementById('incomingSearch') 
                       ? document.getElementById('incomingSearch').value
                       : null;
@@ -10,22 +11,31 @@ const tooStrictMessage = document.getElementById('tooStrictBox');
 
 
 const filterSearch = () => {
+  // this takes place in two parts, the controller gets questions that match the categories search
+  // all category matches are sent to the client
+  // but here we discover which meet the keyword search requirements as well
   const searchItems = incomingSearch 
                       ? incomingSearch.split(' ')
                       : document.getElementById('search-bar').value.split(' ');
   document.getElementById('search-bar').value = '';
   const search = searchItems.map(word => word.toLowerCase().trim()).filter(Boolean);
   
+  // filter any questions whose content matches
   const pass = searchedQs.filter(question => {
     return search.every(item => question.textContent.toLowerCase().includes(item));
   });
   
+  // filter those that dont match (styling purposes)
   const fail = searchedQs.filter(question => {
     return search.some(item => !question.textContent.toLowerCase().includes(item));
   });
   
   handleResults();
 
+  // allow times for each transition to occur before changin displays
+  // remove opacity from ALL questions, takes .3s to trans-out, then display = none
+  // wait for those .3s, set elements display to block
+  // DELAY AGAIN (both styles will be picked up on same pass and skip transition), add opacity to trans-in
   searchedQs.forEach(question => question.classList.remove('opacity-100'))
   setTimeout(() => {
     searchedQs.forEach(question => question.style.display = 'none');
@@ -37,17 +47,17 @@ const filterSearch = () => {
     }, 100)
   },300)
 
-  
-  // if (!pass.length) searchedQs.forEach(question => question.classList.add('opacity-100'));
-
+  // reset incoming search so current search queries dont affect next search
   incomingSearch = null;
+
+  // wait .3s AGAIN, handle no matching results
   setTimeout(() => {
     handleNoResults();
   }, 300)
   return pass.length;
 }
 
-
+// same logic, form submission by keypress
 const filterSearchEnter = (e) => {
   if (e.key !== "Enter") return;
   e.preventDefault();
@@ -86,6 +96,9 @@ const filterSearchEnter = (e) => {
   return pass;
 }
 
+// this plays the same delay opacity and display changes for transitions game
+// explained in filterSearch()
+// does so for all questions that were initially returned (category Matches)
 const clearFilters = () => {
   handleResults();
   searchedQs.forEach(question => question.classList.remove('opacity-100'))
@@ -100,6 +113,8 @@ const clearFilters = () => {
   },300)
 }
 
+// this ensures the error messages for no results are removed
+// plays the same delay game as mentioned above
 const handleResults = () => {
   noResultsMessage.classList.remove('opacity-100');
   tooStrictMessage.classList.remove('opacity-100');
@@ -109,6 +124,8 @@ const handleResults = () => {
   }, 300);
 }
 
+// this ensures the proper error message for no results are displayed / removed
+// plays the same delay game as mentioned above
 const handleNoResults = () => {
   const visibleItemsCount = countVisibleQuestions();
   if (visibleItemsCount){
@@ -137,6 +154,7 @@ const handleNoResults = () => {
   }
 }
 
+// use this count to determine how to display error messages
 const countVisibleQuestions = () => {
   let visibleCount = 0;
   searchedQs.forEach(question => {
@@ -146,8 +164,11 @@ const countVisibleQuestions = () => {
   return visibleCount;
 }
 
+// all questions start as transparent to be faded in
+// if there are any questions that pass ALL search requirement (category and keyword)
+  // display them
+// other wise handle which result message should show
 const pass = filterSearch();
-
 if (pass.length) {
   setTimeout(() => {
     pass.forEach(question => question.classList.add('opacity-100'))

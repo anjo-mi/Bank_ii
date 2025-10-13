@@ -7,10 +7,13 @@ const showError = (message) => {
   errorMessage.style.display = 'block';
 }
 
+// if were on the register page
 if (registerForm){
   registerForm.addEventListener('submit', async (e) => {
+    // block form submission
     e.preventDefault();
 
+    // hide the input / display the load indicator
     document.getElementById('submit').style.display = 'none';
     document.getElementById('load-indicator').style.display = 'block';
 
@@ -21,6 +24,7 @@ if (registerForm){
 
     if (password !== confirmation){
       showError('Which password do you want?');
+      // hide the load indicator / display the input
       document.getElementById('load-indicator').style.display = 'none';
       document.getElementById('submit').style.display = 'block';
       return;
@@ -33,6 +37,7 @@ if (registerForm){
 
     if (!nameUsesValidChars){
       showError('Your username may only contain alpha-numeric characters or ,./+=-!@#$%^&*_')
+      // redisplay input for next attempt
       document.getElementById('load-indicator').style.display = 'none';
       document.getElementById('submit').style.display = 'block';
       return;
@@ -40,13 +45,14 @@ if (registerForm){
 
     if (!passwordUsesValidChars){
       showError('Your password may only contain alpha-numeric characters or ,./+=-!@#$%^&*_');
+      // redisplay input for next attempt
       document.getElementById('load-indicator').style.display = 'none';
       document.getElementById('submit').style.display = 'block';
       return;
     }
 
     try{
-
+      // now attempt form submission
       const response = await fetch('/auth/register', {
         method: "POST",
         headers: {"Content-Type": 'application/json'},
@@ -57,8 +63,11 @@ if (registerForm){
 
       const data = await response.json();
 
+      // if were good, go to practice (login occurs in registration method)
       if (response.ok) window.location.href = '/practice'
+      // register sends data.message, login sends data.error
       else showError(data.message || data.error);
+      // redisplay input for next attempt
       document.getElementById('load-indicator').style.display = 'none';
       document.getElementById('submit').style.display = 'block';
     }
@@ -71,6 +80,8 @@ if (registerForm){
   })
 }
 
+// if were on the login page
+// same logic, translate from above
 if (loginForm){
   loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();

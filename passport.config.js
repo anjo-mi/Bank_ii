@@ -13,8 +13,8 @@ passport.use(new LocalStrategy(
           {username:provided},
         ]
       })
+      // error specific messaging
       if (!user) return done(null, false, {message: "invalid credentials"});
-
       const isMatch = await user.comparePassword(password);
       if (!isMatch) return done(null,false,{message: "invalid password"});
 

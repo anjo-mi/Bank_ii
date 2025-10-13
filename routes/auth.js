@@ -1,5 +1,7 @@
 import express from "express";
 import authController from "../controllers/auth.js";
+
+// limiting: login and registration attempts from same IP
 import limiter from "../middleware/limiter.js";
 
 const router = express.Router();

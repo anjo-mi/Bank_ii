@@ -11,6 +11,7 @@ export default {
     res.render('register');
   },
   
+  // authenticate with passport, success:login, (see passport config for Local Strat and [de]serialization)
   login: (req,res,next) => {
     passport.authenticate('local', (err, user, info) => {
       if (err) return next(err);
@@ -32,6 +33,7 @@ export default {
     })
   },
 
+  // collect user data and register, call login with valid info
   registerNewUser: async (req,res) => {
     const {
       email,
