@@ -2,9 +2,11 @@ import request from 'supertest';
 import app from "../../server.js";
 import models from "../../models/index.js";
 const { User } = models;
+import { store } from "../../middleware/limiter.js";
 
 beforeAll(async () => {
   await User.deleteMany({});
+  store.resetAll();
 });
   
 describe('POST /auth/register', () => {

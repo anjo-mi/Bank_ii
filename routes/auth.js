@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/", authController.getLoginPage);
 router.get("/signup", authController.getRegisterPage);
-router.post("/register", authController.registerNewUser);
+router.post("/register", limiter, authController.registerNewUser);
 router.post("/login", limiter, authController.login);
 router.post("/logout", authController.logout);
 

@@ -1,6 +1,10 @@
 import request from 'supertest';
 import app from "../../server.js";
+import { store } from "../../middleware/limiter.js";
 
+beforeEach(async () => {
+  store.resetAll();
+})
  
 describe('POST /auth/login', () => {
   test('logs in user with valid EMAIL and password', async () => {
