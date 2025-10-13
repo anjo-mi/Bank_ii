@@ -1,0 +1,72 @@
+import passport from "passport";
+import models from "../models/index.js";
+const { User, Category, Question } = models;
+
+export default {
+  getLoginPage: async (req, res) => {
+    res.render('login');
+  },
+  
+  getRegisterPage: async (req, res) => {
+    res.render('register');
+  },
+  
+  login: (req,res,next) => {
+    passport.authenticate('local', (err, user, info) => {
+      if (err) return next(err);
+      if (!user) {
+        return res.status(401).json({message: info.message || `check yo'self`});
+      }
+
+      req.login(user, (err) => {
+        if (err) return next(err);
+        return res.status(200).json({redirect:'/practice'});
+      });
+    })(req, res, next);
+  },
+
+  logout: (req,res,next) => {
+    req.logout((e) => {
+      if (e) return next(e);
+      res.redirect('/');
+    })
+  },
+
+  registerNewUser: async (req,res) => {
+    const {
+      email,
+      password,
+      username
+    } = req.body;
+
+    const validChars = new Set(' abcdefghijklmnopqrstuvwxyz0123456789,./+=-!@#$%^&*_');
+    const nameUsesValidChars = username.toLowerCase().split('').every(char => validChars.has(char));
+    const nameIsProperLength = 3 <= username.trim().length && username.trim().length <= 40;
+    const passwordUsesValidChars = password.toLowerCase().split('').every(char => validChars.has(char));
+    const passwordIsValidLength = password.trim().length >= 8 && password.trim().length <= 20;
+
+    const validUsername = nameUsesValidChars && nameIsProperLength;
+    const validPassword = passwordUsesValidChars && passwordIsValidLength;
+
+    if (!validUsername) return res.status(400).json({message:'invalid username'});
+    if (!validPassword) return res.status(400).json({message: 'invalid password'});
+
+    try {
+      const user = await User.create({email,username,password});
+      req.login(user,(err) => {
+        if (err) return res.status(500).json({message:"the registration succeeded, but the login failed"});
+        return res.status(201).json(user)
+      })
+    }
+    catch (e){
+      let message = e.message;
+      if (e.code === 11000){
+        if (e.keyPattern.email) message = 'Email already Registered'
+        if (e.keyPattern.username) message = 'Username is already Taken'
+      }
+      return res.status(400).json({ message })
+    }
+
+  },
+
+};

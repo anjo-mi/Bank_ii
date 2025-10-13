@@ -15,11 +15,13 @@
 - Learning Platform for Studying Questions
 - Store Questions with Associated Categories
 - Guest features enabled
-  - Practice Session Mode
+  - Generic Question Pool
     - Category Selection
     - Question and Answer Mode
-    - Results Page
 - User-focused Searches for Questions by Category or ID
+- User access and Session persistence
+- Protected Routes ensuring authorization
+- Rate Limiting for added Security
 
 ### Tech Stack
 - Node.js, Express, MongoDB, EJS, Tailwind
@@ -27,6 +29,8 @@
    * Jest, Supertest, Playwright
 - Performance:
    * Platformatic: Flame
+- Authentication:
+   * Passport.js
 
 # Setup
 - ```npm install```
@@ -38,22 +42,26 @@
      DB_TEST_STR=mongodb+srv...mongodb.net/app-test?...
      ```
 - ```npm run dev```
-   * Via npm-run-all, Live CSS via Tailwind and Nodemon will runn concurrently
+   * Via npm-run-all, Live CSS via Tailwind and Nodemon will run concurrently
 
 ## Running Tests
 ⚠️ Some tests require data in the database. If you need to populate your database, see [Seeding](#Seeding) ⚠️
 
 - Only Jest Tests ran individually: `npm run test:reqs`
-Interchange these files in the package.json script to run accordingly:
-   * /questionByCategory
-   * /questionById
-- All Other Jest Test Suites are ran via the same command: `npm run test`
+- Jest Testing:
+   * npm run test
+   * npm run test:auth
+   * npm run test:models
+   * npm run test:practo
+   * npm run test:reqs
+      - This requires changing the script between `/questionByCategory` and `/questionById`
 - Playwright Tests are ran by Category
+   * Authorization: `npm run test:pwauth`
+   * Rate-Limiting: `npm run test:pwlimits`
    * Displays: `npm run test:displays`
    * Errors: `npm run test:errors`
    * Filtering Logic: `npm run test:filters`
-   * Models: `npm run test:models`
-     * ⚠️ See [Seeding](#Seeding) about repopulating the database after running a model test ⚠️
+   * Models: `npm run test:pwmodels`
    * Navigation: `npm run test:nav`
    * Setup: `npm run test:setup`
    * Routes: `npm run test:routes`
@@ -62,6 +70,7 @@ Interchange these files in the package.json script to run accordingly:
  
 ## Seeding
 - You may populate the database with functional generic data via the command `npm run seed`
+   * It is recommended to load users via the endpoint rather than seeding, as seeding skips the user password encryption step.
 
 ## Performance
 ⚠️ Due to [configuration issues](#performance-configuration), this is a two step process! ⚠️

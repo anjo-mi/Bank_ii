@@ -8,73 +8,69 @@ beforeAll(async () => {
   await mongoose.connect(process.env.DB_TEST_STR);
   await User.deleteMany({});
 });
-
 afterAll(async () => {
+  await User.deleteMany({});
   await mongoose.connection.close();
 });
-// jest.useFakeTimers();
 
-const user1 = {
-  email: "p1@aol",
 
-  password: "String",
 
-  username: "person1",
-
-  exp: "first use of email and username should pass",
-};
-const user2 = {
-  email: "p2@aol",
-
-  password: "String",
-
-  username: "person1",
-
-  exp: "first use of email, second use of username should pass",
-};
-const user3 = {
-  email: "p1@aol",
-
-  password: "thisisactuallyapasswordfightme",
-
-  username: "iamnooneelse",
-
-  exp: "second use of email, first on all else should fail",
-};
-
-test(user1.exp, async () => {
-  const u = user1;
-  const user = await User.create({
-    email: u.email,
-    password: u.password,
-    username: u.username,
+ describe('POST /auth/register', () => {
+    test('registers user with valid data', async () => {
+      await User.create({
+        email: 'cashMe@outside.com',
+        password: 'Password123!',
+        username: 'jabroni'
+      });
+      
+      const user = await User.findOne({ email: 'cashMe@outside.com' });
+      expect(user).toBeTruthy();
+      expect(user.username).toBe('jabroni');
+      expect(user).toHaveProperty("_id");
+      await User.deleteOne({username:'jabroni'});
   });
-  expect(user.email).toBe(u.email);
-  expect(user.username).toBe(u.username);
-  expect(user).toHaveProperty("_id");
-});
-test(user2.exp, async () => {
-  const u = user2;
-  const user = await User.create({
-    email: u.email,
-    password: u.password,
-    username: u.username,
-  });
-  expect(user.email).toBe(u.email);
-  expect(user.username).toBe(u.username);
-  expect(user).toHaveProperty("_id");
-});
 
-test(user3.exp, async () => {
-  const u = user3;
-  expect.assertions(1);
-  try {
-    const user = await User.create({
-      email: u.email,
-      password: u.password,
-      username: u.username,
+  test('prevents duplicate email registration', async () => {
+    const goodUser = await User.create({
+      email: 'uniqueAndValid@email.com',
+      password: 'Password123!',
+      username: 'iamunique'
     });
-  } catch (e) {
-    expect(e).toBeInstanceOf(Error);
-  }
+    
+    await expect(User.create({
+      email: 'uniqueAndValid@email.com',
+      password: 'DifferentPass123!',
+      username: 'iamunique2'
+    })).rejects.toThrow();
+      
+    await User.deleteOne({username:'iamunique'});
+    await User.deleteOne({username:'iamunique2'});
+  });
+
+  test('prevents suspected invalid email', async () => {
+    
+    await expect(User.create({
+      email: 'duplicateexample.com',
+      password: 'DifferentPass123!',
+      username: 'user2'
+    })).rejects.toThrow();
+      
+    await User.deleteOne({username:'user2'});
+  });
+
+  test('prevents duplicate username registration', async () => {
+    await User.create({
+      email: 'uniqueAndValid@email.com',
+      password: 'Password123!',
+      username: 'iamunique'
+    });
+        
+    await expect(User.create({
+      email: 'yetAnotherUniqueAndValid@email.com',
+      password: 'DifferentPass123!',
+      username: 'iamunique'
+    })).rejects.toThrow();
+      
+    await User.deleteOne({username:'iamunique'});
+  });
 });
