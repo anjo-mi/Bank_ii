@@ -6,6 +6,12 @@ const categorySchema = new mongoose.Schema({
     required: true,
   },
 
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    default: null,
+  },
+  
   isDefault: {
     type: Boolean,
     required: true,

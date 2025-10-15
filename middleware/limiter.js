@@ -7,7 +7,8 @@ export const store = new MemoryStore();
 
 const limiter = rateLimit({
 	windowMs: 15 * 60 * 1000,
-	limit: 10,
+	// limit: 10, // used for auth test cases, will decide on a regular
+	limit: 500, // used for almost all non-auth test cases
   skipSuccessfulRequests: true, // required for testing, needs to be false for registration
 	standardHeaders: 'draft-8',
 	legacyHeaders: false,

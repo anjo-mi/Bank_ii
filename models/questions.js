@@ -6,6 +6,12 @@ const questionSchema = new mongoose.Schema({
     default: null,
   },
 
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    default: null,
+  },
+
   categories: [
     {
       type: String,
@@ -18,7 +24,15 @@ const questionSchema = new mongoose.Schema({
     required: true,
   },
 
-  isDefault: Boolean,
+  isDefault: {
+    type: Boolean,
+    default: false,
+  },
+  
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
 });
 
 export default mongoose.model("Question", questionSchema);

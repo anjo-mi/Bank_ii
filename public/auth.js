@@ -81,6 +81,10 @@ if (registerForm){
 }
 
 // if were on the login page
+// ********the changes from above are:
+      // - no #confirm-password
+      // - #email and #username are consolidated into #provided-info
+      // - #provided-info is not confined to entry restraints, validated for match on back-end
 // same logic, translate from above
 if (loginForm){
   loginForm.addEventListener('submit', async (e) => {

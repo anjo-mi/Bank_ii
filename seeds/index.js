@@ -18,7 +18,7 @@ const populateDB = async () => {
 
     await Question.insertMany(questions);
     await Category.insertMany(categories);
-    await User.insertMany(users);
+    for (const user of users) await User.create(user)
     console.log("seed data placed into corresponding DBs");
   } catch (err) {
     console.log(`Error: ${err}`);

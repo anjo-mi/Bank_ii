@@ -1,12 +1,12 @@
+// Categories Array
 export const categories = [
-  { description: "Behavioral", isDefault: true },
-  { description: "Technical", isDefault: true },
-  { description: "Leadership", isDefault: true },
-  { description: "Problem Solving", isDefault: true },
-  { description: "Communication", isDefault: true },
-  { description: "Teamwork", isDefault: true },
-  { description: "JavaScript", isDefault: true },
-  { description: "React", isDefault: true },
-  { description: "Node.js", isDefault: true },
-  { description: "Database", isDefault: true },
+  { description: "Behavioral", isDefault: true, userId: null },
+  { description: "Technical", isDefault: true, userId: null },
+  { description: "HTML", isDefault: true, userId: null },
+  { description: "CSS", isDefault: true, userId: null },
+  { description: "Javascript", isDefault: true, userId: null },
+  { description: "Javascript General", isDefault: true, userId: null },
+  { description: "Node", isDefault: true, userId: null },
+  { description: "CS Theory", isDefault: true, userId: null }
 ];
+
