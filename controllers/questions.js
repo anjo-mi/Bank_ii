@@ -88,4 +88,43 @@ export default {
       console.log({ e });
     }
   },
+
+  getNewQuestionForm: async (req,res) => {
+    const userCategories = await Category.find({userId: req.user.id});
+    const defaultCategories = await Category.find({isDefault: true});
+    const categori = userCategories.concat(defaultCategories);
+    res.render('addQuestion', {categori})
+  },
+
+  createNewQuestion: async (req,res) => {
+    let {
+      categori,
+      question,
+      answer,
+    } = req.body;
+    if (!categori) return res.status(400).json({message: "questions each need at least 1 category"});
+    if (!question.trim().length) return res.status(400).json({message: "questions need content"});
+    categori = Array.isArray(categori) ? categori : [categori];
+
+    // categori.forEach(async (cat) => {
+    //   const existingCategory = await Category.find({description: cat})
+    //   if (!existingCategory){
+    //     const c = await Category.create({
+    //         description: cat,
+    //         userId: req.user.id,
+    //         isDefault: true,
+    //     })
+    //     // if (!c) return res.status(500).json({message:`${cat} was not added to the database`})
+    //   }
+    // })
+    const quest = await Question.create({
+      categories: categori,
+      userId: req.user.id,
+      content: question,
+      answer: answer || null,
+      isDefault: true,
+    })
+    if (!quest) return res.status(500).json({message:`question was not added to the database`})
+    return res.status(201).json(quest);
+  }
 };

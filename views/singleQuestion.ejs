@@ -11,13 +11,14 @@
     <div class="">
         <ul class="flex flex-wrap border-1 border-dashed border-gray-400 rounded-sm gap-1 m-auto mt-5 ml-18 p-1 py-2 w-80/100 justify-end md:justify-evenly items-center text-center">
             <% question.categories.forEach(cat => {%>
-            <form action="/questions/byCategory" method="POST">
-                <input type="hidden" name="categori" value="<%= cat%>">
-                <input  type="submit" value="<%= cat %>" class="bg-slate-700 p-1 rounded-lg border-1 border-gray-200 text-xs md:text-lg lg:text-lg md:mt-0 lg:mt-0 text-sky-200 font-bold">
+            <li>
+                <form action="/questions/byCategory" method="POST">
+                    <input type="hidden" name="categori" value="<%= cat%>">
+                    <input  type="submit" value="<%= cat %>" class="bg-slate-700 p-1 rounded-lg border-1 border-gray-200 text-xs md:text-lg lg:text-lg md:mt-0 lg:mt-0 text-sky-200 font-bold">
                 </form>
-            </form>
+            </li>
             <% })%>
-            </ul>
+        </ul>
     </div>
    
     <div class="w-95/100 m-auto mt-4 flex flex-col" id="answerContainer">
