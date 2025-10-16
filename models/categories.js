@@ -5,7 +5,7 @@ const categorySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-
+  
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
@@ -14,8 +14,11 @@ const categorySchema = new mongoose.Schema({
   
   isDefault: {
     type: Boolean,
+    default: false,
     required: true,
   },
 });
+
+categorySchema.index({userId:1,description:1},{unique:true});
 
 export default mongoose.model("Category", categorySchema);

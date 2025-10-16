@@ -9,8 +9,16 @@ dotenv.config();
 beforeAll(async () => {
   await mongoose.disconnect();
   await mongoose.connect(process.env.DB_TEST_STR);
+  await User.deleteMany({});
+  await Category.collection.dropIndexes();
+  await Category.syncIndexes();
+  await Category.deleteMany({});
 });
 afterAll(async () => {
+  await User.deleteMany({});
+  await Category.collection.dropIndexes();
+  await Category.syncIndexes();
+  await Category.deleteMany({});
   await mongoose.connection.close();
 });
 
@@ -30,7 +38,7 @@ test('GET /questions/form after a valid login', async () => {
   expect(response.text).toContain('textarea');
 });
 
-test('POST /questions/create creates question with valid data', async () => {
+test('POST /questions/create creates question with valid data\n    plus 1 new cat', async () => {
   const user = await User.create({
     email: "diff@email.com",
     username: "this is different",
@@ -48,18 +56,20 @@ test('POST /questions/create creates question with valid data', async () => {
     .send({
       question: 'What should my brand new question be?',
       categori: ["Behavioral", "Theoretical"],
-      answer: 'If you havent figured it out yet, maybe give up.'
+      answer: 'If you havent figured it out yet, maybe give up.',
+      newCategories: 'VERYUNIQUEIFSOMEONECOPIESTHISTHEYREJUSTBEINGDIFFICULTTheoretical'
     });
   
   expect(response.status).toBe(201);
-  expect(response.body).toHaveProperty('_id');
-  expect(response.body.content).toBe('What should my brand new question be?');
-  expect(response.body.answer).toBe('If you havent figured it out yet, maybe give up.');
-  expect(response.body.userId).toBe(user._id.toString());
-  expect(response.body.categories.length).toEqual(2);
+  expect(response.body.quest).toHaveProperty('_id');
+  expect(response.body.quest.content).toBe('What should my brand new question be?');
+  expect(response.body.quest.answer).toBe('If you havent figured it out yet, maybe give up.');
+  expect(response.body.quest.userId).toBe(user._id.toString());
+  expect(response.body.quest.categories.length).toEqual(2);
+  expect(response.body.cs.length).toEqual(1);
 });
 
-test('POST /questions/create creates question with valid data, no answer, 1 category', async () => {
+test('POST /questions/create creates question with valid data, no answer, 1 category\n    category is duplicate of default (still works)', async () => {
   const user = await User.create({
     email: "different@email.com",
     username: "this is diff",
@@ -77,14 +87,16 @@ test('POST /questions/create creates question with valid data, no answer, 1 cate
     .send({
       question: 'What should my brand new question be?',
       categori: "Behavioral",
+      newCategories: 'VERYUNIQUEIFSOMEONECOPIESTHISTHEYREJUSTBEINGDIFFICULTBehavioral'
     });
   
   expect(response.status).toBe(201);
-  expect(response.body).toHaveProperty('_id');
-  expect(response.body.content).toBe('What should my brand new question be?');
-  expect(response.body.answer).toBe(null);
-  expect(response.body.userId).toBe(user._id.toString());
-  expect(response.body.categories.length).toEqual(1);
+  expect(response.body.quest).toHaveProperty('_id');
+  expect(response.body.quest.content).toBe('What should my brand new question be?');
+  expect(response.body.quest.answer).toBe(null);
+  expect(response.body.quest.userId).toBe(user._id.toString());
+  expect(response.body.quest.categories.length).toEqual(1);
+  expect(response.body.cs.length).toEqual(1);
 });
 
 test('POST /questions/create fails when trimmed content is empty', async () => {
@@ -105,6 +117,7 @@ test('POST /questions/create fails when trimmed content is empty', async () => {
     .send({
       question: '              ',
       categori: ["Behavioral"],
+      newCategories: ''
     });
   
   expect(response.status).toBe(400);
@@ -129,6 +142,7 @@ test('POST /questions/create fails when no categories are selected', async () =>
     .send({
       question: 'is this a legitimate question?',
       categori: undefined,
+      newCategories: ''
     });
   
   expect(response.status).toBe(400);

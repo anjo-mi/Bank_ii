@@ -69,16 +69,18 @@ describe('POST /auth/register', () => {
       username: 'iamunique'
     });
     
-    const response = await request(app)
-      .post('/auth/register')
-      .send({
-        email: 'uniqueAndAlsoValid@email.com',
-        password: 'DifferentPass123!',
-        username: 'iamunique'
+    setTimeout(async () => {
+      const response = await request(app)
+        .post('/auth/register')
+        .send({
+          email: 'uniqueAndAlsoValid@email.com',
+          password: 'DifferentPass123!',
+          username: 'iamunique'
       });
       
       expect(response.status).toBe(400);
       await User.deleteOne({username:'iamunique'});
+    }, 300)
   });
 
   test('username must use valid characters', async () => {

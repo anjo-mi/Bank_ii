@@ -23,9 +23,6 @@
     --color-blue-200: oklch(88.2% 0.059 254.128);
     --color-blue-500: oklch(62.3% 0.214 259.815);
     --color-blue-600: oklch(54.6% 0.245 262.881);
-    --color-blue-700: oklch(48.8% 0.243 264.376);
-    --color-blue-800: oklch(42.4% 0.199 265.638);
-    --color-blue-900: oklch(37.9% 0.146 265.522);
     --color-indigo-950: oklch(25.7% 0.09 281.288);
     --color-violet-800: oklch(43.2% 0.232 292.759);
     --color-fuchsia-500: oklch(66.7% 0.295 322.15);
@@ -357,6 +354,9 @@
   .max-h-100 {
     max-height: calc(var(--spacing) * 100);
   }
+  .min-h-4 {
+    min-height: calc(var(--spacing) * 4);
+  }
   .min-h-50 {
     min-height: calc(var(--spacing) * 50);
   }
@@ -425,6 +425,9 @@
   }
   .w-full {
     width: 100%;
+  }
+  .max-w-7\/10 {
+    max-width: calc(7/10 * 100%);
   }
   .max-w-9\/10 {
     max-width: calc(9/10 * 100%);
@@ -555,9 +558,6 @@
   }
   .border-violet-800 {
     border-color: var(--color-violet-800);
-  }
-  .bg-blue-700 {
-    background-color: var(--color-blue-700);
   }
   .bg-gray-50 {
     background-color: var(--color-gray-50);
@@ -793,13 +793,6 @@
     --tw-ease: var(--ease-in-out);
     transition-timing-function: var(--ease-in-out);
   }
-  .hover\:bg-blue-800 {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--color-blue-800);
-      }
-    }
-  }
   .hover\:bg-green-400 {
     &:hover {
       @media (hover: hover) {
@@ -818,6 +811,13 @@
     &:hover {
       @media (hover: hover) {
         background-color: var(--color-green-700);
+      }
+    }
+  }
+  .hover\:bg-green-800 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-green-800);
       }
     }
   }
@@ -874,14 +874,14 @@
       box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
     }
   }
-  .focus\:ring-blue-200 {
-    &:focus {
-      --tw-ring-color: var(--color-blue-200);
-    }
-  }
   .focus\:ring-blue-500 {
     &:focus {
       --tw-ring-color: var(--color-blue-500);
+    }
+  }
+  .focus\:ring-green-950 {
+    &:focus {
+      --tw-ring-color: var(--color-green-950);
     }
   }
   .focus\:outline-2 {
@@ -1252,13 +1252,6 @@
     @media (prefers-color-scheme: dark) {
       &:focus {
         --tw-ring-color: var(--color-blue-600);
-      }
-    }
-  }
-  .dark\:focus\:ring-blue-900 {
-    @media (prefers-color-scheme: dark) {
-      &:focus {
-        --tw-ring-color: var(--color-blue-900);
       }
     }
   }
