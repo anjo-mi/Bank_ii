@@ -6,30 +6,45 @@ import { jest } from "@jest/globals";
 import app from "../../server.js";
 import dotenv from "dotenv";
 dotenv.config();
+
 beforeAll(async () => {
   await mongoose.disconnect();
   await mongoose.connect(process.env.DB_TEST_STR);
-  await User.deleteMany({});
+  
+  await User.collection.dropIndexes();
   await Category.collection.dropIndexes();
+  await Question.collection.dropIndexes();
+  await User.syncIndexes();
   await Category.syncIndexes();
+  await Question.syncIndexes();
+  
+  await User.deleteMany({});
   await Category.deleteMany({});
+  await Question.deleteMany({});
 });
+
 afterAll(async () => {
   await User.deleteMany({});
-  await Category.collection.dropIndexes();
-  await Category.syncIndexes();
   await Category.deleteMany({});
+  await Question.deleteMany({});
   await mongoose.connection.close();
 });
 
 test('GET /questions/form after a valid login', async () => {
+  const timestamp = Date.now();
   const user = await User.create({
-    email: "my@email.com",
-    username: "randomuser",
+    email: `create-form-${timestamp}@email.com`,
+    username: `createform${timestamp}`,
     password: "randompass",
   });
+  
   const agent = request.agent(app);
-  await agent.post('/auth/login').send({provided: user.email, password: 'randompass'});
+  const loginResponse = await agent.post('/auth/login').send({
+    provided: user.email,
+    password: 'randompass'
+  });
+  
+  expect(loginResponse.status).toBe(200);
   
   const response = await agent.get('/questions/form');
   
@@ -38,10 +53,11 @@ test('GET /questions/form after a valid login', async () => {
   expect(response.text).toContain('textarea');
 });
 
-test('POST /questions/create creates question with valid data\n    plus 1 new cat', async () => {
+test('POST /questions/create creates question with valid data plus 1 new category', async () => {
+  const timestamp = Date.now();
   const user = await User.create({
-    email: "diff@email.com",
-    username: "this is different",
+    email: `create-with-cat-${timestamp}@email.com`,
+    username: `createwithcat${timestamp}`,
     password: "randompass",
   });
 
@@ -54,25 +70,30 @@ test('POST /questions/create creates question with valid data\n    plus 1 new ca
   const response = await agent
     .post('/questions/create')
     .send({
-      question: 'What should my brand new question be?',
+      question: `Question created at ${timestamp}`,
       categori: ["Behavioral", "Theoretical"],
-      answer: 'If you havent figured it out yet, maybe give up.',
+      answer: 'Test answer',
       newCategories: 'VERYUNIQUEIFSOMEONECOPIESTHISTHEYREJUSTBEINGDIFFICULTTheoretical'
     });
   
-  expect(response.status).toBe(201);
-  expect(response.body.quest).toHaveProperty('_id');
-  expect(response.body.quest.content).toBe('What should my brand new question be?');
-  expect(response.body.quest.answer).toBe('If you havent figured it out yet, maybe give up.');
-  expect(response.body.quest.userId).toBe(user._id.toString());
-  expect(response.body.quest.categories.length).toEqual(2);
-  expect(response.body.cs.length).toEqual(1);
+  expect(response.status).toBe(200);
+  expect(response.body.message).toBe('question successfully added!');
+  
+  const createdQuestion = await Question.findOne({ content: `Question created at ${timestamp}` });
+  expect(createdQuestion).toBeTruthy();
+  expect(createdQuestion.userId.toString()).toBe(user._id.toString());
+  expect(createdQuestion.categories.length).toBe(2);
+  
+  const createdCategory = await Category.findOne({ description: 'Theoretical', userId: user._id });
+  expect(createdCategory).toBeTruthy();
+  expect(createdCategory.isDefault).toBe(false);
 });
 
-test('POST /questions/create creates question with valid data, no answer, 1 category\n    category is duplicate of default (still works)', async () => {
+test('POST /questions/create creates question with valid data, no answer, 1 category', async () => {
+  const timestamp = Date.now();
   const user = await User.create({
-    email: "different@email.com",
-    username: "this is diff",
+    email: `create-no-answer-${timestamp}@email.com`,
+    username: `createnoanswer${timestamp}`,
     password: "randompass",
   });
 
@@ -85,24 +106,29 @@ test('POST /questions/create creates question with valid data, no answer, 1 cate
   const response = await agent
     .post('/questions/create')
     .send({
-      question: 'What should my brand new question be?',
+      question: `No answer question ${timestamp}`,
       categori: "Behavioral",
       newCategories: 'VERYUNIQUEIFSOMEONECOPIESTHISTHEYREJUSTBEINGDIFFICULTBehavioral'
     });
   
-  expect(response.status).toBe(201);
-  expect(response.body.quest).toHaveProperty('_id');
-  expect(response.body.quest.content).toBe('What should my brand new question be?');
-  expect(response.body.quest.answer).toBe(null);
-  expect(response.body.quest.userId).toBe(user._id.toString());
-  expect(response.body.quest.categories.length).toEqual(1);
-  expect(response.body.cs.length).toEqual(1);
+  expect(response.status).toBe(200);
+  expect(response.body.message).toBe('question successfully added!');
+  
+  const createdQuestion = await Question.findOne({ content: `No answer question ${timestamp}` });
+  expect(createdQuestion).toBeTruthy();
+  expect(createdQuestion.answer).toBe(null);
+  expect(createdQuestion.userId.toString()).toBe(user._id.toString());
+  expect(createdQuestion.categories.length).toBe(1);
+  
+  const createdCategory = await Category.findOne({ description: 'Behavioral', userId: user._id });
+  expect(createdCategory).toBeTruthy();
 });
 
 test('POST /questions/create fails when trimmed content is empty', async () => {
+  const timestamp = Date.now();
   const user = await User.create({
-    email: "notothers@email.com",
-    username: "notothers",
+    email: `create-empty-${timestamp}@email.com`,
+    username: `createempty${timestamp}`,
     password: "randompass",
   });
 
@@ -125,9 +151,10 @@ test('POST /questions/create fails when trimmed content is empty', async () => {
 });
 
 test('POST /questions/create fails when no categories are selected', async () => {
+  const timestamp = Date.now();
   const user = await User.create({
-    email: "onlyme@email.com",
-    username: "notanyoneelse",
+    email: `create-no-cat-${timestamp}@email.com`,
+    username: `createnocat${timestamp}`,
     password: "randompass",
   });
 

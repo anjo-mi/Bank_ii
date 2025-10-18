@@ -120,7 +120,13 @@ newQuestionForm.addEventListener('submit', async (e) => {
       const data = await response.json();
 
       // if were good, go to practice (login occurs in registration method)
-      if (response.ok) window.location.href = '/questions/form'
+      if (response.ok){
+        // window.location.href = '/questions/form'
+        showError(data.message);
+        document.getElementById('question').value = '';
+        document.getElementById('answer').value = '';
+        document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+      }
       // register sends data.message, login sends data.error
       else showError(data.message || data.error);
       // redisplay input for next attempt

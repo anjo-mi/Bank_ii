@@ -6,10 +6,16 @@ const router = express.Router();
 import auth from '../middleware/auth.js';
 const {ensureAuth} = auth;
 
+// open
 router.get("/", questionsController.getAllQuestions);
-router.get("/form", ensureAuth, questionsController.getNewQuestionForm);
-router.post("/create", ensureAuth, questionsController.createNewQuestion);
 router.post("/byCategory", questionsController.getQuestionsByCats);
 router.post("/byId", questionsController.getQuestionById);
+
+// move along, nothing to see here
+router.get("/form", ensureAuth, questionsController.getNewQuestionForm);
+router.get("/edit/select", ensureAuth, questionsController.getEditSearchPage);
+router.post("/create", ensureAuth, questionsController.createNewQuestion);
+router.post("/edit", ensureAuth, questionsController.getEditQuestionPage);
+router.post("/edit/update", ensureAuth, questionsController.updateQuestion);
 
 export default router;

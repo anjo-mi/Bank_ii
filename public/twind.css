@@ -426,6 +426,9 @@
   .w-full {
     width: 100%;
   }
+  .max-w-4\/10 {
+    max-width: calc(4/10 * 100%);
+  }
   .max-w-7\/10 {
     max-width: calc(7/10 * 100%);
   }
@@ -434,6 +437,9 @@
   }
   .max-w-10\/10 {
     max-width: calc(10/10 * 100%);
+  }
+  .min-w-2\/10 {
+    min-width: calc(2/10 * 100%);
   }
   .min-w-3\/10 {
     min-width: calc(3/10 * 100%);
