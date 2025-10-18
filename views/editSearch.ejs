@@ -22,6 +22,8 @@
         </ul>
     </div>
 
+    <div id="success-message" class="hidden w-80/100 m-auto mb-5 text-green-400 text-center p-2 bg-gray-600 border-1 border-gray-200 rounded-lg "></div>
+
     <div 
     class="mx-auto w-full max-w-9/10 text-center">
         <input type="submit" value="Get Questions"
@@ -40,13 +42,16 @@
                 </li>
                 <% })%>
             </ul>
-        <form action="/questions/edit" method="POST">
-            <p class="question-content text-sm md:text-lg lg:text-2xl row-span-2 col-span-5"><%= question.content%></p>
-            <div class="m-auto text-center">
-                <input type="hidden" name="questionId" id="questionId" value="<%= question._id %>">
-                <input type="submit" class="text-center bg-green-400 active:bg-green-950 hover:bg-green-600 focus:outline-4 focus:outline-offset-2 focus:outline-green-700 text-white font-bold py-1 px-5 rounded-full" value="Edit">
+            <form action="/questions/edit" method="POST">
+                <p class="question-content text-sm md:text-lg lg:text-2xl row-span-2 col-span-5"><%= question.content%></p>
+                <div class="m-auto text-center">
+                    <input type="hidden" name="questionId" value="<%= question._id %>">
+                    <input type="submit" class="text-center bg-green-400 active:bg-green-950 hover:bg-green-600 focus:outline-4 focus:outline-offset-2 focus:outline-green-700 text-white font-bold py-1 px-5 rounded-full" value="Edit">
+                </div>
+            </form>
+            <div>
+                <button type="submit" class="delete-question-btn text-center bg-red-400 active:bg-red-950 hover:bg-red-600 focus:outline-2 focus:outline-offset-2 focus:outline-red-700 text-white font-bold py-1 px-5 rounded-full"">Delete</button>
             </div>
-        </form>
         </li>
     <% }) %>
     </ul>

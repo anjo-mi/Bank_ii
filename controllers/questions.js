@@ -206,4 +206,39 @@ export default {
       return res.status(500).json({message: updateQuestionError.message});
     }
   },
+
+  deleteQuestion: async (req,res) => {
+    try{
+      const questionId = req.params.id;
+      // make sure question exists and is the user's
+      const checkQuestion = await Question.findById(questionId);
+      if (!checkQuestion) return res.status(500).json({message:'failed to locate question'});
+      if (checkQuestion.userId.toString() !== req.user.id) return res.status(403).json({message:'tsk tsk, this is not yours to remove'});
+
+      // delete the question, but extract the categories
+      const deletedQuestion = await Question.findByIdAndDelete(questionId);
+      const {categories} = deletedQuestion;
+
+      // make sure the categories can find at least one question, otherwise delete the category
+      for (const category of categories){
+        const questionsInCategory = await Question.find({
+          userId: req.user.id,
+          categories: {$in: [category]},
+        })
+        if (!questionsInCategory.length) {
+          const removedCategory = await Category.deleteOne({
+            description: category,
+            userId: req.user.id
+          });
+        }
+      }
+      // if ( req.get('referer').endsWith('/select')){
+        return res.status(200).json({message: 'question has been removed from the database'});
+      // }
+      // return res.redirect('/questions/edit/select');
+    }catch(deleteQuestionError){
+      console.log({deleteQuestionError})
+      return res.status(500).json({message: deleteQuestionError.message});
+    }
+  },
 };

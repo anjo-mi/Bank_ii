@@ -1,8 +1,10 @@
 
 <div id="error-message" class="hidden w-80/100 m-auto mb-5 text-red-400 text-center p-2 bg-gray-600 border-1 border-gray-200 rounded-lg "></div>
 
-<div class="w-95/100 m-auto mt-4 flex flex-col" id="question-creation-container">
-  <form id="create-question-form" action="/questions/edit/update" method="POST"
+<div id="success-message" class="hidden w-80/100 m-auto mb-5 text-green-400 text-center p-2 bg-gray-600 border-1 border-gray-200 rounded-lg "></div>
+
+<div class="w-95/100 m-auto mt-4 flex flex-col" id="edit-question-container">
+  <form id="edit-question-form" action="/questions/edit/update" method="POST"
   class="flex flex-col lg:sticky lg:-top-12">
     <ul id="category-list" class="flex flex-wrap border-1 border-dashed border-gray-400 rounded-sm gap-3 m-auto mt-5 ml-18 p-1 py-2 w-80/100 justify-end justify-evenly items-center text-center">
         <% categori.forEach(cat => {%>
@@ -15,6 +17,9 @@
         <% })%>
         <li class="min-w:4/10 max-w-7/10"><input type="text" id="new-category" placeholder="Add New Category" class="p-2  min-h-4 block text-center text-xs md:text-lg lg:text-lg border-1 border-gray-300 focus:outline-2 focus:outline-green-400"></li>
     </ul>
+    <div class="mt-5">
+        <button type="button" id="delete-btn" class="delete-question-btn text-center bg-red-400 active:bg-red-950 hover:bg-red-600 focus:outline-2 focus:outline-offset-2 focus:outline-red-700 text-white font-bold py-1 px-5 rounded-full"">Delete</button>
+    </div>
     <div>
       <label for="question" class="block m-auto mt-5 text-xs md:text-lg lg:text">Question:</label>
       <textarea class="w-90/100 text-xs md:text-lg lg:text-lg order-3 h-25 mt-2 focus:mt-5 focus:h-140 lg:focus:h-80 transition-all duration-300 resize-none px-2 py-1 mx-auto mb-6 border-2 border-gray-700 outline-0 focus:outline-2 focus:outline-blue-600 focus:bg-slate-800 rounded-lg" name="question" id="question" required><%= question.content%></textarea>
@@ -37,3 +42,5 @@
    </button>
   </form>
 </div>
+
+<script src="../../editQuestion.js"></script>

@@ -12,6 +12,7 @@
     "css:watch": "npx postcss ./public/styles.css -o ./public/twind.css --watch",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "test:auth": "node --experimental-vm-modules node_modules/jest/bin/jest.js ./tests/auth",
+    "test:delete": "node --experimental-vm-modules node_modules/jest/bin/jest.js ./tests/delete",
     "test:models": "node --experimental-vm-modules node_modules/jest/bin/jest.js ./tests/models",
     "test:practo": "node --experimental-vm-modules node_modules/jest/bin/jest.js ./tests/practice",
     "test:reqs": "node --experimental-vm-modules node_modules/jest/bin/jest.js ./tests/requests/questionsByCategory",

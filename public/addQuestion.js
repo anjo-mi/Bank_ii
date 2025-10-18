@@ -1,25 +1,4 @@
-/*
-<li class="bg-slate-700 p-1 min-w-3/10 rounded-lg border-1 border-gray-200 text-xs md:text-lg lg:text-lg md:mt-0 lg:mt-0 text-sky-200 font-bold">
-  <label for="<%= cat.description %>" class="w-full h-full">
-    <input  type="checkbox" 
-    name="categori" 
-    id="<%= cat.description %>" 
-    value="<%= cat.description %>" 
-    class="w-full h-full"
-    >
-  
-  <%= cat.description %>
-  </label>
-</li>
 
-<li class="w-3/10">
-  <input type="text" 
-  id="new-category" 
-  placeholder="Add New Category" 
-  class="px-2 w-full block text-center text-xs md:text-lg lg:text-lg border-1 border-gray-300 focus:outline-2 focus:outline-green-400"
-  >
-</li>
-*/
 
 const newCategoryBox = document.getElementById('new-category');
 const newQuestionForm = document.getElementById('create-question-form');
@@ -79,6 +58,10 @@ newQuestionForm.addEventListener('submit', async (e) => {
  // block form submission
     e.preventDefault();
 
+    const errorMessage = document.getElementById('error-message');
+    errorMessage.textContent = '';
+    errorMessage.style.display = 'none';
+
     // hide the input / display the load indicator
     document.getElementById('submit').style.display = 'none';
     document.getElementById('load-indicator').style.display = 'block';
@@ -126,6 +109,81 @@ newQuestionForm.addEventListener('submit', async (e) => {
         document.getElementById('question').value = '';
         document.getElementById('answer').value = '';
         document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+        possNewCategories.value = '';
+      }
+      // register sends data.message, login sends data.error
+      else showError(data.message || data.error);
+      // redisplay input for next attempt
+      document.getElementById('load-indicator').style.display = 'none';
+      document.getElementById('submit').style.display = 'block';
+    }
+    catch(e){
+      console.log({e});
+      showError(e.message);
+      document.getElementById('load-indicator').style.display = 'none';
+      document.getElementById('submit').style.display = 'block';
+    }
+  })
+
+newQuestionForm.addEventListener('keydown', async (e) => {
+    if (newCategoryBox.hasFocus) return;
+    if (e.key !== 'Enter') return;
+    if (e.shiftKey) return;
+ // block form submission
+    e.preventDefault();
+
+    const errorMessage = document.getElementById('error-message');
+    errorMessage.textContent = '';
+    errorMessage.style.display = 'none';
+
+    // hide the input / display the load indicator
+    document.getElementById('submit').style.display = 'none';
+    document.getElementById('load-indicator').style.display = 'block';
+
+    const selectedCategories = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(input => input.value);
+    const question = document.getElementById('question').value;
+    const answer = document.getElementById('answer').value;
+    const newCategories = document.getElementById('possible-new-categories').value;
+
+    if (!selectedCategories.length){
+      showError('questions each need at least 1 category')
+      // hide the load indicator / display the button
+      document.getElementById('load-indicator').style.display = 'none';
+      document.getElementById('submit').style.display = 'block';
+      return;
+    }
+
+    if (!question.trim().length){
+      showError('questions need content')
+      // hide the load indicator / display the button
+      document.getElementById('load-indicator').style.display = 'none';
+      document.getElementById('submit').style.display = 'block';
+      return;
+    }
+
+    try{
+      // now attempt form submission
+      const response = await fetch('/questions/create', {
+        method: "POST",
+        headers: {"Content-Type": 'application/json'},
+        body: JSON.stringify({
+          question,
+          categori: selectedCategories,
+          answer: answer.trim() || null,
+          newCategories,
+        })
+      })
+
+      const data = await response.json();
+
+      // if were good, go to practice (login occurs in registration method)
+      if (response.ok){
+        // window.location.href = '/questions/form'
+        showError(data.message);
+        document.getElementById('question').value = '';
+        document.getElementById('answer').value = '';
+        document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+        possNewCategories.value = '';
       }
       // register sends data.message, login sends data.error
       else showError(data.message || data.error);
