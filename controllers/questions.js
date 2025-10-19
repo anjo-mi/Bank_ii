@@ -120,7 +120,7 @@ export default {
       categori = Array.isArray(categori) ? categori : [categori];
 
       const cs = [];
-      if (newCategories.trim().length){
+      if (newCategories && newCategories.trim().length){
         newCategories = newCategories.trim().split('VERYUNIQUEIFSOMEONECOPIESTHISTHEYREJUSTBEINGDIFFICULT').slice(1);
         newCategories = new Set(newCategories);
         for (const cat of categori) if (newCategories.has(cat)){

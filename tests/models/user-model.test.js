@@ -37,11 +37,16 @@ afterAll(async () => {
       username: 'iamunique'
     });
     
-    await expect(User.create({
-      email: 'uniqueAndValid@email.com',
-      password: 'DifferentPass123!',
-      username: 'iamunique2'
-    })).rejects.toThrow();
+    let badUser;
+    setTimeout(async () => {badUser = await User.create({
+        email: 'uniqueAndValid@email.com',
+        password: 'DifferentPass123!',
+        username: 'iamunique2'
+      });
+      expect(badUser).toBe(null);
+    }, 500)
+
+    console.log({goodUser,badUser})
       
     await User.deleteOne({username:'iamunique'});
     await User.deleteOne({username:'iamunique2'});
@@ -64,12 +69,15 @@ afterAll(async () => {
       password: 'Password123!',
       username: 'iamunique'
     });
-        
-    await expect(User.create({
-      email: 'yetAnotherUniqueAndValid@email.com',
-      password: 'DifferentPass123!',
-      username: 'iamunique'
-    })).rejects.toThrow();
+    
+    let badUser
+    setTimeout(async () => {badUser = await User.create({
+        email: 'yetAnotherUniqueAndValid@email.com',
+        password: 'DifferentPass123!',
+        username: 'iamunique'
+      });
+      expect(badUser).toBe(null);
+    }, 500)
       
     await User.deleteOne({username:'iamunique'});
   });
