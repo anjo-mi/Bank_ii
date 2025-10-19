@@ -13,6 +13,7 @@
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "test:auth": "node --experimental-vm-modules node_modules/jest/bin/jest.js ./tests/auth",
     "test:delete": "node --experimental-vm-modules node_modules/jest/bin/jest.js ./tests/delete",
+    "test:guest": "node --experimental-vm-modules node_modules/jest/bin/jest.js ./tests/guest",
     "test:models": "node --experimental-vm-modules node_modules/jest/bin/jest.js ./tests/models",
     "test:practo": "node --experimental-vm-modules node_modules/jest/bin/jest.js ./tests/practice",
     "test:reqs": "node --experimental-vm-modules node_modules/jest/bin/jest.js ./tests/requests/questionsByCategory",

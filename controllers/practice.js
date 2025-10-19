@@ -4,7 +4,9 @@ const { User, Category, Question } = models;
 export default {
   // load practice setup page with all [pre-loaded] categories
   getCategories: async (req, res) => {
-    const allCats = await Category.find();
+    const userCategories = await Category.find({userId:req.user.id});
+    const defaultCategories = await Category.find({isDefault:true})
+    const allCats = userCategories ? [...userCategories,...defaultCategories] : defaultCategories;
     res.render("practice", { allCats });
     // res.json({allCats})
   },
@@ -12,9 +14,13 @@ export default {
   // take any requested categories and desired interview length
   startPractice: async (req,res) => {
     let {categori, limit} = req.body;
-    const questions = await Question.find();
-    const arab = new Set([0,1,2,3,4,5,6,7,8,9,]);
+
+    const defaultQuestions = await Question.find({isDefault:true});
+    const userQuestions = await Question.find({userId: req.user.id});
+    const questions = userQuestions ? [...userQuestions, ...defaultQuestions] : defaultQuestions;
+
     // if the length provided is a valid number, use that number, otherwise default is 7
+    const arab = new Set([0,1,2,3,4,5,6,7,8,9,]);
     limit = limit 
             && limit > 0
             && limit.toString().split('').map(Number).every(dig => arab.has(dig)) 

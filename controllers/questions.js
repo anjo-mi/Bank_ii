@@ -6,14 +6,18 @@ export default {
 
   getAllQuestions: async (req, res) => {
     try {
-      const allQuestions = await Question.find();
+      const defaultQuestions = await Question.find({isDefault: true});
+      let userQuestions;
+      if (req.user) userQuestions = await Question.find({userId: req.user.id});
+
+      const allQuestions = userQuestions ? [...userQuestions,...defaultQuestions] : defaultQuestions;
 
       // set incomingSearch to nothing so EJS doesnt complain
       res.render("questions", { allQuestions, incomingSearch:'' });
 
-    } catch (e) {
-      console.log({ e });
-      res.status(400).send("at this point, its prolly a server error");
+    } catch (getQuestionsError) {
+      console.log({ getQuestionsError });
+      res.status(500).send("database error");
     }
   },
 
@@ -25,16 +29,21 @@ export default {
       if (question) res.render("singleQuestion", { question });
       // if (question) return res.json(question);
       else return res.status(404).send("that question does not exist in the database!");
-    } catch (e) {
-      console.log({ e });
-      res.status(404).send("question not found!");
+    } catch (searchByIdError) {
+      console.log({ searchByIdError });
+      res.status(500).json({message: searchByIdError.message});
     }
   },
 
   // EJS is needy af, make sure to send req.body.incomingSearch in ALL cases
   getQuestionsByCats: async (req, res) => {
     try {
-      const allQuestions = await Question.find();
+      const defaultQuestions = await Question.find({isDefault:true});
+      let userQuestions;
+      if (req.user) userQuestions = await Question.find({userId:req.user.id});
+      
+      const allQuestions = userQuestions ? [...userQuestions,...defaultQuestions] : defaultQuestions;
+      
       const body = req.body;
 
       // if matchAll isnt selected, assume its match any
@@ -85,8 +94,9 @@ export default {
         });
         // return res.json( { allQuestions: requested } );
       }
-    } catch (e) {
-      console.log({ e });
+    } catch (searchByCategoryError) {
+      console.log({ searchByCategoryError });
+      res.status(500).json({message: searchByCategoryError.message});
     }
   },
 
