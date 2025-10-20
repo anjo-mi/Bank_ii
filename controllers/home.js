@@ -6,9 +6,9 @@ export default {
   getHome: async (req, res) => {
     try{
       const defaultCategories = await Category.find({isDefault: true});
-      console.log({defaultCategories});
       const userCategories = req.user?.id ? await Category.find({userId:req.user.id}) : null;
       const allCats = userCategories ? [...userCategories, ...defaultCategories] : defaultCategories;
+      
       res.render("index", { allCats });
     }catch(getIndexPageError){
       console.log({getIndexPageError});

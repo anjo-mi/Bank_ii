@@ -1,4 +1,5 @@
 import models from "../models/index.js";
+import practiceSession from "../models/practiceSession.js";
 const { User, Category, Question } = models;
 
 export default {
@@ -14,11 +15,12 @@ export default {
   // take any requested categories and desired interview length
   startPractice: async (req,res) => {
     let {categori, limit} = req.body;
+    categori = categori && !Array.isArray(categori) ? [categori] : categori;
 
     const defaultQuestions = await Question.find({isDefault:true});
     const userQuestions = await Question.find({userId: req.user.id});
     const questions = userQuestions ? [...userQuestions, ...defaultQuestions] : defaultQuestions;
-
+    // console.log({questions})
     // if the length provided is a valid number, use that number, otherwise default is 7
     const arab = new Set([0,1,2,3,4,5,6,7,8,9,]);
     limit = limit 
@@ -35,7 +37,7 @@ export default {
     const matchingQuestions = categori && categori.length 
           ? questions.filter(q => q.categories.some(cat => categori.includes(cat)))
           : questions;
-
+    if (!matchingQuestions.length) return res.status(403).json({message: 'no questions match your search?'});
     // function that takes an array and randomizes the order
     // + radomize all matching questions and slice(0,limit) to get at most the amount of requested questions
     const randomizeQuestions = (qArr) => {
@@ -58,7 +60,6 @@ export default {
     const message = sufficient
                     ? null
                     : `Your search yielded ${randomizedQuestions.length} results, while the interview was intended to contain ${limit} questions. Would you like to proceed?`;
-    
     // send the user to the briefing page
     // index at -1, so each next call works for the length of the array
       // (first next() -> 0, listens for it to equal arr length and abort)
@@ -105,7 +106,17 @@ export default {
           answer: answers[i],
         }
       }
-      res.render('practiceCompleted', {results});
+      const sessionRecap = await practiceSession.create({
+        userId: req.user.id,
+        questions,
+        answers
+      })
+
+      // maybe add the AI call per question here? 
+      // (prolly above, so the last question will get a response as well)
+
+
+      res.render('practiceCompleted', {results,sessionRecap});
     }
     else res.render('practiceQuestion', {questions,current,answers});
   }
