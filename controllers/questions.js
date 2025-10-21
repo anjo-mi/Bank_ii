@@ -156,7 +156,10 @@ export default {
 
       const userQuestions = await Question.find({userId: req.user.id});
       if (!userQuestions.length) return res.redirect('/questions/form');
-      const allCategories = await Category.find();
+      const defaultCategories = await Category.find({isDefault: true});
+      const userCategories = await Category.find({userId: req.user.id});
+
+      const allCategories = userCategories ? [...userCategories, ...defaultCategories] : defaultCategories;
 
       return res.render('editSearch', {
         allCats: allCategories,
