@@ -18,8 +18,9 @@ make a function that when the button is clicked:
 takes in:
 */
 const filterQuestions = (e) => {
-  // if (e.key && e.key === 'Enter'){
-    // e.preventDefault();
+  if (e.key === 'Enter' || e.detail){
+    e.preventDefault();
+    noResultsBox.style.opacity = 0;
     const contentSearch = searchBar.value.trim().split(' ').map(word => word.toLowerCase());
     const categorySearch = categoryBoxes.filter(box => box.checked).map(input => input.value);
     console.log({categorySearch})
@@ -47,14 +48,15 @@ const filterQuestions = (e) => {
     setTimeout(() => {
       questionListItems.forEach(li => li.style.display = 'none');
       matchingQuestions.forEach(li => li.style.display = 'block');
-      setTimeout(() => {
-        questionList.style.opacity = 1;
-      },0)
+      setTimeout(() => questionList.style.opacity = 1 ,0);
+      if (!matchingQuestions.length) setTimeout(() => noResultsBox.style.opacity = 1 ,0)
     } ,300)
-  // }
+
+  }
 }
 
 filterSearchBtn.addEventListener('click', filterQuestions);
+searchBar.addEventListener('keydown', filterQuestions);
 /*
   id:noResultsBox .style = none, wait opacity 0.
   const selectedCategories = document.querySelectorAll: input[type='checkbox']:checked .map => value
