@@ -51,9 +51,15 @@
         </ul>
     </div>
 
-    <div 
-    class="mx-auto w-full max-w-9/10 text-center">
-        <input type="submit" value="Get Questions"
-        class="text-center bg-gray-400 active:bg-green-800 hover:bg-green-400 focus:outline-4 focus:outline-offset-2 focus:outline-green-700 text-white font-bold py-2 px-4 rounded-full">
+    <div
+    class="mx-auto flex place-content-around max-w-9/10 text-center">
+        <div>
+            <input type="submit" value="Get Questions"
+            class="text-center bg-gray-400 active:bg-green-800 hover:bg-green-400 focus:outline-4 focus:outline-offset-2 focus:outline-green-700 text-white font-bold py-2 px-4 rounded-full">
+        </div>
+        <div>
+            <input type="submit" formaction="/questions/getSingleRandom" value="Get Random Question"
+            class="text-center bg-gray-400 active:bg-green-800 hover:bg-green-400 focus:outline-4 focus:outline-offset-2 focus:outline-green-700 text-white font-bold py-2 px-4 rounded-full">
+        </div>
     </div>
 </form>

@@ -100,6 +100,76 @@ export default {
     }
   },
 
+  getRandomQuestion: async (req,res) => {
+    try{
+      let {
+        matchAll, // 0 for MatchAny, 1 for MatchAll
+        search, // ' ' separated String || undefined
+        categori, // undefined || String || [Strings]
+      } = req.body;
+
+      const defaultQuestions = await Question.find({isDefault: true});
+      let userQuestions;
+      if (req.user) userQuestions = await Question.find({userId: req.userId});
+      const allQuestions = userQuestions ? [...userQuestions,...defaultQuestions] : defaultQuestions;
+      console.log({categori,search,matchAll})
+      if ((!search || !search.trim()) && !categori) {
+        const random = Math.floor(Math.random() * allQuestions.length);
+        return res.render('singleQuestion', {
+          question: allQuestions[random],
+        })
+      }
+
+      matchAll = matchAll ? Boolean(+matchAll) : false;
+      console.log({categori})
+      categori = Array.isArray(categori) ? categori : [categori];
+      console.log({categori})
+      categori = new Set(categori.filter(Boolean));
+      console.log({categori})
+      search = search ? search.trim().split(' ').map(word => word.toLowerCase()) : [];
+
+      let questions;
+      if (matchAll){
+        questions = allQuestions.filter(q =>{
+          let searchMatch = true;
+          let categoryMatch = true;
+          if (categori.size){
+            // categoryMatch = q.categories.every(cat => categori.has(cat));
+            categoryMatch = Array.from(categori).every(cat => q.categories.includes(cat));
+          }
+          if (search.length){
+            searchMatch = search.every(word => q.content.toLowerCase().includes(word));
+          }
+          return searchMatch && categoryMatch;
+        });
+      }else{
+        questions = allQuestions.filter(q =>{
+          let searchMatch = true;
+          let categoryMatch = true;
+          if (categori.size){
+            categoryMatch = q.categories.some(cat => categori.has(cat));
+          }
+          if (search.length){
+            searchMatch = search.every(word => q.content.toLowerCase().includes(word));
+          }
+          return searchMatch && categoryMatch;
+        });
+      }
+      if (!questions || !questions.length){
+        return res.status(400).json({message: 'no questions matched your search'})
+      }
+      const random = Math.floor(Math.random() * questions.length);
+      const question = questions[random];
+      return res.render('singleQuestion', {
+        question,
+      })
+
+    }catch(getRandomQuestionError){
+      console.log({getRandomQuestionError});
+      return res.status(500).json({message: 'there was en error while retrieving the question'});
+    }
+  },
+
   getNewQuestionForm: async (req,res) => {
     const userCategories = await Category.find({userId: req.user.id});
     const defaultCategories = await Category.find({isDefault: true});

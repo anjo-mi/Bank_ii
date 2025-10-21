@@ -10,6 +10,7 @@ const {ensureAuth} = auth;
 router.get("/", questionsController.getAllQuestions);
 router.post("/byCategory", questionsController.getQuestionsByCats);
 router.post("/byId", questionsController.getQuestionById);
+router.post("/getSingleRandom", questionsController.getRandomQuestion);
 
 // move along, nothing to see here
 router.get("/form", ensureAuth, questionsController.getNewQuestionForm);
