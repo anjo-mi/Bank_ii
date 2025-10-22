@@ -112,7 +112,7 @@ export default {
       let userQuestions;
       if (req.user) userQuestions = await Question.find({userId: req.userId});
       const allQuestions = userQuestions ? [...userQuestions,...defaultQuestions] : defaultQuestions;
-      console.log({categori,search,matchAll})
+      
       if ((!search || !search.trim()) && !categori) {
         const random = Math.floor(Math.random() * allQuestions.length);
         return res.render('singleQuestion', {

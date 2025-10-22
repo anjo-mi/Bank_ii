@@ -15,4 +15,13 @@ export default {
       res.status(500).json({message:getIndexPageError.message});
     }
   },
+
+  getUserDash: async (req,res) => {
+    try{
+      res.render('dashboard');
+    }catch(getUserDashError){
+      console.log({getUserDashError});
+      return res.status(400).json({message:getUserDashError.message});
+    }
+  },
 };

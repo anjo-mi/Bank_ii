@@ -1,0 +1,81 @@
+<div id="stats-page-container" class="m-auto text-center text-white">
+  <section id="heading-container" class="m-auto w-8/10">
+    <h1 id="welcome-message" class="relative my-5 left-1 bg-aqua-700 text-green-500">
+      Welcome, USERNAME!
+    </h1>
+  </section>
+  <div id="user-info-container" class="w-95/100 m-auto md:w-9/10 h-full lg:w-7/10 grid grid-cols-1 xl:grid-cols-2 gap-3 p-2 border border-1 border-emerald-600 rounded-2xl">
+    <dl>
+      <dt class="w-9/10 text-left ml-4">Stats</dt>
+      <dd>
+        <section id="user-stats-container" class="w-9/10 min-h-24 m-auto">
+          <ul class="p-2 border border-2 border-sky-600 bg-stone-950 rounded-xl">
+            <li>
+              <button type="button" class="w-full px-4 py-2 font-medium text-left rtl:text-right border-1 border-blue-200 cursor-pointer border-gray-600 bg-indigo-500 hover:bg-green-600 hover:text-white focus:ring-gray-500 focus:text-white rounded-xl">Sessions Complete:
+              </button>
+            </li>
+            <li>
+              <button type="button" class="w-full mt-1 px-4 py-2 font-medium text-left rtl:text-right border-1 border-blue-200 cursor-pointer border-gray-600 bg-indigo-500 hover:bg-green-600 hover:text-white focus:ring-gray-500 focus:text-white rounded-xl">Average Score:
+              </button>
+            </li>
+            <li>
+              <button type="button" class="w-full mt-1 px-4 py-2 font-medium text-left rtl:text-right border-1 border-blue-200 cursor-pointer border-gray-600 bg-indigo-500 hover:bg-green-600 hover:text-white focus:ring-gray-500 focus:text-white rounded-xl">Best Topic:
+              </button>
+            </li>
+          </ul>
+        </section>
+      </dd>
+
+      <dt class="w-9/10 text-left ml-4">Previous Practice Sessions</dt>
+      <dd>
+        <section id="user-questions-container" class="w-9/10 min-h-24 max-h-40 m-auto">
+          <ul class="min-h-24 max-h-80 overflow-y-scroll p-2 border border-2 border-sky-600 bg-stone-950 rounded-xl">
+            <li class="flex items-center text-center place-content-around w-full px-4 py-2 font-medium text-left rtl:text-right border-1 border-blue-200 cursor-pointer border-gray-600 bg-indigo-500 hover:bg-green-600 hover:text-white focus:ring-gray-500 focus:text-white rounded-xl">
+              <div class="practice-date w-full h-full min-w-3/10 text-center border-r-1 border-slate-900">Oct. 3</div>
+              <div class="practice-length w-full h-full min-w-3/10 text-center">9 Questions</div>
+              <div class="practice-score w-full h-full min-w-3/10 text-center border-l-1 border-slate-900">6.4/10</div>
+            </li>
+          </ul>
+        </section>
+      </dd>
+
+      <dt class="w-9/10 text-left ml-4">Questions</dt>
+      <dd>
+        <section id="user-session-container" class="w-9/10 min-h-24 m-auto">
+          <ul class="min-h-24 max-h-80 overflow-y-scroll p-2 border border-2 border-sky-600 bg-stone-950 rounded-xl">
+            <li>
+              <p class="w-full px-4 py-2 truncate font-medium text-left rtl:text-right border-1 border-blue-200 cursor-pointer border-gray-600 bg-indigo-500 hover:bg-green-600 hover:text-white focus:ring-gray-500 focus:text-white rounded-xl">This is my question and running out of space leaves me an ellipsis!
+              </p>
+            </li>
+          </ul>
+        </section>
+      </dd>
+      
+      <dt class="w-9/10 text-left ml-4">Need Something Else?</dt>
+      <dd>
+        <section id="user-nav-container" class="w-9/10 min-h-24 h-fit m-auto">
+          <ul class="grid grid-cols-2 gap-3 p-2 border border-2 border-sky-600 bg-stone-950 rounded-xl">
+            <li class="p-2">
+              <a href="/questions/form" class="block m-auto min-4/10 text-center h-full p-2 font-medium border-1 border-blue-200 cursor-pointer border-gray-600 bg-indigo-500 hover:bg-green-600 hover:text-white focus:text-white rounded-xl">Add New Question
+              </a>
+            </li>
+            <li class="p-2">
+              <a href="/practice" class="block m-auto min-4/10 text-center h-full p-2 font-medium border-1 border-blue-200 cursor-pointer border-gray-600 bg-indigo-500 hover:bg-green-600 hover:text-white focus:text-white rounded-xl">Start New Practice
+              </a>
+            </li>
+            <li class="p-2">
+              <a href="/questions/edit/select" class="block m-auto min-4/10 text-center h-full p-2 font-medium border-1 border-blue-200 cursor-pointer border-gray-500 bg-indigo-500 hover:bg-green-600 hover:text-white focus:text-white rounded-xl">Edit Questions
+              </a>
+            </li>
+            <li class="p-2 min-4/10">
+              <form action="/questions/getSingleRandom" method="POST">
+                <button class="block w-full m-auto text-center h-full p-2 font-medium border-1 border-blue-200 cursor-pointer border-gray-600 bg-indigo-500 hover:bg-green-600 hover:text-white focus:text-white rounded-xl">Random Question
+                </button>
+              </form>
+            </li>
+          </ul>
+        </section>
+      </dd>
+    </dl>
+  </div>
+</div>

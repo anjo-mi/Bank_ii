@@ -63,8 +63,8 @@ if (registerForm){
 
       const data = await response.json();
 
-      // if were good, go to practice (login occurs in registration method)
-      if (response.ok) window.location.href = '/practice'
+      // if were good, go to dashboard (login occurs in registration method)
+      if (response.ok) window.location.href = '/dashboard'
       // register sends data.message, login sends data.error
       else showError(data.message || data.error);
       // redisplay input for next attempt
@@ -119,7 +119,7 @@ if (loginForm){
 
       const data = await response.json();
 
-      if (response.ok) window.location.href = '/practice';
+      if (response.ok) window.location.href = '/dashboard';
       else showError(data.message || data.error);
       document.getElementById('load-indicator').style.display = 'none';
       document.getElementById('submit').style.display = 'block';
