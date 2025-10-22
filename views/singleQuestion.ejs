@@ -9,7 +9,7 @@
 
 <div class="">
     <div class="">
-        <ul class="flex flex-wrap border-1 border-dashed border-gray-400 rounded-sm gap-1 m-auto mt-5 ml-18 p-1 py-2 w-80/100 justify-end md:justify-evenly items-center text-center">
+        <ul class="flex flex-wrap border-1 border-dashed border-gray-400 rounded-sm gap-1 m-auto mt-5 sm:ml-18 md:m-auto md:mt-5 p-1 py-2 w-80/100 justify-end md:justify-evenly items-center text-center">
             <% question.categories.forEach(cat => {%>
             <li>
                 <form action="/questions/byCategory" method="POST">
