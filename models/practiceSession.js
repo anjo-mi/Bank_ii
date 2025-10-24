@@ -20,11 +20,12 @@ const practiceSessionSchema = new mongoose.Schema({
   },
   answers: {
     type: [{type:String}],
-    required:true,
-    validate: {
-      validator: (answers) => Array.isArray(answers) && answers.length,
-      message: 'answers array needs to exist and contain questions',
-    },
+    // required:true,
+    // validate: {
+    //   validator: (answers) => Array.isArray(answers) && answers.length,
+    //   message: 'answers array needs to exist and contain questions',
+    // },
+    default: [],
   },
   
   completedAt: {
@@ -34,14 +35,11 @@ const practiceSessionSchema = new mongoose.Schema({
 
   aiResponse:{
     type: {
-      sessionScore: Number,
       questionResponse: [{
         questionId: mongoose.Schema.Types.ObjectId,
-        score: Number,
         feedback: String,
         resources: [String]
       }],
-      categoryScores: Object,
       completedAt: Date,
     },
     default:null,

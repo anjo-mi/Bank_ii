@@ -4,6 +4,7 @@
         <form id="answerSubmission" action="/practice/next" method="POST"
         class="flex flex-col lg:sticky lg:-top-12">
         <input type="hidden" name="questions" value="<%= JSON.stringify(questions) %>">
+        <input type="hidden" name="sessionId" value="<%= sessionId %>">
         <input type="hidden" name="current" value="<%= current %>">
         <input type="hidden" name="answers" value="<%= JSON.stringify(answers) %>">
              <div>

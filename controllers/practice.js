@@ -1,6 +1,6 @@
 import models from "../models/index.js";
 import practiceSession from "../models/practiceSession.js";
-const { User, Category, Question } = models;
+const { User, Category, Question, PracticeSession } = models;
 
 export default {
   // load practice setup page with all [pre-loaded] categories
@@ -81,18 +81,39 @@ export default {
 
   // begins being called from breifing page (/startPractice)
   showNext: async (req,res) => {
-    let {questions, current} = req.body;
+    let {questions, current, sessionId} = req.body;
     // pages are rendered, so parse JSON
     questions = JSON.parse(questions);
-    // increment current index (passed from /startPractice, tracked to be less than questions length)
-    current = +current + 1;
+
+    const session = +current < 0 ? await PracticeSession.create({
+      userId: req.user.id,
+      questions,
+    }) : null;
+
+    sessionId = session ? 
+                  session._id : 
+                sessionId ?
+                  sessionId : null;
 
     // if this is from the /startPractice page, initialize an answers array, otherwise it equals itself (parsed)
     const answers = req.body.answers ? JSON.parse(req.body.answers) : [];
     const answer = req.body.answer;
+    
+    // to do: sprint 3: call AI enpoint here
+    let updatedSession;
+    if (current >= 0){
+      // if this is coming form the /practiceQuestion page, take then answer field and push it to the answers array
+      answers.push(answer || '');
+      updatedSession = await PracticeSession.findByIdAndUpdate(
+        sessionId,
+        {$push: {answers: answer || ''}},
+        {new: true},
+      )
+    }
+    console.log({session, updatedSession,sessionId});
+    // increment current index (passed from /startPractice, tracked to be less than questions length)
+    current = +current + 1;
 
-    // if this is coming form the /practiceQuestion page, take then answer field and push it to the answers array
-    if (answer || answer === '') answers.push(answer);
 
     // if all questions are answered, make a results object that binds questions to their answers
       // render the results page
@@ -106,18 +127,9 @@ export default {
           answer: answers[i],
         }
       }
-      const sessionRecap = await practiceSession.create({
-        userId: req.user.id,
-        questions,
-        answers
-      })
 
-      // maybe add the AI call per question here? 
-      // (prolly above, so the last question will get a response as well)
-
-
-      res.render('practiceCompleted', {results,sessionRecap});
+      res.render('practiceCompleted', {questions,results,updatedSession});
     }
-    else res.render('practiceQuestion', {questions,current,answers});
+    else res.render('practiceQuestion', {questions,current,answers,sessionId: sessionId ? sessionId.toString() : null});
   }
 };

@@ -9,5 +9,6 @@ const router = express.Router();
 
 router.get('/', homeController.getHome);
 router.get('/dashboard', ensureAuth, homeController.getUserDash);
+router.post('/saveResource', ensureAuth, homeController.saveResource);
 
 export default router;

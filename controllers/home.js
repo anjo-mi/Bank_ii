@@ -1,5 +1,5 @@
 import models from "../models/index.js";
-const { User, Category, Question } = models;
+const { User, Category, Question, PracticeSession } = models;
 
 // good chance this will be encompassed elsewhere
 export default {
@@ -18,10 +18,30 @@ export default {
 
   getUserDash: async (req,res) => {
     try{
-      res.render('dashboard');
+      const user = await User.findById(req.user.id);
+      const userQuestions = await Question.find({userId: req.user.id});
+      const userSessions = await PracticeSession.find({userId: req.user.id});
+      return res.render('dashboard', {
+        user,
+        userQuestions,
+        userSessions,
+      });
     }catch(getUserDashError){
       console.log({getUserDashError});
       return res.status(400).json({message:getUserDashError.message});
     }
   },
+
+  saveResource: async (req,res) => {
+    try{
+      const {resource} = req.body;
+      const user = await User.findByIdAndUpdate(req.user.id,{
+        $push: {resources: resource},
+      },{new:true});
+      return res.status(201).json({message: 'your resource has been saved'})
+    }catch(saveResourceError){
+      console.log(saveResourceError);
+      return res.status(400).json({message:saveResourceError.message});
+    }
+  }
 };

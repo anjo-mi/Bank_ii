@@ -290,6 +290,25 @@ export default {
     }
   },
 
+  saveAnswer: async(req,res) => {
+    try{
+      const {
+        answer,
+        questionId,
+      } = req.body;
+      const updatedQuestion = await Question.findOneAndUpdate({
+        _id:questionId,
+        userId: req.user.id,
+      },{
+        answer
+      },{new:true});
+      return res.status(201).json({message: `your answer to ${updatedQuestion.content} has been updated`});
+    }catch(saveAnswerError){
+      console.log(saveAnswerError);
+      return res.status(400).json({message: saveAnswerError.message});
+    }
+  },
+
   deleteQuestion: async (req,res) => {
     try{
       const questionId = req.params.id;
