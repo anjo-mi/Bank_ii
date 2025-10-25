@@ -19,12 +19,12 @@ export default {
   getUserDash: async (req,res) => {
     try{
       const user = await User.findById(req.user.id);
-      const userQuestions = await Question.find({userId: req.user.id});
-      const userSessions = await PracticeSession.find({userId: req.user.id});
+      const questions = await Question.find({userId: req.user.id});
+      const sessions = await PracticeSession.find({userId: req.user.id});
       return res.render('dashboard', {
         user,
-        userQuestions,
-        userSessions,
+        questions,
+        sessions,
       });
     }catch(getUserDashError){
       console.log({getUserDashError});
@@ -43,5 +43,20 @@ export default {
       console.log(saveResourceError);
       return res.status(400).json({message:saveResourceError.message});
     }
-  }
+  },
+  
+  getSession: async(req,res) => {
+    try{
+      const {sessionId} = req.body;
+      const session = await PracticeSession.findById(sessionId).populate('questions');
+      const {questions} = session;
+      console.log({session, questions});
+      return res.render('previousSession', {
+        session
+      })
+    }catch(getSessionError){
+      console.log({getSessionError});
+      return res.status(400).json({message: getSessionError.message});
+    }
+  },
 };
