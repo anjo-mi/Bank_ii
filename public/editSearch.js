@@ -90,7 +90,17 @@ for (const deleteBtn of deleteButtons){
 
   deleteBtn.addEventListener('click', async (e) => {
 
-    const listItem = e.target.closest('li')
+    const listItem = e.target.closest('li');
+
+    const defaultValue = listItem.querySelector('input[name="isDefault"]').value;
+    const isDefault = Boolean(+defaultValue);
+    console.log({listItem,defaultValue,isDefault})
+    if (isDefault){
+      const dikembe = listItem.querySelector('.error-message');
+      dikembe.textContent = 'default questions stay, this is the way';
+      dikembe.style.display = 'block';
+      return;
+    }
     
     const questionId = listItem.querySelector('input[name="questionId"]').value;
     

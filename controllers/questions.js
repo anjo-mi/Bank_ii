@@ -6,9 +6,13 @@ export default {
 
   getAllQuestions: async (req, res) => {
     try {
-      const defaultQuestions = await Question.find({isDefault: true});
+      let defaultQuestions = await Question.find({isDefault: true});
       let userQuestions;
-      if (req.user) userQuestions = await Question.find({userId: req.user.id});
+      if (req.user) {
+        userQuestions = await Question.find({userId: req.user.id});
+        const ignoredIds = new Set(userQuestions.map(q => q.parentId).filter(Boolean).map(String));
+        defaultQuestions = defaultQuestions.filter(q => !ignoredIds.has(q._id.toString()));
+      }
 
       const allQuestions = userQuestions ? [...userQuestions,...defaultQuestions] : defaultQuestions;
 
@@ -38,9 +42,13 @@ export default {
   // EJS is needy af, make sure to send req.body.incomingSearch in ALL cases
   getQuestionsByCats: async (req, res) => {
     try {
-      const defaultQuestions = await Question.find({isDefault:true});
+      let defaultQuestions = await Question.find({isDefault:true});
       let userQuestions;
-      if (req.user) userQuestions = await Question.find({userId:req.user.id});
+      if (req.user) {
+        userQuestions = await Question.find({userId:req.user.id});
+        const ignoredIds = new Set(userQuestions.map(q => q.parentId).filter(Boolean).map(String));
+        defaultQuestions = defaultQuestions.filter(q => !ignoredIds.has(q._id.toString()));
+      }
       
       const allQuestions = userQuestions ? [...userQuestions,...defaultQuestions] : defaultQuestions;
       
@@ -108,9 +116,13 @@ export default {
         categori, // undefined || String || [Strings]
       } = req.body;
 
-      const defaultQuestions = await Question.find({isDefault: true});
+      let defaultQuestions = await Question.find({isDefault: true});
       let userQuestions;
-      if (req.user) userQuestions = await Question.find({userId: req.userId});
+      if (req.user) {
+        userQuestions = await Question.find({userId: req.userId});
+        const ignoredIds = new Set(userQuestions.map(q => q.parentId).filter(Boolean).map(String));
+        defaultQuestions = defaultQuestions.filter(q => !ignoredIds.has(q._id.toString()));
+      }
       const allQuestions = userQuestions ? [...userQuestions,...defaultQuestions] : defaultQuestions;
       
       if ((!search || !search.trim()) && !categori) {
@@ -171,10 +183,15 @@ export default {
   },
 
   getNewQuestionForm: async (req,res) => {
-    const userCategories = await Category.find({userId: req.user.id});
-    const defaultCategories = await Category.find({isDefault: true});
-    const categori = userCategories.concat(defaultCategories);
-    res.render('addQuestion', {categori})
+    try{
+      const userCategories = await Category.find({userId: req.user.id});
+      const defaultCategories = await Category.find({isDefault: true});
+      const categori = Array.from(new Set(userCategories.concat(defaultCategories)));
+      res.render('addQuestion', {categori})
+    }catch(getNewQuestionFormError){
+      console.log({getNewQuestionFormError});
+      return res.status(400).json({message:getNewQuestionFormError.message});
+    }
   },
 
   createNewQuestion: async (req,res) => {
@@ -224,16 +241,22 @@ export default {
   getEditSearchPage: async (req,res) => {
     try{
 
+      let defaultQuestions = await Question.find({isDefault: true});
       const userQuestions = await Question.find({userId: req.user.id});
-      if (!userQuestions.length) return res.redirect('/questions/form');
+      const ignoredIds = new Set(userQuestions.map(q => q.parentId).filter(Boolean).map(String));
+      defaultQuestions = defaultQuestions.filter(q => !ignoredIds.has(q._id.toString()));
+      const allQuestions = Array.from(new Set([...userQuestions,...defaultQuestions]));
+      
+      if (!allQuestions.length) return res.redirect('/questions/form');
+      
       const defaultCategories = await Category.find({isDefault: true});
       const userCategories = await Category.find({userId: req.user.id});
-
-      const allCategories = userCategories ? [...userCategories, ...defaultCategories] : defaultCategories;
+      
+      const allCategories = userCategories ? Array.from(new Set([...userCategories, ...defaultCategories])) : defaultCategories;
 
       return res.render('editSearch', {
         allCats: allCategories,
-        allQuestions: userQuestions,
+        allQuestions,
       })
     }catch(getEditSearchError){
       console.log({getEditSearchError});
@@ -246,7 +269,7 @@ export default {
       const {questionId} = req.body;
       const user = await User.findById(req.user.id);
       const question = await Question.findById(questionId);
-      if (!question.userId || question.userId.toString() !== req.user.id) return res.status(403).json({message: "this question isnt yours to change"});
+      if (question.userId && question.userId.toString() !== req.user.id) return res.status(403).json({message: "this question isnt yours to change"});
       res.render('editQuestion', {
       question,
       categori: question.categories || [],
@@ -271,18 +294,29 @@ export default {
       const categories = Array.isArray(categori) ? categori : [categori];
 
       const quest = await Question.findById(questionId);
-      if (!quest.userId || quest.userId.toString() !== req.user.id) return res.status(403).json({message: "this question isnt yours to change"});
+      if (quest.userId && quest.userId.toString() !== req.user.id) return res.status(403).json({message: "this question isnt yours to change"});
 
-      const updatedQuestion = await Question.findByIdAndUpdate(
-        questionId,
-        {$set:{
-          content: question,
+      if (!quest.isDefault){
+        const updatedQuestion = await Question.findByIdAndUpdate(
+          questionId,
+          {$set:{
+            content: question,
+            userId: req.user.id,
+            categories,
+            answer: answer || null,
+          }},
+          {new:true}
+        );
+      }else{
+        const noLongerDefaultQuestion = await Question.create({
           userId: req.user.id,
+          content:question,
           categories,
-          answer: answer || null,
-        }},
-        {new:true}
-      );
+          isDefault:false,
+          answer,
+          parentId: quest._id,
+        })
+      }
       return res.redirect('/questions/edit/select')
     }catch(updateQuestionError){
       console.log({updateQuestionError});
@@ -294,15 +328,30 @@ export default {
     try{
       const {
         answer,
+        content,
         questionId,
+        isDefault,
       } = req.body;
-      const updatedQuestion = await Question.findOneAndUpdate({
-        _id:questionId,
-        userId: req.user.id,
-      },{
-        answer
-      },{new:true});
-      return res.status(201).json({message: `your answer to ${updatedQuestion.content} has been updated`});
+      console.log({answer, content,questionId})
+      const q = await Question.findById(questionId);
+      if (!q.isDefault){
+        const updatedQuestion = await Question.findByIdAndUpdate(
+          questionId , {answer} , {new:true}
+        );
+        console.log({updatedQuestion})
+        return res.status(201).json({message: `your answer to ${updatedQuestion.content} has been updated`});
+      }else{
+        const noLongerDefaultQuestion = await Question.create({
+          userId: req.user.id,
+          content,
+          answer,
+          categories: q.categories,
+          isDefault: false,
+          parentId: q._id,
+        })
+        console.log({noLongerDefaultQuestion})
+        return res.status(201).json({message: `your answer to ${noLongerDefaultQuestion.content} has been updated`});
+      }
     }catch(saveAnswerError){
       console.log(saveAnswerError);
       return res.status(400).json({message: saveAnswerError.message});

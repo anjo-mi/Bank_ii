@@ -17,8 +17,9 @@
     <div class="answer-portion">
       <h2 class="font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3">Your response:</h2>
       <form action="/questions/saveAnswer" method="POST">
-        <input type="hidden" name="answer" value="<%= results[question]['answer']%>">
-        <input type="hidden" name="questionId" value="<%= question._id %>">
+        <input type="hidden" name="answer" value="<%= results[question].answer%>">
+        <input type="hidden" name="content" value="<%= results[question].question%>">
+        <input type="hidden" name="questionId" value="<%= results[question].id %>">
         <button type="submit" class="m-auto w-20/100 bg-green-500 hover:bg-green-700 text-white p-1 border-1 border-fuchsia-500 rounded-sm">Save</button>
       </form>
       <p class="m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg text-lg md:text-xl lg:text-2xl"><%= results[question]['answer']%></p>
