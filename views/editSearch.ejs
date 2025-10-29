@@ -36,10 +36,10 @@ class="mx-auto w-full max-w-9/10 text-center">
     <% allQuestions.forEach(question =>{ %>
         <li class="question-list-item rounded-md p-2 h-fit w-full flex flex-col place-content-center gap-2 items-center col-span-3 border-solid border-2 border-black-700">
             <input type="hidden" name="isDefault" value="<%= question.isDefault ? 1 : 0 %>">
-            <ul class="flex flex-wrap gap-y-1 m-auto border-b-1 border-dashed w-full max-w-10/10 place-content-around text-center">
+            <ul class="flex flex-wrap gap-y-1 md:gap-y-3 p-2 m-auto border-b-1 border-dashed w-full max-w-10/10 place-content-around text-center">
                 <% question.categories.forEach(cat =>{ %>
                 <li class="w-3/10 max-w-4/10 min-w-fit">
-                  <button  type="submit" value="<%= cat %>" class="category-quick-search bg-slate-700 hover:bg-slate-800 p-2 w-full rounded-lg border-1 border-gray-200 text-xs md:text-lg lg:text-lg md:mt-0 lg:mt-0 text-sky-200 font-bold"><%= cat%></button>
+                  <P type="submit" value="<%= cat %>" class="category-quick-search inline-block bg-gray-700 p-2 w-full rounded-lg border-1 border-gray-200 border-dashed text-xs md:text-lg lg:text-lg md:mt-0 lg:mt-0 text-sky-200 font-bold"><%= cat%></P>
                 </li>
                 <% })%>
             </ul>
