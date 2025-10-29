@@ -29,6 +29,7 @@
     --color-sky-600: oklch(58.8% 0.158 241.966);
     --color-sky-800: oklch(44.3% 0.11 240.79);
     --color-blue-200: oklch(88.2% 0.059 254.128);
+    --color-blue-400: oklch(70.7% 0.165 254.624);
     --color-blue-500: oklch(62.3% 0.214 259.815);
     --color-blue-600: oklch(54.6% 0.245 262.881);
     --color-indigo-500: oklch(58.5% 0.233 277.117);
@@ -676,6 +677,9 @@
   .bg-gray-400 {
     background-color: var(--color-gray-400);
   }
+  .bg-gray-500 {
+    background-color: var(--color-gray-500);
+  }
   .bg-gray-600 {
     background-color: var(--color-gray-600);
   }
@@ -1105,6 +1109,17 @@
       background-color: var(--color-red-950);
     }
   }
+  .active\:outline-1 {
+    &:active {
+      outline-style: var(--tw-outline-style);
+      outline-width: 1px;
+    }
+  }
+  .active\:outline-blue-400 {
+    &:active {
+      outline-color: var(--color-blue-400);
+    }
+  }
   .active\:outline-green-800 {
     &:active {
       outline-color: var(--color-green-800);
@@ -1197,6 +1212,11 @@
         margin-block-start: calc(calc(var(--spacing) * 6) * var(--tw-space-y-reverse));
         margin-block-end: calc(calc(var(--spacing) * 6) * calc(1 - var(--tw-space-y-reverse)));
       }
+    }
+  }
+  .md\:gap-y-3 {
+    @media (width >= 48rem) {
+      row-gap: calc(var(--spacing) * 3);
     }
   }
   .md\:p-2 {
