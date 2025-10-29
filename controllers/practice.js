@@ -107,11 +107,11 @@ export default {
         answers.push(answer || '');
         updatedSession = await PracticeSession.findByIdAndUpdate(
           sessionId,
-          {$push: {answers: answer || ''}},
+          {$addToSet: {answers: answer || ''}},
           {new: true},
         )
       }else updatedSession = await PracticeSession.findById(sessionId);
-      console.log({session, updatedSession,sessionId});
+      console.log({updatedSession});
       // increment current index (passed from /startPractice, tracked to be less than questions length)
       current = +current + 1;
 
