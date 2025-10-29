@@ -22,7 +22,7 @@ export default {
       const userQuestions = await Question.find({userId: req.user.id});
       const ignoredIds = new Set(userQuestions.map(q => q.parentId).filter(Boolean).map(String));
       const questions = userQuestions ? [...userQuestions, ...defaultQuestions.filter(q => !ignoredIds.has(q._id.toString()))] : defaultQuestions;
-      // console.log({questions})
+      
       // if the length provided is a valid number, use that number, otherwise default is 7
       const arab = new Set([0,1,2,3,4,5,6,7,8,9,]);
       limit = limit 
@@ -41,18 +41,18 @@ export default {
             : questions;
       if (!matchingQuestions.length) return res.status(403).json({message: 'no questions match your search?'});
       // function that takes an array and randomizes the order
-      // + radomize all matching questions and slice(0,limit) to get at most the amount of requested questions
+      // + radomize all matching questions and to get at most the amount of requested questions
       const randomizeQuestions = (qArr) => {
         const qs = qArr.slice(0);
-        let current = qArr.length;
+        const randoms = new Set();
 
-        while (current){
-          const random = Math.floor(Math.random() * current);
-          current--;
-
-          [ qs[current] , qs[random] ] = [ qs[random] , qs[current] ]
+        while (qs.length && randoms.size < limit){
+          const random = Math.floor(Math.random() * qs.length);
+          const q = qs.splice(random,1)[0];
+          if (randoms.has(q)) continue;
+          randoms.add(q);
         }
-        return qs;
+        return Array.from(randoms);
       }
       const randomizedQuestions = randomizeQuestions(matchingQuestions).slice(0,limit);
 
