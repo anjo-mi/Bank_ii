@@ -89,6 +89,7 @@ export default {
       const session = +current < 0 ? await PracticeSession.create({
         userId: req.user.id,
         questions,
+        answers: [],
       }) : null;
 
       sessionId = session ? 
@@ -107,11 +108,11 @@ export default {
         answers.push(answer || '');
         updatedSession = await PracticeSession.findByIdAndUpdate(
           sessionId,
-          {$addToSet: {answers: answer || ''}},
+          {$set: {[`answers.${current}`]: answer || ''}},
           {new: true},
         )
       }else updatedSession = await PracticeSession.findById(sessionId);
-      console.log({updatedSession});
+      console.log({session,updatedSession});
       // increment current index (passed from /startPractice, tracked to be less than questions length)
       current = +current + 1;
 
