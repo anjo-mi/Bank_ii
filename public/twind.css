@@ -926,6 +926,10 @@
     --tw-ease: var(--ease-in-out);
     transition-timing-function: var(--ease-in-out);
   }
+  .select-all {
+    -webkit-user-select: all;
+    user-select: all;
+  }
   .hover\:bg-green-400 {
     &:hover {
       @media (hover: hover) {
