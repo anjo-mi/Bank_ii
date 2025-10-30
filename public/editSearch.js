@@ -31,7 +31,7 @@ const filterQuestions = (e) => {
       let catMatch = true;
       let contentMatch = true;
       if (categorySearch.length) catMatch = categorySearch.every(cat =>{
-        const questionCategories = Array.from(q.querySelectorAll('button')).map(btn => btn.value)
+        const questionCategories = Array.from(q.querySelectorAll('.category-quick-search')).map(p => p.textContent)
         console.log({questionCategories});
         return questionCategories.includes(cat);
       });

@@ -1,6 +1,7 @@
 
 
 const newCategoryBox = document.getElementById('new-category');
+const newCategoryBtn = document.getElementById('add-new-category');
 const newQuestionForm = document.getElementById('create-question-form');
 
 const categories = new Set(Array.from(document.querySelectorAll('input[name="categori"]')).map(cat => cat.value));
@@ -54,9 +55,50 @@ newCategoryBox.addEventListener('keydown', (e) => {
   return;
 })
 
+newCategoryBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  const category = newCategoryBox.value;
+  newCategoryBox.value = '';
+  if (!category.trim().length){
+    showError('categories cant be empty')
+    return;
+  }
+  if (categories.has(category)){
+    showError('youve created this category before')
+    return;
+  }
+  categories.add(category);
+  const li = document.createElement('li');
+  li.className="bg-slate-700 p-1 min-w-3/10 rounded-lg border-1 border-gray-200 text-xs md:text-lg lg:text-lg md:mt-0 lg:mt-0 text-sky-200 font-bold";
+  
+  const label = document.createElement('label');
+  label.className="w-full h-full";
+  label.htmlFor=category;
+  
+  const input = document.createElement('input');
+  input.type="checkbox";
+  input.name="categori";
+  input.id=category;
+  input.value=category; 
+  input.checked=true; 
+  input.className="w-full h-full text-blue-600 mt-2 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+  
+  label.appendChild(input);
+  li.appendChild(label);
+  const list = document.getElementById('category-list');
+  list.appendChild(li);
+  list.appendChild(newCategoryBox);
+  label.appendChild(document.createTextNode(category));
+  possNewCategories.value += 'VERYUNIQUEIFSOMEONECOPIESTHISTHEYREJUSTBEINGDIFFICULT' + category;
+  return;
+  
+  
+})
+
 newQuestionForm.addEventListener('submit', async (e) => {
  // block form submission
     e.preventDefault();
+    if (e.target === newCategoryBox || e.target === newCategoryBtn) return;
 
     const errorMessage = document.getElementById('error-message');
     errorMessage.textContent = '';
@@ -126,11 +168,11 @@ newQuestionForm.addEventListener('submit', async (e) => {
   })
 
 newQuestionForm.addEventListener('keydown', async (e) => {
-    if (newCategoryBox.hasFocus) return;
     if (e.key !== 'Enter') return;
     if (e.shiftKey) return;
  // block form submission
     e.preventDefault();
+    if (e.target === newCategoryBox || e.target === newCategoryBtn) return;
 
     const errorMessage = document.getElementById('error-message');
     errorMessage.textContent = '';
