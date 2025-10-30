@@ -288,11 +288,26 @@ export default {
         answer,
         question,
         questionId,
+        newCategories,
       } = req.body;
       if (!categori || !categori.length) return res.status(404).json({message:"questions each need at least 1 category"});
       if (!question.trim().length) return res.status(404).json({message:"questions need content"});
       const categories = Array.isArray(categori) ? categori : [categori];
 
+      const cs = [];
+      if (newCategories && newCategories.trim().length){
+        newCategories = newCategories.trim().split('VERYUNIQUEIFSOMEONECOPIESTHISTHEYREJUSTBEINGDIFFICULT').slice(1);
+        newCategories = new Set(newCategories);
+        for (const cat of categori) if (newCategories.has(cat)){
+          const c = await Category.create({
+            description: cat,
+            userId: req.user.id,
+            isDefault: false,
+          })
+          if (!c) res.json({message:`${cat} was not added to the database`})
+          else cs.push(c);
+        }
+      }
       const quest = await Question.findById(questionId);
       if (quest.userId && quest.userId.toString() !== req.user.id) return res.status(403).json({message: "this question isnt yours to change"});
 
@@ -317,7 +332,7 @@ export default {
           parentId: quest._id,
         })
       }
-      return res.redirect('/questions/edit/select')
+      return res.status(201).json({message: 'question updated!'})
     }catch(updateQuestionError){
       console.log({updateQuestionError});
       return res.status(500).json({message: updateQuestionError.message});
