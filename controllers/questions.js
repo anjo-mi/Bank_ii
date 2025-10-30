@@ -356,16 +356,27 @@ export default {
         console.log({updatedQuestion})
         return res.status(201).json({message: `your answer to ${updatedQuestion.content} has been updated`});
       }else{
-        const noLongerDefaultQuestion = await Question.create({
-          userId: req.user.id,
-          content,
-          answer,
-          categories: q.categories,
-          isDefault: false,
-          parentId: q._id,
-        })
-        console.log({noLongerDefaultQuestion})
-        return res.status(201).json({message: `your answer to ${noLongerDefaultQuestion.content} has been updated`});
+        const reUpdatedDefault = await Question.findOneAndUpdate(
+          {
+            userId: req.user.id,
+            parentId: questionId,
+          },
+          {answer},
+          {new:true}
+        )
+        let noLongerDefaultQuestion;
+        if (!reUpdatedDefault){
+          noLongerDefaultQuestion = await Question.create({
+            userId: req.user.id,
+            content,
+            answer,
+            categories: q.categories,
+            isDefault: false,
+            parentId: q._id,
+          })
+        }
+        console.log({reUpdatedDefault,noLongerDefaultQuestion})
+        return res.status(201).json({message: `your answer to ${reUpdatedDefault ? reUpdatedDefault.content : noLongerDefaultQuestion.content} has been updated`});
       }
     }catch(saveAnswerError){
       console.log(saveAnswerError);
