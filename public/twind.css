@@ -330,6 +330,9 @@
   .mt-10 {
     margin-top: calc(var(--spacing) * 10);
   }
+  .mt-20 {
+    margin-top: calc(var(--spacing) * 20);
+  }
   .mb-2 {
     margin-bottom: calc(var(--spacing) * 2);
   }
@@ -416,6 +419,9 @@
   }
   .max-h-100 {
     max-height: calc(var(--spacing) * 100);
+  }
+  .max-h-\[80vh\] {
+    max-height: 80vh;
   }
   .min-h-4 {
     min-height: calc(var(--spacing) * 4);

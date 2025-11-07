@@ -8,6 +8,7 @@ const {ensureAuth} = auth;
 const router = express.Router();
 
 router.get("/", ensureAuth, practiceController.getCategories);
+router.get("/history", ensureAuth, practiceController.getSessions);
 router.post("/start", ensureAuth, practiceController.startPractice);
 router.post("/next", ensureAuth, practiceController.showNext);
 

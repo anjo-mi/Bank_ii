@@ -138,5 +138,15 @@ export default {
       console.log({showNextError});
       return res.status(400).json({message: showNextError.message});
     }
-  }
+  },
+
+  getSessions: async (req,res) => {
+    try{
+      const sessions = await PracticeSession.find({userId: req.user.id});
+      res.render('sessionHistory', {sessions});
+    }catch(getPracticeSessionsError){
+      console.log({getPracticeSessionsError});
+      return res.status(400).json({message: getPracticeSessionsError.message});
+    }
+  },
 };
