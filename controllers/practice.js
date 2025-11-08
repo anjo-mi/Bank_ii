@@ -142,8 +142,10 @@ export default {
 
   getSessions: async (req,res) => {
     try{
-      const sessions = await PracticeSession.find({userId: req.user.id});
-      res.render('sessionHistory', {sessions});
+      const sessions = await PracticeSession.find({userId: req.user.id}).populate('questions');
+      res.render('sessionHistory', {
+        sessions,
+      });
     }catch(getPracticeSessionsError){
       console.log({getPracticeSessionsError});
       return res.status(400).json({message: getPracticeSessionsError.message});

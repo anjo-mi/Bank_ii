@@ -1,22 +1,37 @@
-<div class="mt-20">
-  <dt class="w-9/10 text-left ml-4">Previous Practice Sessions: <%= sessions.length %></dt>
-  <div  class="w-9/10 m-auto h-fit max-h-[80vh] overflow-y-scroll p-2 border border-2 border-sky-600 bg-stone-950 rounded-xl">
-    <% for (const session of sessions.slice(0).reverse()){ %>
-    <dd>
-      <form action="/getSession" method="POST">
+
+
+
+<div class="mt-15">
+  <h1 class="w-full text-left ml-4">Previous Practice Sessions: <%= sessions.length %></h1>
+  <div  class="w-full m-auto h-fit max-h-[90vh] overflow-y-scroll p-2 border border-2 border-sky-600 bg-stone-950 rounded-xl">
+    <dl>
+    <% for (const session of sessions.slice(0).reverse()){ 
+
+        const questions = session.questions;
+        const categories = new Set();
+        for (const q of questions) for (const cat of q.categories) if (!categories.has(cat)) categories.add(cat);
+      %>
+      <form action="/getSession" method="POST" class="mt-5 md:mt-15 border-1 p-1 border-yellow-500 bg-teal-950 rounded-lg">
         <input type="hidden" name="sessionId" value="<%= session._id %>">
-        <button type="submit" class="block m-auto w-full">
-          <section id="user-questions-container" class="w-9/10  m-auto">
-            <ul>
-              <li class="flex my-1 items-center text-center place-content-around px-4 py-2 font-medium text-left rtl:text-right border-1 border-blue-200 cursor-pointer border-gray-600 bg-indigo-500 hover:bg-green-600 hover:text-white focus:ring-gray-500 focus:text-white rounded-xl">
-                <div class="practice-date h-full w-5/10 text-center border-r-1 border-slate-900"><%= session.completedAt.toString().slice(4,15) %></div>
-                <div class="practice-length h-full w-5/10 text-center border-l-1 border-slate-900"><%= session.questions.length %> Questions</div>
-              </li>
+        <button type="submit" class="block m-auto w-95/100">
+          <dt class="-ml-2 text-left p-1 w-fit bg-orange-800 rounded-sm border-1 border-zinc-950"><%= session.completedAt.toString().slice(4,15) %>: <%= session.questions.length %> Question(s)</dt>
+          <dd class="w-97/100 m-auto max-h-3/10 p-2 border border-2 border-indigo-600 bg-neutral-950 rounded-xl">
+            <h3>Categories Covered:</h3>
+            <ul class="flex gap-2 my-1 items-center text-center place-content-around p-2 font-medium text-left rtl:text-right border-1 rounded-lg overflow-x-scroll bg-gray-900">
+              <% for (const category of categories){ %>
+              <li class="p-2 min-w-30/100 border-1 border-sky-600 bg-blue-900 text-center m-auto rounded-lg"><%= category %></li>
+              <% } %>
             </ul>
-          </section>
+            <h3>Questions Asked:</h3>
+            <ul class="flex flex-wrap h-20 md:h-40 gap-2 my-1 items-center text-center place-content-around p-1 font-medium text-left rtl:text-right border-1 rounded-lg overflow-y-scroll bg-gray-900">
+              <% for (const question of questions){ %>
+              <li class="p-2 w-96/100 truncate border-1 border-sky-600 bg-blue-900 text-center m-auto rounded-lg"><%= question.content %></li>
+              <% } %>
+            </ul>
+          </dd>
         </button>
       </form>
-    </dd>
     <%}%>
+    </dl>
   </div>
 </div>
