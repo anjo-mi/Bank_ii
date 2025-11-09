@@ -10,7 +10,7 @@
     <dl class="grid grid-cols-1 xl:grid-cols-2 gap-3 p-2">
       <div>
         <dt class="w-9/10 text-left ml-4">Resources Accrued:</dt>
-        <div class="w-9/10 m-auto h-24 md:h-80 overflow-y-scroll p-2 border border-2 border-sky-600 bg-stone-950 rounded-xl">
+        <div class="w-9/10 m-auto h-40 md:h-80 overflow-y-scroll p-2 border border-2 border-sky-600 bg-stone-950 rounded-xl">
           <dd>
             <section id="user-stats-container" class="w-9/10 min-h-24 m-auto">
               <ul>
@@ -28,7 +28,7 @@
 
       <div>
         <dt class="w-9/10 text-left ml-4">Previous Practice Sessions: <%= sessions.length %></dt>
-        <div  class="w-9/10 m-auto h-24 md:h-80 overflow-y-scroll p-2 border border-2 border-sky-600 bg-stone-950 rounded-xl">
+        <div  class="w-9/10 m-auto h-40 md:h-80 overflow-y-scroll p-2 border border-2 border-sky-600 bg-stone-950 rounded-xl">
           <% for (const session of sessions.slice(0).reverse()){ %>
           <dd>
             <form action="/getSession" method="POST">
@@ -36,7 +36,7 @@
               <button type="submit" class="block m-auto w-full">
                 <section id="user-questions-container" class="w-9/10  m-auto">
                   <ul>
-                    <li class="flex my-1 items-center text-center place-content-around px-4 py-2 font-medium text-left rtl:text-right border-1 border-blue-200 cursor-pointer border-gray-600 bg-indigo-500 hover:bg-green-600 hover:text-white focus:ring-gray-500 focus:text-white rounded-xl">
+                    <li class="flex my-1 items-center text-center text-xs md:text-lg place-content-around px-4 py-2 text-left rtl:text-right border-1 border-blue-200 cursor-pointer border-gray-600 bg-indigo-500 hover:bg-green-600 hover:text-white focus:ring-gray-500 focus:text-white rounded-xl">
                       <div class="practice-date h-full w-5/10 text-center border-r-1 border-slate-900"><%= session.completedAt.toString().slice(4,15) %></div>
                       <div class="practice-length h-full w-5/10 text-center border-l-1 border-slate-900"><%= session.questions.length %> Questions</div>
                     </li>
@@ -51,7 +51,7 @@
 
       <div>
         <dt class="w-95/100 text-left ml-4">Questions</dt>
-        <div class="w-9/10 m-auto h-24 md:h-80 overflow-y-scroll p-2 border border-2 border-sky-600 bg-stone-950 rounded-xl">
+        <div class="w-9/10 m-auto h-40 md:h-80 overflow-y-scroll p-2 border border-2 border-sky-600 bg-stone-950 rounded-xl">
         <% for (const q of questions){ %>
           <dd class="my-1">
             <section id="user-session-container" class="w-95/100 m-auto">
@@ -74,13 +74,13 @@
         <dt class="w-9/10 text-left ml-4">Need Something Else?</dt>
         <dd>
           <section id="user-nav-container" class="w-9/10 h-fit m-auto">
-            <ul class="grid grid-cols-2 gap-3 p-2 h-24 md:h-80 border border-2 border-sky-600 bg-stone-950 rounded-xl">
+            <ul class="grid grid-cols-2 text-xs md:text-lg gap-1 md:gap-3 p-2 min-h-24 md:h-80 border border-2 border-sky-600 bg-stone-950 rounded-xl">
               <li class="p-2 h-fit w-full m-auto">
                 <a href="/questions/form" class="block m-auto text-center h-full p-2 font-medium border-1 border-blue-200 cursor-pointer border-gray-600 bg-indigo-500 hover:bg-green-600 hover:text-white focus:text-white rounded-xl">Add New Question
                 </a>
               </li>
               <li class="p-2 h-fit w-full m-auto">
-                <a href="/practice" class="block m-auto text-center h-full p-2 font-medium border-1 border-blue-200 cursor-pointer border-gray-600 bg-indigo-500 hover:bg-green-600 hover:text-white focus:text-white rounded-xl">Start New Practice
+                <a href="/practice" class="block m-auto text-center h-full p-2 font-medium border-1 border-blue-200 cursor-pointer border-gray-600 bg-indigo-500 hover:bg-green-600 hover:text-white focus:text-white rounded-xl">New Practice
                 </a>
               </li>
               <li class="p-2 h-fit w-full m-auto">

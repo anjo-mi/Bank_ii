@@ -1,57 +1,101 @@
-<div class="exit-interview mx-auto w-7/10 h-30 flex items-center text-center">
+<div class="exit-interview mx-auto my-7 w-9/10 h-30 flex items-center text-center">
   <ul class="flex py-5 px-1 gap-4 m-auto w-full max-w-10/10 border-1 border-gray-300 rounded-lg bg-zinc-800 place-content-around items-center text-xs md:text-xl lg:text-2xl text-center">
-    <li class="nav-item m-auto w-30/100 bg-green-500 hover:bg-green-700 border-1 border-fuchsia-500 text-white py-2 px-1 rounded-full"><a class="block" href="/">Return Home</a></li>
+    <li class="nav-item m-auto w-30/100 bg-green-500 hover:bg-green-700 border-1 border-fuchsia-500 text-white py-2 px-1 rounded-full"><a class="block" href="/dashboard">Return Home</a></li>
     <li class="nav-item m-auto w-30/100 bg-green-500 hover:bg-green-700 text-white py-2 px-1 border-1 border-fuchsia-500 rounded-full"><a class="block" href="/questions">All Questions</a></li>
     <li class="nav-item m-auto w-30/100 bg-green-500 hover:bg-green-700 text-white py-2 px-1 border-1 border-fuchsia-500 rounded-full"><a class="block" href="/practice">New Session</a></li>
   </ul>
 </div>
 
-<section id="resultCarousel" class="result-card-carousel m-auto flex flex-col w-85/100 border-1 rounded-lg border-gray-300 p-3 gap-6 items-center place-content-center">
-  <h1 class="m-auto p-3 w-70/100 border-1 border-gray-300 rounded-lg bg-orange-800 text-white">Interview Results:</h1>
-  <% for (const question in results){ %>
-  <div class="result-card w-95/100 min-w-95-100 border-t-2 dashed border-sky-300">
-    <div class="question-portion">
-      <h2 class="font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3"><%= question %>:</h2>
-      <p class="m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg text-lg md:text-xl lg:text-2xl"><%= results[question]['question']%></p>
-    </div>
-    <div class="answer-portion">
-      <h2 class="font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3">Your response:</h2>
-      <form action="/questions/saveAnswer" method="POST">
-        <input type="hidden" name="answer" value="<%= results[question].answer%>">
-        <input type="hidden" name="content" value="<%= results[question].question%>">
-        <input type="hidden" name="questionId" value="<%= results[question].id %>">
-        <button type="submit" class="m-auto w-20/100 bg-green-500 hover:bg-green-700 text-white p-1 border-1 border-fuchsia-500 rounded-sm">Save</button>
-      </form>
-      <p class="m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg text-lg md:text-xl lg:text-2xl"><%= results[question]['answer']%></p>
-    </div>
-    <% if (updatedSession.aiResponse){ %>
-    <div class="ai-response">
-      <h2 class="font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3">Bot Botterson says:</h2>
+<div id="interview-results" class="flex h-screen w-full left-1/2 -translate-x-1/2 absolute justify-center items-center absolute z-1">
+  <section id="resultCarousel" class="result-card-carousel m-auto flex flex-col w-85/100 border-1 rounded-lg border-gray-300 p-3 gap-6 items-center place-content-center">
+    <h1 class="m-auto p-3 w-70/100 border-1 border-gray-300 rounded-lg bg-orange-800 text-white">Interview Results:</h1>
+    <% for (const question in results){ %>
+    <div class="result-card w-95/100 min-w-95-100 border-t-2 dashed border-sky-300">
+      <div class="question-portion">
+        <h2 class="font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3"><%= question %>:</h2>
+        <p class="m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg text-lg md:text-xl lg:text-2xl"><%= results[question]['question']%></p>
+      </div>
+      <div class="answer-portion">
+        <h2 class="font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3">Your response:</h2>
+        <form action="/questions/saveAnswer" method="POST" class="save-answer">
+          <input type="hidden" name="answer" class="answer" value="<%= results[question].answer%>">
+          <input type="hidden" name="content" class="content" value="<%= results[question].question%>">
+          <input type="hidden" name="questionId" class="questionId" value="<%= results[question].id %>">
+          <button type="submit" class="m-auto w-20/100 bg-green-500 hover:bg-green-700 text-white p-1 border-1 border-fuchsia-500 rounded-sm">Save</button>
+        </form>
+        <p class="m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg text-lg md:text-xl lg:text-2xl"><%= results[question]['answer']%></p>
+      </div>
+      <% if (updatedSession.aiResponse){ %>
+      <div class="ai-response">
+        <h2 class="font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3">Bot Botterson says:</h2>
 
 
-      <!-- this could be problematic: are responses not tied to questions? -->
+        <!-- this could be problematic: are responses not tied to questions? -->
 
 
-      <p class="m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg text-lg md:text-xl lg:text-2xl"><%= updatedSession.aiResponse%></p>
+        <p class="m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg text-lg md:text-xl lg:text-2xl"><%= updatedSession.aiResponse%></p>
+      </div>
+      <div class="ai-resources">
+        <ul class="min-h-24 max-h-80 overflow-y-scroll p-2 border border-2 border-sky-600 bg-stone-950 rounded-xl">
+          <% for (const resource of updatedSession.aiResponse.resources){ %>
+          <li class="flex items-center text-center place-content-around w-full px-4 py-2 font-medium text-left rtl:text-right border-1 border-blue-200 cursor-pointer border-gray-600 bg-indigo-500 hover:bg-green-600 hover:text-white focus:ring-gray-500 focus:text-white rounded-xl">
+            <div class="practice-date w-full h-full min-w-8/10 text-center border-r-1 border-slate-900"><%= resource %>></div>
+            <form action="/saveResource" method="POST">
+              <input type="hidden" name="resource" value="<%= resource %>">
+              <button class="m-auto w-15/100 bg-green-500 hover:bg-green-700 text-white py-2 px-1 border-1 border-fuchsia-500 rounded-full">Save</button>
+            </form>
+          </li>
+          <% } %>
+        </ul>
+      </div>
+      <% } %>
+      <div class="prev-answer-portion">
+        <h2 class="font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3">Previously saved answer:</h2>
+        <p class="m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg text-lg md:text-xl lg:text-2xl"><%= questions['answer']%></p>
+      </div>
     </div>
-    <div class="ai-resources">
-      <ul class="min-h-24 max-h-80 overflow-y-scroll p-2 border border-2 border-sky-600 bg-stone-950 rounded-xl">
-        <% for (const resource of updatedSession.aiResponse.resources){ %>
-        <li class="flex items-center text-center place-content-around w-full px-4 py-2 font-medium text-left rtl:text-right border-1 border-blue-200 cursor-pointer border-gray-600 bg-indigo-500 hover:bg-green-600 hover:text-white focus:ring-gray-500 focus:text-white rounded-xl">
-          <div class="practice-date w-full h-full min-w-8/10 text-center border-r-1 border-slate-900"><%= resource %>></div>
-          <form action="/saveResource" method="POST">
-            <input type="hidden" name="resource" value="<%= resource %>">
-            <button class="m-auto w-15/100 bg-green-500 hover:bg-green-700 text-white py-2 px-1 border-1 border-fuchsia-500 rounded-full">Save</button>
-          </form>
-        </li>
-        <% } %>
-      </ul>
+    <%} %>
+  </section>
+</div>
+
+<div id="error-message" class="hidden opacity-0 transition-opacity duration-300 ease-in-out h-screen w-full left-1/2 -translate-x-1/2 justify-center items-center absolute z-1">
+  <div class="p-4 mb-4 w-8/10 text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">
+    <div class="flex items-center">
+      <svg class="shrink-0 w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+      </svg>
+      <span class="sr-only">Info</span>
+      <h3 class="text-lg font-medium">Oh no!</h3>
     </div>
-    <% } %>
-    <div class="prev-answer-portion">
-      <h2 class="font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3">Previously saved answer:</h2>
-      <p class="m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg text-lg md:text-xl lg:text-2xl"><%= questions['answer']%></p>
+    <div class="message mt-2 mb-4 text-sm text-wrap">
+      
+    </div>
+    <div class="flex">
+      <button type="button" class="dismiss text-red-800 bg-transparent border border-red-800 hover:bg-red-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:hover:bg-red-600 dark:border-red-600 dark:text-red-500 dark:hover:text-white dark:focus:ring-red-800" data-dismiss-target="#alert-additional-content-2" aria-label="Close">
+        Dismiss
+      </button>
     </div>
   </div>
-  <%} %>
-</section>
+</div>
+
+<div id="success-message" class="hidden opacity-0 transition-opacity duration-300 ease-in-out h-screen w-full left-1/2 -translate-x-1/2 justify-center items-center absolute z-1">
+  <div class="p-4 mb-4 w-8/10 text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert">
+    <div class="flex items-center">
+      <svg class="shrink-0 w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+      </svg>
+      <span class="sr-only">Info</span>
+      <h3 class="text-lg font-medium">Hooray!</h3>
+    </div>
+    <div class="message mt-2 mb-4 text-sm text-wrap">
+      
+    </div>
+    <div class="flex">
+      <button type="button" class="dismiss text-green-800 bg-transparent border border-green-800 hover:bg-green-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:hover:bg-green-600 dark:border-green-600 dark:text-green-400 dark:hover:text-white dark:focus:ring-green-800" data-dismiss-target="#alert-additional-content-3" aria-label="Close">
+        Dismiss
+      </button>
+    </div>
+  </div>
+</div>
+
+<script src="/saveAnswer.js"></script>
