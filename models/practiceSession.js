@@ -20,11 +20,6 @@ const practiceSessionSchema = new mongoose.Schema({
   },
   answers: {
     type: [{type:String}],
-    // required:true,
-    // validate: {
-    //   validator: (answers) => Array.isArray(answers) && answers.length,
-    //   message: 'answers array needs to exist and contain questions',
-    // },
     default: [],
   },
   
@@ -42,7 +37,7 @@ const practiceSessionSchema = new mongoose.Schema({
       }],
       completedAt: Date,
     },
-    default:null,
+    default:{},
   }
 });
 

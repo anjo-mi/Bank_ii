@@ -1,6 +1,6 @@
 import models from "../models/index.js";
-import practiceSession from "../models/practiceSession.js";
 const { User, Category, Question, PracticeSession } = models;
+import agent from "../services/aiService.js";
 
 export default {
   // load practice setup page with all [pre-loaded] categories
@@ -111,8 +111,8 @@ export default {
           {$set: {[`answers.${current}`]: answer || ''}},
           {new: true},
         )
+        agent.getAnswerFeedback(questions[current].content, answer, current, sessionId);
       }else updatedSession = await PracticeSession.findById(sessionId);
-      console.log({session,updatedSession});
       // increment current index (passed from /startPractice, tracked to be less than questions length)
       current = +current + 1;
 
