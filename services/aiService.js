@@ -54,7 +54,7 @@ export default {
       // console.log('google translated to: ', {data})
 
       const {feedback, resources} = data;
-      console.log({feedback,resources, question, answer, current, sessionId})
+      console.log(question.content, {feedback,resources, answer}, question._id)
 
       // TODO at a later date:
       //  - |||||ctrl F: rate-limiter|||||| populate the practice session with limit or error message

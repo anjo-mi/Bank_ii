@@ -111,7 +111,7 @@ export default {
           {$set: {[`answers.${current}`]: answer || ''}},
           {new: true},
         )
-        agent.getAnswerFeedback(questions[current].content, answer, current, sessionId);
+        agent.getAnswerFeedback(questions[current], answer, current, sessionId);
       }else updatedSession = await PracticeSession.findById(sessionId);
       // increment current index (passed from /startPractice, tracked to be less than questions length)
       current = +current + 1;
@@ -120,6 +120,7 @@ export default {
       // if all questions are answered, make a results object that binds questions to their answers
         // render the results page
       // otherwise call the current page with new data
+      console.log({questions})
       if (current === questions.length) {
         const results = {};
         for (let i = 0 ; i < questions.length ; i++){
@@ -131,7 +132,10 @@ export default {
           }
         }
 
-        res.render('practiceCompleted', {questions,results,updatedSession});
+        setTimeout(async () => {
+          updatedSession = await PracticeSession.findById(sessionId);
+          res.render('practiceCompleted', {questions,results,updatedSession});
+        }, 30000)
       }
       else res.render('practiceQuestion', {questions,current,answers,sessionId: sessionId ? sessionId.toString() : null});
     }catch(showNextError){

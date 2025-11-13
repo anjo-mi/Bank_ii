@@ -9,23 +9,33 @@
 <div id="interview-results" class="flex h-screen w-full left-1/2 -translate-x-1/2 absolute justify-center items-center absolute z-1">
   <section id="resultCarousel" class="result-card-carousel m-auto flex flex-col w-85/100 border-1 rounded-lg border-gray-300 p-3 gap-6 items-center place-content-center">
     <h1 class="m-auto p-3 w-70/100 border-1 border-gray-300 rounded-lg bg-orange-800 text-white">Interview Results:</h1>
-    <% for (const question in results){ %>
+    <% 
+    const answers = updatedSession.answers;
+    const responses = updatedSession.aiResponse.questionResponse
+    for (let i = 0 ; i < questions.length ; i++){ 
+      const q = questions[i];
+      const a = answers[i];
+    %>
     <div class="result-card w-95/100 min-w-95-100 border-t-2 dashed border-sky-300">
       <div class="question-portion">
-        <h2 class="font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3"><%= question %>:</h2>
-        <p class="m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg text-lg md:text-xl lg:text-2xl"><%= results[question]['question']%></p>
+        <h2 class="font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3">Question <%= i + 1 %>:</h2>
+        <p class="m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg text-lg md:text-xl lg:text-2xl"><%= q.content %></p>
       </div>
       <div class="answer-portion">
         <h2 class="font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3">Your response:</h2>
         <form action="/questions/saveAnswer" method="POST" class="save-answer">
-          <input type="hidden" name="answer" class="answer" value="<%= results[question].answer%>">
-          <input type="hidden" name="content" class="content" value="<%= results[question].question%>">
-          <input type="hidden" name="questionId" class="questionId" value="<%= results[question].id %>">
+          <input type="hidden" name="answer" class="answer" value="<%= a %>">
+          <input type="hidden" name="content" class="content" value="<%= q %>">
+          <input type="hidden" name="questionId" class="questionId" value="<%= q._id %>">
           <button type="submit" class="m-auto w-20/100 bg-green-500 hover:bg-green-700 text-white p-1 border-1 border-fuchsia-500 rounded-sm">Save</button>
         </form>
-        <p class="m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg text-lg md:text-xl lg:text-2xl"><%= results[question]['answer']%></p>
+        <p class="m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg text-lg md:text-xl lg:text-2xl"><%= a %></p>
       </div>
-      <% if (updatedSession.aiResponse){ %>
+      <%
+      if (responses && responses.length){ 
+        const feedback = responses[i].feedback;
+        const resources = responses[i].resources;
+      %>
       <div class="ai-response">
         <h2 class="font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3">Bot Botterson says:</h2>
 
@@ -33,16 +43,16 @@
         <!-- this could be problematic: are responses not tied to questions? -->
 
 
-        <p class="m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg text-lg md:text-xl lg:text-2xl"><%= updatedSession.aiResponse%></p>
+        <p class="m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg text-lg md:text-xl lg:text-2xl"><%= feedback %></p>
       </div>
       <div class="ai-resources">
         <ul class="min-h-24 max-h-80 overflow-y-scroll p-2 border border-2 border-sky-600 bg-stone-950 rounded-xl">
-          <% for (const resource of updatedSession.aiResponse.resources){ %>
+          <% for (const resource of resources){ %>
           <li class="flex items-center text-center place-content-around w-full px-4 py-2 font-medium text-left rtl:text-right border-1 border-blue-200 cursor-pointer border-gray-600 bg-indigo-500 hover:bg-green-600 hover:text-white focus:ring-gray-500 focus:text-white rounded-xl">
-            <div class="practice-date w-full h-full min-w-8/10 text-center border-r-1 border-slate-900"><%= resource %>></div>
+            <div class="practice-date w-full h-full min-w-8/10 text-center border-slate-900"><a href="<%= resource %>" target="_blank" class="block"><%= resource %>></a></div>
             <form action="/saveResource" method="POST">
               <input type="hidden" name="resource" value="<%= resource %>">
-              <button class="m-auto w-15/100 bg-green-500 hover:bg-green-700 text-white py-2 px-1 border-1 border-fuchsia-500 rounded-full">Save</button>
+              <button class="m-auto w-fit bg-green-500 hover:bg-green-700 text-white py-2 px-1 border-1 border-fuchsia-500 rounded-full">Save</button>
             </form>
           </li>
           <% } %>
@@ -51,7 +61,7 @@
       <% } %>
       <div class="prev-answer-portion">
         <h2 class="font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3">Previously saved answer:</h2>
-        <p class="m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg text-lg md:text-xl lg:text-2xl"><%= questions['answer']%></p>
+        <p class="m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg text-lg md:text-xl lg:text-2xl"><%= q.answer %></p>
       </div>
     </div>
     <%} %>
