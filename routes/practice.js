@@ -9,7 +9,9 @@ const router = express.Router();
 
 router.get("/", ensureAuth, practiceController.getCategories);
 router.get("/history", ensureAuth, practiceController.getSessions);
+router.get("/:id", ensureAuth, practiceController.getResults);
 router.post("/start", ensureAuth, practiceController.startPractice);
 router.post("/next", ensureAuth, practiceController.showNext);
+router.post("/checkSession", ensureAuth, practiceController.checkSession);
 
 export default router;

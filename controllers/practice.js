@@ -120,22 +120,10 @@ export default {
       // if all questions are answered, make a results object that binds questions to their answers
         // render the results page
       // otherwise call the current page with new data
-      console.log({questions})
+      // console.log({questions})
       if (current === questions.length) {
-        const results = {};
-        for (let i = 0 ; i < questions.length ; i++){
-          results['Question ' + (i+1)] = {
-            question: questions[i].content,
-            id: questions[i]._id,
-            categories: questions[i].categories,
-            answer: answers[i],
-          }
-        }
-
-        setTimeout(async () => {
-          updatedSession = await PracticeSession.findById(sessionId);
-          res.render('practiceCompleted', {questions,results,updatedSession});
-        }, 30000)
+        console.log('im going to call to load the results, with', {questions,sessionId})
+        res.render('loadResults', {questions,sessionId})
       }
       else res.render('practiceQuestion', {questions,current,answers,sessionId: sessionId ? sessionId.toString() : null});
     }catch(showNextError){
@@ -155,4 +143,35 @@ export default {
       return res.status(400).json({message: getPracticeSessionsError.message});
     }
   },
+
+  checkSession: async (req,res) => {
+    try{
+      const sessionId = req.body.sessionId;
+      const updatedSession = await PracticeSession.findById(sessionId).populate('questions');
+      
+      if (updatedSession.questions.length !== updatedSession.aiResponse.questionResponse?.reduce(a => a + 1, 0)) return res.status(206).json({message:'still cooking'});
+
+      return res.status(201).json({sessionId});
+    }catch(checkSessionError){
+      console.log({checkSessionError});
+      return res.status(400).json({message: checkSessionError.message});
+    }
+  },
+
+  getResults: async (req,res) => {
+    try{
+      const sessionId = req.params.id;
+      const updatedSession = await PracticeSession.findById(sessionId).populate('questions');
+      
+      if (updatedSession.questions.length !== updatedSession.aiResponse.questionResponse?.reduce(a => a + 1 ,0)) return res.status(500).json({message: 'the '});
+
+      console.log({sessionId,updatedSession})
+      const questions = updatedSession.questions;
+      console.log({sessionId,updatedSession,questions})
+      res.render('practiceCompleted', {questions,updatedSession})
+    }catch(getResultsError){
+      console.log({getResultsError});
+      return res.status(400).json({message: getResultsError.message});
+    }
+  }
 };

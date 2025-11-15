@@ -424,6 +424,9 @@
   .h-15 {
     height: calc(var(--spacing) * 15);
   }
+  .h-16 {
+    height: calc(var(--spacing) * 16);
+  }
   .h-20 {
     height: calc(var(--spacing) * 20);
   }
@@ -466,6 +469,9 @@
   .min-h-50 {
     min-height: calc(var(--spacing) * 50);
   }
+  .min-h-60 {
+    min-height: calc(var(--spacing) * 60);
+  }
   .w-2\/10 {
     width: calc(2/10 * 100%);
   }
@@ -504,6 +510,9 @@
   }
   .w-15\/100 {
     width: calc(15/100 * 100%);
+  }
+  .w-16 {
+    width: calc(var(--spacing) * 16);
   }
   .w-20\/100 {
     width: calc(20/100 * 100%);
@@ -656,6 +665,9 @@
   }
   .gap-6 {
     gap: calc(var(--spacing) * 6);
+  }
+  .gap-9 {
+    gap: calc(var(--spacing) * 9);
   }
   .space-y-2 {
     :where(& > :not(:last-child)) {
@@ -892,6 +904,9 @@
   .fill-green-400 {
     fill: var(--color-green-400);
   }
+  .fill-orange-800 {
+    fill: var(--color-orange-800);
+  }
   .p-1 {
     padding: calc(var(--spacing) * 1);
   }
@@ -1012,6 +1027,9 @@
   }
   .text-wrap {
     text-wrap: wrap;
+  }
+  .break-all {
+    word-break: break-all;
   }
   .whitespace-nowrap {
     white-space: nowrap;
