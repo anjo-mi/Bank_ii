@@ -121,10 +121,8 @@ export default {
         // render the results page
       // otherwise call the current page with new data
       // console.log({questions})
-      if (current === questions.length) {
-        console.log('im going to call to load the results, with', {questions,sessionId})
-        res.render('loadResults', {questions,sessionId})
-      }
+      if (current === questions.length) res.render('loadResults', {questions,sessionId});
+
       else res.render('practiceQuestion', {questions,current,answers,sessionId: sessionId ? sessionId.toString() : null});
     }catch(showNextError){
       console.log({showNextError});

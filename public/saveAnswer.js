@@ -42,13 +42,16 @@ const makeList = (array) => {
   }
   let head = null,
       tail = null;
+  
   for (let i = 0 ; i < array.length ; i++){
     const n = new Node(array[i]);
     if (!head){
       head = n;
       tail = n;
       head.next = tail;
-      tail.prev = next;
+      head.prev = tail;
+      tail.prev = head;
+      tail.next = head;
     }else{
       n.prev = tail;
       tail.next = n;

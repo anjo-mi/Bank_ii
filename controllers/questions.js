@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import models from "../models/index.js";
-const { User, Category, Question } = models;
+const { User, Category, Question, PracticeSession } = models;
+import agent from "../services/aiService.js";
 
 export default {
 
@@ -277,6 +278,27 @@ export default {
     }catch(getEditQuestionError){
       console.log(getEditQuestionError)
       return res.status(500).json({message: getEditQuestionError.message});
+    }
+  },
+
+  answerQuestion: async (req,res) => {
+    try{
+      const body = req.body;
+      console.log({body})
+      const {answer,questionId,question} = req.body;
+      const singleQuestionSession = await PracticeSession.create({
+        userId: req.user.id,
+        questions: [questionId],
+        answers: [answer],
+      });
+      const sessionId = singleQuestionSession._id;
+      const questions = [question];
+      console.log({answer,questionId,question, singleQuestionSession})
+      agent.getAnswerFeedback(question, answer, 0, sessionId);
+      res.render('loadResults', {questions,sessionId})
+    }catch(answerQuestionError){
+      console.log({answerQuestionError});
+      return res.status(400).json({message: answerQuestionError.message});
     }
   },
 

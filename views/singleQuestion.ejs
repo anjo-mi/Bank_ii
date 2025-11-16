@@ -24,8 +24,10 @@
     </div>
    
     <div class="w-95/100 m-auto mt-4 flex flex-col" id="answerContainer">
-        <form action="/answerQuestion" method="POST"
+        <form id="answer-form" action="/answerQuestion" method="POST"
         class="flex flex-col lg:sticky lg:-top-12">
+            <input type="hidden" id="questionId" name="questionId" value="<%= question._id %>">
+            <input type="hidden" id="question" name="question" value="<%= question %>">
              <div>
                 <h2 class="font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3">Question:</h2>
                 <p class="m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg text-lg md:text-xl lg:text-2xl"><%= question.content%></p>
@@ -34,8 +36,8 @@
                 <li class="m-auto px-2 py-1 h-full w-32/100 text-xs md:text-lg lg:text-xl outline-2 outline-grey-200 hover:outline-green-400 active:outline-green-800 rounded-full">
                     <button id="view-saved" type="button" class="view-saved m-auto h-full w-full items-center">View Previous Answer</button>
                 </li>
-                <li class="m-auto px-2 py-1 h-fit w-32/100 text-xs md:text-lg lg:text-xl outline-2 outline-grey-200 hover:outline-green-400 active:outline-green-800 rounded-full">
-                    <input class="m-auto inline-block h-full w-full items-center" type="submit" value="Submit Current&#13;&#10;Answer">
+                <li class="m-auto px-2 py-1 h-full w-32/100 text-xs md:text-lg lg:text-xl outline-2 outline-grey-200 hover:outline-green-400 active:outline-green-800 rounded-full">
+                    <button id="submit-answer" type="submit" class="view-saved m-auto h-full w-full items-center">Submit Current Answer</button>
                 </li>
                 <li class="m-auto px-2 py-1 h-full w-32/100 text-xs md:text-lg lg:text-xl outline-2 outline-grey-200 hover:outline-green-400 active:outline-green-800 rounded-full">
                     <button type="button" class="m-auto h-full w-full items-center">Record</button>
