@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (count >= 15){
           waitText.textContent = 'sorry, there may have been an error, well look into this. theres a good chance you can still access this feedback from the previousSessions page or your dashboard';
           clearInterval(checkInterval);
-          console.log('something amiss');
+          setTimeout(() => window.location.replace('/dashboard'),3000);
         }
       }
     }catch(error){

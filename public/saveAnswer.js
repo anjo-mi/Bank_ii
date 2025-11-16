@@ -1,6 +1,7 @@
 const successBox = document.getElementById('success-message');
 const errorBox = document.getElementById('error-message');
 const dismisses = document.querySelectorAll('.dismiss');
+const resultCards = Array.from(document.querySelectorAll('.result-card'));
 
 if (dismisses) dismisses.forEach(dismissBox => {
   dismissBox.addEventListener('click', (e) => {
@@ -50,8 +51,32 @@ document.addEventListener('submit', async (e) => {
 
     const data = await response.json();
 
-    console.log({data})
     if (response.ok){
+
+      handleGood(data.message);
+    }
+    else handleBad(data.message);
+  }
+}
+)
+
+document.addEventListener('submit', async (e) => {
+  if (e.target.classList.contains('save-resource')){
+    e.preventDefault();
+    const resource = e.target.querySelector('.resource').value;
+    
+    const response = await fetch('/saveResource', {
+      method: "POST",
+      headers: {"Content-Type": 'application/json'},
+      body: JSON.stringify({
+        resource,
+      })
+    })
+
+    const data = await response.json();
+    
+    if (response.ok){
+      
       handleGood(data.message);
     }
     else handleBad(data.message);

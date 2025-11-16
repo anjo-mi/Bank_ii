@@ -11,7 +11,7 @@
         const categories = new Set();
         for (const q of questions) for (const cat of q.categories) if (!categories.has(cat)) categories.add(cat);
       %>
-      <form action="/getSession" method="POST" class="mt-5 md:mt-15 border-1 p-1 border-yellow-500 bg-teal-950 rounded-lg">
+      <form action="practice/<%= session._id %>" method="GET" class="mt-5 md:mt-15 border-1 p-1 border-yellow-500 bg-teal-950 rounded-lg">
         <input type="hidden" name="sessionId" value="<%= session._id %>">
         <button type="submit" class="block m-auto w-95/100">
           <dt class="-ml-2 text-left p-1 w-fit bg-orange-800 rounded-sm border-1 border-zinc-950"><%= session.completedAt.toString().slice(4,15) %>: <%= session.questions.length %> Question(s)</dt>

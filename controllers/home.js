@@ -36,7 +36,7 @@ export default {
     try{
       const {resource} = req.body;
       const user = await User.findByIdAndUpdate(req.user.id,{
-        $push: {resources: resource},
+        $addToSet: {resources: resource},
       },{new:true});
       return res.status(201).json({message: 'your resource has been saved'})
     }catch(saveResourceError){
