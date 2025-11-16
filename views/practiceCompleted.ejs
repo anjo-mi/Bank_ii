@@ -6,7 +6,13 @@
   </ul>
 </div>
 
-<div id="interview-results" class="flex h-screen w-95/100 m-auto justify-center items-center text-xs md:text-lg">
+<div id="interview-results" class="flex h-screen w-full m-auto justify-center items-center text-xs md:text-lg">
+  <div class="flex flex-col h-full flex-1">
+      <button type="button" id="prev" class="inline-flex m-auto items-center justify-center text-white bg-teal-900 rounded-sm outline-1 outline-gray-400 hover:bg-teal-600 hover:bold focus:ring-4 focus:ring-medium shadow-xs rounded-base w-10 h-10">
+        <
+        <span class="sr-only">Previous</span>
+      </button>
+  </div>
   <section id="resultCarousel" class="result-card-carousel m-auto flex flex-col w-full border-1 rounded-lg border-gray-300 p-3 gap-6 items-center place-content-center">
     <h1 class="m-auto p-3 w-70/100 border-1 border-gray-300 rounded-lg bg-orange-800 text-white">Interview Results:</h1>
     <% 
@@ -16,7 +22,7 @@
       const q = questions[i];
       const a = answers[i];
     %>
-    <div class="result-card w-95/100 min-w-95-100 border-t-2 dashed border-sky-300">
+    <div class="result-card hidden opacity-0 transition-opacity duration-300 ease-in-out w-95/100 min-w-95-100">
       <div class="question-portion">
         <h2 class="font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3">Question <%= i + 1 %>:</h2>
         <p class="m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg"><%= q.content %></p>
@@ -66,6 +72,12 @@
     </div>
     <%} %>
   </section>
+  <div class="flex flex-col h-full flex-1">
+      <button type="button" id="next" class="inline-flex m-auto items-center justify-center text-white bg-teal-900 rounded-sm outline-1 outline-gray-400 hover:bg-teal-600 hover:bold focus:ring-4 focus:ring-medium shadow-xs rounded-base w-10 h-10">
+        >
+        <span class="sr-only">Next</span>
+      </button>
+  </div>
 </div>
 
 <div id="error-message" class="hidden flex-col opacity-0 transition-opacity duration-300 ease-in-out h-screen w-full left-1/2 top-1/2 -translate-x-1/2 justify-content-center items-center fixed z-1">

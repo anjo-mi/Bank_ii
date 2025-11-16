@@ -6,7 +6,13 @@
   </ul>
 </div>
 
-<div id="interview-results" class="flex h-screen w-95/100 m-auto justify-center items-center">
+<div id="interview-results" class="flex h-screen gap-2 w-full m-auto justify-center items-center text-xs md:text-lg">
+  <div class="flex flex-col h-full flex-1">
+      <button type="button" id="prev" class="inline-flex m-auto items-center justify-center text-white bg-teal-900 rounded-sm outline-1 outline-gray-400 hover:bg-teal-600 hover:bold focus:ring-4 focus:ring-medium shadow-xs rounded-base w-10 h-10">
+        <
+        <span class="sr-only">Previous</span>
+      </button>
+  </div>
   <section id="resultCarousel" class="result-card-carousel m-auto flex flex-col w-full border-1 rounded-lg border-gray-300 p-3 gap-6 items-center place-content-center">
     <h1 class="m-auto p-3 w-70/100 border-1 border-gray-300 rounded-lg bg-orange-800 text-white">Interview Results:</h1>
     <%
@@ -15,10 +21,10 @@
     const ais = session.aiResponse?.questionResponse
     for (let i = 0 ; i < qs.length ; i++){ 
     %>
-    <div class="result-card w-95/100 min-w-95-100 border-t-2 dashed border-sky-300">
+    <div class="result-card hidden opacity-0 transition-opacity duration-300 ease-in-out w-95/100 min-w-95-100">
       <div class="question-portion">
         <h2 class="font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3">Question: <%= i + 1 %>:</h2>
-        <p class="m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg text-lg md:text-xl lg:text-2xl"><%= qs[i].content %></p>
+        <p class="m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg"><%= qs[i].content %></p>
       </div>
       <div class="answer-portion">
         <h2 class="font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3">Your response:</h2>
@@ -29,17 +35,17 @@
           <input type="hidden" name="isDefault" class="isDefault" value="<%= qs[i].isDefault %>">
           <button type="submit" class="m-auto w-20/100 bg-green-500 hover:bg-green-700 text-white p-1 border-1 border-fuchsia-500 rounded-sm">Save</button>
         </form>
-        <textarea class="m-auto text-center text-sm md:text-lg items-center min-h-60 w-9/10 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg text-lg md:text-xl lg:text-2xl"><%= as[i] %></textarea>
+        <textarea class="m-auto text-center text-sm md:text-lg items-center min-h-60 w-9/10 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg"><%= as[i] %></textarea>
       </div>
       <% if (ais && ais.length){ %>
       <div class="ai-response">
         <h2 class="font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3">Bot Botterson says:</h2>
-        <p class="m-auto text-center text-sm md:text-lg items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg text-lg md:text-xl lg:text-2xl"><%= ais[i].feedback %></p>
+        <p class="m-auto text-center text-sm md:text-lg items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg"><%= ais[i].feedback %></p>
       </div>
       <div class="ai-resources">
         <ul class="min-h-24 max-h-80 overflow-y-scroll p-2 border border-2 border-sky-600 bg-stone-950 rounded-xl">
           <% for (const resource of ais[i].resources){ %>
-          <li class="flex items-center gap-4 text-center text-sm md:text-lg place-content-between w-full px-4 py-2 border-1 border-blue-200 cursor-pointer border-gray-600 bg-indigo-500 hover:bg-green-600 hover:text-white focus:ring-gray-500 focus:text-white rounded-xl">
+          <li class="flex items-center gap-4 text-center place-content-between w-full px-4 py-2 border-1 border-blue-200 cursor-pointer border-gray-600 bg-indigo-500 hover:bg-green-600 hover:text-white focus:ring-gray-500 focus:text-white rounded-xl">
             <a href="<%= resource %>" target="_blank" class="practice-date block m-auto break-all text-center w-7/10 flex-4"><%= resource %>></a>
             <form action="/saveResource" method="POST" class="save-resource w-3/10 block m-auto flex-1">
               <input type="hidden" name="resource" class="resource" value="<%= resource %>">
@@ -52,11 +58,17 @@
       <% } %>
       <div class="prev-answer-portion">
         <h2 class="font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3">Previously saved answer:</h2>
-        <p class="m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg text-lg md:text-xl lg:text-2xl"><%= qs[i].answer %></p>
+        <p class="m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg"><%= qs[i].answer %></p>
       </div>
     </div>
     <%} %>
   </section>
+  <div class="flex flex-col h-full flex-1">
+      <button type="button" id="next" class="inline-flex m-auto items-center justify-center text-white bg-teal-900 rounded-sm outline-1 outline-gray-400 hover:bg-teal-600 hover:bold focus:ring-4 focus:ring-medium shadow-xs rounded-base w-10 h-10">
+        >
+        <span class="sr-only">Next</span>
+      </button>
+  </div>
 </div>
 
 <div id="error-message" class="hidden flex-col opacity-0 transition-opacity duration-300 ease-in-out h-screen w-full left-1/2 top-1/2 -translate-x-1/2 justify-content-center items-center fixed z-1">
