@@ -32,8 +32,9 @@ answerForm.addEventListener('submit', async (e) => {
   console.log({e})
   if (e.target.id = 'submit-answer'){
     const answer = document.getElementById('answer').value;
-    const question = document.getElementById('question').value;
+    let question = document.getElementById('question').value;
     const questionId = document.getElementById('questionId').value;
+    question = JSON.parse(question);
     console.log({answer,question,questionId})
     if (!answer.trim().length){
       // handleBad('lets not waste calls with blank data chief');
@@ -48,5 +49,13 @@ answerForm.addEventListener('submit', async (e) => {
         question
       })
     })
+
+    console.log({response});
+    if (response.ok){
+      window.location.replace('/practice/getLoadResults');
+    }
+    else{
+      // handleBad(response.mesage);
+    }
   }
 })

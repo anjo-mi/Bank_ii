@@ -2,7 +2,6 @@ const waitText = document.getElementById('wait-text');
 document.addEventListener('DOMContentLoaded', async () => {
   console.log('i made an attempt?')
   const sessionId = document.getElementById('sessionId').value;
-  const questions = document.getElementById('questions').value;
   let count = 0;
   
   const checkInterval = setInterval(async () => {

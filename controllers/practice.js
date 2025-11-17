@@ -163,13 +163,25 @@ export default {
       
       if (updatedSession.questions.length !== updatedSession.aiResponse.questionResponse?.reduce(a => a + 1 ,0)) return res.status(500).json({message: 'the '});
 
-      console.log({sessionId,updatedSession})
+      // console.log({sessionId,updatedSession})
       const questions = updatedSession.questions;
       console.log({sessionId,updatedSession,questions})
       res.render('practiceCompleted', {questions,updatedSession})
     }catch(getResultsError){
       console.log({getResultsError});
       return res.status(400).json({message: getResultsError.message});
+    }
+  },
+
+  getLoadResults: async(req,res) => {
+    try{
+      const {sessionId} = req.session.practiceId;
+      console.log({sessionId},'session: ',res.session)
+      delete req.session.practiceId;
+      res.render('loadResults', {sessionId})
+    }catch(getLoadResultsError){
+      console.log({getLoadResultsError});
+      return res.status(400).json({message: getLoadResultsError.message});
     }
   }
 };

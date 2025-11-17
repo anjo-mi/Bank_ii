@@ -1,7 +1,7 @@
 <script>console.log('LoadResults page rendered');</script>
 
 <form action="/practice/checkSession" method="POST" id="get-results-form" class="m-auto h-screen">
-  <input type="hidden" name="questions" id="questions" value="<%= JSON.stringify(questions) %>">
+
   <input type="hidden" name="sessionId" id="sessionId" value="<%= sessionId %>">
   <input type="submit" name="submit" id="submit" class="hidden">
   <div id="load-state-container" class="flex flex-col w-80/100 h-full m-auto items-center justify-center gap-9">

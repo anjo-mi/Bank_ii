@@ -285,17 +285,21 @@ export default {
     try{
       const body = req.body;
       console.log({body})
-      const {answer,questionId,question} = req.body;
+      let {answer,questionId,question} = req.body;
       const singleQuestionSession = await PracticeSession.create({
         userId: req.user.id,
         questions: [questionId],
         answers: [answer],
       });
+      // question = JSON.parse(question)
       const sessionId = singleQuestionSession._id;
-      const questions = [question];
-      console.log({answer,questionId,question, singleQuestionSession})
+      // const questions = singleQuestionSession.questions;
+      console.log({answer,questionId, question, singleQuestionSession})
       agent.getAnswerFeedback(question, answer, 0, sessionId);
-      res.render('loadResults', {questions,sessionId})
+      req.session.practiceId = {sessionId};
+      console.log(req.session.practiceId ,{sessionId});
+      await req.session.save();
+      return res.status(201).json({sessionId});
     }catch(answerQuestionError){
       console.log({answerQuestionError});
       return res.status(400).json({message: answerQuestionError.message});
