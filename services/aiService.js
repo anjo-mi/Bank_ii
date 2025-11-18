@@ -33,7 +33,12 @@ export default {
         
         If there are free and reputable resources [mdn, youtube, learnwithleon, medium, freecodecamp, official documentation, github, etc.] available that a user can use in order to strengthen their knowledge on the given subject, please look up ones that may help the user strengthen their answer.
         
-        Please return your response in the JSON format specified in the config file, with your advice and suggested improvements or acknowledgement of sufficiency in the "feedback" property and the full URLs of any of the free and reputable resources as the items of the resources array (if there are no resources that are valid or necessary, send resources as an empty array). If there is an error, send back in JSON format with a 'message' property.`,
+        Please return your response in the JSON format specified in the config file, with your advice and suggested improvements or acknowledgement of sufficiency in the "feedback" property and the full URLs of any of the free and reputable resources as the items of the resources array (if there are no resources that are valid or necessary, send resources as an empty array). If there is an error, send back in JSON format with a 'message' property.
+        
+        IMPORTANT: Please format the feedback portion of your response with actual line breaks (DOUBLE SPACE PLEASE) and markdown formats:
+          - Before each numbered point (1., 2., 3.)
+          - Between paragraphs
+          - After colons introducing lists`,
         config: {
           responseMimeType: "application/json",
           responseJsonSchema: {
@@ -48,7 +53,8 @@ export default {
           }
         },
       })
-
+      console.log({response});
+      console.log(response.text);
       const data = await JSON.parse(response.text);
 
       // console.log('google translated to: ', {data})

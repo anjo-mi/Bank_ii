@@ -1,6 +1,10 @@
 import models from "../models/index.js";
 const { User, Category, Question, PracticeSession } = models;
 
+import {marked} from 'marked';
+import createDOMPurify from 'dompurify';
+import {JSDOM} from 'jsdom';
+
 // good chance this will be encompassed elsewhere
 export default {
   getHome: async (req, res) => {
@@ -50,9 +54,16 @@ export default {
       const {sessionId} = req.body;
       const session = await PracticeSession.findById(sessionId).populate('questions');
       const {questions} = session;
+      const feedback = session.aiResponse.questionResponse.map(res => {
+        const window = new JSDOM('').window;
+        const pure = createDOMPurify(window);
+        return pure.sanitize(marked.parse(res.feedback, {breaks:true}));
+      })
+      console.log({feedback})
       console.log({session, questions});
       return res.render('previousSession', {
-        session
+        session,
+        feedback
       })
     }catch(getSessionError){
       console.log({getSessionError});

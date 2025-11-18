@@ -1,6 +1,10 @@
+import agent from "../services/aiService.js";
 import models from "../models/index.js";
 const { User, Category, Question, PracticeSession } = models;
-import agent from "../services/aiService.js";
+
+import {marked} from 'marked';
+import createDOMPurify from 'dompurify';
+import {JSDOM} from 'jsdom';
 
 export default {
   // load practice setup page with all [pre-loaded] categories
@@ -161,12 +165,17 @@ export default {
       const sessionId = req.params.id;
       const updatedSession = await PracticeSession.findById(sessionId).populate('questions');
       
-      if (updatedSession.questions.length !== updatedSession.aiResponse.questionResponse?.reduce(a => a + 1 ,0)) return res.status(500).json({message: 'the '});
+      if (updatedSession.questions.length !== updatedSession.aiResponse.questionResponse?.reduce(a => a + 1 ,0)) return res.status(500).json({message: 'the ai didnt catch up, were sorry'});
 
       // console.log({sessionId,updatedSession})
       const questions = updatedSession.questions;
-      console.log({sessionId,updatedSession,questions})
-      res.render('practiceCompleted', {questions,updatedSession})
+      const feedback = updatedSession.aiResponse.questionResponse.map(res => {
+        const window = new JSDOM('').window;
+        const pure = createDOMPurify(window);
+        return pure.sanitize(marked.parse(res.feedback, {breaks:true}));
+      })
+      console.log(feedback);
+      res.render('practiceCompleted', {questions,updatedSession,feedback})
     }catch(getResultsError){
       console.log({getResultsError});
       return res.status(400).json({message: getResultsError.message});

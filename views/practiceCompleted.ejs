@@ -39,7 +39,7 @@
       </div>
       <%
       if (responses && responses.length){ 
-        const feedback = responses[i].feedback;
+        
         const resources = responses[i].resources;
       %>
       <div class="ai-response">
@@ -49,13 +49,15 @@
         <!-- this could be problematic: are responses not tied to questions? -->
 
 
-        <p class="m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg"><%= feedback %></p>
+        <div class="m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 border-1 border-violet-800 bg-zinc-900 rounded-lg">
+          <%- feedback[i] %>
+        </div>
       </div>
       <div class="ai-resources">
         <ul class="min-h-24 max-h-80 overflow-y-scroll p-2 border border-2 border-sky-600 bg-stone-950 rounded-xl">
           <% for (const resource of resources){ %>
           <li class="flex items-center text-center place-content-around w-full px-4 py-2 font-medium text-left rtl:text-right border-1 border-blue-200 cursor-pointer border-gray-600 bg-indigo-500 hover:bg-green-600 hover:text-white focus:ring-gray-500 focus:text-white rounded-xl">
-            <div class="practice-date w-full h-full min-w-8/10 text-center border-slate-900"><a href="<%= resource %>" target="_blank" class="block"><%= resource %>></a></div>
+            <div class="practice-date w-full h-full min-w-8/10 text-center border-slate-900"><a href="<%= resource %>" target="_blank" class="block w-full h-full"><%= resource %>></a></div>
             <form action="/saveResource" method="POST" class="save-resource">
               <input type="hidden" name="resource" class="resource" value="<%= resource %>">
               <button class="m-auto w-fit bg-green-500 hover:bg-green-700 text-white py-2 px-1 border-1 border-fuchsia-500 rounded-full">Save</button>
