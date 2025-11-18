@@ -58,9 +58,6 @@ export default {
 
       // TODO at a later date:
       //  - |||||ctrl F: rate-limiter|||||| populate the practice session with limit or error message
-      // TODO tomorrow:
-      //  - update specific places in array using the same $set trick
-      //  - (if !response.ok) update aiResponse with error messages / rationale
       const updatedSession = await PracticeSession.findByIdAndUpdate(
         sessionId,
         {
@@ -77,6 +74,17 @@ export default {
 
     }catch(feedbackError){
       console.log({feedbackError});
+      const updatedSession = await PracticeSession.findByIdAndUpdate(
+        sessionId,
+        {
+          $set: {
+            [`aiResponse.questionResponse.${current}.feedback`]: `SAAAAWWWWWYYY :( ${feedbackError.message}`,
+            [`aiResponse.questionResponse.${current}.resources`]: [],
+            [`aiResponse.questionResponse.${current}.questionId`]: question._id,
+          },
+        },
+        {new:true}
+      )
       // res.status(400).json({message: feedbackError.message})
     }
   },
