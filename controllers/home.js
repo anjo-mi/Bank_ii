@@ -66,12 +66,12 @@ export default {
         }
         return q;
       });
-      const feedback = session.aiResponse.questionResponse.map(res => {        
+      const feedback = session.aiResponse ? session.aiResponse.questionResponse.map(res => {        
         const window = new JSDOM('').window;
         const pure = createDOMPurify(window);
         const purified = pure.sanitize(marked.parse(res.feedback, {breaks:true}));
         return purified.replaceAll('\n', '<br>');
-      })
+      }) : [];
       console.log({session, questions});
       return res.render('previousSession', {
         session,

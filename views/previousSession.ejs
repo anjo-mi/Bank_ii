@@ -18,7 +18,7 @@
     <%
     const qs = questions
     const as = session.answers
-    const ais = session.aiResponse?.questionResponse
+    const ais = session.aiResponse?.questionResponse || null;
     for (let i = 0 ; i < qs.length ; i++){ 
     %>
     <div class="result-card hidden opacity-0 transition-opacity duration-300 ease-in-out w-95/100 min-w-95-100">
