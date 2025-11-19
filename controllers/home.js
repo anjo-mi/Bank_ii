@@ -53,16 +53,29 @@ export default {
     try{
       const {sessionId} = req.body;
       const session = await PracticeSession.findById(sessionId).populate('questions');
-      const {questions} = session;
-      const feedback = session.aiResponse.questionResponse.map(res => {
+      const userQuestions = await Question.find({userId:req.user.id});
+      const parentIds = new Set(userQuestions.map(q => q.parentId ? q.parentId.toString() : null).filter(Boolean));
+      const questions = session.questions.map(q => {
+        if (parentIds.has(q._id.toString())){
+          const updated = userQuestions.find(uq => {
+            console.log({uq,q})
+            return uq.parentId?.toString() === q._id.toString()
+          })
+          console.log({updated})
+          return updated;
+        }
+        return q;
+      });
+      const feedback = session.aiResponse.questionResponse.map(res => {        
         const window = new JSDOM('').window;
         const pure = createDOMPurify(window);
-        return pure.sanitize(marked.parse(res.feedback, {breaks:true}));
+        const purified = pure.sanitize(marked.parse(res.feedback, {breaks:true}));
+        return purified.replaceAll('\n', '<br>');
       })
-      console.log({feedback})
       console.log({session, questions});
       return res.render('previousSession', {
         session,
+        questions,
         feedback
       })
     }catch(getSessionError){

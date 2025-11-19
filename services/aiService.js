@@ -29,14 +29,14 @@ export default {
         
         For both a.) and b.), if a user can condense wordy, run-on sentences, or instances where they beat around the bush, or are saying similar things in different words without adding real content, suggest ways in which they can do so.
 
-        Any advice should be brief and to the point, while using soft set-up's like "I think," or "Maybe if you tried" for the personal or opinion-based questions. And for fact-based questions, set-up's that offer brief guidance or clarifying points and encouragement rather than drawn out explanations. And remember, sometimes an answer can just be good, and not need much by way of advice.
+        Any advice should be brief and to the point, while using soft set-up's like "I think," or "Maybe if you tried" for the personal or opinion-based questions. And for fact-based questions, set-up's that offer brief guidance or clarifying points and encouragement rather than drawn out explanations. And remember, sometimes an answer can just be good, and not need much by way of advice. Especially in instances when this is the case, notify the user of potential follow-up questions they should be prepared for. When compiling your replies, imagine the user does not know what this prompt is, so give context to your thought process.
         
-        If there are free and reputable resources [mdn, youtube, learnwithleon, medium, freecodecamp, official documentation, github, etc.] available that a user can use in order to strengthen their knowledge on the given subject, please look up ones that may help the user strengthen their answer.
+        If there are free and reputable resources [mdn, github repos, youtube, medium, official documentation, etc.] available that a user can use in order to strengthen their knowledge on the given subject, please look up ones that may help the user strengthen their answer.
         
         Please return your response in the JSON format specified in the config file, with your advice and suggested improvements or acknowledgement of sufficiency in the "feedback" property and the full URLs of any of the free and reputable resources as the items of the resources array (if there are no resources that are valid or necessary, send resources as an empty array). If there is an error, send back in JSON format with a 'message' property.
         
-        IMPORTANT: Please format the feedback portion of your response with actual line breaks (DOUBLE SPACE PLEASE) and markdown formats:
-          - Before each numbered point (1., 2., 3.)
+        IMPORTANT: Please format the feedback portion of your response with TRIPLE line breaks and markdown formats:
+          - to display any lists
           - Between paragraphs
           - After colons introducing lists`,
         config: {
@@ -53,14 +53,12 @@ export default {
           }
         },
       })
-      console.log({response});
-      console.log(response.text);
+
       const data = await JSON.parse(response.text);
 
       // console.log('google translated to: ', {data})
 
       const {feedback, resources} = data;
-      console.log(question.content, {feedback,resources,sessionId, answer})
 
       // TODO at a later date:
       //  - |||||ctrl F: rate-limiter|||||| populate the practice session with limit or error message
@@ -84,7 +82,7 @@ export default {
         sessionId,
         {
           $set: {
-            [`aiResponse.questionResponse.${current}.feedback`]: `SAAAAWWWWWYYY :( ${feedbackError.message}`,
+            [`aiResponse.questionResponse.${current}.feedback`]: `SAAAAWWWWWYYY :(` +'\n\n\n'+ `${feedbackError.message}`,
             [`aiResponse.questionResponse.${current}.resources`]: [],
             [`aiResponse.questionResponse.${current}.questionId`]: question._id,
           },

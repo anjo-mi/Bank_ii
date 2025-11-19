@@ -124,7 +124,6 @@ export default {
       // if all questions are answered, make a results object that binds questions to their answers
         // render the results page
       // otherwise call the current page with new data
-      // console.log({questions})
       if (current === questions.length) res.render('loadResults', {questions,sessionId});
 
       else res.render('practiceQuestion', {questions,current,answers,sessionId: sessionId ? sessionId.toString() : null});
@@ -167,14 +166,13 @@ export default {
       
       if (updatedSession.questions.length !== updatedSession.aiResponse.questionResponse?.reduce(a => a + 1 ,0)) return res.status(500).json({message: 'the ai didnt catch up, were sorry'});
 
-      // console.log({sessionId,updatedSession})
       const questions = updatedSession.questions;
       const feedback = updatedSession.aiResponse.questionResponse.map(res => {
         const window = new JSDOM('').window;
         const pure = createDOMPurify(window);
-        return pure.sanitize(marked.parse(res.feedback, {breaks:true}));
+        const purified = pure.sanitize(marked.parse(res.feedback, {breaks:true}));
+        return purified.replaceAll('\n', '<br>');
       })
-      console.log(feedback);
       res.render('practiceCompleted', {questions,updatedSession,feedback})
     }catch(getResultsError){
       console.log({getResultsError});
@@ -185,7 +183,6 @@ export default {
   getLoadResults: async(req,res) => {
     try{
       const {sessionId} = req.session.practiceId;
-      console.log({sessionId},'session: ',res.session)
       delete req.session.practiceId;
       res.render('loadResults', {sessionId})
     }catch(getLoadResultsError){

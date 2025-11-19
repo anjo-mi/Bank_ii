@@ -349,6 +349,26 @@ export default {
           {new:true}
         );
       }else{
+        // const reUpdatedDefault = await Question.findOneAndUpdate(
+        //   {
+        //     userId: req.user.id,
+        //     parentId: questionId,
+        //   },
+        //   {answer},
+        //   {new:true}
+        // )
+        // let noLongerDefaultQuestion;
+        // if (!reUpdatedDefault){
+        //   noLongerDefaultQuestion = await Question.create({
+        //     userId: req.user.id,
+        //     content,
+        //     answer,
+        //     categories: q.categories,
+        //     isDefault: false,
+        //     parentId: q._id,
+        //   })
+        // }
+        // console.log({reUpdatedDefault,noLongerDefaultQuestion})
         const noLongerDefaultQuestion = await Question.create({
           userId: req.user.id,
           content:question,

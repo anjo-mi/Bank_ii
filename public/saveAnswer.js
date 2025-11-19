@@ -97,6 +97,7 @@ nextBtn.addEventListener('click', (e) => {
     current.val.style.display = 'none'
     setTimeout(() =>{
       current = current.next;
+      console.log({current});
       current.val.style.display = 'block';
       current.val.style.opacity = 100;
     })
