@@ -335,7 +335,7 @@ export default {
         }
       }
       const quest = await Question.findById(questionId);
-      if (quest.userId && quest.userId.toString() !== req.user.id) return res.status(403).json({message: "this question isnt yours to change"});
+      if (quest.userId && quest.userId.toString() !== req.user.id) return res.status(403).json({message: "congratulations, you worked some magic and got access to someone elses question, but you cant change it that easily"});
 
       if (!quest.isDefault){
         const updatedQuestion = await Question.findByIdAndUpdate(
@@ -349,34 +349,39 @@ export default {
           {new:true}
         );
       }else{
-        // const reUpdatedDefault = await Question.findOneAndUpdate(
-        //   {
-        //     userId: req.user.id,
-        //     parentId: questionId,
-        //   },
-        //   {answer},
-        //   {new:true}
-        // )
-        // let noLongerDefaultQuestion;
-        // if (!reUpdatedDefault){
-        //   noLongerDefaultQuestion = await Question.create({
-        //     userId: req.user.id,
-        //     content,
-        //     answer,
-        //     categories: q.categories,
-        //     isDefault: false,
-        //     parentId: q._id,
-        //   })
-        // }
-        // console.log({reUpdatedDefault,noLongerDefaultQuestion})
-        const noLongerDefaultQuestion = await Question.create({
-          userId: req.user.id,
-          content:question,
-          categories,
-          isDefault:false,
-          answer,
-          parentId: quest._id,
-        })
+        const reUpdatedDefault = await Question.findOneAndUpdate(
+          {
+            userId: req.user.id,
+            parentId: questionId,
+          },
+          {$set:{
+            content: question,
+            userId: req.user.id,
+            categories,
+            answer: answer || null,
+          }},
+          {new:true}
+        )
+        let noLongerDefaultQuestion;
+        if (!reUpdatedDefault){
+          noLongerDefaultQuestion = await Question.create({
+            userId: req.user.id,
+            content: question,
+            categories,
+            answer,
+            isDefault: false,
+            parentId: quest._id,
+          })
+        }
+        console.log({reUpdatedDefault,noLongerDefaultQuestion})
+        // const noLongerDefaultQuestion = await Question.create({
+        //   userId: req.user.id,
+        //   content:question,
+        //   categories,
+        //   isDefault:false,
+        //   answer,
+        //   parentId: quest._id,
+        // })
       }
       return res.status(201).json({message: 'question updated!'})
     }catch(updateQuestionError){
