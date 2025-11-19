@@ -18,6 +18,7 @@ router.get("/edit/select", ensureAuth, questionsController.getEditSearchPage);
 router.post("/create", ensureAuth, questionsController.createNewQuestion);
 router.post("/answerQuestion", ensureAuth, questionsController.answerQuestion);
 router.post("/saveAnswer", ensureAuth, questionsController.saveAnswer);
+router.post("/saveFeedback", ensureAuth, questionsController.saveFeedback);
 router.post("/edit", ensureAuth, questionsController.getEditQuestionPage);
 router.post("/edit/update", ensureAuth, questionsController.updateQuestion);
 router.delete("/delete/:id", ensureAuth, questionsController.deleteQuestion);

@@ -33,9 +33,9 @@
           <input type="hidden" name="answer" class="answer" value="<%= a %>">
           <input type="hidden" name="content" class="content" value="<%= q.content %>">
           <input type="hidden" name="questionId" class="questionId" value="<%= q._id %>">
-          <button type="submit" class="m-auto w-20/100 bg-green-500 hover:bg-green-700 text-white p-1 border-1 border-fuchsia-500 rounded-sm">Save</button>
+          <button type="submit" class="m-auto mb-2 w-20/100 bg-green-500 hover:bg-green-700 text-white p-1 border-1 border-fuchsia-500 rounded-sm">Save</button>
         </form>
-        <p class="m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg"><%= a %></p>
+        <textarea class="m-auto text-center text-sm md:text-lg items-center min-h-60 w-full py-1 md:py-3 px-2 md:px-4 border-1 border-violet-800 bg-zinc-900 rounded-lg"><%= a %></textarea>
       </div>
       <%
       if (responses && responses.length){ 
@@ -47,7 +47,13 @@
 
 
         <!-- this could be problematic: are responses not tied to questions? -->
-
+        <form action="/questions/saveFeedback" method="POST" class="save-feedback">
+          <input type="hidden" name="answer" class="answer" value="<%= a %>">
+          <input type="hidden" name="content" class="content" value="<%= q.content %>">
+          <input type="hidden" name="questionId" class="questionId" value="<%= q._id %>">
+          <input type="hidden" name="feedback" class="feedback" value="<%= feedback[i] %>">
+          <button type="submit" class="m-auto mb-2 w-20/100 bg-green-500 hover:bg-green-700 text-white p-1 border-1 border-fuchsia-500 rounded-sm">Save</button>
+        </form>
 
         <div class="m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 border-1 border-violet-800 bg-zinc-900 rounded-lg">
           <%- feedback[i] %>

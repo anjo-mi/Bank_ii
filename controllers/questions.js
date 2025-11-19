@@ -374,14 +374,6 @@ export default {
           })
         }
         console.log({reUpdatedDefault,noLongerDefaultQuestion})
-        // const noLongerDefaultQuestion = await Question.create({
-        //   userId: req.user.id,
-        //   content:question,
-        //   categories,
-        //   isDefault:false,
-        //   answer,
-        //   parentId: quest._id,
-        // })
       }
       return res.status(201).json({message: 'question updated!'})
     }catch(updateQuestionError){
@@ -428,6 +420,52 @@ export default {
         }
         console.log({reUpdatedDefault,noLongerDefaultQuestion})
         return res.status(201).json({message: `your answer to ${reUpdatedDefault ? reUpdatedDefault.content : noLongerDefaultQuestion.content} has been updated`});
+      }
+    }catch(saveAnswerError){
+      console.log(saveAnswerError);
+      return res.status(400).json({message: saveAnswerError.message});
+    }
+  },
+
+  saveFeedback: async(req,res) => {
+    try{
+      const {
+        answer,
+        content,
+        questionId,
+        feedback,
+      } = req.body;
+      console.log({feedback, content,questionId})
+      const q = await Question.findById(questionId);
+      if (!q.isDefault){
+        const updatedQuestion = await Question.findByIdAndUpdate(
+          questionId , {feedback} , {new:true}
+        );
+        console.log({updatedQuestion})
+        return res.status(201).json({message: `your feedback for "${updatedQuestion.content}" has been updated`});
+      }else{
+        const reUpdatedDefault = await Question.findOneAndUpdate(
+          {
+            userId: req.user.id,
+            parentId: questionId,
+          },
+          {feedback},
+          {new:true}
+        )
+        let noLongerDefaultQuestion;
+        if (!reUpdatedDefault){
+          noLongerDefaultQuestion = await Question.create({
+            userId: req.user.id,
+            content,
+            answer,
+            feedback,
+            categories: q.categories,
+            isDefault: false,
+            parentId: q._id,
+          })
+        }
+        console.log({reUpdatedDefault,noLongerDefaultQuestion})
+        return res.status(201).json({message: `your feedback for "${reUpdatedDefault ? reUpdatedDefault.content : noLongerDefaultQuestion.content}" has been updated`});
       }
     }catch(saveAnswerError){
       console.log(saveAnswerError);

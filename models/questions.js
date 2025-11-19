@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { type } from "os";
 
 const questionSchema = new mongoose.Schema({
   answer: {
@@ -32,6 +33,11 @@ const questionSchema = new mongoose.Schema({
   parentId: {
     type: mongoose.Schema.Types.ObjectId,
     default: null,
+  },
+
+  feedback: {
+    type: String,
+    default: '',
   },
   
   createdAt: {

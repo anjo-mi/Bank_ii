@@ -1402,6 +1402,11 @@
       background-color: var(--color-green-800);
     }
   }
+  .active\:bg-green-900 {
+    &:active {
+      background-color: var(--color-green-900);
+    }
+  }
   .active\:bg-green-950 {
     &:active {
       background-color: var(--color-green-950);

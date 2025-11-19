@@ -131,8 +131,36 @@ document.addEventListener('submit', async (e) => {
     }
     else handleBad(data.message);
   }
-}
-)
+})
+
+document.addEventListener('submit', async (e) => {
+  if (e.target.classList.contains('save-feedback')){
+    e.preventDefault();
+    const answer = e.target.querySelector('.answer').value;
+    const content = e.target.querySelector('.content').value;
+    const questionId = e.target.querySelector('.questionId').value;
+    const feedback = e.target.querySelector('.feedback')?.value;
+
+    const response = await fetch('/questions/saveFeedback', {
+      method: "POST",
+      headers: {"Content-Type": 'application/json'},
+      body: JSON.stringify({
+        answer,
+        content,
+        questionId,
+        feedback,
+      })
+    })
+
+    const data = await response.json();
+
+    if (response.ok){
+
+      handleGood(data.message);
+    }
+    else handleBad(data.message);
+  }
+})
 
 document.addEventListener('submit', async (e) => {
   if (e.target.classList.contains('save-resource')){

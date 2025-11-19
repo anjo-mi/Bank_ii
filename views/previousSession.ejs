@@ -33,14 +33,21 @@
           <input type="hidden" name="content" class="content" value="<%= qs[i].content %>">
           <input type="hidden" name="questionId" class="questionId" value="<%= qs[i]._id %>">
           <input type="hidden" name="isDefault" class="isDefault" value="<%= qs[i].isDefault %>">
-          <button type="submit" class="m-auto w-20/100 bg-green-500 hover:bg-green-700 text-white p-1 border-1 border-fuchsia-500 rounded-sm">Save</button>
+          <button type="submit" class="m-auto mb-2 w-20/100 bg-green-500 hover:bg-green-700 active:bg-green-900 text-white p-1 border-1 border-fuchsia-500 rounded-sm">Save</button>
         </form>
-        <textarea class="m-auto text-center text-sm md:text-lg items-center min-h-60 w-9/10 py-1 md:py-3 px-2 md:px-4 border-1 border-violet-800 bg-zinc-900 rounded-lg"><%= as[i] %></textarea>
+        <textarea class="m-auto text-center text-sm md:text-lg items-center min-h-60 w-full py-1 md:py-3 px-2 md:px-4 border-1 border-violet-800 bg-zinc-900 rounded-lg"><%= as[i] %></textarea>
       </div>
       <% if (ais && ais.length){ %>
       <div class="ai-response">
         <h2 class="font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3">Bot Botterson says:</h2>
-        <div class="m-auto text-center text-xs md:text-lg items-center min-h-50 py-1 md:py-3 px-2 md:px-4 border-1 border-violet-800 bg-zinc-900 rounded-lg"><%- feedback[i] %></div>
+        <form action="/questions/saveFeedback" method="POST" class="save-feedback">
+          <input type="hidden" name="answer" class="answer" value="<%= as[i] %>">
+          <input type="hidden" name="content" class="content" value="<%= qs[i].content %>">
+          <input type="hidden" name="questionId" class="questionId" value="<%= qs[i]._id %>">
+          <input type="hidden" name="feedback" class="feedback" value="<%= feedback[i] %>">
+          <button type="submit" class="m-auto mb-2 w-20/100 bg-green-500 hover:bg-green-700 active:bg-green-900 text-white p-1 border-1 border-fuchsia-500 rounded-sm">Save</button>
+        </form>
+        <div class="feedback m-auto text-center text-xs md:text-lg items-center min-h-50 py-1 md:py-3 px-2 md:px-4 border-1 border-violet-800 bg-zinc-900 rounded-lg"><%- feedback[i] %></div>
       </div>
       <div class="ai-resources">
         <ul class="min-h-24 max-h-80 overflow-y-scroll p-2 border border-2 border-sky-600 bg-stone-950 rounded-xl">
