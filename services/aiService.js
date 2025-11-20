@@ -12,7 +12,6 @@ export default {
     try{
       // TODO at a later date:
       //  - this is prolly where a rate limiter check will be initiated, and the error response will be handled below |||||ctrl F: rate-limiter||||||
-      console.log('if an aquarius uses gemini, are they the third member of outkast?')
       const response = await ai.models.generateContent({
         model: 'gemini-2.5-flash',
         contents: `Please, treat this as though you are mentoring someone who is typically an entry level / junior / early career developer. When in an interview they were given the question "${question.content}." The person you're mentoring gave the answer, "${answer}." Remembering to stay positive with critiques, suggest those improvements.
@@ -56,8 +55,6 @@ export default {
 
       const data = await JSON.parse(response.text);
 
-      // console.log('google translated to: ', {data})
-
       const {feedback, resources} = data;
 
       // TODO at a later date:
@@ -74,7 +71,7 @@ export default {
         {new:true}
       )
 
-      console.log({updatedSession})
+      console.log({feedback, resources})
 
     }catch(feedbackError){
       console.log({feedbackError});

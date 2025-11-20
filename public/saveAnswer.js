@@ -67,7 +67,6 @@ let current;
 
 document.addEventListener('DOMContentLoaded', (e) => {
   const resultsList = makeList(resultCards);
-  console.log(resultsList)
   current = resultsList;
   current.val.style.display = 'block';
   current.val.style.opacity = 100;
@@ -76,7 +75,6 @@ document.addEventListener('DOMContentLoaded', (e) => {
 prevBtn.addEventListener('click', (e) => {
   e.preventDefault();
   if (!current.prev) return;
-  console.log({current});
   current.val.style.opacity = 0;
   setTimeout(() => {
     current.val.style.display = 'none'
@@ -91,13 +89,11 @@ prevBtn.addEventListener('click', (e) => {
 nextBtn.addEventListener('click', (e) => {
   e.preventDefault();
   if (!current.next) return;
-  console.log({current});
   current.val.style.opacity = 0;
   setTimeout(() => {
     current.val.style.display = 'none'
     setTimeout(() =>{
       current = current.next;
-      console.log({current});
       current.val.style.display = 'block';
       current.val.style.opacity = 100;
     })

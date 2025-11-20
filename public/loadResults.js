@@ -1,6 +1,5 @@
 const waitText = document.getElementById('wait-text');
 document.addEventListener('DOMContentLoaded', async () => {
-  console.log('i made an attempt?')
   const sessionId = document.getElementById('sessionId').value;
   let count = 0;
   
@@ -11,14 +10,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         headers: {"Content-Type" : "application/json"},
         body:JSON.stringify({sessionId}),
       });
-      console.log({response})
       if (response.ok && response.status !== 206){
         const data = await response.json();
         clearInterval(checkInterval);
         window.location.assign(`/practice/${data.sessionId}`);
       }else {
         count++;
-        waitText.textContent = count >= 12
+        waitText.textContent = count >= 15
+                                ? 'i swear this has never happened before'
+                              :count >= 12
                                 ? 'ok tf?!?!?!'
                               :count >=  9
                                 ? 'i swear its me and not you'
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                               :count >=  3
                                 ? 'still cooking...'
                                 : waitText.textContent;
-        if (count >= 15){
+        if (count >= 18){
           waitText.textContent = 'sorry, there may have been an error, well look into this. theres a good chance you can still access this feedback from the previousSessions page or your dashboard';
           clearInterval(checkInterval);
           setTimeout(() => window.location.replace('/dashboard'),3000);

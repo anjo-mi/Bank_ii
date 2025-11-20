@@ -1,7 +1,6 @@
 document.querySelectorAll('.delete-btn').forEach(btn => {
   btn.addEventListener('click', async (e) => {
     const resource = e.target.id || e.target.parentElement.id;
-    console.log(e.target);
     const response = await fetch('/deleteResource', {
       method: 'PATCH',
       headers: {"Content-Type" : "application/json"},

@@ -4,7 +4,6 @@ const searchBar = document.getElementById('search-bar');
 const noResultsBox = document.getElementById('no-results-box');
 const questionListItems = Array.from(document.querySelectorAll('.question-list-item'));
 const categoryBoxes = Array.from(document.querySelectorAll('.category-input'));
-console.log({categoryBoxes})
 
 
 /*
@@ -23,7 +22,6 @@ const filterQuestions = (e) => {
     noResultsBox.style.opacity = 0;
     const contentSearch = searchBar.value.trim().split(' ').map(word => word.toLowerCase());
     const categorySearch = categoryBoxes.filter(box => box.checked).map(input => input.value);
-    console.log({categorySearch})
     searchBar.value = '';
     categoryBoxes.forEach(box => box['checked']= false);
 
@@ -32,12 +30,10 @@ const filterQuestions = (e) => {
       let contentMatch = true;
       if (categorySearch.length) catMatch = categorySearch.every(cat =>{
         const questionCategories = Array.from(q.querySelectorAll('.category-quick-search')).map(p => p.textContent)
-        console.log({questionCategories});
         return questionCategories.includes(cat);
       });
       if (contentSearch.length) contentMatch = contentSearch.every(word => {
         const questionContent = q.querySelector('.question-content').textContent.toLowerCase()
-        // console.log({questionContent});
         return questionContent.includes(word);
       });
       
@@ -94,7 +90,6 @@ for (const deleteBtn of deleteButtons){
 
     const defaultValue = listItem.querySelector('input[name="isDefault"]').value;
     const isDefault = Boolean(+defaultValue);
-    console.log({listItem,defaultValue,isDefault})
     if (isDefault){
       const dikembe = listItem.querySelector('.error-message');
       dikembe.textContent = 'default questions stay, this is the way';
@@ -111,7 +106,6 @@ for (const deleteBtn of deleteButtons){
       method: 'DELETE'
     })
     const data = await response.json();
-    console.log({data})
     if (response.ok){
       // fadeout the question, wait for transition, switch display to none
       const successage = document.getElementById('success-message');

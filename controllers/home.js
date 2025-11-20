@@ -58,10 +58,8 @@ export default {
       const questions = session.questions.map(q => {
         if (parentIds.has(q._id.toString())){
           const updated = userQuestions.find(uq => {
-            console.log({uq,q})
             return uq.parentId?.toString() === q._id.toString()
           })
-          console.log({updated})
           return updated;
         }
         return q;
@@ -72,7 +70,6 @@ export default {
         const purified = pure.sanitize(marked.parse(res.feedback, {breaks:true}));
         return purified.replaceAll('\n', '<br>');
       }) : [];
-      console.log({session, questions});
       return res.render('previousSession', {
         session,
         questions,
@@ -87,7 +84,6 @@ export default {
   deleteResource: async(req,res) =>{
     try{
       const {resource} = req.body;
-      console.log({resource});
       const user = await User.findByIdAndUpdate(
         req.user.id,
         {
@@ -95,7 +91,6 @@ export default {
         },
         {new:true}
       )
-      console.log(user.resources)
       return res.status(200).json({message:"successfully removed resource"})
     }catch(deleteResourceError){
       console.log({deleteResourceError});

@@ -249,7 +249,6 @@ deleteBtn.addEventListener('click', async (e) => {
     method: 'DELETE'
   })
   const data = await response.json();
-  console.log({data})
     
   if (response.ok){
       // fadeout the question, wait for transition, switch display to none

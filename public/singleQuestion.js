@@ -60,13 +60,11 @@ document.addEventListener('click', (e) => {
 
 answerForm.addEventListener('submit', async (e) => {
   e.preventDefault();
-  console.log({e})
   if (e.target.id = 'submit-answer'){
     const answer = document.getElementById('answer').value;
     let question = document.getElementById('question').value;
     const questionId = document.getElementById('questionId').value;
     question = JSON.parse(question);
-    console.log({answer,question,questionId})
     if (!answer.trim().length){
       // handleBad('lets not waste calls with blank data chief');
       return;
@@ -81,7 +79,7 @@ answerForm.addEventListener('submit', async (e) => {
       })
     })
 
-    console.log({response});
+
     if (response.ok){
       window.location.replace('/practice/getLoadResults');
     }
