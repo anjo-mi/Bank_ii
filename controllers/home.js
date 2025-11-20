@@ -83,4 +83,23 @@ export default {
       return res.status(400).json({message: getSessionError.message});
     }
   },
+
+  deleteResource: async(req,res) =>{
+    try{
+      const {resource} = req.body;
+      console.log({resource});
+      const user = await User.findByIdAndUpdate(
+        req.user.id,
+        {
+          $pull: {resources: resource},
+        },
+        {new:true}
+      )
+      console.log(user.resources)
+      return res.status(200).json({message:"successfully removed resource"})
+    }catch(deleteResourceError){
+      console.log({deleteResourceError});
+      return res.status(404).json({message: deleteResourceError.message})
+    }
+  },
 };

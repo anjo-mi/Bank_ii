@@ -14,10 +14,13 @@
           <dd>
             <section id="user-stats-container" class="w-full min-h-24 m-auto">
               <ul>
-                <% for (const resource of user.resources){ %>
-                <li>
-                  <a href="<%= resource %>" target="_blank" class="block m-auto break-all w-9/10 px-4 py-2 text-xs md:text-lg text-left rtl:text-right border-1 border-blue-200 cursor-pointer border-gray-600 bg-indigo-500 hover:bg-green-600 hover:text-white focus:ring-gray-500 focus:text-white rounded-xl"><%= resource %>
+                <% for (const resource of user.resources.slice(0).reverse()){ %>
+                <li class="resource-li block opacity-100 transition-opacity duration-300 ease-out h-fit mb-2 relative">
+                  <a href="<%= resource %>" target="_blank" class="block m-auto truncate w-9/10 px-4 py-2 text-xs md:text-lg text-left rtl:text-right border-1 border-blue-200 cursor-pointer border-gray-600 bg-indigo-500 hover:bg-green-600 hover:text-white focus:ring-gray-500 focus:text-white rounded-xl"><%= resource %>
                   </a>
+                  <button type="button" id="<%= resource %>" class="delete-btn h-5/6 inline p-1 rounded-full border-1 border-black hover:border-white hover:pointer bg-red-700 hover:bg-red-900 active:bg-red-400 absolute right-1 top-1 z-10">
+                    <img class="max-h-full" src="/images/trash.svg" alt="Delete">
+                  </button>
                 </li>
                 <% } %>
               </ul>
@@ -100,3 +103,5 @@
     </dl>
   </div>
 </div>
+
+<script src="/dashboard.js"></script>
