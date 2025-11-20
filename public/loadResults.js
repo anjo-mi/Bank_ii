@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                               :count >=  3
                                 ? 'still cooking...'
                                 : waitText.textContent;
-        if (count >= 50){
+        if (count >= 15){
           waitText.textContent = 'sorry, there may have been an error, well look into this. theres a good chance you can still access this feedback from the previousSessions page or your dashboard';
           clearInterval(checkInterval);
           setTimeout(() => window.location.replace('/dashboard'),3000);

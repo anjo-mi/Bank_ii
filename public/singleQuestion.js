@@ -1,7 +1,13 @@
 const viewSavedBtn = document.getElementById('view-saved');
 const dismissBtn = document.getElementById('dismiss');
 const prevAnswerBox = document.getElementById('saved-answer');
+
+const viewFeedbackBtn = document.getElementById('view-fb');
+const dismissFeedbackBtn = document.getElementById('dismiss-fb');
+const prevFeedbackBox = document.getElementById('saved-feedback');
+
 const answerForm = document.getElementById('answer-form');
+
 
 viewSavedBtn.addEventListener('click', (e) => {
   e.preventDefault();
@@ -17,12 +23,37 @@ dismissBtn.addEventListener('click', (e) => {
   },300)
 })
 
+viewFeedbackBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  prevFeedbackBox.style.display = 'flex';
+  setTimeout(() => prevFeedbackBox.style.opacity = 100,0);
+  prevFeedbackBox.scrollIntoView({ 
+    behavior: 'smooth', 
+    block: 'center' 
+  });
+})
+
+dismissFeedbackBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  prevFeedbackBox.style.opacity = 0;
+  setTimeout(() => {
+    prevFeedbackBox.style.display = 'none';
+  },300)
+})
+
 document.addEventListener('click', (e) => {
   if (!e.target.classList.contains('saved-answer') 
     && !e.target.classList.contains('view-saved')){
     prevAnswerBox.style.opacity = 0;
   setTimeout(() => {
     prevAnswerBox.style.display = 'none';
+  },300)
+  }
+  if (!e.target.classList.contains('saved-feedback') 
+    && !e.target.classList.contains('view-fb')){
+    prevFeedbackBox.style.opacity = 0;
+  setTimeout(() => {
+    prevFeedbackBox.style.display = 'none';
   },300)
   }
 })
