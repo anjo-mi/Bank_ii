@@ -17,15 +17,15 @@ document.addEventListener('DOMContentLoaded', async () => {
       }else {
         count++;
         waitText.textContent = count >= 15
-                                ? 'i swear this has never happened before'
+                                ? `this has never happened before`
                               :count >= 12
-                                ? 'ok tf?!?!?!'
+                                ? `ok tf ?!?!?!`
                               :count >=  9
-                                ? 'i swear its me and not you'
+                                ? `i swear it's me and not you`
                               :count >=  6
-                                ? 'dont read into this'
+                                ? `don't read into this`
                               :count >=  3
-                                ? 'still cooking...'
+                                ? `still cooking...`
                                 : waitText.textContent;
         if (count >= 18){
           waitText.textContent = 'sorry, there may have been an error, well look into this. theres a good chance you can still access this feedback from the previousSessions page or your dashboard';

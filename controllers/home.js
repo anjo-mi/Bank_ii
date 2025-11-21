@@ -97,4 +97,24 @@ export default {
       return res.status(404).json({message: deleteResourceError.message})
     }
   },
+
+  updateUser: async(req,res) => {
+    try{
+      const {title,level} = req.body;
+      const user = await User.findByIdAndUpdate(
+        req.user.id,
+        {
+          $set: {
+            [`info.title`]: title,
+            [`info.level`]: level,
+          },
+        },
+        {new:true}
+      );
+      return res.status(200).json({message: "successfully updated user info"})
+    }catch(updateUserError){
+      console.log({updateUserError});
+      return res.status(400).json({message: updateUserError.message});
+    }
+  },
 };

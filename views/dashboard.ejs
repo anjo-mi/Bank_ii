@@ -18,7 +18,7 @@
                 <li class="resource-li block opacity-100 transition-opacity duration-300 ease-out h-fit mb-2 relative">
                   <a href="<%= resource %>" target="_blank" class="block m-auto truncate w-9/10 px-4 py-2 text-xs md:text-lg text-left rtl:text-right border-1 border-blue-200 cursor-pointer border-gray-600 bg-indigo-500 hover:bg-green-600 hover:text-white focus:ring-gray-500 focus:text-white rounded-xl"><%= resource %>
                   </a>
-                  <button type="button" id="<%= resource %>" class="delete-btn h-5/6 inline p-1 rounded-full border-1 border-black hover:border-white hover:pointer bg-red-700 hover:bg-red-900 active:bg-red-400 absolute right-1 top-1 z-10">
+                  <button type="button" id="<%= resource %>" class="delete-btn h-5/6 inline p-1 rounded-full border-1 border-black hover:border-white hover:pointer bg-red-700 hover:bg-red-900 active:bg-red-400 absolute right-1 top-1 z-10 hover:cursor-pointer">
                     <img class="max-h-full" src="/images/trash.svg" alt="Delete">
                   </button>
                 </li>
@@ -103,5 +103,29 @@
     </dl>
   </div>
 </div>
+
+<button id="settings-toggle" class="settings fixed top-2 right-3 z-50 p-2 text-sm text-gray-500 rounded-lg bg-gray-700 hover:bg-gray-400 focus:ring-2 focus:ring-blue-200 hover:cursor-pointer">
+   <span class="sr-only">Settings</span>
+   <img class="settings w-6 h-6" src="/images/settings.svg" alt="settings">
+</button>
+
+<section id="settings-menu" class="settings-menu settings hidden opacity-0 transition-opacity duration-300 ease-in-out h-fit w-2/5 md:w-1/6 fixed top-15 right-2 z-50 p-2 text-sm text-white bg-gray-600 border-1 border-white rounded-xl">
+  <form id="user-settings" class="settings" action="/updateUser" method="PATCH">
+    <h5 class="settings text-sm bg-teal-900 w-fit py-1 px-4 text-center rounded-full"><%= user.username %></h5>
+    <p class="settings text-sm bg-blue-900 w-fit mt-2 py-1 px-4 text-center rounded-full">Career Level:</p>
+    <ul>
+      <li class="settings block my-2 ml-5 flex gap-3"><label class="settings" for="early"><input class="settings" id="early" name="status" type="radio" value="early" required>Early</label></li>
+      <li class="settings block my-2 ml-5 flex gap-3"><label class="settings" for="early-mid"><input class="settings" id="early-mid" name="status" type="radio" value="early-to-mid">Early-Mid</label></li>
+      <li class="settings block my-2 ml-5 flex gap-3"><label class="settings" for="mid"><input class="settings" id="mid" name="status" type="radio" value="mid">Mid-Level</label></li>
+      <li class="settings block my-2 ml-5 flex gap-3"><label class="settings" for="mid-senior"><input class="settings" id="mid-senior" name="status" type="radio" value="mid-to-senior">Mid-Senior</label></li>
+      <li class="settings block my-2 ml-5 flex gap-3"><label class="settings" for="senior"><input class="settings" id="senior" name="status" type="radio" value="senior">Senior Level</label></li>
+    </ul>
+    <p class="settings text-sm bg-blue-900 w-fit mt-2 py-1 px-4 text-center rounded-full">Position Title:</p>
+    <div class="settings block my-2 ml-3 flex gap-3">
+      <input id="title" name="title" type="text" placeholder="<%= user.info?.title %>" class="settings w-full mb-8 px-2 py-1 bg-gray-900 text-white border-1 border-blue-400 rounded-xl" minlength="3" maxlength="30" required>
+    </div>
+    <button type="submit" class="settings w-fit absolute bottom-2 right-2 px-3 py-1 bg-green-400 hover:bg-green-700 active:bg-green-900 rounded-2xl">Submit Changes</button>
+  </form>
+</section>
 
 <script src="/dashboard.js"></script>
