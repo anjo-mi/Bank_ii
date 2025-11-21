@@ -33,7 +33,7 @@
           <input type="hidden" name="answer" class="answer" value="<%= a %>">
           <input type="hidden" name="content" class="content" value="<%= q.content %>">
           <input type="hidden" name="questionId" class="questionId" value="<%= q._id %>">
-          <button type="submit" class="m-auto mb-2 w-20/100 bg-green-500 hover:bg-green-700 text-white p-1 border-1 border-fuchsia-500 rounded-sm">Save</button>
+          <button type="submit" class="save-answer m-auto mb-2 w-20/100 bg-green-500 hover:bg-green-700 text-white p-1 border-1 border-fuchsia-500 rounded-sm">Save</button>
         </form>
         <textarea class="m-auto text-center text-sm md:text-lg items-center min-h-60 w-full py-1 md:py-3 px-2 md:px-4 border-1 border-violet-800 bg-zinc-900 rounded-lg"><%= a %></textarea>
       </div>
@@ -52,7 +52,7 @@
           <input type="hidden" name="content" class="content" value="<%= q.content %>">
           <input type="hidden" name="questionId" class="questionId" value="<%= q._id %>">
           <input type="hidden" name="feedback" class="feedback" value="<%= feedback[i] %>">
-          <button type="submit" class="m-auto mb-2 w-20/100 bg-green-500 hover:bg-green-700 text-white p-1 border-1 border-fuchsia-500 rounded-sm">Save</button>
+          <button type="submit" class="save-response m-auto mb-2 w-20/100 bg-green-500 hover:bg-green-700 text-white p-1 border-1 border-fuchsia-500 rounded-sm">Save</button>
         </form>
 
         <div class="m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 border-1 border-violet-800 bg-zinc-900 rounded-lg">
@@ -65,8 +65,8 @@
           <li class="flex items-center text-center place-content-around w-full pl-2 pr-2/10 font-medium text-left rtl:text-right border-1 border-blue-200 cursor-pointer border-gray-600 bg-indigo-500 hover:bg-green-600 hover:text-white focus:ring-gray-500 focus:text-white rounded-xl">
             <div class="practice-date w-full h-full min-w-8/10 text-center m-auto border-slate-900"><a href="<%= resource %>" target="_blank" class="block w-full h-full"><%= resource %>></a></div>
             <form action="/saveResource" method="POST" class="save-resource">
-              <input type="hidden" name="resource" class="resource" value="<%= resource %>">
-              <button class="m-auto w-fit bg-green-500 hover:bg-green-700 text-white py-2 px-1 border-1 border-fuchsia-500 rounded-full">Save</button>
+              <input type="hidden" name="resource" class="resource save-resource" value="<%= resource %>">
+              <button class="save-resource m-auto w-fit bg-green-500 hover:bg-green-700 text-white py-2 px-1 border-1 border-fuchsia-500 rounded-full">Save</button>
             </form>
           </li>
           <% } %>

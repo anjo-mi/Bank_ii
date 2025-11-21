@@ -180,3 +180,17 @@ document.addEventListener('submit', async (e) => {
     else handleBad(data.message);
   }
 })
+
+document.addEventListener('click', (e) => {
+  if (!e.target.classList.contains('save-response') 
+        && !e.target.classList.contains('save-answer')
+        && !e.target.classList.contains('save-resource')
+  ){
+    successBox.style.opacity = 0;
+    errorBox.style.opacity = 0;
+    setTimeout(() => {
+      successBox.style.display = 'none';
+      errorBox.style.display = 'none';
+    },300)
+  }
+})

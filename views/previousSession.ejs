@@ -33,7 +33,7 @@
           <input type="hidden" name="content" class="content" value="<%= qs[i].content %>">
           <input type="hidden" name="questionId" class="questionId" value="<%= qs[i]._id %>">
           <input type="hidden" name="isDefault" class="isDefault" value="<%= qs[i].isDefault %>">
-          <button type="submit" class="m-auto mb-2 w-20/100 bg-green-500 hover:bg-green-700 active:bg-green-900 text-white p-1 border-1 border-fuchsia-500 rounded-sm">Save</button>
+          <button type="submit" class="save-answer m-auto mb-2 w-20/100 bg-green-500 hover:bg-green-700 active:bg-green-900 text-white p-1 border-1 border-fuchsia-500 rounded-sm">Save</button>
         </form>
         <textarea class="m-auto text-center text-sm md:text-lg items-center min-h-60 w-full py-1 md:py-3 px-2 md:px-4 border-1 border-violet-800 bg-zinc-900 rounded-lg"><%= as[i] %></textarea>
       </div>
@@ -45,7 +45,7 @@
           <input type="hidden" name="content" class="content" value="<%= qs[i].content %>">
           <input type="hidden" name="questionId" class="questionId" value="<%= qs[i]._id %>">
           <input type="hidden" name="feedback" class="feedback" value="<%= feedback[i] %>">
-          <button type="submit" class="m-auto mb-2 w-20/100 bg-green-500 hover:bg-green-700 active:bg-green-900 text-white p-1 border-1 border-fuchsia-500 rounded-sm">Save</button>
+          <button type="submit" class="save-response m-auto mb-2 w-20/100 bg-green-500 hover:bg-green-700 active:bg-green-900 text-white p-1 border-1 border-fuchsia-500 rounded-sm">Save</button>
         </form>
         <div class="feedback m-auto text-center text-xs md:text-lg items-center min-h-50 py-1 md:py-3 px-2 md:px-4 border-1 border-violet-800 bg-zinc-900 rounded-lg"><%- feedback[i] %></div>
       </div>
@@ -55,8 +55,8 @@
           <li class="flex items-center gap-4 text-center place-content-between w-full px-4 py-2 border-1 border-blue-200 cursor-pointer border-gray-600 bg-indigo-500 hover:bg-green-600 hover:text-white focus:ring-gray-500 focus:text-white rounded-xl">
             <a href="<%= resource %>" target="_blank" class="practice-date block m-auto break-all text-center text-xs md:text-base w-7/10 h-full flex-4"><%= resource %>></a>
             <form action="/saveResource" method="POST" class="save-resource w-3/10 block m-auto flex-1">
-              <input type="hidden" name="resource" class="resource" value="<%= resource %>">
-              <button class="m-auto w-1fit bg-green-500 hover:bg-green-700 text-white p-2 border-1 border-fuchsia-500 rounded-full">Save</button>
+              <input type="hidden" name="resource" class="resource save-resource" value="<%= resource %>">
+              <button class="save-resource m-auto w-1fit bg-green-500 hover:bg-green-700 text-white p-2 border-1 border-fuchsia-500 rounded-full">Save</button>
             </form>
           </li>
           <% } %>
