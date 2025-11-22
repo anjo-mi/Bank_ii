@@ -120,7 +120,7 @@ export default {
       let defaultQuestions = await Question.find({isDefault: true});
       let userQuestions;
       if (req.user) {
-        userQuestions = await Question.find({userId: req.userId});
+        userQuestions = await Question.find({userId: req.user.id});
         const ignoredIds = new Set(userQuestions.map(q => q.parentId).filter(Boolean).map(String));
         defaultQuestions = defaultQuestions.filter(q => !ignoredIds.has(q._id.toString()));
       }
@@ -136,7 +136,7 @@ export default {
       matchAll = matchAll ? Boolean(+matchAll) : false;
       categori = Array.isArray(categori) ? categori : [categori];
       categori = new Set(categori.filter(Boolean));
-      search = search ? search.trim().split(' ').map(word => word.toLowerCase()) : [];
+      search = search ? search.trim().split(' ').map(word => word.trim().toLowerCase()) : [];
 
       let questions;
       if (matchAll){
