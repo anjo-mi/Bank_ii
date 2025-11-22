@@ -8,13 +8,13 @@ dotenv.config();
 export const ai = new GoogleGenAI({apiKey: process.env.GEMINI_KEY});
 
 export default {
-  getAnswerFeedback: async (question,answer,current = 0,sessionId) => {
+  getAnswerFeedback: async (question,answer,current = 0,sessionId, level,title) => {
     try{
       // TODO at a later date:
       //  - this is prolly where a rate limiter check will be initiated, and the error response will be handled below |||||ctrl F: rate-limiter||||||
       const response = await ai.models.generateContent({
         model: 'gemini-2.5-flash',
-        contents: `Please, treat this as though you are mentoring someone who is typically an entry level / junior / early career developer. When in an interview they were given the question "${question.content}." The person you're mentoring gave the answer, "${answer}." Remembering to stay positive with critiques, suggest those improvements.
+        contents: `Please, treat this as though you are mentoring someone who is typically an ${level || 'early'} level / career ${title || 'developer'}. When in an interview they were given the question "${question.content}." The person you're mentoring gave the answer, "${answer}." Remembering to stay positive with critiques, suggest those improvements.
         a.) When a question is fact-based, operate under the pretense that a user should hit three main points:
          Remember that these three points need not always be separate (ie. what suffices for 1a, may also suffice for 2a and/or 3a, etc.).
          1a. Display an understanding of the concept via a brief explanation.

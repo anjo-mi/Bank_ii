@@ -290,7 +290,10 @@ export default {
       // question = JSON.parse(question)
       const sessionId = singleQuestionSession._id;
       // const questions = singleQuestionSession.questions;
-      agent.getAnswerFeedback(question, answer, 0, sessionId);
+      const user = await User.findById(req.user.id);
+      const level = user?.info?.level;
+      const title = user?.info?.title;
+      agent.getAnswerFeedback(question, answer, 0, sessionId, level,title);
       req.session.practiceId = {sessionId};
       await req.session.save();
       return res.status(201).json({sessionId});

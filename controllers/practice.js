@@ -115,7 +115,10 @@ export default {
           {$set: {[`answers.${current}`]: answer || ''}},
           {new: true},
         )
-        agent.getAnswerFeedback(questions[current], answer, current, sessionId);
+        const user = await User.findById(req.user.id);
+        const level = user?.info?.level;
+        const title = user?.info?.title;
+        agent.getAnswerFeedback(questions[current], answer, current, sessionId, level,title);
       }else updatedSession = await PracticeSession.findById(sessionId);
       // increment current index (passed from /startPractice, tracked to be less than questions length)
       current = +current + 1;
