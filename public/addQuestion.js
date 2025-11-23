@@ -14,6 +14,12 @@ const showError = (message) => {
   errorMessage.style.display = 'block';
 }
 
+const showSuccess = (message) => {
+  const successMessage = document.getElementById('success-message');
+  successMessage.textContent = message;
+  successMessage.style.display = 'block';
+}
+
 newCategoryBox.addEventListener('keydown', (e) => {
   if (e.key === 'Enter'){
     e.preventDefault();
@@ -147,7 +153,7 @@ newQuestionForm.addEventListener('submit', async (e) => {
       // if were good, go to practice (login occurs in registration method)
       if (response.ok){
         // window.location.href = '/questions/form'
-        showError(data.message);
+        showSuccess(data.message);
         document.getElementById('question').value = '';
         document.getElementById('answer').value = '';
         document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
@@ -221,7 +227,7 @@ newQuestionForm.addEventListener('keydown', async (e) => {
       // if were good, go to practice (login occurs in registration method)
       if (response.ok){
         // window.location.href = '/questions/form'
-        showError(data.message);
+        showSuccess(data.message);
         document.getElementById('question').value = '';
         document.getElementById('answer').value = '';
         document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
