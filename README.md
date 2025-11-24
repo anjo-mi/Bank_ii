@@ -22,6 +22,16 @@
 - User access and Session persistence
 - Protected Routes ensuring authorization
 - Rate Limiting for added Security
+- AI Feedback for Members
+   - Works for providing feedback, follow-ups and resources
+   - User Settings
+      * Choose Your career-level
+      * Choose Your Profession
+   - Single Question and Practice Mode
+   - Stored in Sessions
+   - Can be Saved with Question
+   - Answer Storage
+   - Resource Storage
 
 ### Tech Stack
 - Node.js, Express, MongoDB, EJS, Tailwind
@@ -31,6 +41,8 @@
    * Platformatic: Flame
 - Authentication:
    * Passport.js
+- Artificial Intelligence
+   * Google GenAI 2.5
 
 # Setup
 - ```npm install```
@@ -76,7 +88,7 @@ User Features:
 
 ## Ensuing Updates
 - Voice-to-Text
-- AI Feedback and Follow-Up Questions
+- API Rate Limiting
 
 ## Possible Updates
 - Communications / Answer Posting Pages

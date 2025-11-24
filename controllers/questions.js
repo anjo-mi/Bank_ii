@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import models from "../models/index.js";
-const { User, Category, Question } = models;
+const { User, Category, Question, PracticeSession } = models;
+import agent from "../services/aiService.js";
 
 export default {
 
@@ -119,7 +120,7 @@ export default {
       let defaultQuestions = await Question.find({isDefault: true});
       let userQuestions;
       if (req.user) {
-        userQuestions = await Question.find({userId: req.userId});
+        userQuestions = await Question.find({userId: req.user.id});
         const ignoredIds = new Set(userQuestions.map(q => q.parentId).filter(Boolean).map(String));
         defaultQuestions = defaultQuestions.filter(q => !ignoredIds.has(q._id.toString()));
       }
@@ -133,12 +134,9 @@ export default {
       }
 
       matchAll = matchAll ? Boolean(+matchAll) : false;
-      console.log({categori})
       categori = Array.isArray(categori) ? categori : [categori];
-      console.log({categori})
       categori = new Set(categori.filter(Boolean));
-      console.log({categori})
-      search = search ? search.trim().split(' ').map(word => word.toLowerCase()) : [];
+      search = search ? search.trim().split(' ').map(word => word.trim().toLowerCase()) : [];
 
       let questions;
       if (matchAll){
@@ -280,6 +278,31 @@ export default {
     }
   },
 
+  answerQuestion: async (req,res) => {
+    try{
+      const body = req.body;
+      let {answer,questionId,question} = req.body;
+      const singleQuestionSession = await PracticeSession.create({
+        userId: req.user.id,
+        questions: [questionId],
+        answers: [answer],
+      });
+      // question = JSON.parse(question)
+      const sessionId = singleQuestionSession._id;
+      // const questions = singleQuestionSession.questions;
+      const user = await User.findById(req.user.id);
+      const level = user?.info?.level;
+      const title = user?.info?.title;
+      agent.getAnswerFeedback(question, answer, 0, sessionId, level,title);
+      req.session.practiceId = {sessionId};
+      await req.session.save();
+      return res.status(201).json({sessionId});
+    }catch(answerQuestionError){
+      console.log({answerQuestionError});
+      return res.status(400).json({message: answerQuestionError.message});
+    }
+  },
+
   updateQuestion: async(req,res) => {
     try{
       const body = req.body;
@@ -309,7 +332,7 @@ export default {
         }
       }
       const quest = await Question.findById(questionId);
-      if (quest.userId && quest.userId.toString() !== req.user.id) return res.status(403).json({message: "this question isnt yours to change"});
+      if (quest.userId && quest.userId.toString() !== req.user.id) return res.status(403).json({message: "congratulations, you worked some magic and got access to someone elses question, but you cant change it that easily"});
 
       if (!quest.isDefault){
         const updatedQuestion = await Question.findByIdAndUpdate(
@@ -323,14 +346,30 @@ export default {
           {new:true}
         );
       }else{
-        const noLongerDefaultQuestion = await Question.create({
-          userId: req.user.id,
-          content:question,
-          categories,
-          isDefault:false,
-          answer,
-          parentId: quest._id,
-        })
+        const reUpdatedDefault = await Question.findOneAndUpdate(
+          {
+            userId: req.user.id,
+            parentId: questionId,
+          },
+          {$set:{
+            content: question,
+            userId: req.user.id,
+            categories,
+            answer: answer || null,
+          }},
+          {new:true}
+        )
+        let noLongerDefaultQuestion;
+        if (!reUpdatedDefault){
+          noLongerDefaultQuestion = await Question.create({
+            userId: req.user.id,
+            content: question,
+            categories,
+            answer,
+            isDefault: false,
+            parentId: quest._id,
+          })
+        }
       }
       return res.status(201).json({message: 'question updated!'})
     }catch(updateQuestionError){
@@ -347,13 +386,11 @@ export default {
         questionId,
         isDefault,
       } = req.body;
-      console.log({answer, content,questionId})
       const q = await Question.findById(questionId);
       if (!q.isDefault){
         const updatedQuestion = await Question.findByIdAndUpdate(
           questionId , {answer} , {new:true}
         );
-        console.log({updatedQuestion})
         return res.status(201).json({message: `your answer to ${updatedQuestion.content} has been updated`});
       }else{
         const reUpdatedDefault = await Question.findOneAndUpdate(
@@ -375,8 +412,50 @@ export default {
             parentId: q._id,
           })
         }
-        console.log({reUpdatedDefault,noLongerDefaultQuestion})
         return res.status(201).json({message: `your answer to ${reUpdatedDefault ? reUpdatedDefault.content : noLongerDefaultQuestion.content} has been updated`});
+      }
+    }catch(saveAnswerError){
+      console.log(saveAnswerError);
+      return res.status(400).json({message: saveAnswerError.message});
+    }
+  },
+
+  saveFeedback: async(req,res) => {
+    try{
+      const {
+        answer,
+        content,
+        questionId,
+        feedback,
+      } = req.body;
+      const q = await Question.findById(questionId);
+      if (!q.isDefault){
+        const updatedQuestion = await Question.findByIdAndUpdate(
+          questionId , {feedback} , {new:true}
+        );
+        return res.status(201).json({message: `your feedback for "${updatedQuestion.content}" has been updated`});
+      }else{
+        const reUpdatedDefault = await Question.findOneAndUpdate(
+          {
+            userId: req.user.id,
+            parentId: questionId,
+          },
+          {feedback},
+          {new:true}
+        )
+        let noLongerDefaultQuestion;
+        if (!reUpdatedDefault){
+          noLongerDefaultQuestion = await Question.create({
+            userId: req.user.id,
+            content,
+            answer,
+            feedback,
+            categories: q.categories,
+            isDefault: false,
+            parentId: q._id,
+          })
+        }
+        return res.status(201).json({message: `your feedback for "${reUpdatedDefault ? reUpdatedDefault.content : noLongerDefaultQuestion.content}" has been updated`});
       }
     }catch(saveAnswerError){
       console.log(saveAnswerError);

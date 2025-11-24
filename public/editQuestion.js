@@ -4,6 +4,10 @@ const deleteBtn = document.getElementById('delete-btn');
 const updateQuestionForm = document.getElementById('edit-question-form');
 const questionId = document.getElementById('questionId').value;
 
+const viewFeedbackBtn = document.getElementById('view-fb');
+const dismissFeedbackBtn = document.getElementById('dismiss-fb');
+const prevFeedbackBox = document.getElementById('saved-feedback');
+
 const categories = new Set(Array.from(document.querySelectorAll('input[name="categori"]')).map(cat => cat.value));
 
 const possNewCategories = document.getElementById('possible-new-categories');
@@ -12,6 +16,12 @@ const showError = (message) => {
   const errorMessage = document.getElementById('error-message');
   errorMessage.textContent = message;
   errorMessage.style.display = 'block';
+}
+
+const showSuccess = (message) => {
+  const successMessage = document.getElementById('success-message');
+  successMessage.textContent = message;
+  successMessage.style.display = 'block';
 }
 
 newCategoryBox.addEventListener('keydown', (e) => {
@@ -147,9 +157,9 @@ updateQuestionForm.addEventListener('submit', async (e) => {
 
       // if were good, go to practice (login occurs in registration method)
       if (response.ok){
-        showError(data.message);
+        showSuccess(data.message);
         
-        setTimeout(() => {window.location.href = '/questions/edit/select'}, 600)
+        setTimeout(() => {window.location.href = '/questions/edit/select'}, 1500)
         
       }
       // register sends data.message, login sends data.error
@@ -221,9 +231,9 @@ updateQuestionForm.addEventListener('keydown', async (e) => {
 
       // if were good, go to practice (login occurs in registration method)
       if (response.ok){
-        showError(data.message);
+        showSuccess(data.message);
         
-        setTimeout(() => {window.location.href = '/questions/edit/select'}, 600)
+        setTimeout(() => {window.location.href = '/questions/edit/select'}, 1500)
       }
       // register sends data.message, login sends data.error
       else showError(data.message || data.error);
@@ -249,7 +259,6 @@ deleteBtn.addEventListener('click', async (e) => {
     method: 'DELETE'
   })
   const data = await response.json();
-  console.log({data})
     
   if (response.ok){
       // fadeout the question, wait for transition, switch display to none
@@ -270,5 +279,33 @@ deleteBtn.addEventListener('click', async (e) => {
 
   }
   // otherwise 
-  // else showError(data.message);
+  else showError(data.message);
+})
+
+viewFeedbackBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  prevFeedbackBox.style.display = 'flex';
+  setTimeout(() => prevFeedbackBox.style.opacity = 100,0);
+  prevFeedbackBox.scrollIntoView({ 
+    behavior: 'smooth', 
+    block: 'center' 
+  });
+})
+
+dismissFeedbackBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  prevFeedbackBox.style.opacity = 0;
+  setTimeout(() => {
+    prevFeedbackBox.style.display = 'none';
+  },300)
+})
+
+document.addEventListener('click', (e) => {
+  if (!e.target.classList.contains('saved-feedback') 
+    && !e.target.classList.contains('view-fb')){
+    prevFeedbackBox.style.opacity = 0;
+  setTimeout(() => {
+    prevFeedbackBox.style.display = 'none';
+  },300)
+  }
 })

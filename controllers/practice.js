@@ -1,6 +1,10 @@
+import agent from "../services/aiService.js";
 import models from "../models/index.js";
-import practiceSession from "../models/practiceSession.js";
 const { User, Category, Question, PracticeSession } = models;
+
+import {marked} from 'marked';
+import createDOMPurify from 'dompurify';
+import {JSDOM} from 'jsdom';
 
 export default {
   // load practice setup page with all [pre-loaded] categories
@@ -111,8 +115,11 @@ export default {
           {$set: {[`answers.${current}`]: answer || ''}},
           {new: true},
         )
+        const user = await User.findById(req.user.id);
+        const level = user?.info?.level;
+        const title = user?.info?.title;
+        agent.getAnswerFeedback(questions[current], answer, current, sessionId, level,title);
       }else updatedSession = await PracticeSession.findById(sessionId);
-      console.log({session,updatedSession});
       // increment current index (passed from /startPractice, tracked to be less than questions length)
       current = +current + 1;
 
@@ -120,19 +127,8 @@ export default {
       // if all questions are answered, make a results object that binds questions to their answers
         // render the results page
       // otherwise call the current page with new data
-      if (current === questions.length) {
-        const results = {};
-        for (let i = 0 ; i < questions.length ; i++){
-          results['Question ' + (i+1)] = {
-            question: questions[i].content,
-            id: questions[i]._id,
-            categories: questions[i].categories,
-            answer: answers[i],
-          }
-        }
+      if (current === questions.length) res.render('loadResults', {questions,sessionId});
 
-        res.render('practiceCompleted', {questions,results,updatedSession});
-      }
       else res.render('practiceQuestion', {questions,current,answers,sessionId: sessionId ? sessionId.toString() : null});
     }catch(showNextError){
       console.log({showNextError});
@@ -151,4 +147,50 @@ export default {
       return res.status(400).json({message: getPracticeSessionsError.message});
     }
   },
+
+  checkSession: async (req,res) => {
+    try{
+      const sessionId = req.body.sessionId;
+      const updatedSession = await PracticeSession.findById(sessionId).populate('questions');
+      
+      if (updatedSession.questions.length !== updatedSession.aiResponse.questionResponse?.reduce(a => a + 1, 0)) return res.status(206).json({message:'still cooking'});
+
+      return res.status(201).json({sessionId});
+    }catch(checkSessionError){
+      console.log({checkSessionError});
+      return res.status(400).json({message: checkSessionError.message});
+    }
+  },
+
+  getResults: async (req,res) => {
+    try{
+      const sessionId = req.params.id;
+      const updatedSession = await PracticeSession.findById(sessionId).populate('questions');
+      
+      if (updatedSession.questions.length !== updatedSession.aiResponse.questionResponse?.reduce(a => a + 1 ,0)) return res.status(500).json({message: 'the ai didnt catch up, were sorry'});
+
+      const questions = updatedSession.questions;
+      const feedback = updatedSession.aiResponse.questionResponse.map(res => {
+        const window = new JSDOM('').window;
+        const pure = createDOMPurify(window);
+        const purified = pure.sanitize(marked.parse(res.feedback, {breaks:true}));
+        return purified.replaceAll('\n', '<br>');
+      })
+      res.render('practiceCompleted', {questions,updatedSession,feedback})
+    }catch(getResultsError){
+      console.log({getResultsError});
+      return res.status(400).json({message: getResultsError.message});
+    }
+  },
+
+  getLoadResults: async(req,res) => {
+    try{
+      const {sessionId} = req.session.practiceId;
+      delete req.session.practiceId;
+      res.render('loadResults', {sessionId})
+    }catch(getLoadResultsError){
+      console.log({getLoadResultsError});
+      return res.status(400).json({message: getLoadResultsError.message});
+    }
+  }
 };

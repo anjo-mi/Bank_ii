@@ -41,6 +41,14 @@ const userSchema = new mongoose.Schema({
     type: Object,
     default: {},
   },
+
+  info: {
+    type: {
+      title: String,
+      level: String,
+    },
+    default: {},
+  },
 },
 {
   // add a compare method to be called with passports (Local Strat) login attempts

@@ -1,0 +1,42 @@
+const waitText = document.getElementById('wait-text');
+document.addEventListener('DOMContentLoaded', async () => {
+  const sessionId = document.getElementById('sessionId').value;
+  let count = 0;
+  
+  const checkInterval = setInterval(async () => {
+    try {
+      const response = await fetch('/practice/checkSession', {
+        method: "POST",
+        headers: {"Content-Type" : "application/json"},
+        body:JSON.stringify({sessionId}),
+      });
+      if (response.ok && response.status !== 206){
+        const data = await response.json();
+        clearInterval(checkInterval);
+        window.location.assign(`/practice/${data.sessionId}`);
+      }else {
+        count++;
+        waitText.textContent = count >= 15
+                                ? `this has never happened before`
+                              :count >= 12
+                                ? `ok tf ?!?!?!`
+                              :count >=  9
+                                ? `i swear it's me and not you`
+                              :count >=  6
+                                ? `don't read into this`
+                              :count >=  3
+                                ? `still cooking...`
+                                : waitText.textContent;
+        if (count >= 18){
+          waitText.textContent = 'sorry, there may have been an error, well look into this. theres a good chance you can still access this feedback from the previousSessions page or your dashboard';
+          clearInterval(checkInterval);
+          setTimeout(() => window.location.replace('/dashboard'),3000);
+        }
+      }
+    }catch(error){
+      console.log({error});
+      count++;
+      if (count >= 15) clearInterval(checkInterval);
+    }
+  },2000)
+})
