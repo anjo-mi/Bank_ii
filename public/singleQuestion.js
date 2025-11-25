@@ -8,6 +8,9 @@ const prevFeedbackBox = document.getElementById('saved-feedback');
 
 const answerForm = document.getElementById('answer-form');
 
+const recordBtn = document.getElementById('record');
+const stopBtn = document.getElementById('stop');
+
 
 viewSavedBtn.addEventListener('click', (e) => {
   e.preventDefault();
@@ -87,4 +90,56 @@ answerForm.addEventListener('submit', async (e) => {
       // handleBad(response.mesage);
     }
   }
+})
+
+class Recorder{
+  constructor(){
+    this.recorder = null;
+    this.chunks = [];
+    this.stream = null;
+  }
+
+  async create(){
+    this.stream = await navigator.mediaDevices.getUserMedia({audio:true});
+    this.recorder = new MediaRecorder(this.stream);
+    this.recorder.ondataavailable = (e) => this.chunks.push(e.data);
+    return this;
+  }
+
+  start(){
+    this.recorder.start()
+  };
+
+  pause(){
+    this.recorder.pause()
+  };
+
+  resume(){
+    this.recorder.resume()
+  };
+
+  stop(){
+    return new Promise((resolve) => {
+      this.recorder.onstop = (e) => {
+        const blob = new Blob(this.chunks, {type: 'audio/webm'});
+        this.chunks = [];
+        this.stream.getTracks().forEach(tr => tr.stop());
+        resolve(blob)
+      }
+      this.recorder.stop();
+    });
+  };
+}
+
+recordBtn.addEventListener('click', async (e) => {
+  const recorder = await new Recorder().create();
+  recorder.start();
+  stopBtn.addEventListener('click', async (e) => {
+    const recording = await recorder.stop();
+    const recordedUrl = URL.createObjectURL(recording);
+    const audio = document.getElementById('recording');
+    audio.src = recordedUrl;
+    audio.controls = true;
+  });
+
 })
