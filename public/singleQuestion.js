@@ -150,7 +150,7 @@ recordBtn.addEventListener('click', async (e) => {
       if (res[i].isFinal) transcript += res[i][0].transcript;
     }
     const answerBox = document.getElementById('answer');
-    answerBox.textContent += transcript + ' ';
+    answerBox.textContent += transcript ? transcript + ' ' : '';
   }
 
   recorder.start();
