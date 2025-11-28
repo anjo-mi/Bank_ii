@@ -70,6 +70,7 @@ export default {
         const purified = pure.sanitize(marked.parse(res.feedback, {breaks:true}));
         console.log({purified})
         return purified.replaceAll('\n', '<br>')
+                       .replaceAll('\\n', '<br>')
                        .replaceAll('&lt;', '<br>')
                        .replaceAll('&nbsp;', '<br>');
       }) : [];
