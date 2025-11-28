@@ -174,7 +174,10 @@ export default {
         const window = new JSDOM('').window;
         const pure = createDOMPurify(window);
         const purified = pure.sanitize(marked.parse(res.feedback, {breaks:true}));
-        return purified.replaceAll('\n', '<br>');
+        console.log({purified})
+        return purified.replaceAll('\n', '<br>')
+                       .replaceAll('&lt;', '<br>')
+                       .replaceAll('&nbsp;', '<br>');
       })
       res.render('practiceCompleted', {questions,updatedSession,feedback})
     }catch(getResultsError){
