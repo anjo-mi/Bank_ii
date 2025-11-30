@@ -99,6 +99,8 @@ if (navigator.mediaDevices?.getUserMedia){
       this.recorder = null;
       this.chunks = [];
       this.stream = null;
+      this.transcriber = null;
+      this.time = 0;
     }
   
     async create(){
@@ -110,6 +112,7 @@ if (navigator.mediaDevices?.getUserMedia){
   
     start(){
       this.recorder.start()
+      this.count();
     };
   
     pause(){
@@ -118,6 +121,15 @@ if (navigator.mediaDevices?.getUserMedia){
   
     resume(){
       this.recorder.resume()
+    };
+
+    count(){
+      setTimeout(() => {
+        this.time++;
+        console.log(this.time);
+        if (this.time > 60) this.stop();
+        else this.count();
+      },1000)
     };
   
     stop(){
@@ -129,6 +141,7 @@ if (navigator.mediaDevices?.getUserMedia){
           resolve(blob)
         }
         this.recorder.stop();
+        this.transcriber?.stop()
       });
     };
   }
@@ -137,7 +150,8 @@ if (navigator.mediaDevices?.getUserMedia){
   recordBtn.addEventListener('click', async (e) => {
     const recorder = await new Recorder().create();
 
-    const transcriber = new SpeechRecognition();
+    recorder.transcriber = new SpeechRecognition();
+    const transcriber = recorder.transcriber;
     transcriber.continuous = true;
     transcriber.interimResults = true;
     transcriber.lang = 'en-US';
