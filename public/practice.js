@@ -54,7 +54,7 @@ if (navigator.mediaDevices?.getUserMedia){
     count(){
       setTimeout(() => {
         this.time++;
-        console.log(this.time);
+        console.log(60 - this.time);
         if (this.time > 60) this.stop();
         else this.count();
       },1000)
@@ -83,12 +83,8 @@ if (navigator.mediaDevices?.getUserMedia){
     transcriber.interimResults = true;
     transcriber.lang = 'en-US';
     transcriber.onresult = (e) => {
-      console.log({e});
       let transcript = '';
       const res = e.results;
-
-
-      console.log({transcript})
 
       for (let i = e.resultIndex ; i < res.length ; i++){
         if (res[i].isFinal) transcript += res[i][0].transcript;
