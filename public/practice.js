@@ -16,10 +16,22 @@ answerBox.addEventListener('keydown', (e) =>{
   if (e.key === 'Enter'){
     if (!e.shiftKey){
       e.preventDefault();
-      answerForm.submit();
+      console.log('requesting submit')
+      answerForm.requestSubmit();
     }
   }
 })
+
+answerForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const answer = document.getElementById('answer').value;
+
+  if (answer.trim().split(' ').length > 300){
+    console.log('keep words to a 300 maximum');
+    return;
+  }else answerForm.submit();
+});
 
 if (navigator.mediaDevices?.getUserMedia){
   class Recorder{

@@ -177,6 +177,7 @@ export default {
         console.log({purified})
         return purified.replaceAll('\n', '<br>')
                        .replaceAll('\\n', '<br>')
+                       .replaceAll('-', '<br>')
                        .replaceAll('&lt;', '<br>')
                        .replaceAll('&nbsp;', '<br>');
       })

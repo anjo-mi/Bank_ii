@@ -73,6 +73,11 @@ answerForm.addEventListener('submit', async (e) => {
       // handleBad('lets not waste calls with blank data chief');
       return;
     }
+    if (answer.trim().split(' ').length > 300){
+      // handleBad('lets not waste calls with blank data chief');
+      console.log('interviews are conversations, not soliloquys');
+      return;
+    }
     const response = await fetch('/questions/answerQuestion', {
       method: "POST",
       headers: {"Content-Type" : "application/json"},
