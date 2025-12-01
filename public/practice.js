@@ -64,10 +64,18 @@ if (navigator.mediaDevices?.getUserMedia){
     };
 
     count(){
-      setTimeout(() => {
+      setTimeout(async () => {
+        if (this.recorder.state !== 'recording') return;
         this.time++;
         console.log(60 - this.time);
-        if (this.time > 60) this.stop();
+        if (this.time > 60){
+          const recording = await this.stop();
+          this.transcriber.stop();
+          const recordedUrl = URL.createObjectURL(recording);
+          const audio = document.getElementById('recording');
+          audio.src = recordedUrl;
+          audio.controls = true;
+        }
         else this.count();
       },1000)
     };
