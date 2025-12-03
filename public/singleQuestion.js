@@ -11,6 +11,7 @@ const answerForm = document.getElementById('answer-form');
 const recordBtn = document.getElementById('record');
 const stopBtn = document.getElementById('stop');
 const recordBox = document.getElementById('record-box');
+const audioContainer = document.getElementById('record-container');
 
 
 viewSavedBtn.addEventListener('click', (e) => {
@@ -134,6 +135,7 @@ if (navigator.mediaDevices?.getUserMedia){
         this.time++;
         console.log(60 - this.time);
         if (this.time > 6){
+          audioContainer.classList.remove('hidden');
           const recording = await this.stop();
           this.transcriber.stop();
           const recordedUrl = URL.createObjectURL(recording);
@@ -182,6 +184,7 @@ if (navigator.mediaDevices?.getUserMedia){
     recorder.start();
     transcriber.start();
     stopBtn.addEventListener('click', async (e) => {
+      audioContainer.classList.remove('hidden');
       const recording = await recorder.stop();
       transcriber.stop();
       const recordedUrl = URL.createObjectURL(recording);
@@ -189,6 +192,5 @@ if (navigator.mediaDevices?.getUserMedia){
       audio.src = recordedUrl;
       audio.controls = true;
     });
-
   })
 }else recordBox.style.display = "none";
