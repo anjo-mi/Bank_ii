@@ -11,6 +11,7 @@ const answerForm = document.getElementById('answer-form');
 const recordBtn = document.getElementById('record');
 const stopBtn = document.getElementById('stop');
 const recordBox = document.getElementById('record-box');
+const audioFile = document.getElementById('audio-file');
 const audioContainer = document.getElementById('record-container');
 
 
@@ -69,6 +70,7 @@ answerForm.addEventListener('submit', async (e) => {
     const answer = document.getElementById('answer').value;
     let question = document.getElementById('question').value;
     const questionId = document.getElementById('questionId').value;
+    const audio = audioFile?.checked ? await fetch(audioFile.value) : null;
     question = JSON.parse(question);
     if (!answer.trim().length){
       // handleBad('lets not waste calls with blank data chief');
@@ -79,15 +81,31 @@ answerForm.addEventListener('submit', async (e) => {
       console.log('interviews are conversations, not soliloquys');
       return;
     }
-    const response = await fetch('/questions/answerQuestion', {
-      method: "POST",
-      headers: {"Content-Type" : "application/json"},
-      body: JSON.stringify({
-        answer,
-        questionId,
-        question
-      })
+    const formData = new FormData();
+    const resp = audio ? await fetch(audio) : null;
+    const audioBlob = resp ? await resp.blob() : null;
+    formData.append('audio', audioBlob);
+    formData.append('answer', answer);
+    formData.append('questionId', questionId);
+    formData.append('question', JSON.stringify({question}));
+
+    const body = audio ? formData : JSON.stringify({
+      answer,
+      questionId,
+      question,
     })
+
+    console.log({body, audio})
+    const response = audio 
+      ? await fetch('/questions/answerQuestion', {
+          method: "POST",
+          body
+        })
+      : await fetch('/questions/answerQuestion', {
+          method: "POST",
+          headers: {"Content-Type" : "application/json"},
+          body
+        })
 
 
     if (response.ok){
@@ -142,6 +160,7 @@ if (navigator.mediaDevices?.getUserMedia){
           const audio = document.getElementById('recording');
           audio.src = recordedUrl;
           audio.controls = true;
+          audioFile.value = recordedUrl;
         }
         else this.count();
       },1000)
@@ -188,6 +207,7 @@ if (navigator.mediaDevices?.getUserMedia){
       const recording = await recorder.stop();
       transcriber.stop();
       const recordedUrl = URL.createObjectURL(recording);
+      audioFile.value = recordedUrl;
       const audio = document.getElementById('recording');
       audio.src = recordedUrl;
       audio.controls = true;

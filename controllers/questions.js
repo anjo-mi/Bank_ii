@@ -280,14 +280,18 @@ export default {
 
   answerQuestion: async (req,res) => {
     try{
+      const audio = req.file;
       const body = req.body;
+      console.log( "xxxxxxxxxxxxxxxxxxxxxxxxxxx", {audio,body})
       let {answer,questionId,question} = req.body;
       const singleQuestionSession = await PracticeSession.create({
         userId: req.user.id,
         questions: [questionId],
         answers: [answer],
       });
-      // question = JSON.parse(question)
+      console.log({question})
+      question = audio ? JSON.parse(question).question : question;
+      console.log({question})
       const sessionId = singleQuestionSession._id;
       // const questions = singleQuestionSession.questions;
       const user = await User.findById(req.user.id);
