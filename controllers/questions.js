@@ -3,6 +3,8 @@ import models from "../models/index.js";
 const { User, Category, Question, PracticeSession } = models;
 import agent from "../services/aiService.js";
 
+import s3client from "../controllers/aws.js";
+
 export default {
 
   getAllQuestions: async (req, res) => {
@@ -289,15 +291,22 @@ export default {
         questions: [questionId],
         answers: [answer],
       });
-      console.log({question})
+      
       question = audio ? JSON.parse(question).question : question;
-      console.log({question})
+      
       const sessionId = singleQuestionSession._id;
-      // const questions = singleQuestionSession.questions;
+      
       const user = await User.findById(req.user.id);
       const level = user?.info?.level;
       const title = user?.info?.title;
       agent.getAnswerFeedback(question, answer, 0, sessionId, level,title);
+      let audioStoreResponse;
+      if (audio){
+        const key = `${question._id}/${req.user.id}.webm`;
+        audioStoreResponse = await s3client.storeAudio({key,audio});
+        const audioUrl = await s3client.getAudio(key);
+        console.log({audioStoreResponse, audioUrl, key, audio})
+      }
       req.session.practiceId = {sessionId};
       await req.session.save();
       return res.status(201).json({sessionId});

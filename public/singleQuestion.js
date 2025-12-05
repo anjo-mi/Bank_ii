@@ -82,8 +82,7 @@ answerForm.addEventListener('submit', async (e) => {
       return;
     }
     const formData = new FormData();
-    const resp = audio ? await fetch(audio) : null;
-    const audioBlob = resp ? await resp.blob() : null;
+    const audioBlob = audio ? await audio.blob() : null;
     formData.append('audio', audioBlob);
     formData.append('answer', answer);
     formData.append('questionId', questionId);

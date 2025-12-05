@@ -41,6 +41,7 @@
     --color-sky-400: oklch(74.6% 0.16 232.661);
     --color-sky-600: oklch(58.8% 0.158 241.966);
     --color-sky-800: oklch(44.3% 0.11 240.79);
+    --color-sky-900: oklch(39.1% 0.09 240.876);
     --color-blue-100: oklch(93.2% 0.032 255.585);
     --color-blue-200: oklch(88.2% 0.059 254.128);
     --color-blue-300: oklch(80.9% 0.105 251.813);
@@ -1420,6 +1421,13 @@
     &:hover {
       @media (hover: hover) {
         background-color: var(--color-red-900);
+      }
+    }
+  }
+  .hover\:bg-sky-900 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-sky-900);
       }
     }
   }
