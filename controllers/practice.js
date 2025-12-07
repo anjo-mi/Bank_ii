@@ -86,28 +86,37 @@ export default {
   // begins being called from breifing page (/startPractice)
   showNext: async (req,res) => {
     try{
+      const audio = req.file;
+      const body = req.body;
+      console.log({audio,body});
       let {questions, current, sessionId} = req.body;
+      
+      // console.log({audio,current,body,questions})
+      
       // pages are rendered, so parse JSON
-      questions = JSON.parse(questions);
-
+      // if this is from the /startPractice page, initialize an answers array, otherwise it equals itself (parsed)
+      const answers = req.body.answers && req.body.answers.length ? JSON.parse(req.body.answers) : [];
+      console.log({answers})
+      const answer = req.body.answer;
+      questions = audio || current < 0 ? JSON.parse(questions) : questions;
+      // console.log({audio,body,questions,answer,answers})
       const session = +current < 0 ? await PracticeSession.create({
         userId: req.user.id,
         questions,
-        answers: [],
+        answers,
       }) : null;
-
+      
+      // console.log({audio,body})
       sessionId = session ? 
                     session._id : 
                   sessionId ?
                     sessionId : null;
 
-      // if this is from the /startPractice page, initialize an answers array, otherwise it equals itself (parsed)
-      const answers = req.body.answers ? JSON.parse(req.body.answers) : [];
-      const answer = req.body.answer;
 
       // to do: sprint 3: call AI enpoint here
       let updatedSession;
-      if (current >= 0 && current < questions.length){
+      // console.log({session, current, questions})
+      if (current >= 0 && current <= questions.length){
         // if this is coming form the /practiceQuestion page, take then answer field and push it to the answers array
         answers.push(answer || '');
         updatedSession = await PracticeSession.findByIdAndUpdate(
@@ -119,17 +128,35 @@ export default {
         const level = user?.info?.level;
         const title = user?.info?.title;
         agent.getAnswerFeedback(questions[current], answer, current, sessionId, level,title);
-      }else updatedSession = await PracticeSession.findById(sessionId);
+      }
+      // else updatedSession = await PracticeSession.findById(sessionId);
       // increment current index (passed from /startPractice, tracked to be less than questions length)
-      current = +current + 1;
+      current = answers.length;
+      console.log({current}, 'after length equalling -------------------------------')
 
 
       // if all questions are answered, make a results object that binds questions to their answers
         // render the results page
       // otherwise call the current page with new data
-      if (current === questions.length) res.render('loadResults', {questions,sessionId});
+      // if (current === questions.length) res.render('loadResults', {questions,sessionId});
 
-      else res.render('practiceQuestion', {questions,current,answers,sessionId: sessionId ? sessionId.toString() : null});
+      // else res.render('practiceQuestion', {questions,current,answers,sessionId: sessionId ? sessionId.toString() : null});
+      if (current === questions.length){
+        console.log({current}, 'lastquestion---------------------------')
+        req.session.practiceId = {sessionId};
+        await req.session.save();
+      }
+
+      if (!current) res.render('practiceQuestion', {questions,current,answers,sessionId: sessionId ? sessionId.toString() : null});
+
+      console.log({questions,current,answers,sessionId}, 'this gets returned')
+
+      if (current) return res.status(200).json({
+        questions,
+        current,
+        answers,
+        sessionId: sessionId ? sessionId.toString() : null
+      })
     }catch(showNextError){
       console.log({showNextError});
       return res.status(400).json({message: showNextError.message});
@@ -179,6 +206,8 @@ export default {
                        .replaceAll('\\n', '<br>')
                        .replaceAll('-', '<br>')
                        .replaceAll('&lt;', '<br>')
+                       .replaceAll('&gt;', '<br>')
+                       .replaceAll(',,,', '<br>')
                        .replaceAll('&nbsp;', '<br>');
       })
       res.render('practiceCompleted', {questions,updatedSession,feedback})

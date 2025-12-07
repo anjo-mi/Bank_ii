@@ -3,10 +3,10 @@
     <div class="w-95/100 m-auto mt-4 flex flex-col" id="answerContainer">
         <form id="answerSubmission" action="/practice/next" method="POST"
         class="flex flex-col lg:sticky lg:-top-12">
-        <input type="hidden" name="questions" value="<%= JSON.stringify(questions) %>">
-        <input type="hidden" name="sessionId" value="<%= sessionId %>">
-        <input type="hidden" name="current" value="<%= current %>">
-        <input type="hidden" name="answers" value="<%= JSON.stringify(answers) %>">
+        <input type="hidden" id="questions" name="questions" value="<%= JSON.stringify(questions) %>">
+        <input type="hidden" id="sessionId" name="sessionId" value="<%= sessionId %>">
+        <input type="hidden" id="current" name="current" value="<%= current %>">
+        <input type="hidden" id="answers" name="answers" value="<%= JSON.stringify(answers) %>">
              <div>
                 <h2 class="font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3">Question <span id="questionNumber" class="inline-block text-center p-2 border-1 bg-slate-800 text-white"><%= current + 1%></span> of <span id="totalQuestions" class="inline-block p-2 border-1 bg-slate-800 text-white"><%= questions.length%></span></h2>
                 <p class="question-content m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg text-lg md:text-xl lg:text-2xl"><%= questions[current].content%></p>
@@ -29,9 +29,9 @@
                 <div id="stop" class="w-12 h-12 p-3 bg-red-600 hover:bg-red-800 active:bg-red-400 rounded-full">
                     <img class="block" src="/images/stop.svg" alt="Stop">
                 </div>
-                <div class="w-12 h-12 p-2 bg-gray-600 hover:bg-green-800 active:bg-green-400 rounded-full">
-                    <img class="block" src="/images/play-pause.svg" alt="Play">
-                    <audio id="recording" src=""></audio>
+                <div id="record-container" class="hidden w-fit max-w-1/3 h-hit">
+                    <label for="audio-file" class="w-full px-3 border-1 border-white mb-1 py-1 bg-stone-900 hover:bg-lime-900 rounded-xl space-content-evenly"><input class="mr-5 mb-1" id="audio-file" type="checkbox" value="">Store Audio</label>
+                    <audio class="mt-2" id="recording" src=""></audio>
                 </div>
             </div>
             <textarea class="w-90/100 text-xs md:text-lg lg:text-lg order-3 h-25 mt-10 focus:mt-30 focus:h-140 lg:focus:h-80 transition-all duration-300 resize-none px-2 py-1 mx-auto mb-6 border-2 border-gray-700 outline-0 focus:outline-2 focus:outline-blue-600 focus:bg-slate-800 rounded-lg" name="answer" id="answer"></textarea>
