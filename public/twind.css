@@ -20,6 +20,8 @@
     --color-orange-700: oklch(55.3% 0.195 38.402);
     --color-orange-800: oklch(47% 0.157 37.304);
     --color-yellow-500: oklch(79.5% 0.184 86.047);
+    --color-lime-600: oklch(64.8% 0.2 131.684);
+    --color-lime-800: oklch(45.3% 0.124 130.933);
     --color-lime-900: oklch(40.5% 0.101 131.063);
     --color-green-50: oklch(98.2% 0.018 155.826);
     --color-green-300: oklch(87.1% 0.15 154.449);
@@ -549,6 +551,9 @@
   .w-1\/3 {
     width: calc(1/3 * 100%);
   }
+  .w-1\/4 {
+    width: calc(1/4 * 100%);
+  }
   .w-2\/5 {
     width: calc(2/5 * 100%);
   }
@@ -647,6 +652,9 @@
   }
   .w-full {
     width: 100%;
+  }
+  .max-w-1\/2 {
+    max-width: calc(1/2 * 100%);
   }
   .max-w-1\/3 {
     max-width: calc(1/3 * 100%);
@@ -979,6 +987,9 @@
   }
   .bg-indigo-950 {
     background-color: var(--color-indigo-950);
+  }
+  .bg-lime-800 {
+    background-color: var(--color-lime-800);
   }
   .bg-neutral-950 {
     background-color: var(--color-neutral-950);
@@ -1396,6 +1407,13 @@
       }
     }
   }
+  .hover\:bg-lime-600 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-lime-600);
+      }
+    }
+  }
   .hover\:bg-lime-900 {
     &:hover {
       @media (hover: hover) {
@@ -1604,6 +1622,11 @@
   .active\:bg-green-950 {
     &:active {
       background-color: var(--color-green-950);
+    }
+  }
+  .active\:bg-lime-900 {
+    &:active {
+      background-color: var(--color-lime-900);
     }
   }
   .active\:bg-red-400 {

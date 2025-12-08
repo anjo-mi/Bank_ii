@@ -1,5 +1,6 @@
 import models from "../models/index.js";
 const { User, Category, Question, PracticeSession } = models;
+import s3client from "../controllers/aws.js";
 
 import {marked} from 'marked';
 import createDOMPurify from 'dompurify';
@@ -75,10 +76,15 @@ export default {
                        .replaceAll('&lt;', '<br>')
                        .replaceAll('&nbsp;', '<br>');
       }) : [];
+      const audioKeys = await Promise.all(
+        session.audioKeys?.map(async key => key ? await s3client.getAudio(key) : key)
+      );
+      console.log({audioKeys})
       return res.render('previousSession', {
         session,
         questions,
-        feedback
+        feedback,
+        audioKeys,
       })
     }catch(getSessionError){
       console.log({getSessionError});

@@ -286,13 +286,15 @@ export default {
       const body = req.body;
       console.log( "xxxxxxxxxxxxxxxxxxxxxxxxxxx", {audio,body})
       let {answer,questionId,question} = req.body;
+      question = audio ? JSON.parse(question).question : question;
+      const key = audio ? `${question._id}/${req.user.id}.webm` : '';
+
       const singleQuestionSession = await PracticeSession.create({
         userId: req.user.id,
         questions: [questionId],
         answers: [answer],
+        audioKeys: [key],
       });
-      
-      question = audio ? JSON.parse(question).question : question;
       
       const sessionId = singleQuestionSession._id;
       
@@ -302,10 +304,9 @@ export default {
       agent.getAnswerFeedback(question, answer, 0, sessionId, level,title);
       let audioStoreResponse;
       if (audio){
-        const key = `${question._id}/${req.user.id}.webm`;
         audioStoreResponse = await s3client.storeAudio({key,audio});
-        const audioUrl = await s3client.getAudio(key);
-        console.log({audioStoreResponse, audioUrl, key, audio})
+        // const audioUrl = await s3client.getAudio(key);
+        // console.log({audioStoreResponse, audioUrl, key, audio})
       }
       req.session.practiceId = {sessionId};
       await req.session.save();

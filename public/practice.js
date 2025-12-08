@@ -87,6 +87,7 @@ answerForm.addEventListener('submit', async (e) => {
         document.getElementById('current').value = data.current;
         document.getElementById('sessionId').value = data.sessionId;
         audioFile.value = '';
+        audioFile.checked = false;
       }
     }
 });

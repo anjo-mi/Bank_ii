@@ -18,6 +18,7 @@
     <%
     const qs = questions
     const as = session.answers
+    const keys = audioKeys;
     const ais = session.aiResponse?.questionResponse || null;
     for (let i = 0 ; i < qs.length ; i++){ 
     %>
@@ -28,6 +29,13 @@
       </div>
       <div class="answer-portion">
         <h2 class="font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3">Your response:</h2>
+        <% if (keys?.[i]){ %>
+          <form action="/saveAudio" method="POST" id="record-container" class="w-full flex place-content-evenly items-center mx-auto my-2 h-hit">
+            <audio class="max-w-1/2" id="recording" controls src="<%- keys[i] %>"></audio>
+            <input id="audio-file" type="hidden" value="<%- keys[i] %>">
+            <button class="w-1/4 px-3 border-1 border-white mb-1 py-1 bg-lime-800 hover:bg-lime-600 active:bg-lime-900 rounded-xl space-content-evenly">Store Audio</button>
+          </form>
+        <% } %>
         <form action="/questions/saveAnswer" method="POST" class="save-answer">
           <input type="hidden" name="answer" class="answer" value="<%= as[i] %>">
           <input type="hidden" name="content" class="content" value="<%= qs[i].content %>">

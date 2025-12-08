@@ -1,6 +1,7 @@
 import agent from "../services/aiService.js";
 import models from "../models/index.js";
 const { User, Category, Question, PracticeSession } = models;
+import s3client from "../controllers/aws.js";
 
 import {marked} from 'marked';
 import createDOMPurify from 'dompurify';
@@ -104,7 +105,10 @@ export default {
         userId: req.user.id,
         questions,
         answers,
+        audioKeys: [],
       }) : null;
+
+     console.log(session?.audioKeys)
       
       // console.log({audio,body})
       sessionId = session ? 
@@ -116,18 +120,32 @@ export default {
       // to do: sprint 3: call AI enpoint here
       let updatedSession;
       // console.log({session, current, questions})
-      if (current >= 0 && current <= questions.length){
+      if (current >= 0 && current < questions.length){
         // if this is coming form the /practiceQuestion page, take then answer field and push it to the answers array
         answers.push(answer || '');
+        const key = audio ? `${questions[current]._id}/${req.user.id}.webm` : '';
+        console.log({key},'YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY')
         updatedSession = await PracticeSession.findByIdAndUpdate(
           sessionId,
-          {$set: {[`answers.${current}`]: answer || ''}},
+          {
+            $set: {
+              [`answers.${current}`]: answer || '',
+              [`audioKeys.${current}`]: key,
+            },
+          },
           {new: true},
         )
+        console.log(updatedSession.audioKeys, "audio keys urls")
         const user = await User.findById(req.user.id);
         const level = user?.info?.level;
         const title = user?.info?.title;
         agent.getAnswerFeedback(questions[current], answer, current, sessionId, level,title);
+
+        if (audio){
+          const audioStoreResponse = await s3client.storeAudio({key,audio});
+          // const audioUrl = await s3client.getAudio(key);
+          // console.log({audioStoreResponse, audioUrl, key, audio})
+        }
       }
       // else updatedSession = await PracticeSession.findById(sessionId);
       // increment current index (passed from /startPractice, tracked to be less than questions length)
@@ -210,7 +228,11 @@ export default {
                        .replaceAll(',,,', '<br>')
                        .replaceAll('&nbsp;', '<br>');
       })
-      res.render('practiceCompleted', {questions,updatedSession,feedback})
+      const audioKeys = await Promise.all(
+        updatedSession.audioKeys?.map(async key => key ? await s3client.getAudio(key) : key)
+      );
+      console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxget results audio keys xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',{audioKeys})
+      res.render('practiceCompleted', {questions,updatedSession,feedback, audioKeys})
     }catch(getResultsError){
       console.log({getResultsError});
       return res.status(400).json({message: getResultsError.message});
