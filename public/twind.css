@@ -545,6 +545,9 @@
   .min-h-60 {
     min-height: calc(var(--spacing) * 60);
   }
+  .min-h-100 {
+    min-height: calc(var(--spacing) * 100);
+  }
   .min-h-full {
     min-height: 100%;
   }

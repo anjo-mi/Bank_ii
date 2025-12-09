@@ -39,6 +39,11 @@ const questionSchema = new mongoose.Schema({
     type: String,
     default: '',
   },
+
+  audioKey: {
+    type: String,
+    default: '',
+  },
   
   createdAt: {
     type: Date,

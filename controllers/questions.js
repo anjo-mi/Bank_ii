@@ -434,6 +434,55 @@ export default {
     }
   },
 
+  saveAudio: async (req,res) => {
+    try{
+      const {
+        answer,
+        content,
+        questionId,
+        feedback,
+      } = req.body;
+      const q = await Question.findById(questionId);
+      const audioKey = `${questionId.toString()}/${req.user.id}.webm`;
+      if (!q.isDefault){
+        const updatedQuestion = await Question.findByIdAndUpdate(
+          questionId , {audioKey} , {new:true}
+        );
+        return res.status(201).json({message: `your audio for "${updatedQuestion.content}" has been updated`});
+      }else{
+        const reUpdatedDefault = await Question.findOneAndUpdate(
+          {
+            userId: req.user.id,
+            parentId: questionId,
+          },
+          {audioKey},
+          {new:true}
+        )
+        let noLongerDefaultQuestion;
+        if (!reUpdatedDefault){
+          noLongerDefaultQuestion = await Question.create({
+            userId: req.user.id,
+            content,
+            answer,
+            feedback,
+            categories: q.categories,
+            isDefault: false,
+            parentId: q._id,
+          })
+          const id = noLongerDefaultQuestion._id.toString();
+          noLongerDefaultQuestion = await Question.findByIdAndUpdate(id,
+            {audioKey : `${id}/${req.user.id}.webm`},
+            {new:true}
+          )
+        }
+        return res.status(201).json({message: `your audio for "${reUpdatedDefault ? reUpdatedDefault.content : noLongerDefaultQuestion.content}" has been updated`});
+      }
+    }catch(saveAudioError){
+      console.log(saveAudioError);
+      return res.status(400).json({message: saveAudioError.message});
+    }
+  },
+
   saveFeedback: async(req,res) => {
     try{
       const {
@@ -471,9 +520,9 @@ export default {
         }
         return res.status(201).json({message: `your feedback for "${reUpdatedDefault ? reUpdatedDefault.content : noLongerDefaultQuestion.content}" has been updated`});
       }
-    }catch(saveAnswerError){
-      console.log(saveAnswerError);
-      return res.status(400).json({message: saveAnswerError.message});
+    }catch(saveFeedbackError){
+      console.log(saveFeedbackError);
+      return res.status(400).json({message: saveFeedbackError.message});
     }
   },
 
