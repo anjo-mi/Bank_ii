@@ -270,8 +270,11 @@ export default {
       const user = await User.findById(req.user.id);
       const question = await Question.findById(questionId);
       if (question.userId && question.userId.toString() !== req.user.id) return res.status(403).json({message: "this question isnt yours to change"});
+      const audio = question.audioKey ? await s3client.getAudio(question.audioKey) : null;
+
       res.render('editQuestion', {
       question,
+      audio,
       categori: question.categories || [],
       })
     }catch(getEditQuestionError){
@@ -443,7 +446,7 @@ export default {
         feedback,
       } = req.body;
       const q = await Question.findById(questionId);
-      const audioKey = `${questionId.toString()}/${req.user.id}.webm`;
+      const audioKey = `${q.parentId || q._id.toString()}/${req.user.id}.webm`;
       if (!q.isDefault){
         const updatedQuestion = await Question.findByIdAndUpdate(
           questionId , {audioKey} , {new:true}
@@ -465,15 +468,16 @@ export default {
             content,
             answer,
             feedback,
+            audioKey,
             categories: q.categories,
             isDefault: false,
             parentId: q._id,
           })
-          const id = noLongerDefaultQuestion._id.toString();
-          noLongerDefaultQuestion = await Question.findByIdAndUpdate(id,
-            {audioKey : `${id}/${req.user.id}.webm`},
-            {new:true}
-          )
+          // const id = noLongerDefaultQuestion._id.toString();
+          // noLongerDefaultQuestion = await Question.findByIdAndUpdate(id,
+          //   {audioKey : `${id}/${req.user.id}.webm`},
+          //   {new:true}
+          // )
         }
         return res.status(201).json({message: `your audio for "${reUpdatedDefault ? reUpdatedDefault.content : noLongerDefaultQuestion.content}" has been updated`});
       }

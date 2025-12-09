@@ -123,7 +123,7 @@ export default {
       if (current >= 0 && current < questions.length){
         // if this is coming form the /practiceQuestion page, take then answer field and push it to the answers array
         answers.push(answer || '');
-        const key = audio ? `${questions[current]._id}/${req.user.id}.webm` : '';
+        const key = audio ? `${questions[current]._id.toString()}/${req.user.id}.webm` : '';
         console.log({key},'YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY')
         updatedSession = await PracticeSession.findByIdAndUpdate(
           sessionId,
