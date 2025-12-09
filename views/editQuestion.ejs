@@ -2,6 +2,11 @@
 
 <div id="success-message" class="hidden w-80/100 m-auto mb-5 text-green-400 text-center p-2 bg-gray-600 border-1 border-gray-200 rounded-lg "></div>
 
+<form id="answer-this" action="/questions/byId" method="POST" class="m-auto w-fit h-fit my-4 bg-lime-700 hover:bg-lime-600 active:bg-lime-900 border-1 border-gray-400 rounded-xl text-white">
+  <input type="hidden" name="id" value="<%= question._id.toString() %>">
+  <button class="block h-full w-full py-2 px-4 hover:cursor-pointer">Answer This Question</button>
+</form>
+
 <div class="w-95/100 m-auto mt-4 flex flex-col" id="edit-question-container">
   <form id="edit-question-form" action="/questions/edit/update" method="POST"
   class="flex flex-col lg:sticky lg:-top-12">

@@ -13,6 +13,11 @@
             <% })%>
         </ul>
     </div>
+
+    <form id="edit-this" action="/questions/edit" method="POST" class="m-auto w-fit h-fit my-4 bg-lime-700 hover:bg-lime-600 active:bg-lime-900 border-1 border-gray-400 rounded-xl text-white">
+        <input type="hidden" name="questionId" value="<%= question._id.toString() %>">
+        <button class="block h-full w-full py-2 px-4 hover:cursor-pointer">Edit This Question</button>
+    </form>
    
     <div class="w-95/100 m-auto mt-4 flex flex-col" id="answerContainer">
         <form id="answer-form" action="/answerQuestion" method="POST"
