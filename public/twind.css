@@ -306,6 +306,9 @@
   .top-15 {
     top: calc(var(--spacing) * 15);
   }
+  .-right-1 {
+    right: calc(var(--spacing) * -1);
+  }
   .right-1 {
     right: calc(var(--spacing) * 1);
   }
@@ -467,6 +470,9 @@
   }
   .h-3 {
     height: calc(var(--spacing) * 3);
+  }
+  .h-3\/4 {
+    height: calc(3/4 * 100%);
   }
   .h-4 {
     height: calc(var(--spacing) * 4);

@@ -34,7 +34,7 @@
         <div  class="w-9/10 m-auto h-40 md:h-80 overflow-y-scroll p-2 border border-2 border-sky-600 bg-stone-950 rounded-xl">
           <% for (const session of sessions.slice(0).reverse()){ %>
           <dd>
-            <form action="/getSession" method="POST">
+            <form action="/getSession" method="POST" class="relative session-form opacity-100 transition-opacity duration-300 ease-in-out">
               <input type="hidden" name="sessionId" value="<%= session._id %>">
               <button type="submit" class="block m-auto w-full">
                 <section id="user-questions-container" class="w-9/10  m-auto">
@@ -46,6 +46,9 @@
                   </ul>
                 </section>
               </button>
+              <button type="button" id="<%= session._id.toString() %>" class="delete-session h-3/4 inline p-1 rounded-full border-1 border-black hover:border-white hover:pointer bg-red-700 hover:bg-red-900 active:bg-red-400 absolute -right-1 top-1 z-10 hover:cursor-pointer">
+                <img class="max-h-full" src="/images/trash.svg" alt="Delete">
+              </button>
             </form>
           </dd>
           <%}%>
@@ -55,7 +58,7 @@
       <div>
         <dt class="w-95/100 text-left ml-4">Questions</dt>
         <div class="w-9/10 m-auto h-40 md:h-80 overflow-y-scroll p-2 border border-2 border-sky-600 bg-stone-950 rounded-xl">
-        <% for (const q of questions){ %>
+        <% for (const q of questions.reverse()){ %>
           <dd class="my-1">
             <section id="user-session-container" class="w-95/100 m-auto">
               <ul>
