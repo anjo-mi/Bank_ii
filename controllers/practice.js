@@ -225,5 +225,16 @@ export default {
       console.log({getLoadResultsError});
       return res.status(400).json({message: getLoadResultsError.message});
     }
-  }
+  },
+
+  deleteSession: async(req,res) => {
+    try{
+      const {id} = req.body;
+      const deletedSession = await PracticeSession.findByIdAndDelete(id);
+      return res.status(200).json({message: "Session Deleted"})
+    }catch(deleteSessionError){
+      console.log({deleteSessionError});
+      return res.status(400).json({message: deleteSessionError.message});
+    }
+  },
 };

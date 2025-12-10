@@ -1,4 +1,5 @@
 const deleteBtns = document.querySelectorAll('.delete-btn');
+const deleteSessionBtns = document.querySelectorAll('.delete-session');
 const settingsForm = document.getElementById('user-settings');
 const settingsMenu = document.getElementById('settings-menu');
 const settingsBtn = document.getElementById('settings-toggle');
@@ -21,6 +22,26 @@ deleteBtns.forEach(btn => {
       }, 300);
     }
     else console.log('failed to delete');
+  })
+})
+
+deleteSessionBtns.forEach(btn => {
+  btn.addEventListener('click', async (e) => {
+    const id = e.target.id || e.target.parentElement.id;
+    const response = await fetch(`/practice/delete`, {
+      method: "PATCH",
+      headers: {"Content-Type" : "application/json"},
+      body: JSON.stringify({id}),
+    });
+
+    if (response.ok){
+      let clicked = e.target;
+      while (!clicked.classList.contains('session-form')) clicked = clicked.parentElement;
+      clicked.style.opacity = 0;
+      setTimeout(() => {
+        clicked.style.display = 'none';
+      }, 300)
+    }else console.log('failed to delete');
   })
 })
 

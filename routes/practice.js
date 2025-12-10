@@ -18,5 +18,6 @@ router.get("/:id", ensureAuth, practiceController.getResults);
 router.post("/start", ensureAuth, practiceController.startPractice);
 router.post("/next", ensureAuth, upload.single('audio'), practiceController.showNext);
 router.post("/checkSession", ensureAuth, practiceController.checkSession);
+router.patch("/delete", ensureAuth, practiceController.deleteSession);
 
 export default router;
