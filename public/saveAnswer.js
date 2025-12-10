@@ -159,7 +159,6 @@ document.addEventListener('submit', async (e) => {
 })
 
 document.addEventListener('submit', async (e) => {
-  console.log(e.target)
   if (e.target.id === "record-container"){
     e.preventDefault();
     const answer = e.target.querySelector('.answer').value;
@@ -178,16 +177,9 @@ document.addEventListener('submit', async (e) => {
       })
     })
 
-    console.log({response})
-
     const data = await response.json();
 
-    console.log({data})
-    if (response.ok){
-
-      console.log('message: ', data.message)
-      handleGood(data.message);
-    }
+    if (response.ok) handleGood(data.message);
     else handleBad(data.message);
   }
 })
@@ -207,10 +199,7 @@ document.addEventListener('submit', async (e) => {
 
     const data = await response.json();
     
-    if (response.ok){
-      
-      handleGood(data.message);
-    }
+    if (response.ok) handleGood(data.message);
     else handleBad(data.message);
   }
 })

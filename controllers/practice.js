@@ -89,42 +89,31 @@ export default {
     try{
       const audio = req.file;
       const body = req.body;
-      console.log({audio,body});
       let {questions, current, sessionId} = req.body;
-      
-      // console.log({audio,current,body,questions})
       
       // pages are rendered, so parse JSON
       // if this is from the /startPractice page, initialize an answers array, otherwise it equals itself (parsed)
       const answers = req.body.answers && req.body.answers.length ? JSON.parse(req.body.answers) : [];
-      console.log({answers})
       const answer = req.body.answer;
       questions = audio || current < 0 ? JSON.parse(questions) : questions;
-      // console.log({audio,body,questions,answer,answers})
+
       const session = +current < 0 ? await PracticeSession.create({
         userId: req.user.id,
         questions,
         answers,
         audioKeys: [],
       }) : null;
-
-     console.log(session?.audioKeys)
       
-      // console.log({audio,body})
       sessionId = session ? 
                     session._id : 
                   sessionId ?
                     sessionId : null;
 
-
-      // to do: sprint 3: call AI enpoint here
       let updatedSession;
-      // console.log({session, current, questions})
       if (current >= 0 && current < questions.length){
         // if this is coming form the /practiceQuestion page, take then answer field and push it to the answers array
         answers.push(answer || '');
         const key = audio ? `${questions[current]._id.toString()}/${req.user.id}.webm` : '';
-        console.log({key},'YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY')
         updatedSession = await PracticeSession.findByIdAndUpdate(
           sessionId,
           {
@@ -135,7 +124,6 @@ export default {
           },
           {new: true},
         )
-        console.log(updatedSession.audioKeys, "audio keys urls")
         const user = await User.findById(req.user.id);
         const level = user?.info?.level;
         const title = user?.info?.title;
@@ -143,32 +131,22 @@ export default {
 
         if (audio){
           const audioStoreResponse = await s3client.storeAudio({key,audio});
-          // const audioUrl = await s3client.getAudio(key);
-          // console.log({audioStoreResponse, audioUrl, key, audio})
         }
       }
-      // else updatedSession = await PracticeSession.findById(sessionId);
+
       // increment current index (passed from /startPractice, tracked to be less than questions length)
       current = answers.length;
-      console.log({current}, 'after length equalling -------------------------------')
 
-
-      // if all questions are answered, make a results object that binds questions to their answers
-        // render the results page
-      // otherwise call the current page with new data
-      // if (current === questions.length) res.render('loadResults', {questions,sessionId});
-
-      // else res.render('practiceQuestion', {questions,current,answers,sessionId: sessionId ? sessionId.toString() : null});
+      // if this is the last question, store the practiceId to the session (getLoadResults / load results will use this to check session status)
       if (current === questions.length){
-        console.log({current}, 'lastquestion---------------------------')
         req.session.practiceId = {sessionId};
         await req.session.save();
       }
 
+      // render the practice question page if its the start of the session
       if (!current) res.render('practiceQuestion', {questions,current,answers,sessionId: sessionId ? sessionId.toString() : null});
 
-      console.log({questions,current,answers,sessionId}, 'this gets returned')
-
+      // otherwise send the json data to update to the next question
       if (current) return res.status(200).json({
         questions,
         current,
@@ -219,19 +197,18 @@ export default {
         const window = new JSDOM('').window;
         const pure = createDOMPurify(window);
         const purified = pure.sanitize(marked.parse(res.feedback, {breaks:true}));
-        console.log({purified})
         return purified.replaceAll('\n', '<br>')
                        .replaceAll('\\n', '<br>')
                        .replaceAll('-', '<br>')
                        .replaceAll('&lt;', '<br>')
                        .replaceAll('&gt;', '<br>')
-                       .replaceAll(',,,', '<br>')
-                       .replaceAll('&nbsp;', '<br>');
+                       .replaceAll('&nbsp;', '<br>')
+                       .replaceAll(',,,', '<br><br><br>')
+                       .replaceAll('###', '<br><br><br>');
       })
       const audioKeys = await Promise.all(
         updatedSession.audioKeys?.map(async key => key ? await s3client.getAudio(key) : key)
       );
-      console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxget results audio keys xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',{audioKeys})
       res.render('practiceCompleted', {questions,updatedSession,feedback, audioKeys})
     }catch(getResultsError){
       console.log({getResultsError});

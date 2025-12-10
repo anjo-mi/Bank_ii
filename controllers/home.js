@@ -69,17 +69,20 @@ export default {
         const window = new JSDOM('').window;
         const pure = createDOMPurify(window);
         const purified = pure.sanitize(marked.parse(res.feedback, {breaks:true}));
-        console.log({purified})
+
         return purified.replaceAll('\n', '<br>')
                        .replaceAll('\\n', '<br>')
                        .replaceAll('-', '<br>')
                        .replaceAll('&lt;', '<br>')
-                       .replaceAll('&nbsp;', '<br>');
+                       .replaceAll('&gt;', '<br>')
+                       .replaceAll('&nbsp;', '<br>')
+                       .replaceAll(',,,', '<br><br><br>')
+                       .replaceAll('###', '<br><br><br>');
       }) : [];
       const audioKeys = await Promise.all(
         session.audioKeys?.map(async key => key ? await s3client.getAudio(key) : key)
       );
-      console.log({audioKeys})
+
       return res.render('previousSession', {
         session,
         questions,

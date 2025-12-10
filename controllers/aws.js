@@ -15,7 +15,6 @@ dotenv.config();
 
 export default {
   storeAudio: async ({ key, audio }) => {
-    console.log({key,audio})
     const client = new S3Client({
       region: process.env.AWS_REGION,
       credentials: {
@@ -32,7 +31,6 @@ export default {
 
     try {
       const response = await client.send(command);
-      console.log({response});
 
       return response;
       
@@ -68,13 +66,11 @@ export default {
     const command = new GetObjectCommand({
       Bucket: "bankii.0",
       Key: key,
-      // ResponseContentType: "audio/webm",
     });
 
     
     try{
       const url = await getSignedUrl(client,command, {expiresIn: 10800});
-      console.log({url})
       return url;
     }catch(getAudioError){
       console.error(`error while retrieving your data: ${getAudioError.message}`)

@@ -18,7 +18,6 @@ answerBox.addEventListener('keydown', (e) =>{
   if (e.key === 'Enter'){
     if (!e.shiftKey){
       e.preventDefault();
-      console.log('requesting submit')
       answerForm.requestSubmit();
     }
   }
@@ -60,7 +59,6 @@ answerForm.addEventListener('submit', async (e) => {
     sessionId,
   })
 
-  console.log({body,audio});
   const response = audio
     ? await fetch('/practice/next', {
       method: "POST",
@@ -74,7 +72,7 @@ answerForm.addEventListener('submit', async (e) => {
 
     if (response.ok){
       const data = await response.json();
-      console.log({data})
+
       if (data.current === questions.length){
         window.location.replace('/practice/getLoadResults');
       }else{

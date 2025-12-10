@@ -94,7 +94,6 @@ answerForm.addEventListener('submit', async (e) => {
       question,
     })
 
-    console.log({body, audio})
     const response = audio 
       ? await fetch('/questions/answerQuestion', {
           method: "POST",
@@ -151,7 +150,7 @@ if (navigator.mediaDevices?.getUserMedia){
         if (this.recorder.state !== 'recording') return;
         this.time++;
         console.log(60 - this.time);
-        if (this.time > 6){
+        if (this.time > 60){
           audioContainer.classList.remove('hidden');
           const recording = await this.stop();
           this.transcriber.stop();

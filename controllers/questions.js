@@ -286,8 +286,6 @@ export default {
   answerQuestion: async (req,res) => {
     try{
       const audio = req.file;
-      const body = req.body;
-      console.log( "xxxxxxxxxxxxxxxxxxxxxxxxxxx", {audio,body})
       let {answer,questionId,question} = req.body;
       question = audio ? JSON.parse(question).question : question;
       const key = audio ? `${question._id}/${req.user.id}.webm` : '';
@@ -305,15 +303,13 @@ export default {
       const level = user?.info?.level;
       const title = user?.info?.title;
       agent.getAnswerFeedback(question, answer, 0, sessionId, level,title);
-      let audioStoreResponse;
-      if (audio){
-        audioStoreResponse = await s3client.storeAudio({key,audio});
-        // const audioUrl = await s3client.getAudio(key);
-        // console.log({audioStoreResponse, audioUrl, key, audio})
-      }
+
+      if (audio) {const audioStoreResponse = await s3client.storeAudio({key,audio});}
+
       req.session.practiceId = {sessionId};
       await req.session.save();
       return res.status(201).json({sessionId});
+
     }catch(answerQuestionError){
       console.log({answerQuestionError});
       return res.status(400).json({message: answerQuestionError.message});
@@ -376,9 +372,8 @@ export default {
           }},
           {new:true}
         )
-        let noLongerDefaultQuestion;
         if (!reUpdatedDefault){
-          noLongerDefaultQuestion = await Question.create({
+          const noLongerDefaultQuestion = await Question.create({
             userId: req.user.id,
             content: question,
             categories,
@@ -473,11 +468,6 @@ export default {
             isDefault: false,
             parentId: q._id,
           })
-          // const id = noLongerDefaultQuestion._id.toString();
-          // noLongerDefaultQuestion = await Question.findByIdAndUpdate(id,
-          //   {audioKey : `${id}/${req.user.id}.webm`},
-          //   {new:true}
-          // )
         }
         return res.status(201).json({message: `your audio for "${reUpdatedDefault ? reUpdatedDefault.content : noLongerDefaultQuestion.content}" has been updated`});
       }
@@ -555,10 +545,7 @@ export default {
           });
         }
       }
-      // if ( req.get('referer').endsWith('/select')){
-        return res.status(200).json({message: 'question has been removed from the database'});
-      // }
-      // return res.redirect('/questions/edit/select');
+      return res.status(200).json({message: 'question has been removed from the database'});
     }catch(deleteQuestionError){
       console.log({deleteQuestionError})
       return res.status(500).json({message: deleteQuestionError.message});
