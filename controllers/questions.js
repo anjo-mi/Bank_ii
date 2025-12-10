@@ -443,8 +443,9 @@ export default {
       const q = await Question.findById(questionId);
       const audioKey = `${q.parentId || q._id.toString()}/${req.user.id}.webm`;
       if (!q.isDefault){
+        const key = `${q._id.toString()}/${req.user.id}.webm`;
         const updatedQuestion = await Question.findByIdAndUpdate(
-          questionId , {audioKey} , {new:true}
+          questionId , {audioKey: key} , {new:true}
         );
         return res.status(201).json({message: `your audio for "${updatedQuestion.content}" has been updated`});
       }else{
