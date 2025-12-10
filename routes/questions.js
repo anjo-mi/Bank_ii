@@ -6,6 +6,10 @@ const router = express.Router();
 import auth from '../middleware/auth.js';
 const {ensureAuth} = auth;
 
+// parse formData for audio storage
+import multer from "multer";
+const upload = multer({storage: multer.memoryStorage()});
+
 // open
 router.get("/", questionsController.getAllQuestions);
 router.post("/byCategory", questionsController.getQuestionsByCats);
@@ -16,8 +20,9 @@ router.post("/getSingleRandom", questionsController.getRandomQuestion);
 router.get("/form", ensureAuth, questionsController.getNewQuestionForm);
 router.get("/edit/select", ensureAuth, questionsController.getEditSearchPage);
 router.post("/create", ensureAuth, questionsController.createNewQuestion);
-router.post("/answerQuestion", ensureAuth, questionsController.answerQuestion);
+router.post("/answerQuestion", ensureAuth, upload.single('audio'), questionsController.answerQuestion);
 router.post("/saveAnswer", ensureAuth, questionsController.saveAnswer);
+router.post("/saveAudio", ensureAuth, questionsController.saveAudio);
 router.post("/saveFeedback", ensureAuth, questionsController.saveFeedback);
 router.post("/edit", ensureAuth, questionsController.getEditQuestionPage);
 router.post("/edit/update", ensureAuth, questionsController.updateQuestion);

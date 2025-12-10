@@ -1,6 +1,7 @@
 import agent from "../services/aiService.js";
 import models from "../models/index.js";
 const { User, Category, Question, PracticeSession } = models;
+import s3client from "../controllers/aws.js";
 
 import {marked} from 'marked';
 import createDOMPurify from 'dompurify';
@@ -86,50 +87,72 @@ export default {
   // begins being called from breifing page (/startPractice)
   showNext: async (req,res) => {
     try{
+      const audio = req.file;
+      const body = req.body;
       let {questions, current, sessionId} = req.body;
+      
       // pages are rendered, so parse JSON
-      questions = JSON.parse(questions);
+      // if this is from the /startPractice page, initialize an answers array, otherwise it equals itself (parsed)
+      const answers = req.body.answers && req.body.answers.length ? JSON.parse(req.body.answers) : [];
+      const answer = req.body.answer;
+      questions = audio || current < 0 ? JSON.parse(questions) : questions;
 
       const session = +current < 0 ? await PracticeSession.create({
         userId: req.user.id,
         questions,
-        answers: [],
+        answers,
+        audioKeys: [],
       }) : null;
-
+      
       sessionId = session ? 
                     session._id : 
                   sessionId ?
                     sessionId : null;
 
-      // if this is from the /startPractice page, initialize an answers array, otherwise it equals itself (parsed)
-      const answers = req.body.answers ? JSON.parse(req.body.answers) : [];
-      const answer = req.body.answer;
-
-      // to do: sprint 3: call AI enpoint here
       let updatedSession;
       if (current >= 0 && current < questions.length){
         // if this is coming form the /practiceQuestion page, take then answer field and push it to the answers array
         answers.push(answer || '');
+        const key = audio ? `${questions[current]._id.toString()}/${req.user.id}.webm` : '';
         updatedSession = await PracticeSession.findByIdAndUpdate(
           sessionId,
-          {$set: {[`answers.${current}`]: answer || ''}},
+          {
+            $set: {
+              [`answers.${current}`]: answer || '',
+              [`audioKeys.${current}`]: key,
+            },
+          },
           {new: true},
         )
         const user = await User.findById(req.user.id);
         const level = user?.info?.level;
         const title = user?.info?.title;
         agent.getAnswerFeedback(questions[current], answer, current, sessionId, level,title);
-      }else updatedSession = await PracticeSession.findById(sessionId);
+
+        if (audio){
+          const audioStoreResponse = await s3client.storeAudio({key,audio});
+        }
+      }
+
       // increment current index (passed from /startPractice, tracked to be less than questions length)
-      current = +current + 1;
+      current = answers.length;
 
+      // if this is the last question, store the practiceId to the session (getLoadResults / load results will use this to check session status)
+      if (current === questions.length){
+        req.session.practiceId = {sessionId};
+        await req.session.save();
+      }
 
-      // if all questions are answered, make a results object that binds questions to their answers
-        // render the results page
-      // otherwise call the current page with new data
-      if (current === questions.length) res.render('loadResults', {questions,sessionId});
+      // render the practice question page if its the start of the session
+      if (!current) res.render('practiceQuestion', {questions,current,answers,sessionId: sessionId ? sessionId.toString() : null});
 
-      else res.render('practiceQuestion', {questions,current,answers,sessionId: sessionId ? sessionId.toString() : null});
+      // otherwise send the json data to update to the next question
+      if (current) return res.status(200).json({
+        questions,
+        current,
+        answers,
+        sessionId: sessionId ? sessionId.toString() : null
+      })
     }catch(showNextError){
       console.log({showNextError});
       return res.status(400).json({message: showNextError.message});
@@ -174,9 +197,19 @@ export default {
         const window = new JSDOM('').window;
         const pure = createDOMPurify(window);
         const purified = pure.sanitize(marked.parse(res.feedback, {breaks:true}));
-        return purified.replaceAll('\n', '<br>');
+        return purified.replaceAll('\n', '<br>')
+                       .replaceAll('\\n', '<br>')
+                       .replaceAll('-', '<br>')
+                       .replaceAll('&lt;', '<br>')
+                       .replaceAll('&gt;', '<br>')
+                       .replaceAll('&nbsp;', '<br>')
+                       .replaceAll(',,,', '<br><br><br>')
+                       .replaceAll('###', '<br><br><br>');
       })
-      res.render('practiceCompleted', {questions,updatedSession,feedback})
+      const audioKeys = await Promise.all(
+        updatedSession.audioKeys?.map(async key => key ? await s3client.getAudio(key) : key)
+      );
+      res.render('practiceCompleted', {questions,updatedSession,feedback, audioKeys})
     }catch(getResultsError){
       console.log({getResultsError});
       return res.status(400).json({message: getResultsError.message});

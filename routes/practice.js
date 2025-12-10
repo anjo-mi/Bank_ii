@@ -5,6 +5,10 @@ import practiceController from "../controllers/practice.js";
 import auth from '../middleware/auth.js';
 const {ensureAuth} = auth;
 
+// parse formData for audio storage
+import multer from "multer";
+const upload = multer({storage: multer.memoryStorage()});
+
 const router = express.Router();
 
 router.get("/", ensureAuth, practiceController.getCategories);
@@ -12,7 +16,7 @@ router.get("/history", ensureAuth, practiceController.getSessions);
 router.get("/getLoadResults", ensureAuth, practiceController.getLoadResults);
 router.get("/:id", ensureAuth, practiceController.getResults);
 router.post("/start", ensureAuth, practiceController.startPractice);
-router.post("/next", ensureAuth, practiceController.showNext);
+router.post("/next", ensureAuth, upload.single('audio'), practiceController.showNext);
 router.post("/checkSession", ensureAuth, practiceController.checkSession);
 
 export default router;

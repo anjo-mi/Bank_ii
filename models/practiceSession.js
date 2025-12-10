@@ -22,6 +22,12 @@ const practiceSessionSchema = new mongoose.Schema({
     type: [{type:String}],
     default: [],
   },
+
+  audioKeys: {
+    type: [{type:String}],
+    default: [],
+  },
+
   
   completedAt: {
     type: Date,

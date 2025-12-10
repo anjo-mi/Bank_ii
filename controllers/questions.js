@@ -3,6 +3,8 @@ import models from "../models/index.js";
 const { User, Category, Question, PracticeSession } = models;
 import agent from "../services/aiService.js";
 
+import s3client from "../controllers/aws.js";
+
 export default {
 
   getAllQuestions: async (req, res) => {
@@ -268,8 +270,11 @@ export default {
       const user = await User.findById(req.user.id);
       const question = await Question.findById(questionId);
       if (question.userId && question.userId.toString() !== req.user.id) return res.status(403).json({message: "this question isnt yours to change"});
+      const audio = question.audioKey ? await s3client.getAudio(question.audioKey) : null;
+
       res.render('editQuestion', {
       question,
+      audio,
       categori: question.categories || [],
       })
     }catch(getEditQuestionError){
@@ -280,23 +285,31 @@ export default {
 
   answerQuestion: async (req,res) => {
     try{
-      const body = req.body;
+      const audio = req.file;
       let {answer,questionId,question} = req.body;
+      question = audio ? JSON.parse(question).question : question;
+      const key = audio ? `${question._id}/${req.user.id}.webm` : '';
+
       const singleQuestionSession = await PracticeSession.create({
         userId: req.user.id,
         questions: [questionId],
         answers: [answer],
+        audioKeys: [key],
       });
-      // question = JSON.parse(question)
+      
       const sessionId = singleQuestionSession._id;
-      // const questions = singleQuestionSession.questions;
+      
       const user = await User.findById(req.user.id);
       const level = user?.info?.level;
       const title = user?.info?.title;
       agent.getAnswerFeedback(question, answer, 0, sessionId, level,title);
+
+      if (audio) {const audioStoreResponse = await s3client.storeAudio({key,audio});}
+
       req.session.practiceId = {sessionId};
       await req.session.save();
       return res.status(201).json({sessionId});
+
     }catch(answerQuestionError){
       console.log({answerQuestionError});
       return res.status(400).json({message: answerQuestionError.message});
@@ -359,9 +372,8 @@ export default {
           }},
           {new:true}
         )
-        let noLongerDefaultQuestion;
         if (!reUpdatedDefault){
-          noLongerDefaultQuestion = await Question.create({
+          const noLongerDefaultQuestion = await Question.create({
             userId: req.user.id,
             content: question,
             categories,
@@ -420,6 +432,52 @@ export default {
     }
   },
 
+  saveAudio: async (req,res) => {
+    try{
+      const {
+        answer,
+        content,
+        questionId,
+        feedback,
+      } = req.body;
+      const q = await Question.findById(questionId);
+      const audioKey = `${q.parentId || q._id.toString()}/${req.user.id}.webm`;
+      if (!q.isDefault){
+        const key = `${q._id.toString()}/${req.user.id}.webm`;
+        const updatedQuestion = await Question.findByIdAndUpdate(
+          questionId , {audioKey: key} , {new:true}
+        );
+        return res.status(201).json({message: `your audio for "${updatedQuestion.content}" has been updated`});
+      }else{
+        const reUpdatedDefault = await Question.findOneAndUpdate(
+          {
+            userId: req.user.id,
+            parentId: questionId,
+          },
+          {audioKey},
+          {new:true}
+        )
+        let noLongerDefaultQuestion;
+        if (!reUpdatedDefault){
+          noLongerDefaultQuestion = await Question.create({
+            userId: req.user.id,
+            content,
+            answer,
+            feedback,
+            audioKey,
+            categories: q.categories,
+            isDefault: false,
+            parentId: q._id,
+          })
+        }
+        return res.status(201).json({message: `your audio for "${reUpdatedDefault ? reUpdatedDefault.content : noLongerDefaultQuestion.content}" has been updated`});
+      }
+    }catch(saveAudioError){
+      console.log(saveAudioError);
+      return res.status(400).json({message: saveAudioError.message});
+    }
+  },
+
   saveFeedback: async(req,res) => {
     try{
       const {
@@ -457,9 +515,9 @@ export default {
         }
         return res.status(201).json({message: `your feedback for "${reUpdatedDefault ? reUpdatedDefault.content : noLongerDefaultQuestion.content}" has been updated`});
       }
-    }catch(saveAnswerError){
-      console.log(saveAnswerError);
-      return res.status(400).json({message: saveAnswerError.message});
+    }catch(saveFeedbackError){
+      console.log(saveFeedbackError);
+      return res.status(400).json({message: saveFeedbackError.message});
     }
   },
 
@@ -488,10 +546,7 @@ export default {
           });
         }
       }
-      // if ( req.get('referer').endsWith('/select')){
-        return res.status(200).json({message: 'question has been removed from the database'});
-      // }
-      // return res.redirect('/questions/edit/select');
+      return res.status(200).json({message: 'question has been removed from the database'});
     }catch(deleteQuestionError){
       console.log({deleteQuestionError})
       return res.status(500).json({message: deleteQuestionError.message});

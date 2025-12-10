@@ -35,7 +35,6 @@ settingsForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   const level = settingsForm.querySelector('input[name="status"]:checked').value;
   const title = settingsForm.querySelector('#title').value;
-  console.log({level,title});
 
   const response = await fetch('/updateUser', {
     method: 'PATCH',

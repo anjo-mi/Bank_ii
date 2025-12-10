@@ -159,6 +159,32 @@ document.addEventListener('submit', async (e) => {
 })
 
 document.addEventListener('submit', async (e) => {
+  if (e.target.id === "record-container"){
+    e.preventDefault();
+    const answer = e.target.querySelector('.answer').value;
+    const content = e.target.querySelector('.content').value;
+    const questionId = e.target.querySelector('.questionId').value;
+    const feedback = e.target.querySelector('.feedback')?.value;
+
+    const response = await fetch('/questions/saveAudio', {
+      method: "POST",
+      headers: {"Content-Type": 'application/json'},
+      body: JSON.stringify({
+        answer,
+        content,
+        questionId,
+        feedback,
+      })
+    })
+
+    const data = await response.json();
+
+    if (response.ok) handleGood(data.message);
+    else handleBad(data.message);
+  }
+})
+
+document.addEventListener('submit', async (e) => {
   if (e.target.classList.contains('save-resource')){
     e.preventDefault();
     const resource = e.target.querySelector('.resource').value;
@@ -173,10 +199,7 @@ document.addEventListener('submit', async (e) => {
 
     const data = await response.json();
     
-    if (response.ok){
-      
-      handleGood(data.message);
-    }
+    if (response.ok) handleGood(data.message);
     else handleBad(data.message);
   }
 })
@@ -185,6 +208,7 @@ document.addEventListener('click', (e) => {
   if (!e.target.classList.contains('save-response') 
         && !e.target.classList.contains('save-answer')
         && !e.target.classList.contains('save-resource')
+        && !e.target.classList.contains('save-audio')
   ){
     successBox.style.opacity = 0;
     errorBox.style.opacity = 0;

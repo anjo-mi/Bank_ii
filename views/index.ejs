@@ -5,12 +5,12 @@
     <div 
     class="mx-auto w-full max-w-9/10 mt-5 mb-3">
         <ul 
-        class="m-auto flex place-content-center gap-0 text-center w-full text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+        class="m-auto flex p-4 place-content-evenly gap-0 text-center w-full text-gray-900 bg-white border border-gray-200 rounded-2xl dark:bg-gray-700 dark:border-gray-600 dark:text-white">
             <li 
             class="text-xs md:text-md lg:text-2xl
-            h-fit w-4/10 py-1 md:py-2 lg:py-2 border-1 border-sky-400" >
+            h-fit w-4/10 py-1 md:py-2 lg:py-2 border-1 border-sky-400 hover:bg-sky-900 rounded-2xl" >
                 <label for="matchAll"
-                    class="flex items-center place-content-center text-xs md:text-xl lg:text-2xl h-full w-full py-3 gap-3 text-gray-900 dark:text-gray-300" >
+                    class="flex items-center place-content-center text-xs md:text-xl lg:text-2xl h-full w-full py-3 gap-3 text-gray-900 dark:text-gray-300 hover:bg-sky-900 hover:cursor-pointer rounded-2xl" >
                     <input type="radio" id="matchAll" name="matchAll" value="1"
                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                     Match All
@@ -18,9 +18,9 @@
             </li>
             <li 
             class="text-xs md:text-md lg:text-2xl
-             h-fit w-4/10 py-1 md:py-2 lg:py-2 border-1 border-sky-400">
+             h-fit w-4/10 py-1 md:py-2 lg:py-2 border-1 border-sky-400 hover:bg-sky-900 rounded-2xl">
                 <label for="matchAny"
-                    class="flex items-center place-content-center text-xs md:text-xl lg:text-2xl h-full w-full py-3 gap-3 text-gray-900 dark:text-gray-300">
+                    class="flex items-center place-content-center text-xs md:text-xl lg:text-2xl h-full w-full py-3 gap-3 text-gray-900 dark:text-gray-300 hover:bg-sky-900 hover:cursor-pointer rounded-2xl">
                     <input type="radio" id="matchAny" name="matchAll" value="0"
                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" >
                     Match Any
@@ -31,23 +31,22 @@
     <div class="m-auto flex place-content-center gap-5 w-full h-20 text-white py-2 px-5 rounded-full mt-5">
         <input type="text" name="search" id="search-bar" placeholder="Search Specific Content"
         class="px-2 h-full text-center w-7/10 text-xs md:text-lg lg:text-lg border-1 border-gray-300 focus:outline-2 focus:outline-green-400">
-        <!-- <button class="p-2 text-xs md:text-lg lg:text-lg w-2/10 border-1 border-gray-300 bg-orange-700 rounded-lg" id="search-btn">Search</button> -->
     </div>
-    <button type="button" id="select-all" class="block w-4/10 m-auto mt-3 items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-green-400 rounded-lg focus:ring-2 focus:ring-green-950 hover:bg-green-800">
+    <button type="button" id="select-all" class="block w-4/10 m-auto mt-3 items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-green-400 rounded-lg focus:ring-2 focus:ring-green-950 hover:bg-green-800 hover:cursor-pointer">
        Select All
    </button>
-    <button type="reset" id="reset" class="block w-4/10 m-auto mt-3 items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-green-400 rounded-lg focus:ring-2 focus:ring-green-950 hover:bg-green-800">
+    <button type="reset" id="reset" class="block w-4/10 m-auto mt-3 items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-green-400 rounded-lg focus:ring-2 focus:ring-green-950 hover:bg-green-800 hover:cursor-pointer">
        Un-Select All
    </button>
     <div 
-    class="mx-auto h-fit w-full max-w-9/10 mt-5 mb-3 p-3 dark:bg-gray-700 dark:border-gray-200 dark:text-white">
+    class="mx-auto max-w-9/10 mt-5 mb-3 p-3">
         <ul 
-        class="m-auto flex h-full flex-wrap gap-4 items-center text-center">
+        class="m-auto flex flex-wrap gap-4 items-center text-center h-fit min-h-100 w-full max-w-9/10 mt-5 mb-3 p-3 bg-gray-700 border-gray-200 text-white rounded-3xl">
         <% allCats.forEach(cat =>{ %>
             <li 
-            class="m-auto h-fit min-h-full w-3/10 flex flex-col place-content-center gap-2 items-center border border-gray-200 rounded-sm dark:border-gray-200">
+            class="m-auto h-fit min-h-full w-3/10 flex flex-col place-content-center gap-2 items-center border border-gray-200 rounded-3xl dark:border-gray-200">
             <label for="<%= cat.description%>"
-            class="px-1 py-2 text-xs md:text-xl lg:text-2xl md:text-md lg:text-2xl h-full w-full text-gray-900 dark:text-gray-300 hover:bg-cyan-950 hover:cursor-pointer">
+            class="px-1 py-2 text-xs md:text-xl lg:text-2xl md:text-md lg:text-2xl h-full w-full text-gray-900 dark:text-gray-300 hover:bg-cyan-950 hover:cursor-pointer rounded-3xl">
                 <input type="checkbox" id="<%= cat.description%>" name="categori" value="<%= cat.description%>" 
                 class="checkbox break-normal text-blue-600 mt-2 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                 <p><%= cat.description%></p>
@@ -61,11 +60,11 @@
     class="mx-auto flex place-content-around max-w-9/10 text-center">
         <div>
             <input type="submit" value="Get Questions"
-            class="text-center bg-gray-400 active:bg-green-800 hover:bg-green-400 focus:outline-4 focus:outline-offset-2 focus:outline-green-700 text-white font-bold py-2 px-4 rounded-full">
+            class="text-center bg-gray-400 active:bg-green-800 hover:bg-green-400 focus:outline-4 focus:outline-offset-2 focus:outline-green-700 text-white font-bold py-2 px-4 rounded-full  hover:cursor-pointer">
         </div>
         <div>
             <input type="submit" formaction="/questions/getSingleRandom" value="Get Random Question"
-            class="text-center bg-gray-400 active:bg-green-800 hover:bg-green-400 focus:outline-4 focus:outline-offset-2 focus:outline-green-700 text-white font-bold py-2 px-4 rounded-full">
+            class="text-center bg-gray-400 active:bg-green-800 hover:bg-green-400 focus:outline-4 focus:outline-offset-2 focus:outline-green-700 text-white font-bold py-2 px-4 rounded-full  hover:cursor-pointer">
         </div>
     </div>
 </form>

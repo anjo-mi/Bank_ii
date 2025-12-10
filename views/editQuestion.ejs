@@ -2,6 +2,11 @@
 
 <div id="success-message" class="hidden w-80/100 m-auto mb-5 text-green-400 text-center p-2 bg-gray-600 border-1 border-gray-200 rounded-lg "></div>
 
+<form id="answer-this" action="/questions/byId" method="POST" class="m-auto w-fit h-fit my-4 bg-lime-700 hover:bg-lime-600 active:bg-lime-900 border-1 border-gray-400 rounded-xl text-white">
+  <input type="hidden" name="id" value="<%= question._id.toString() %>">
+  <button class="block h-full w-full py-2 px-4 hover:cursor-pointer">Answer This Question</button>
+</form>
+
 <div class="w-95/100 m-auto mt-4 flex flex-col" id="edit-question-container">
   <form id="edit-question-form" action="/questions/edit/update" method="POST"
   class="flex flex-col lg:sticky lg:-top-12">
@@ -27,6 +32,11 @@
       <label for="question" class="block m-auto mt-5 text-xs md:text-lg lg:text">Question:</label>
       <textarea class="w-90/100 text-xs md:text-lg lg:text-lg order-3 h-25 mt-2 focus:mt-5 focus:h-140 lg:focus:h-80 transition-all duration-300 resize-none px-2 py-1 mx-auto mb-6 border-2 border-gray-700 outline-0 focus:outline-2 focus:outline-blue-600 focus:bg-slate-800 rounded-lg" name="question" id="question" required><%= question.content%></textarea>
     </div>
+    <% if (audio) { %>
+    <div class="w-full flex place-content-evenly items-center mx-auto my-2 h-fit">
+      <audio class="max-w-1/2 m-auto" id="recording" controls src="<%- audio %>"></audio>
+    </div>
+    <% } %>
     <div>
       <label for="answer" class="block m-auto mt-5 text-xs md:text-lg lg:text">Answer:</label>
       <textarea class="w-90/100 text-xs md:text-lg lg:text-lg order-3 h-25 mt-2 focus:mt-5 focus:h-140 lg:focus:h-80 transition-all duration-300 resize-none px-2 py-1 mx-auto mb-6 border-2 border-gray-700 outline-0 focus:outline-2 focus:outline-blue-600 focus:bg-slate-800 rounded-lg" name="answer" id="answer"><%= question.answer || ''%></textarea>

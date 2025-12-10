@@ -21,6 +21,7 @@
     for (let i = 0 ; i < questions.length ; i++){ 
       const q = questions[i];
       const a = answers[i];
+      const key = audioKeys?.[i];
     %>
     <div class="result-card hidden opacity-0 transition-opacity duration-300 ease-in-out w-95/100 min-w-95-100">
       <div class="question-portion">
@@ -29,6 +30,17 @@
       </div>
       <div class="answer-portion">
         <h2 class="font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3">Your response:</h2>
+        <% if (key) { %>
+          <form action="/questions/saveAudio" method="POST" id="record-container" class="w-full flex place-content-evenly items-center mx-auto my-2 h-hit">
+            <input type="hidden" name="answer" class="answer" value="<%= a %>">
+            <input type="hidden" name="content" class="content" value="<%= q.content %>">
+            <input type="hidden" name="questionId" class="questionId" value="<%= q._id %>">
+            <input type="hidden" name="feedback" class="feedback" value="<%= feedback[i] %>">
+            <audio class="max-w-1/2" id="recording" controls src="<%- key %>"></audio>
+            <input id="audio-file" type="hidden" value="<%- key %>">
+            <button class="save-audio w-1/4 px-3 border-1 border-white mb-1 py-1 bg-lime-800 hover:bg-lime-600 active:bg-lime-900 rounded-xl space-content-evenly">Store Audio</button>
+          </form>
+        <% } %>
         <form action="/questions/saveAnswer" method="POST" class="save-answer">
           <input type="hidden" name="answer" class="answer" value="<%= a %>">
           <input type="hidden" name="content" class="content" value="<%= q.content %>">

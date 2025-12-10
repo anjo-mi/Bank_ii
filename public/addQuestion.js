@@ -135,6 +135,14 @@ newQuestionForm.addEventListener('submit', async (e) => {
       return;
     }
 
+    if (question.trim().split(' ').length > 60){
+      showError('questions shouldnt be so verbose')
+      // hide the load indicator / display the button
+      document.getElementById('load-indicator').style.display = 'none';
+      document.getElementById('submit').style.display = 'block';
+      return;
+    }
+
     try{
       // now attempt form submission
       const response = await fetch('/questions/create', {
@@ -203,6 +211,14 @@ newQuestionForm.addEventListener('keydown', async (e) => {
 
     if (!question.trim().length){
       showError('questions need content')
+      // hide the load indicator / display the button
+      document.getElementById('load-indicator').style.display = 'none';
+      document.getElementById('submit').style.display = 'block';
+      return;
+    }
+
+    if (question.trim().split(' ').length > 60){
+      showError('questions shouldnt be so verbose')
       // hide the load indicator / display the button
       document.getElementById('load-indicator').style.display = 'none';
       document.getElementById('submit').style.display = 'block';

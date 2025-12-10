@@ -1,5 +1,6 @@
 import models from "../models/index.js";
 const { User, Category, Question, PracticeSession } = models;
+import s3client from "../controllers/aws.js";
 
 import {marked} from 'marked';
 import createDOMPurify from 'dompurify';
@@ -64,16 +65,29 @@ export default {
         }
         return q;
       });
-      const feedback = session.aiResponse ? session.aiResponse.questionResponse.map(res => {        
+      const feedback = session.aiResponse ? session.aiResponse.questionResponse.map(res => {      
         const window = new JSDOM('').window;
         const pure = createDOMPurify(window);
         const purified = pure.sanitize(marked.parse(res.feedback, {breaks:true}));
-        return purified.replaceAll('\n', '<br>');
+
+        return purified.replaceAll('\n', '<br>')
+                       .replaceAll('\\n', '<br>')
+                       .replaceAll('-', '<br>')
+                       .replaceAll('&lt;', '<br>')
+                       .replaceAll('&gt;', '<br>')
+                       .replaceAll('&nbsp;', '<br>')
+                       .replaceAll(',,,', '<br><br><br>')
+                       .replaceAll('###', '<br><br><br>');
       }) : [];
+      const audioKeys = await Promise.all(
+        session.audioKeys?.map(async key => key ? await s3client.getAudio(key) : key)
+      );
+
       return res.render('previousSession', {
         session,
         questions,
-        feedback
+        feedback,
+        audioKeys,
       })
     }catch(getSessionError){
       console.log({getSessionError});
