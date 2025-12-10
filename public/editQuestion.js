@@ -317,11 +317,13 @@ dismissFeedbackBtn.addEventListener('click', (e) => {
 })
 
 document.addEventListener('click', (e) => {
-  if (!e.target.classList.contains('saved-feedback') 
-    && !e.target.classList.contains('view-fb')){
-    prevFeedbackBox.style.opacity = 0;
+  let elm = e.target;
+  while (elm){
+    if (elm.classList.contains('saved-feedback') || elm.classList.contains('view-fb')) return;
+    elm = elm.parentElement;
+  }
+  prevFeedbackBox.style.opacity = 0;
   setTimeout(() => {
     prevFeedbackBox.style.display = 'none';
   },300)
-  }
 })

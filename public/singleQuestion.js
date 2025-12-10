@@ -55,13 +55,15 @@ document.addEventListener('click', (e) => {
     prevAnswerBox.style.display = 'none';
   },300)
   }
-  if (!e.target.classList.contains('saved-feedback') 
-    && !e.target.classList.contains('view-fb')){
-    prevFeedbackBox.style.opacity = 0;
+  let elm = e.target;
+  while (elm){
+    if (elm.classList.contains('saved-feedback') || elm.classList.contains('view-fb')) return;
+    elm = elm.parentElement;
+  }
+  prevFeedbackBox.style.opacity = 0;
   setTimeout(() => {
     prevFeedbackBox.style.display = 'none';
   },300)
-  }
 })
 
 answerForm.addEventListener('submit', async (e) => {
