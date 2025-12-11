@@ -2,6 +2,7 @@ import agent from "../services/aiService.js";
 import models from "../models/index.js";
 const { User, Category, Question, PracticeSession } = models;
 import s3client from "../controllers/aws.js";
+import aiLimiter from "../middleware/limiter-ai.js";
 
 import {marked} from 'marked';
 import createDOMPurify from 'dompurify';
@@ -127,7 +128,9 @@ export default {
         const user = await User.findById(req.user.id);
         const level = user?.info?.level;
         const title = user?.info?.title;
-        agent.getAnswerFeedback(questions[current], answer, current, sessionId, level,title);
+
+        const userHasTokens = await aiLimiter.limitAI(current,req.user.id,sessionId,questions[current]);
+        if (userHasTokens) agent.getAnswerFeedback(questions[current], answer, current, sessionId, level,title,req.user.id);
 
         if (audio){
           const audioStoreResponse = await s3client.storeAudio({key,audio});
