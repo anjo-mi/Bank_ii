@@ -41,6 +41,9 @@ deleteSessionBtns.forEach(btn => {
       setTimeout(() => {
         clicked.style.display = 'none';
       }, 300)
+      const count = document.getElementById('session-count');
+      const prevCount = +count.textContent;
+      count.textContent = `${prevCount - 1}`;
     }else console.log('failed to delete');
   })
 })

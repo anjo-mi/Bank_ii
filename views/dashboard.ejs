@@ -30,7 +30,7 @@
       </div>
 
       <div>
-        <dt class="w-9/10 text-left ml-4">Previous Practice Sessions: <%= sessions.length %></dt>
+        <dt class="w-9/10 text-left ml-4">Previous Practice Sessions: <span id="session-count"><%= sessions.length %></span></dt>
         <div  class="w-9/10 m-auto h-40 md:h-80 overflow-y-scroll p-2 border border-2 border-sky-600 bg-stone-950 rounded-xl">
           <% for (const session of sessions.slice(0).reverse()){ %>
           <dd>

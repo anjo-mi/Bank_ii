@@ -25,7 +25,8 @@ answerBox.addEventListener('keydown', (e) =>{
 
 answerForm.addEventListener('submit', async (e) => {
   e.preventDefault();
-
+  answerForm.style.width = '0px';
+  answerForm.style.opacity = '0';
   const answer = document.getElementById('answer').value;
   const answers = document.getElementById('answers').value;
   const questions = JSON.parse(document.getElementById('questions').value);
@@ -35,10 +36,18 @@ answerForm.addEventListener('submit', async (e) => {
 
   if (!answer.trim().length){
     console.log('make an effort to get an effort');
+    setTimeout(() => {
+      answerForm.style.width = '100%';
+      answerForm.style.opacity = '100';
+    }, 500);
     return;
   }
   if (answer.trim().split(' ').length > 300){
     console.log('keep words to a 300 maximum');
+    setTimeout(() => {
+      answerForm.style.width = '100%';
+      answerForm.style.opacity = '100';
+    }, 500);
     return;
   }
 
@@ -86,6 +95,10 @@ answerForm.addEventListener('submit', async (e) => {
         document.getElementById('sessionId').value = data.sessionId;
         audioFile.value = '';
         audioFile.checked = false;
+        setTimeout(() => {
+          answerForm.style.width = '100%';
+          answerForm.style.opacity = '100';
+        }, 500);
       }
     }
 });
