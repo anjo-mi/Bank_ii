@@ -79,7 +79,7 @@ answerForm.addEventListener('submit', async (e) => {
       body
     })
 
-    if (response.ok){
+    if (response.ok || response.status === 304){
       const data = await response.json();
 
       if (data.current === questions.length){
@@ -102,6 +102,35 @@ answerForm.addEventListener('submit', async (e) => {
       }
     }
 });
+
+document.addEventListener('DOMContentLoaded', async() => {
+  const response = await fetch('/practice/session-status')
+
+  console.log({response});
+
+  if (response.ok || response.status === 304){
+    const data = await response.json();
+    console.log({data});
+    if (data.current === questions.length){
+      window.location.replace('/practice/getLoadResults');
+    }else{
+      document.getElementById('questionNumber').textContent = data.current + 1;
+      document.querySelector('.question-content').textContent = data.questions[data.current].content;
+      answerBox.value = '';
+      audioContainer.classList.add('hidden');
+      document.getElementById('answers').value = JSON.stringify(data.answers);
+      // document.getElementById('questions').value = JSON.stringify(data.questions);
+      document.getElementById('current').value = data.current;
+      document.getElementById('sessionId').value = data.sessionId;
+      audioFile.value = '';
+      audioFile.checked = false;
+      setTimeout(() => {
+        answerForm.style.width = '100%';
+        answerForm.style.opacity = '100';
+      }, 500);
+    }
+  }
+})
 
 if (navigator.mediaDevices?.getUserMedia){
   class Recorder{

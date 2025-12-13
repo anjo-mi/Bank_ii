@@ -71,6 +71,8 @@ export default {
       // send the user to the briefing page
       // index at -1, so each next call works for the length of the array
         // (first next() -> 0, listens for it to equal arr length and abort)
+      delete req.session.session;
+      await req.session.save()
       res.render('startPractice', {
         questions: randomizedQuestions,
         current: -1,
@@ -85,24 +87,38 @@ export default {
     }
   },
 
+  checkStatus: async (req,res) => {
+    const session = req.session.session;
+    console.log({session})
+    return session ? res.json(session) : res.status(404).json({message: "no session in progress"});
+  },
+
   // begins being called from breifing page (/startPractice)
   showNext: async (req,res) => {
     try{
       const audio = req.file;
       const body = req.body;
       let {questions, current, sessionId} = req.body;
-      
-      // pages are rendered, so parse JSON
       // if this is from the /startPractice page, initialize an answers array, otherwise it equals itself (parsed)
-      const answers = req.body.answers && req.body.answers.length ? JSON.parse(req.body.answers) : [];
+      let answers = req.body.answers?.length ? JSON.parse(req.body.answers) : [];
       const answer = req.body.answer;
+      // pages are rendered, so parse JSON
       questions = audio || current < 0 ? JSON.parse(questions) : questions;
+
+      const sessionData = req.session.session;
+      if (sessionData && +req.body.current < 0){
+        const {questions, current, sessionId, answers} = sessionData
+        return res.render('practiceQuestion', {
+          questions,current,sessionId,answers
+        });
+      }
 
       const session = +current < 0 ? await PracticeSession.create({
         userId: req.user.id,
         questions,
         answers,
         audioKeys: [],
+        aiResponse: {questionResponse: []},
       }) : null;
       
       sessionId = session ? 
@@ -145,6 +161,11 @@ export default {
         req.session.practiceId = {sessionId};
         await req.session.save();
       }
+      console.log({questions, current, sessionId, answers,})
+      req.session.session = {
+        questions, current, sessionId, answers,
+      }
+      await req.session.save();
 
       // render the practice question page if its the start of the session
       if (!current) res.render('practiceQuestion', {questions,current,answers,sessionId: sessionId ? sessionId.toString() : null});
@@ -223,6 +244,7 @@ export default {
     try{
       const {sessionId} = req.session.practiceId;
       delete req.session.practiceId;
+      delete req.session.session;
       res.render('loadResults', {sessionId})
     }catch(getLoadResultsError){
       console.log({getLoadResultsError});
