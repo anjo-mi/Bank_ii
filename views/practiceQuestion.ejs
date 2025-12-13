@@ -1,14 +1,14 @@
 <div class="">
    
-    <div class="w-95/100 m-auto mt-4 flex flex-col" id="answerContainer">
+    <div class="w-95/100 py-5 m-auto mt-4 flex flex-col" id="answerContainer">
         <form id="answerSubmission" action="/practice/next" method="POST"
-        class="flex flex-col lg:sticky lg:-top-12">
+        class="flex flex-col px-3 lg:sticky lg:-top-12 w-full opacity-100 transition-w-opacity duration-350 ease-in-out">
         <input type="hidden" id="questions" name="questions" value="<%= JSON.stringify(questions) %>">
         <input type="hidden" id="sessionId" name="sessionId" value="<%= sessionId %>">
         <input type="hidden" id="current" name="current" value="<%= current %>">
         <input type="hidden" id="answers" name="answers" value="<%= JSON.stringify(answers) %>">
              <div>
-                <h2 class="font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3">Question <span id="questionNumber" class="inline-block text-center p-2 border-1 bg-slate-800 text-white"><%= current + 1%></span> of <span id="totalQuestions" class="inline-block p-2 border-1 bg-slate-800 text-white"><%= questions.length%></span></h2>
+                <h2 class="font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3">Question <span id="questionNumber" class="inline-block text-center p-2 border-1 border-teal-500 bg-slate-800 text-white rounded-lg"><%= current + 1%></span> of <span id="totalQuestions" class="inline-block p-2 border-1 border-teal-500 bg-slate-800 text-white rounded-lg"><%= questions.length%></span></h2>
                 <p class="question-content m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg text-lg md:text-xl lg:text-2xl"><%= questions[current].content%></p>
             </div>
             <ul class="flex order-2 transition-all duration-400 gap-4 m-auto w-full h-12 lg:h-16 mt-3 mb-3 place-content-around text-center">

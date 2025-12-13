@@ -4,6 +4,7 @@ const { User, Category, Question, PracticeSession } = models;
 import agent from "../services/aiService.js";
 
 import s3client from "../controllers/aws.js";
+import aiLimiter from "../middleware/limiter-ai.js";
 
 export default {
 
@@ -302,7 +303,9 @@ export default {
       const user = await User.findById(req.user.id);
       const level = user?.info?.level;
       const title = user?.info?.title;
-      agent.getAnswerFeedback(question, answer, 0, sessionId, level,title);
+
+      const userHasTokens = await aiLimiter.limitAI(0,req.user.id,sessionId,question);
+      if (userHasTokens) agent.getAnswerFeedback(question, answer, 0, sessionId, level,title,req.user.id);
 
       if (audio) {const audioStoreResponse = await s3client.storeAudio({key,audio});}
 

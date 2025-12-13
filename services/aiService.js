@@ -8,7 +8,7 @@ dotenv.config();
 export const ai = new GoogleGenAI({apiKey: process.env.GEMINI_KEY});
 
 export default {
-  getAnswerFeedback: async (question,answer,current = 0,sessionId, level,title) => {
+  getAnswerFeedback: async (question,answer,current = 0,sessionId, level,title,userId) => {
     try{
       // TODO at a later date:
       //  - this is prolly where a rate limiter check will be initiated, and the error response will be handled below |||||ctrl F: rate-limiter||||||
@@ -83,6 +83,13 @@ export default {
             [`aiResponse.questionResponse.${current}.resources`]: [],
             [`aiResponse.questionResponse.${current}.questionId`]: question._id,
           },
+        },
+        {new:true}
+      )
+      const user = await User.findByIdAndUpdate(
+        userId,
+        {
+          $inc: { tokens: 1}
         },
         {new:true}
       )
