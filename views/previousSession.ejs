@@ -6,13 +6,7 @@
   </ul>
 </div>
 
-<div id="interview-results" class="flex h-screen gap-2 w-full m-auto justify-center items-center text-xs md:text-lg">
-  <div class="flex flex-col h-full flex-1">
-      <button type="button" id="prev" class="inline-flex m-auto items-center justify-center text-white bg-teal-900 rounded-sm outline-1 outline-gray-400 hover:bg-teal-600 hover:bold focus:ring-4 focus:ring-medium shadow-xs rounded-base w-10 h-10">
-        <
-        <span class="sr-only">Previous</span>
-      </button>
-  </div>
+<div id="interview-results" class="flex h-screen w-full m-auto justify-center items-center text-xs md:text-lg">
   <section id="resultCarousel" class="result-card-carousel m-auto flex flex-col w-full border-1 rounded-lg border-gray-300 p-3 gap-6 items-center place-content-center">
     <h1 class="m-auto p-3 w-70/100 border-1 border-gray-300 rounded-lg bg-orange-800 text-white">Interview Results:</h1>
     <%
@@ -63,7 +57,7 @@
       </div>
       <div class="ai-resources">
         <ul class="min-h-24 max-h-80 overflow-y-scroll p-2 border border-2 border-sky-600 bg-stone-950 rounded-xl">
-          <% for (const resource of ais[i].resources){ %>
+          <% if (ais[i]) for (const resource of ais[i].resources){ %>
           <li class="flex items-center gap-4 text-center place-content-between w-full px-4 py-2 border-1 border-blue-200 cursor-pointer border-gray-600 bg-indigo-500 hover:bg-green-600 hover:text-white focus:ring-gray-500 focus:text-white rounded-xl">
             <a href="<%= resource %>" target="_blank" class="practice-date block m-auto break-all text-center text-xs md:text-base w-7/10 h-full flex-4"><%= resource %>></a>
             <form action="/saveResource" method="POST" class="save-resource w-3/10 block m-auto flex-1">
@@ -83,7 +77,13 @@
     <%} %>
   </section>
   <div class="flex flex-col h-full flex-1">
-      <button type="button" id="next" class="inline-flex m-auto items-center justify-center text-white bg-teal-900 rounded-sm outline-1 outline-gray-400 hover:bg-teal-600 hover:bold focus:ring-4 focus:ring-medium shadow-xs rounded-base w-10 h-10">
+      <button type="button" id="prev" class="inline-flex m-auto items-center justify-center text-white bg-teal-900 rounded-sm outline-1 outline-gray-400 hover:bg-teal-600 hover:bold active:ring-4 active:ring-medium shadow-xs rounded-base w-7 h-7 md:w-10 md:h-10 fixed top-100 left-5 md:left-7 lg:left-20">
+        <
+        <span class="sr-only">Previous</span>
+      </button>
+  </div>
+  <div class="flex flex-col h-full flex-1">
+      <button type="button" id="next" class="inline-flex m-auto items-center justify-center text-white bg-teal-900 rounded-sm outline-1 outline-gray-400 hover:bg-teal-600 hover:bold active:ring-4 active:ring-medium shadow-xs rounded-base w-7 h-7 md:w-10 md:h-10 fixed top-100 right-5 md:right-7 lg:right-20">
         >
         <span class="sr-only">Next</span>
       </button>

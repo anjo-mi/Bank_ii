@@ -7,12 +7,6 @@
 </div>
 
 <div id="interview-results" class="flex h-screen w-full m-auto justify-center items-center text-xs md:text-lg">
-  <div class="flex flex-col h-full flex-1">
-      <button type="button" id="prev" class="inline-flex m-auto items-center justify-center text-white bg-teal-900 rounded-sm outline-1 outline-gray-400 hover:bg-teal-600 hover:bold focus:ring-4 focus:ring-medium shadow-xs rounded-base w-10 h-10">
-        <
-        <span class="sr-only">Previous</span>
-      </button>
-  </div>
   <section id="resultCarousel" class="result-card-carousel m-auto flex flex-col w-full border-1 rounded-lg border-gray-300 p-3 gap-6 items-center place-content-center">
     <h1 class="m-auto p-3 w-70/100 border-1 border-gray-300 rounded-lg bg-orange-800 text-white">Interview Results:</h1>
     <% 
@@ -52,7 +46,7 @@
       <%
       if (responses && responses.length){ 
         
-        const resources = responses[i].resources;
+        const resources = responses[i] ? responses[i].resources : [];
       %>
       <div class="ai-response">
         <h2 class="font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3">Bot Botterson says:</h2>
@@ -93,7 +87,13 @@
     <%} %>
   </section>
   <div class="flex flex-col h-full flex-1">
-      <button type="button" id="next" class="inline-flex m-auto items-center justify-center text-white bg-teal-900 rounded-sm outline-1 outline-gray-400 hover:bg-teal-600 hover:bold focus:ring-4 focus:ring-medium shadow-xs rounded-base w-10 h-10">
+      <button type="button" id="prev" class="inline-flex m-auto items-center justify-center text-white bg-teal-900 rounded-sm outline-1 outline-gray-400 hover:bg-teal-600 hover:bold active:ring-4 active:ring-medium shadow-xs rounded-base w-7 h-7 md:w-10 md:h-10 fixed top-100 left-5 md:left-7 lg:left-20">
+        <
+        <span class="sr-only">Previous</span>
+      </button>
+  </div>
+  <div class="flex flex-col h-full flex-1">
+      <button type="button" id="next" class="inline-flex m-auto items-center justify-center text-white bg-teal-900 rounded-sm outline-1 outline-gray-400 hover:bg-teal-600 hover:bold active:ring-4 active:ring-medium shadow-xs rounded-base w-7 h-7 md:w-10 md:h-10 fixed top-100 right-5 md:right-7 lg:right-20">
         >
         <span class="sr-only">Next</span>
       </button>
