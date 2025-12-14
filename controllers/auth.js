@@ -21,6 +21,7 @@ export default {
 
       req.login(user, (err) => {
         if (err) return next(err);
+        req.session.optOut = user.optOut;
         return res.status(200).json({redirect:'/practice'});
       });
     })(req, res, next);
@@ -57,6 +58,7 @@ export default {
       const user = await User.create({email,username,password});
       req.login(user,(err) => {
         if (err) return res.status(500).json({message:"the registration succeeded, but the login failed"});
+        req.session.optOut = user.optOut;
         return res.status(201).json(user)
       })
     }

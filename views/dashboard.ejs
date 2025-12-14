@@ -112,20 +112,24 @@
    <img class="settings w-6 h-6" src="/images/settings.svg" alt="settings">
 </button>
 
-<section id="settings-menu" class="settings-menu settings hidden opacity-0 transition-opacity duration-300 ease-in-out h-fit w-2/5 md:w-1/6 fixed top-15 right-2 z-50 p-2 text-sm text-white bg-gray-600 border-1 border-white rounded-xl">
+<section id="settings-menu" class="settings-menu settings hidden opacity-0 transition-opacity duration-300 ease-in-out h-fit w-1/2 md:w-1/4 lg:w-1/6 fixed top-15 right-2 z-50 p-2 text-sm text-white bg-gray-600 border-1 border-white rounded-xl">
   <form id="user-settings" class="settings" action="/updateUser" method="PATCH">
+    <div id="user-info" class="hidden"><%= JSON.stringify(user) %></div>
     <h5 class="settings text-sm bg-teal-900 w-fit py-1 px-4 text-center rounded-full"><%= user.username %></h5>
     <p class="settings text-sm bg-blue-900 w-fit mt-2 py-1 px-4 text-center rounded-full">Career Level:</p>
     <ul>
-      <li class="settings block my-2 ml-5 flex gap-3"><label class="settings" for="early"><input class="settings" id="early" name="status" type="radio" value="early" required>Early</label></li>
-      <li class="settings block my-2 ml-5 flex gap-3"><label class="settings" for="early-mid"><input class="settings" id="early-mid" name="status" type="radio" value="early-to-mid">Early-Mid</label></li>
-      <li class="settings block my-2 ml-5 flex gap-3"><label class="settings" for="mid"><input class="settings" id="mid" name="status" type="radio" value="mid">Mid-Level</label></li>
-      <li class="settings block my-2 ml-5 flex gap-3"><label class="settings" for="mid-senior"><input class="settings" id="mid-senior" name="status" type="radio" value="mid-to-senior">Mid-Senior</label></li>
-      <li class="settings block my-2 ml-5 flex gap-3"><label class="settings" for="senior"><input class="settings" id="senior" name="status" type="radio" value="senior">Senior Level</label></li>
+      <li class="settings block my-2"><label class="settings m-auto block h-full w-full hover:bg-gray-500 hover:cursor-pointer rounded-lg relative" for="early"><input class="settings block absolute left-2 top-1" id="early" name="status" type="radio" value="early" required>Early</label></li>
+      <li class="settings block my-2"><label class="settings m-auto block h-full w-full hover:bg-gray-500 hover:cursor-pointer rounded-lg relative" for="early-mid"><input class="settings block absolute left-2 top-1" id="early-mid" name="status" type="radio" value="early-to-mid">Early-Mid</label></li>
+      <li class="settings block my-2"><label class="settings m-auto block h-full w-full hover:bg-gray-500 hover:cursor-pointer rounded-lg relative" for="mid"><input class="settings block absolute left-2 top-1" id="mid" name="status" type="radio" value="mid">Mid-Level</label></li>
+      <li class="settings block my-2"><label class="settings m-auto block h-full w-full hover:bg-gray-500 hover:cursor-pointer rounded-lg relative" for="mid-senior"><input class="settings block absolute left-2 top-1" id="mid-senior" name="status" type="radio" value="mid-to-senior">Mid-Senior</label></li>
+      <li class="settings block my-2"><label class="settings m-auto block h-full w-full hover:bg-gray-500 hover:cursor-pointer rounded-lg relative" for="senior"><input class="settings block absolute left-2 top-1" id="senior" name="status" type="radio" value="senior">Senior Level</label></li>
     </ul>
     <p class="settings text-sm bg-blue-900 w-fit mt-2 py-1 px-4 text-center rounded-full">Position Title:</p>
-    <div class="settings block my-2 ml-3 flex gap-3">
-      <input id="title" name="title" type="text" placeholder="<%= user.info?.title %>" class="settings w-full mb-8 px-2 py-1 bg-gray-900 text-white border-1 border-blue-400 rounded-xl" minlength="3" maxlength="30" required>
+    <div class="settings block my-2">
+      <input id="title" name="title" type="text" value="<%= user.info?.title || 'software engineer' %>" class="settings w-full px-2 py-1 bg-gray-900 text-white border-1 border-blue-400 rounded-xl" minlength="3" maxlength="30" required>
+    </div>
+    <div class="settings block mt-5 mb-10">
+      <label class="settings m-auto block h-full w-full hover:bg-gray-500 hover:cursor-pointer rounded-lg relative" for="optOut"><input class="settings block absolute left-2 top-1" id="optOut" name="optOut" type="checkbox">Exclude 100 Devs ?'s</label>
     </div>
     <button type="submit" class="settings w-fit absolute bottom-2 right-2 px-3 py-1 bg-green-400 hover:bg-green-700 active:bg-green-900 rounded-2xl">Submit Changes</button>
   </form>

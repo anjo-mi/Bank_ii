@@ -12,8 +12,9 @@ export default {
   // load practice setup page with all [pre-loaded] categories
   getCategories: async (req, res) => {
     const userCategories = await Category.find({userId:req.user.id});
-    const defaultCategories = await Category.find({isDefault:true});
-    const allCats = userCategories ? Array.from(new Set([...userCategories,...defaultCategories])) : defaultCategories;
+    let defaultCategories = await Category.find({isDefault:true});
+    if (req.session?.optOut) defaultCategories = defaultCategories.filter(c => !c.is100Devs);
+    const allCats = userCategories ? Array.from(new Set([...userCategories.map(c => c.description),...defaultCategories.map(c => c.description)])) : defaultCategories.map(c => c.description);
     res.render("practice", { allCats });
     // res.json({allCats})
   },
@@ -25,6 +26,7 @@ export default {
       categori = categori && !Array.isArray(categori) ? [categori] : categori;
 
       let defaultQuestions = await Question.find({isDefault:true});
+      if (req.session.optOut) defaultQuestions = defaultQuestions.filter(q => !q.is100Devs);
       const userQuestions = await Question.find({userId: req.user.id});
       const ignoredIds = new Set(userQuestions.map(q => q.parentId).filter(Boolean).map(String));
       const questions = userQuestions ? [...userQuestions, ...defaultQuestions.filter(q => !ignoredIds.has(q._id.toString()))] : defaultQuestions;

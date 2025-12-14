@@ -59,6 +59,9 @@ settingsForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   const level = settingsForm.querySelector('input[name="status"]:checked').value;
   const title = settingsForm.querySelector('#title').value;
+  const optOut = settingsForm.querySelector('#optOut').checked;
+
+  console.log({settingsForm})
 
   const response = await fetch('/updateUser', {
     method: 'PATCH',
@@ -66,6 +69,7 @@ settingsForm.addEventListener('submit', async (e) => {
     body: JSON.stringify({
       level,
       title,
+      optOut,
     })
   })
 
@@ -80,10 +84,26 @@ settingsForm.addEventListener('submit', async (e) => {
 })
 
 document.addEventListener('click', (e) => {
-  if (!e.target.classList.contains('settings')){
-    settingsMenu.style.opacity = 0
-    setTimeout(() => {
-      settingsMenu.style.display = "none"
-    }, 300)
+  let targ = e.target;
+  while (targ){
+    if (targ.classList.contains('settings')) return;
+    targ = targ.parentElement;
+  }
+  settingsMenu.style.opacity = 0
+  setTimeout(() => {
+    settingsMenu.style.display = "none"
+  }, 300)
+})
+
+document.addEventListener('DOMContentLoaded', () => {
+  const user = JSON.parse(document.getElementById('user-info').textContent);
+  console.log({user})
+  const {level} = user.info;
+  const {optOut} = user;
+  if (level){
+    document.querySelector(`input[value="${level}"]`).checked = true;
+  }
+  if (optOut){
+    document.querySelector(`input[name="optOut"]`).checked = true;
   }
 })

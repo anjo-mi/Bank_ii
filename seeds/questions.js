@@ -30,7 +30,7 @@ export const questions = [
     userId: null
   },
   {
-    content: "Give me an example of a time you had to take a creative and unusual approach to solve coding problem. How did this idea come to your mind? Why do you think it was unusual?",
+    content: "Give me an example of a time you had to take a creative and unusual approach to solve problem. How did this idea come to your mind? Why do you think it was unusual?",
     categories: ["Behavioral"],
     answer: null,
     isDefault: true,
@@ -72,7 +72,7 @@ export const questions = [
     userId: null
   },
   {
-    content: "Tell me about a time when you worked with someone who was not completing his or her share of the work. How did you handle the situation? Did you discuss your concern with your coworker? With your manager? If yes, how did your coworker respond to your concern? What was your manager's response?",
+    content: "Tell me about a time when you worked with someone who was not completing his or her share of the work. How did you handle the situation?",
     categories: ["Behavioral"],
     answer: null,
     isDefault: true,
@@ -93,7 +93,7 @@ export const questions = [
     userId: null
   },
   {
-    content: "Tell me about your experience at 100Devs.",
+    content: "Tell me about your experience at your current place of employment.",
     categories: ["Behavioral"],
     answer: null,
     isDefault: true,
@@ -162,6 +162,7 @@ export const questions = [
     categories: ["Technical", "HTML"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -169,6 +170,7 @@ export const questions = [
     categories: ["Technical", "HTML"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -176,6 +178,7 @@ export const questions = [
     categories: ["Technical", "HTML"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -183,6 +186,7 @@ export const questions = [
     categories: ["Technical", "HTML"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -190,6 +194,7 @@ export const questions = [
     categories: ["Technical", "HTML"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -197,6 +202,7 @@ export const questions = [
     categories: ["Technical", "HTML"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -204,6 +210,7 @@ export const questions = [
     categories: ["Technical", "HTML"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -211,6 +218,7 @@ export const questions = [
     categories: ["Technical", "HTML"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -218,6 +226,7 @@ export const questions = [
     categories: ["Technical", "HTML"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -225,6 +234,7 @@ export const questions = [
     categories: ["Technical", "HTML"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -232,15 +242,17 @@ export const questions = [
     categories: ["Technical", "HTML"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
-  
+
   // CSS Questions
   {
     content: "What is CSS selector specificity and how does it work?",
     categories: ["Technical", "CSS"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -248,6 +260,7 @@ export const questions = [
     categories: ["Technical", "CSS"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -255,6 +268,7 @@ export const questions = [
     categories: ["Technical", "CSS"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -262,6 +276,7 @@ export const questions = [
     categories: ["Technical", "CSS"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -269,6 +284,7 @@ export const questions = [
     categories: ["Technical", "CSS"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -276,6 +292,7 @@ export const questions = [
     categories: ["Technical", "CSS"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -283,6 +300,7 @@ export const questions = [
     categories: ["Technical", "CSS"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -290,6 +308,7 @@ export const questions = [
     categories: ["Technical", "CSS"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -297,6 +316,7 @@ export const questions = [
     categories: ["Technical", "CSS"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -304,6 +324,7 @@ export const questions = [
     categories: ["Technical", "CSS"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -311,6 +332,7 @@ export const questions = [
     categories: ["Technical", "CSS"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -318,6 +340,7 @@ export const questions = [
     categories: ["Technical", "CSS"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -325,6 +348,7 @@ export const questions = [
     categories: ["Technical", "CSS"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -332,6 +356,7 @@ export const questions = [
     categories: ["Technical", "CSS"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -339,6 +364,7 @@ export const questions = [
     categories: ["Technical", "CSS"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -346,6 +372,7 @@ export const questions = [
     categories: ["Technical", "CSS"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -353,6 +380,7 @@ export const questions = [
     categories: ["Technical", "CSS"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -360,6 +388,7 @@ export const questions = [
     categories: ["Technical", "CSS"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -367,6 +396,7 @@ export const questions = [
     categories: ["Technical", "CSS"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -374,6 +404,7 @@ export const questions = [
     categories: ["Technical", "CSS"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -381,6 +412,7 @@ export const questions = [
     categories: ["Technical", "CSS"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -388,6 +420,7 @@ export const questions = [
     categories: ["Technical", "CSS"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -395,6 +428,7 @@ export const questions = [
     categories: ["Technical", "CSS"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -402,6 +436,7 @@ export const questions = [
     categories: ["Technical", "CSS"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -409,6 +444,7 @@ export const questions = [
     categories: ["Technical", "CSS"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -416,6 +452,7 @@ export const questions = [
     categories: ["Technical", "CSS"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -423,6 +460,7 @@ export const questions = [
     categories: ["Technical", "CSS"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -430,6 +468,7 @@ export const questions = [
     categories: ["Technical", "CSS"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -437,6 +476,7 @@ export const questions = [
     categories: ["Technical", "CSS"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -444,6 +484,7 @@ export const questions = [
     categories: ["Technical", "CSS"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -451,15 +492,17 @@ export const questions = [
     categories: ["Technical", "CSS"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
-  
+
   // Javascript Questions
   {
     content: "Explain event delegation",
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -467,6 +510,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -474,6 +518,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -481,6 +526,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -488,6 +534,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -495,6 +542,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -502,6 +550,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -509,6 +558,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -516,6 +566,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -523,6 +574,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -530,6 +582,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -537,6 +590,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -544,6 +598,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -551,6 +606,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -558,6 +614,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -565,6 +622,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -572,6 +630,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -579,6 +638,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -586,6 +646,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -593,6 +654,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -600,6 +662,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -607,6 +670,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -614,6 +678,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -621,6 +686,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -628,6 +694,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -635,6 +702,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -642,6 +710,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -649,6 +718,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -656,6 +726,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -663,6 +734,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -670,6 +742,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -677,6 +750,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -684,6 +758,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -691,6 +766,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -698,6 +774,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -705,6 +782,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -712,6 +790,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -719,6 +798,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -726,6 +806,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -733,6 +814,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -740,6 +822,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -747,6 +830,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -754,6 +838,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -761,6 +846,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -768,6 +854,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -775,6 +862,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -782,6 +870,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -789,6 +878,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -796,6 +886,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -803,6 +894,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -810,6 +902,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -817,6 +910,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -824,6 +918,7 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -831,15 +926,17 @@ export const questions = [
     categories: ["Technical", "Javascript"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
-  
+
   // Javascript General Questions
   {
     content: "Can you name two programming paradigms important for JavaScript app developers?",
     categories: ["Technical", "Javascript General"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -847,6 +944,7 @@ export const questions = [
     categories: ["Technical", "Javascript General"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -854,6 +952,7 @@ export const questions = [
     categories: ["Technical", "Javascript General"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -861,6 +960,7 @@ export const questions = [
     categories: ["Technical", "Javascript General"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -868,6 +968,7 @@ export const questions = [
     categories: ["Technical", "Javascript General"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -875,15 +976,17 @@ export const questions = [
     categories: ["Technical", "Javascript General"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
-  
+
   // Node Questions
   {
     content: "What is Node.js? Where can you use it?",
     categories: ["Technical", "Node"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -891,6 +994,7 @@ export const questions = [
     categories: ["Technical", "Node"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -898,6 +1002,7 @@ export const questions = [
     categories: ["Technical", "Node"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -905,6 +1010,7 @@ export const questions = [
     categories: ["Technical", "Node"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -912,6 +1018,7 @@ export const questions = [
     categories: ["Technical", "Node"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -919,6 +1026,7 @@ export const questions = [
     categories: ["Technical", "Node"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -926,6 +1034,7 @@ export const questions = [
     categories: ["Technical", "Node"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -933,6 +1042,7 @@ export const questions = [
     categories: ["Technical", "Node"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -940,6 +1050,7 @@ export const questions = [
     categories: ["Technical", "Node"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -947,6 +1058,7 @@ export const questions = [
     categories: ["Technical", "Node"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -954,6 +1066,7 @@ export const questions = [
     categories: ["Technical", "Node"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -961,6 +1074,7 @@ export const questions = [
     categories: ["Technical", "Node"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -968,6 +1082,7 @@ export const questions = [
     categories: ["Technical", "Node"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -975,6 +1090,7 @@ export const questions = [
     categories: ["Technical", "Node"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -982,6 +1098,7 @@ export const questions = [
     categories: ["Technical", "Node"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -989,6 +1106,7 @@ export const questions = [
     categories: ["Technical", "Node"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -996,6 +1114,7 @@ export const questions = [
     categories: ["Technical", "Node"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -1003,6 +1122,7 @@ export const questions = [
     categories: ["Technical", "Node"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -1010,6 +1130,7 @@ export const questions = [
     categories: ["Technical", "Node"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -1017,6 +1138,7 @@ export const questions = [
     categories: ["Technical", "Node"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -1024,6 +1146,7 @@ export const questions = [
     categories: ["Technical", "Node"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -1031,6 +1154,7 @@ export const questions = [
     categories: ["Technical", "Node"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -1038,6 +1162,7 @@ export const questions = [
     categories: ["Technical", "Node"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -1045,6 +1170,7 @@ export const questions = [
     categories: ["Technical", "Node"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -1052,6 +1178,7 @@ export const questions = [
     categories: ["Technical", "Node"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -1059,6 +1186,7 @@ export const questions = [
     categories: ["Technical", "Node"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -1066,15 +1194,17 @@ export const questions = [
     categories: ["Technical", "Node"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
-  
+
   // CS Theory Questions
   {
     content: "What is recursion and give an example using javascript?",
     categories: ["Technical", "CS Theory"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -1082,6 +1212,7 @@ export const questions = [
     categories: ["Technical", "CS Theory"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -1089,6 +1220,7 @@ export const questions = [
     categories: ["Technical", "CS Theory"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -1096,6 +1228,7 @@ export const questions = [
     categories: ["Technical", "CS Theory"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -1103,6 +1236,7 @@ export const questions = [
     categories: ["Technical", "CS Theory"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -1110,6 +1244,7 @@ export const questions = [
     categories: ["Technical", "CS Theory"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -1117,6 +1252,7 @@ export const questions = [
     categories: ["Technical", "CS Theory"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -1124,6 +1260,7 @@ export const questions = [
     categories: ["Technical", "CS Theory"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -1131,6 +1268,7 @@ export const questions = [
     categories: ["Technical", "CS Theory"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -1138,6 +1276,7 @@ export const questions = [
     categories: ["Technical", "CS Theory"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -1145,6 +1284,7 @@ export const questions = [
     categories: ["Technical", "CS Theory"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -1152,6 +1292,7 @@ export const questions = [
     categories: ["Technical", "CS Theory"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -1159,6 +1300,7 @@ export const questions = [
     categories: ["Technical", "CS Theory"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -1166,6 +1308,7 @@ export const questions = [
     categories: ["Technical", "CS Theory"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -1173,6 +1316,7 @@ export const questions = [
     categories: ["Technical", "CS Theory"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -1180,6 +1324,7 @@ export const questions = [
     categories: ["Technical", "CS Theory"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -1187,6 +1332,7 @@ export const questions = [
     categories: ["Technical", "CS Theory"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -1194,6 +1340,7 @@ export const questions = [
     categories: ["Technical", "CS Theory"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -1201,6 +1348,7 @@ export const questions = [
     categories: ["Technical", "CS Theory"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -1208,6 +1356,7 @@ export const questions = [
     categories: ["Technical", "CS Theory"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -1215,6 +1364,7 @@ export const questions = [
     categories: ["Technical", "CS Theory"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   },
   {
@@ -1222,6 +1372,7 @@ export const questions = [
     categories: ["Technical", "CS Theory"],
     answer: null,
     isDefault: true,
+    is100Devs: true,
     userId: null
   }
-];
+]

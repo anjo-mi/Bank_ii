@@ -17,6 +17,11 @@ const categorySchema = new mongoose.Schema({
     default: false,
     required: true,
   },
+
+  is100Devs: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 categorySchema.index({userId:1,description:1},{unique:true});

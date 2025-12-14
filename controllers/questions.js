@@ -16,6 +16,7 @@ export default {
         userQuestions = await Question.find({userId: req.user.id});
         const ignoredIds = new Set(userQuestions.map(q => q.parentId).filter(Boolean).map(String));
         defaultQuestions = defaultQuestions.filter(q => !ignoredIds.has(q._id.toString()));
+        if (req.session?.optOut) defaultQuestions = defaultQuestions.filter(q => !q.is100Devs);
       }
 
       const allQuestions = userQuestions ? [...userQuestions,...defaultQuestions] : defaultQuestions;
@@ -52,6 +53,7 @@ export default {
         userQuestions = await Question.find({userId:req.user.id});
         const ignoredIds = new Set(userQuestions.map(q => q.parentId).filter(Boolean).map(String));
         defaultQuestions = defaultQuestions.filter(q => !ignoredIds.has(q._id.toString()));
+        if (req.session?.optOut) defaultQuestions = defaultQuestions.filter(q => !q.is100Devs);
       }
       
       const allQuestions = userQuestions ? [...userQuestions,...defaultQuestions] : defaultQuestions;
@@ -126,6 +128,7 @@ export default {
         userQuestions = await Question.find({userId: req.user.id});
         const ignoredIds = new Set(userQuestions.map(q => q.parentId).filter(Boolean).map(String));
         defaultQuestions = defaultQuestions.filter(q => !ignoredIds.has(q._id.toString()));
+        if (req.session?.optOut) defaultQuestions = defaultQuestions.filter(q => !q.is100Devs);
       }
       const allQuestions = userQuestions ? [...userQuestions,...defaultQuestions] : defaultQuestions;
       
@@ -186,8 +189,9 @@ export default {
   getNewQuestionForm: async (req,res) => {
     try{
       const userCategories = await Category.find({userId: req.user.id});
-      const defaultCategories = await Category.find({isDefault: true});
-      const categori = Array.from(new Set(userCategories.concat(defaultCategories)));
+      let defaultCategories = await Category.find({isDefault: true});
+      if (req.session?.optOut) defaultCategories = defaultCategories.filter(c => !c.is100Devs);
+      const categori = Array.from(new Set([...userCategories,...defaultCategories].map(cat => cat.description)));
       res.render('addQuestion', {categori})
     }catch(getNewQuestionFormError){
       console.log({getNewQuestionFormError});
@@ -246,14 +250,16 @@ export default {
       const userQuestions = await Question.find({userId: req.user.id});
       const ignoredIds = new Set(userQuestions.map(q => q.parentId).filter(Boolean).map(String));
       defaultQuestions = defaultQuestions.filter(q => !ignoredIds.has(q._id.toString()));
-      const allQuestions = Array.from(new Set([...userQuestions,...defaultQuestions]));
+      if (req.session?.optOut) defaultQuestions = defaultQuestions.filter(q => !q.is100Devs);
+      let allQuestions = Array.from(new Set([...userQuestions,...defaultQuestions]));
       
       if (!allQuestions.length) return res.redirect('/questions/form');
       
-      const defaultCategories = await Category.find({isDefault: true});
+      let defaultCategories = await Category.find({isDefault: true});
+      if (req.session.optOut) defaultCategories = defaultCategories.filter(c => !c.is100Devs);
       const userCategories = await Category.find({userId: req.user.id});
       
-      const allCategories = userCategories ? Array.from(new Set([...userCategories, ...defaultCategories])) : defaultCategories;
+      const allCategories = userCategories ? Array.from(new Set([...userCategories.map(c => c.description), ...defaultCategories.map(c => c.description)])) : defaultCategories.map(c => c.description);
 
       return res.render('editSearch', {
         allCats: allCategories,
@@ -384,6 +390,17 @@ export default {
             isDefault: false,
             parentId: quest._id,
           })
+          for (const category of noLongerDefaultQuestion.categories){
+            const userCat = await Category.findOneAndUpdate(
+              {userId: req.user.id, description: category},
+              {},
+              {
+                new:true,
+                upsert:true,
+              }
+            )
+            console.log({userCat})
+          }
         }
       }
       return res.status(201).json({message: 'question updated!'})
@@ -426,6 +443,17 @@ export default {
             isDefault: false,
             parentId: q._id,
           })
+          for (const category of noLongerDefaultQuestion.categories){
+            const userCat = await Category.findOneAndUpdate(
+              {userId: req.user.id, description: category},
+              {},
+              {
+                new:true,
+                upsert:true,
+              }
+            )
+            console.log({userCat})
+          }
         }
         return res.status(201).json({message: `your answer to ${reUpdatedDefault ? reUpdatedDefault.content : noLongerDefaultQuestion.content} has been updated`});
       }
@@ -472,6 +500,17 @@ export default {
             isDefault: false,
             parentId: q._id,
           })
+          for (const category of noLongerDefaultQuestion.categories){
+            const userCat = await Category.findOneAndUpdate(
+              {userId: req.user.id, description: category},
+              {},
+              {
+                new:true,
+                upsert:true,
+              }
+            )
+            console.log({userCat})
+          }
         }
         return res.status(201).json({message: `your audio for "${reUpdatedDefault ? reUpdatedDefault.content : noLongerDefaultQuestion.content}" has been updated`});
       }
@@ -515,6 +554,17 @@ export default {
             isDefault: false,
             parentId: q._id,
           })
+          for (const category of noLongerDefaultQuestion.categories){
+            const userCat = await Category.findOneAndUpdate(
+              {userId: req.user.id, description: category},
+              {},
+              {
+                new:true,
+                upsert:true,
+              }
+            )
+            console.log({userCat})
+          }
         }
         return res.status(201).json({message: `your feedback for "${reUpdatedDefault ? reUpdatedDefault.content : noLongerDefaultQuestion.content}" has been updated`});
       }

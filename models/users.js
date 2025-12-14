@@ -59,6 +59,11 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+
+  optOut: {
+    type: Boolean,
+    default: false,
+  },
 },
 {
   // add a compare method to be called with passports (Local Strat) login attempts
