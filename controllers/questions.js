@@ -233,6 +233,18 @@ export default {
         answer: answer || null,
         isDefault: false,
       })
+
+      for (const category of categori){
+      const userCat = await Category.findOneAndUpdate(
+        {userId: req.user.id, description: category},
+        {},
+        {
+          new:true,
+          upsert:true,
+        }
+      )
+      console.log({userCat})
+      }
       if (!quest) return res.status(500).json({message:`question was not added to the database`})
       // return res.status(201).json({quest,cs});
       // return res.render('addQuestion').json({message:"question successfully uploaded"});

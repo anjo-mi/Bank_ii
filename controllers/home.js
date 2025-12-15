@@ -13,7 +13,7 @@ export default {
       let defaultCategories = await Category.find({isDefault: true});
       if (req.session?.optOut) defaultCategories = defaultCategories.filter(c => !c.is100Devs);
       const userCategories = req.user?.id ? await Category.find({userId:req.user.id}) : null;
-      const allCats = userCategories ? [...userCategories.map(c => c.description), ...defaultCategories.map(c => c.description)] : defaultCategories.map(c => c.description);
+      const allCats = userCategories ? Array.from(new Set([...userCategories.map(c => c.description), ...defaultCategories.map(c => c.description)])) : defaultCategories.map(c => c.description);
       
       res.render("index", { allCats });
     }catch(getIndexPageError){
