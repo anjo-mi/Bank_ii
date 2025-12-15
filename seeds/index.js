@@ -4,7 +4,7 @@ import { categories } from "./categories.js";
 import { users } from "./users.js";
 import { questions } from "./questions.js";
 import models from "../models/index.js";
-const { Category, User, Question } = models;
+const { Category, User, Question, PracticeSession } = models;
 
 dotenv.config();
 
@@ -14,11 +14,11 @@ const populateDB = async () => {
     await Question.deleteMany({});
     await Category.deleteMany({});
     await User.deleteMany({});
+    await PracticeSession.deleteMany({});
     console.log("removed any residual data");
 
     await Question.insertMany(questions);
     await Category.insertMany(categories);
-    for (const user of users) await User.create(user)
     console.log("seed data placed into corresponding DBs");
   } catch (err) {
     console.log(`Error: ${err}`);

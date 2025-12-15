@@ -49,6 +49,11 @@ const questionSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
+
+  is100Devs: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 export default mongoose.model("Question", questionSchema);

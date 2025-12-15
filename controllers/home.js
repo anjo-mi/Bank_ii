@@ -10,9 +10,10 @@ import {JSDOM} from 'jsdom';
 export default {
   getHome: async (req, res) => {
     try{
-      const defaultCategories = await Category.find({isDefault: true});
+      let defaultCategories = await Category.find({isDefault: true});
+      if (req.session?.optOut) defaultCategories = defaultCategories.filter(c => !c.is100Devs);
       const userCategories = req.user?.id ? await Category.find({userId:req.user.id}) : null;
-      const allCats = userCategories ? [...userCategories, ...defaultCategories] : defaultCategories;
+      const allCats = userCategories ? Array.from(new Set([...userCategories.map(c => c.description), ...defaultCategories.map(c => c.description)])) : defaultCategories.map(c => c.description);
       
       res.render("index", { allCats });
     }catch(getIndexPageError){
@@ -114,17 +115,21 @@ export default {
 
   updateUser: async(req,res) => {
     try{
-      const {title,level} = req.body;
+      const {title,level,optOut} = req.body;
+      console.log({title,level,optOut})
       const user = await User.findByIdAndUpdate(
         req.user.id,
         {
           $set: {
             [`info.title`]: title,
             [`info.level`]: level,
+            optOut : optOut || false,
           },
         },
         {new:true}
       );
+      req.session.optOut = optOut;
+      await req.session.save();
       return res.status(200).json({message: "successfully updated user info"})
     }catch(updateUserError){
       console.log({updateUserError});
