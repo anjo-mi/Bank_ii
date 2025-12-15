@@ -54,8 +54,11 @@
     --color-blue-600: oklch(54.6% 0.245 262.881);
     --color-blue-800: oklch(42.4% 0.199 265.638);
     --color-blue-900: oklch(37.9% 0.146 265.522);
+    --color-indigo-400: oklch(67.3% 0.182 276.935);
     --color-indigo-500: oklch(58.5% 0.233 277.117);
     --color-indigo-600: oklch(51.1% 0.262 276.966);
+    --color-indigo-700: oklch(45.7% 0.24 277.023);
+    --color-indigo-900: oklch(35.9% 0.144 278.697);
     --color-indigo-950: oklch(25.7% 0.09 281.288);
     --color-violet-800: oklch(43.2% 0.232 292.759);
     --color-fuchsia-500: oklch(66.7% 0.295 322.15);
@@ -700,9 +703,6 @@
   .flex-3 {
     flex: 3;
   }
-  .flex-4 {
-    flex: 4;
-  }
   .shrink-0 {
     flex-shrink: 0;
   }
@@ -996,6 +996,12 @@
   .bg-indigo-500 {
     background-color: var(--color-indigo-500);
   }
+  .bg-indigo-600 {
+    background-color: var(--color-indigo-600);
+  }
+  .bg-indigo-700 {
+    background-color: var(--color-indigo-700);
+  }
   .bg-indigo-950 {
     background-color: var(--color-indigo-950);
   }
@@ -1198,9 +1204,6 @@
   .break-normal {
     overflow-wrap: normal;
     word-break: normal;
-  }
-  .break-all {
-    word-break: break-all;
   }
   .whitespace-nowrap {
     white-space: nowrap;
@@ -1432,6 +1435,13 @@
       }
     }
   }
+  .hover\:bg-indigo-900 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-indigo-900);
+      }
+    }
+  }
   .hover\:bg-lime-600 {
     &:hover {
       @media (hover: hover) {
@@ -1649,6 +1659,11 @@
       background-color: var(--color-green-950);
     }
   }
+  .active\:bg-indigo-400 {
+    &:active {
+      background-color: var(--color-indigo-400);
+    }
+  }
   .active\:bg-lime-900 {
     &:active {
       background-color: var(--color-lime-900);
@@ -1845,12 +1860,6 @@
     @media (width >= 48rem) {
       font-size: var(--text-4xl);
       line-height: var(--tw-leading, var(--text-4xl--line-height));
-    }
-  }
-  .md\:text-base {
-    @media (width >= 48rem) {
-      font-size: var(--text-base);
-      line-height: var(--tw-leading, var(--text-base--line-height));
     }
   }
   .md\:text-lg {

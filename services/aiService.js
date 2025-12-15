@@ -32,7 +32,7 @@ export default {
         
         If there are free and reputable resources [mdn, github repos, youtube, medium, official documentation, etc.] available that a user can use in order to strengthen their knowledge on the given subject, please look up ones that may help the user strengthen their answer.
         
-        Please return your response in the JSON format specified in the config file, with your advice and suggested improvements or acknowledgement of sufficiency in the "feedback" property and the full URLs of any of the free and reputable resources as the items of the resources array (if there are no resources that are valid or necessary, send resources as an empty array). If there is an error, send back in JSON format with a 'message' property.
+        Please return your response in the JSON format specified in the config file, with your advice and suggested improvements or acknowledgement of sufficiency in the "feedback" property, the full URLs of any of the free and reputable resources as the items of the resources array and the content of any follow-up questions as the items of the followUps array (if there are no resources or follow-ups that are valid or necessary, send resources or followUps as an empty array, respectively). If there is an error, send back in JSON format with a 'message' property.
         
         IMPORTANT: Please format the feedback portion of your response with TRIPLE line breaks and markdown formats:
           - to display any lists
@@ -48,6 +48,10 @@ export default {
                 type: "array",
                 items: {type: "string"},
               },
+              followUps: {
+                type: "array",
+                items: {type: "string"},
+              },
             }
           }
         },
@@ -55,7 +59,7 @@ export default {
 
       const data = await JSON.parse(response.text);
 
-      const {feedback, resources} = data;
+      const {feedback, resources, followUps} = data;
 
       // TODO at a later date:
       //  - |||||ctrl F: rate-limiter|||||| populate the practice session with limit or error message
@@ -65,6 +69,7 @@ export default {
           $set: {
             [`aiResponse.questionResponse.${current}.feedback`]: feedback,
             [`aiResponse.questionResponse.${current}.resources`]: resources,
+            [`aiResponse.questionResponse.${current}.followUps`]: followUps,
             [`aiResponse.questionResponse.${current}.questionId`]: question._id,
           },
         },

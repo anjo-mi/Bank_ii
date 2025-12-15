@@ -39,7 +39,8 @@ const practiceSessionSchema = new mongoose.Schema({
       questionResponse: [{
         questionId: mongoose.Schema.Types.ObjectId,
         feedback: String,
-        resources: [String]
+        resources: [String],
+        followUps: [String],
       }],
       completedAt: Date,
     },

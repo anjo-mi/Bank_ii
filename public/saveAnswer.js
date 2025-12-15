@@ -5,6 +5,8 @@ const resultCards = Array.from(document.querySelectorAll('.result-card'));
 const prevBtn = document.getElementById('prev');
 const nextBtn = document.getElementById('next');
 
+const newQuestionForms = document.querySelectorAll('.save-follow-up');
+
 if (dismisses) dismisses.forEach(dismissBox => {
   dismissBox.addEventListener('click', (e) => {
     successBox.style.opacity = 0;
@@ -17,6 +19,7 @@ if (dismisses) dismisses.forEach(dismissBox => {
 })
 
 const handleGood = (message) => {
+  console.log({message})
   successBox.querySelector('.message').textContent = message;
   successBox.style.display = 'flex';
   setTimeout(() => {
@@ -205,16 +208,43 @@ document.addEventListener('submit', async (e) => {
 })
 
 document.addEventListener('click', (e) => {
-  if (!e.target.classList.contains('save-response') 
-        && !e.target.classList.contains('save-answer')
-        && !e.target.classList.contains('save-resource')
-        && !e.target.classList.contains('save-audio')
-  ){
-    successBox.style.opacity = 0;
-    errorBox.style.opacity = 0;
-    setTimeout(() => {
-      successBox.style.display = 'none';
-      errorBox.style.display = 'none';
-    },300)
+  let targ = e.target;
+  while (targ){
+    if (targ.classList.contains('save-response') 
+          || targ.classList.contains('save-answer')
+          || targ.classList.contains('save-resource')
+          || targ.classList.contains('save-audio')
+          || targ.classList.contains('save-follow-up')
+    ) return;
+    targ = targ.parentElement;
+
   }
+  successBox.style.opacity = 0;
+  errorBox.style.opacity = 0;
+  setTimeout(() => {
+    successBox.style.display = 'none';
+    errorBox.style.display = 'none';
+  },300)
 })
+
+newQuestionForms.forEach(form => form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const targ = e.target;
+  console.log({targ})
+  const question = e.target.querySelector('.follow-up').value;
+  const categori = JSON.parse(e.target.querySelector('.categori').value);
+  console.log({question, categori})
+    const response = await fetch('/questions/create', {
+      method: "POST",
+      headers: {"Content-Type": 'application/json'},
+      body: JSON.stringify({
+        question,
+        categori,
+        answer: null,
+      })
+    })
+  const data = await response.json();
+  console.log({response,data})
+  if (response.ok) handleGood(data.message);
+  else handleBad(data.message);
+}))
