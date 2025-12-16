@@ -4,18 +4,26 @@ const searchBar = document.getElementById('search-bar');
 const noResultsBox = document.getElementById('no-results-box');
 const questionListItems = Array.from(document.querySelectorAll('.question-list-item'));
 const categoryBoxes = Array.from(document.querySelectorAll('.category-input'));
+const successBox = document.getElementById('success-message-del');
+const errorBox = document.getElementById('error-message-del');
 
+const handleGood = (message) => {
+  console.log({message})
+  successBox.querySelector('.message').textContent = message;
+  successBox.style.display = 'flex';
+  setTimeout(() => {
+    successBox.style.opacity = 100;
+  }, 100)
+}
 
-/*
-make a function that when the button is clicked:
-  - gives questionList: opacity 0
-    - waits: gives all li's display: none
-  - determines what (if any questions pass the search)
-    - gives those questions each display: block
-      - waits (maybe reqAnFr ?): gives questionList opacity 1
+const handleBad = (message) => {
+  errorBox.querySelector('.message').textContent = message;
+  errorBox.style.display = 'flex';
+  setTimeout(() => {
+    errorBox.style.opacity = 100;
+  }, 100)
+}
 
-takes in:
-*/
 const filterQuestions = (e) => {
   if (e.key === 'Enter' || e.detail){
     e.preventDefault();
@@ -53,27 +61,6 @@ const filterQuestions = (e) => {
 
 filterSearchBtn.addEventListener('click', filterQuestions);
 searchBar.addEventListener('keydown', filterQuestions);
-/*
-  id:noResultsBox .style = none, wait opacity 0.
-  const selectedCategories = document.querySelectorAll: input[type='checkbox']:checked .map => value
-  const searchContent = document.getElementById: search-bar .content
-
-  questionList.style.opacity = 0;
-  wait for .3 seconds, questionListItems.forEach(li => li.style.display = none);
-  let pass;
-  if (!searchContent.trim().length){
-    pass = questionListItems.filter(q => q.categories.every(cat => selectedCategories.has())
-  }else pass = questionListItems.filter(q => q.categories.every(cat => selectedCategories.has() 
-                                              && searchContent.split(' ')).every(word => question.content.has())
-
-  if pass.length:
-  pass.forEach(li => li.style.diplay => block)
-  wait / rAF: questionList.style.opacity = 1
-
-  else:
-  id:noResultsBox .style = block, wait opacity 1.
-
-*/
 
 // start with questionList as display block, but opactity 0
 // transition to opacity 1
@@ -113,11 +100,29 @@ for (const deleteBtn of deleteButtons){
       successage.style.display= 'block';
 
       // show a success message that fades in and fades out
+      handleGood('the question was deleted!!!')
       console.log('the question was deleted!!!')
 
       listItem.style.display = 'none';
     }
     // otherwise 
-    // else showError(data.message);
+    else {
+      console.log(data.message);
+      handleBad(data.message);
+    }
   })
 }
+
+document.addEventListener('click', (e) => {
+  let elm = e.target;
+  while (elm){
+    if (elm.classList.contains('delete-question-btn')) return;
+    elm = elm.parentElement;
+  }
+  successBox.style.opacity = 0;
+  errorBox.style.opactiy = 0;
+  setTimeout(() => {
+    successBox.style.display = 'none';
+    errorBox.style.display = 'none';
+  }, 300);
+})

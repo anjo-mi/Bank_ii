@@ -30,7 +30,7 @@ const handleGood = (message) => {
 const handleBad = (message) => {
   errorBox.querySelector('.message').textContent = message;
   errorBox.style.display = 'flex';
-  errort(() => {
+  setTimeout(() => {
     errorBox.style.opacity = 100;
   }, 100)
 }

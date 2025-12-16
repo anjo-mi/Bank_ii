@@ -14,9 +14,9 @@
         </ul>
     </div>
 
-    <form id="edit-this" action="/questions/edit" method="POST" class="m-auto w-fit h-fit my-4 bg-lime-700 hover:bg-lime-600 active:bg-lime-900 border-1 border-gray-400 rounded-xl text-white">
+    <form id="edit-this" action="/questions/edit" method="POST" class="m-auto w-fit h-fit my-4 bg-lime-700 hover:bg-lime-600 active:bg-lime-900 border-1 border-gray-400 rounded-xl text-white absolute top-15 left-3">
         <input type="hidden" name="questionId" value="<%= question._id.toString() %>">
-        <button class="block h-full w-full py-2 px-4 hover:cursor-pointer">Edit This Question</button>
+        <button class="block h-full w-full py-1 px-2 hover:cursor-pointer">Edit</button>
     </form>
    
     <div class="w-95/100 m-auto mt-4 flex flex-col" id="answerContainer">
@@ -33,7 +33,7 @@
                     <button id="view-saved" type="button" class="view-saved m-auto h-full w-full items-center">View Previous Answer</button>
                 </li>
                 <li class="m-auto px-2 py-1 h-full w-32/100 text-xs md:text-lg lg:text-xl outline-2 outline-grey-200 hover:outline-green-400 active:outline-green-800 rounded-full">
-                    <button id="submit-answer" type="submit" class="view-saved m-auto h-full w-full items-center">Submit Current Answer</button>
+                    <button id="submit-answer-btn" type="submit" class="view-saved m-auto h-full w-full items-center">Submit Current Answer</button>
                 </li>
                 <li id="view-fb" class="view-fb m-auto px-2 py-1 h-full w-32/100 text-xs md:text-lg lg:text-xl outline-2 outline-grey-200 hover:outline-green-400 active:outline-green-800 rounded-full">
                     <button type="button" class="view-fb m-auto h-full w-full items-center">View Saved Feedback</button>
@@ -75,6 +75,26 @@
       </div>
     </div>
     <button id="dismiss-fb" class="dismiss-fb text-blue-800 bg-transparent border border-blue-800 hover:bg-blue-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-xs px-3 py-1.5 text-center dark:hover:bg-blue-600 dark:border-blue-600 dark:text-blue-400 dark:hover:text-white dark:focus:ring-blue-800">Dismiss</button>
+</div>
+
+<div id="error-message" class="hidden flex-col opacity-0 transition-opacity duration-300 ease-in-out h-screen w-8/10 md:w-7/10 lg:w-1/2 left-55/100 top-2/5 -translate-x-1/2 justify-content-center items-center fixed z-1">
+  <div class="flex flex-col gap-3 place-content-between p-4 mb-4 min-w-8/10 w-9/10 min-h-4/10 text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">
+    <div class="flex flex-1 items-center">
+      <svg class="shrink-0 w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+      </svg>
+      <span class="sr-only">Info</span>
+      <h3 class="text-lg font-medium">Oh no!</h3>
+    </div>
+    <div class="message flex flex-3 min-w-9/10 text-center place-content-center p-3 m-auto text-sm md:text-lg text-wrap border-1 border-sky-800 bg-slate-900">
+      
+    </div>
+    <div class="flex">
+      <button type="button" class="dismiss text-red-800 bg-transparent border border-red-800 hover:bg-red-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:hover:bg-red-600 dark:border-red-600 dark:text-red-500 dark:hover:text-white dark:focus:ring-red-800" data-dismiss-target="#alert-additional-content-2" aria-label="Close">
+        Dismiss
+      </button>
+    </div>
+  </div>
 </div>
 
 <script src="/singleQuestion.js"></script>

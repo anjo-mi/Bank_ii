@@ -5,6 +5,7 @@ const prevAnswerBox = document.getElementById('saved-answer');
 const viewFeedbackBtn = document.getElementById('view-fb');
 const dismissFeedbackBtn = document.getElementById('dismiss-fb');
 const prevFeedbackBox = document.getElementById('saved-feedback');
+const errorMessageBox = document.getElementById('error-message');
 
 const answerForm = document.getElementById('answer-form');
 
@@ -14,6 +15,13 @@ const recordBox = document.getElementById('record-box');
 const audioFile = document.getElementById('audio-file');
 const audioContainer = document.getElementById('record-container');
 
+const handleBad = (message) => {
+  errorMessageBox.querySelector('.message').textContent = message;
+  errorMessageBox.style.display = 'flex';
+  setTimeout(() => {
+    errorMessageBox.style.opacity = 100;
+  }, 300)
+}
 
 viewSavedBtn.addEventListener('click', (e) => {
   e.preventDefault();
@@ -48,22 +56,34 @@ dismissFeedbackBtn.addEventListener('click', (e) => {
 })
 
 document.addEventListener('click', (e) => {
-  if (!e.target.classList.contains('saved-answer') 
-    && !e.target.classList.contains('view-saved')){
-    prevAnswerBox.style.opacity = 0;
-  setTimeout(() => {
-    prevAnswerBox.style.display = 'none';
-  },300)
-  }
   let elm = e.target;
+  let feedback,answer,error;
   while (elm){
-    if (elm.classList.contains('saved-feedback') || elm.classList.contains('view-fb')) return;
+    if (elm.classList.contains('saved-feedback') || elm.classList.contains('view-fb')) feedback = true;
+    if (elm.classList.contains('view-saved') || elm.id === 'saved-answer') answer = true;
+    if (elm.id === "submit-answer-btn") error = true;
     elm = elm.parentElement;
   }
-  prevFeedbackBox.style.opacity = 0;
-  setTimeout(() => {
-    prevFeedbackBox.style.display = 'none';
-  },300)
+  if (!feedback){
+    prevFeedbackBox.style.opacity = 0;
+    setTimeout(() => {
+      prevFeedbackBox.style.display = 'none';
+    },300);
+  }
+  
+  if (!answer){
+    prevAnswerBox.style.opacity = 0;
+    setTimeout(() => {
+      prevAnswerBox.style.display = 'none';
+    },300);
+  }
+
+  if (!error){
+    errorMessageBox.style.opacity = 0;
+    setTimeout(() => {
+      errorMessageBox.style.display = 'none';
+    }, 300);
+  }
 })
 
 answerForm.addEventListener('submit', async (e) => {
@@ -75,11 +95,11 @@ answerForm.addEventListener('submit', async (e) => {
     const audio = audioFile?.checked ? await fetch(audioFile.value) : null;
     question = JSON.parse(question);
     if (!answer.trim().length){
-      // handleBad('lets not waste calls with blank data chief');
+      handleBad('lets not waste calls with blank data chief');
       return;
     }
     if (answer.trim().split(' ').length > 300){
-      // handleBad('lets not waste calls with blank data chief');
+      handleBad('lets not waste calls with blank data chief');
       console.log('interviews are conversations, not soliloquys');
       return;
     }
@@ -112,7 +132,7 @@ answerForm.addEventListener('submit', async (e) => {
       window.location.replace('/practice/getLoadResults');
     }
     else{
-      // handleBad(response.mesage);
+      handleBad(response.message);
     }
   }
 })
