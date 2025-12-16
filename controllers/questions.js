@@ -172,7 +172,9 @@ export default {
         });
       }
       if (!questions || !questions.length){
-        return res.status(400).json({message: 'no questions matched your search'})
+        return res.render('noMatches', {
+          categori: Array.from(categori),
+        })
       }
       const random = Math.floor(Math.random() * questions.length);
       const question = questions[random];

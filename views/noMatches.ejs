@@ -1,0 +1,23 @@
+<div class="w-full flex flex-col h-dvh place-content-center items-center mx-auto">
+  <div class="flex flex-col w-4/5 md:w-2/5 py-5 px-2 rounded-lg shadow bg-slate-800 border-2 border-gray-400">
+	<div class="flex flex-col items-center text-center">
+	  <div class="inline-block p-4 bg-zinc-800 border-1 border-orange-900 rounded-full">
+		<svg class="w-12 h-12 fill-current text-yellow-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 5.99L19.53 19H4.47L12 5.99M12 2L1 21h22L12 2zm1 14h-2v2h2v-2zm0-6h-2v4h2v-4z"/></svg>
+	  </div>
+	  <h2 class="my-2 text-lg font-semibold text-white">Using 'Match All' requires a question to match <em>every</em> category.</h2>
+	  <p class="my-2 text-sm text-white leading-relaxed">Check your questions to ensure you have some that span <em>EACH</em> of your searched categories!</p>
+    <h6 class="place-self-start text-bold ml-2 border-b-1 border-b-white">Searched Categories:</h6>
+    <ul class="place-self-start ml-4">
+    <% categori.forEach(cat => { %>
+      <li class="place-self-start"><%= cat %></li>
+    <% }) %>
+    </ul>
+	</div>
+
+	<div class="flex items-center mt-3">
+	  <p class="flex-1 ml-2 bg-teal-900 hover:bg-teal-700 hover:cursor-pointer text-white text-sm font-medium rounded-md">
+      <a class="block h-full py-2" href="/">Search Again</a>
+	  </p>
+	</div>
+  </div>
+</div>
