@@ -1,4 +1,4 @@
-<div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+<div class="flex flex-col items-center justify-center px-6 py-8 mx-auto h-svh">
     <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
         <div class="border-1 border-blue-200 rounded-lg bg-gray-900 p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
@@ -7,11 +7,11 @@
             <div id="error-message" class="hidden w-80/100 m-auto mb-5 text-red-400 text-center p-2 bg-gray-600 border-1 border-gray-200 rounded-lg "></div>
             <form id="login-form" class="space-y-4 md:space-y-6" action="/auth/login" method="POST">
                 <div>
-                    <label for="provided-info" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username or Email</label>
+                    <label for="provided-info" class="block mb-2 text-sm md:text-lg text-sky-400">Username or Email</label>
                     <input type="text" name="provided" id="provided-info" class="text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Username or Email">
                 </div>
                 <div>
-                    <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                    <label for="password" class="block mb-2 text-sm md:text-lg text-sky-400">Password</label>
                     <input type="password" name="password" id="password" placeholder="••••••••" class="text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
                 </div>
                 <div role="status" id="load-indicator" class="hidden m-auto mb-3">
@@ -21,9 +21,9 @@
                  </svg>
                  <span class="sr-only">Loading...</span>
                 </div>
-                <input type="submit" id="submit" value="Log In" class="w-full text-white bg-green-400 hover:bg-green-600 active:bg-green-950 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                <input type="submit" id="submit" value="Log In" class="w-full text-white bg-lime-600 hover:bg-lime-800 active:bg-lime-950 border-1 border-yellow-600 hover:border-yellow-800 hover:cursor-pointer hover:font-bold rounded-lg text-sm md:text-lg px-5 py-2.5 text-center">
                 <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                    No Account? <a href="/auth/signup" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign Up Here</a>
+                    No Account? <a href="/auth/signup" class="font-medium text-primary-600 hover:underline text-sky-400">Sign Up Here</a>
                 </p>
             </form>
         </div>
