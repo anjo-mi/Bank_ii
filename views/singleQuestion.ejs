@@ -1,100 +1,103 @@
-<div class="">
-    <div class="">
-        <ul class="flex flex-wrap gap-y-1 md:gap-y-3 p-2 m-auto border-1 border-dashed border-gray-400 rounded-sm gap-1 m-auto mt-5 sm:ml-18 md:m-auto md:mt-5 p-1 py-2 w-80/100 justify-end md:justify-evenly items-center text-center
-        place-content-around">
-            <% question.categories.forEach(cat => {%>
-            <li class="w-3/10 max-w-4/10 min-w-fit">
-                <form action="/questions/byCategory" method="POST"
-                class="block m-auto">
-                    <input type="hidden" name="categori" value="<%= cat%>">
-                    <input  type="submit" value="<%= cat %>" class="block m-auto w-full bg-slate-700 hover:bg-slate-800 active:outline-1 active:outline-blue-400 p-1 rounded-lg border-1 border-gray-200 text-xs md:text-lg md:mt-0 lg:mt-0 text-sky-200 font-bold">
-                </form>
-            </li>
-            <% })%>
-        </ul>
-    </div>
-
-    <form id="edit-this" action="/questions/edit" method="POST" class="m-auto w-fit h-fit my-4 bg-lime-700 hover:bg-lime-600 active:bg-lime-900 border-1 border-gray-400 rounded-xl text-white absolute top-15 left-3">
-        <input type="hidden" name="questionId" value="<%= question._id.toString() %>">
-        <button class="block h-full w-full py-1 px-2 hover:cursor-pointer">Edit</button>
-    </form>
-   
-    <div class="w-95/100 m-auto mt-4 flex flex-col" id="answerContainer">
-        <form id="answer-form" action="/answerQuestion" method="POST"
-        class="flex flex-col lg:sticky lg:-top-12">
-            <input type="hidden" id="questionId" name="questionId" value="<%= question._id %>">
-            <input type="hidden" id="question" name="question" value="<%= JSON.stringify(question) %>">
-             <div>
-                <h2 class="font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3">Question:</h2>
-                <p class="m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg text-lg md:text-xl lg:text-2xl"><%= question.content%></p>
-            </div>
-            <ul class="flex order-2 transition-all duration-400 gap-4 m-auto w-full h-12 lg:h-16 mt-3 mb-3 place-content-around text-center">
-                <li class="m-auto px-2 py-1 h-full w-32/100 text-xs md:text-lg lg:text-xl outline-2 outline-grey-200 hover:outline-green-400 active:outline-green-800 rounded-full">
-                    <button id="view-saved" type="button" class="view-saved m-auto h-full w-full items-center">View Previous Answer</button>
+<div class="mx-auto w-full md:w-4/5 lg:w-2/3 flex flex-col place-content-center h-svh min-h-fit">
+    <div class="mx-auto w-full flex flex-col place-content-evenly h-fit min-h-9/10 border-1 border-blue-950 bg-gray-800 border-1 border-white rounded-2xl">
+        <div class="flex-1">
+            <ul class="flex flex-wrap gap-y-1 md:gap-y-3 p-2 m-auto border-1 border-dashed border-sky-500 rounded-lg bg-gray-900 gap-1 m-auto mt-5 m-auto py-4 px-1 w-80/100 justify-evenly items-center text-center place-content-evenly">
+                <% question.categories.forEach(cat => {%>
+                <li class="w-3/10 max-w-4/10 min-w-fit">
+                    <form action="/questions/byCategory" method="POST"
+                    class="block m-auto">
+                        <input type="hidden" name="categori" value="<%= cat%>">
+                        <input  type="submit" value="<%= cat %>" class="block m-auto w-full bg-slate-700 hover:bg-cyan-950 hover:cursor-pointer text-shadow-sky-400 hover:text-shadow-sm active:outline-1 active:outline-blue-400 p-1 rounded-lg border-1 border-gray-200 text-xs md:text-lg md:mt-0 lg:mt-0 text-sky-200 font-bold">
+                    </form>
                 </li>
-                <li class="m-auto px-2 py-1 h-full w-32/100 text-xs md:text-lg lg:text-xl outline-2 outline-grey-200 hover:outline-green-400 active:outline-green-800 rounded-full">
-                    <button id="submit-answer-btn" type="submit" class="view-saved m-auto h-full w-full items-center">Submit Current Answer</button>
-                </li>
-                <li id="view-fb" class="view-fb m-auto px-2 py-1 h-full w-32/100 text-xs md:text-lg lg:text-xl outline-2 outline-grey-200 hover:outline-green-400 active:outline-green-800 rounded-full">
-                    <button type="button" class="view-fb m-auto h-full w-full items-center">View Saved Feedback</button>
-                </li>
+                <% })%>
             </ul>
-            <div id="record-box" class="m-auto my-4 p-3 w-full flex items-center place-content-evenly border-1 border-green-900 bg-slate-800 rounded-xl">
-                <div id="record" class="w-12 h-12 p-2 bg-red-600 hover:bg-red-800 active:bg-red-400 rounded-full">
-                    <img class="block" src="/images/microphone.svg" alt="Record">
+        </div>
+        <form id="edit-this" action="/questions/edit" method="POST" class="m-auto w-fit h-fit my-4 bg-lime-700 hover:bg-lime-600 active:bg-lime-900 border-1 border-gray-400 rounded-xl text-white absolute top-15 left-3">
+            <input type="hidden" name="questionId" value="<%= question._id.toString() %>">
+            <button class="block h-full w-full py-1 px-2 hover:cursor-pointer">Edit</button>
+        </form>
+        <div class="w-95/100 flex-6 m-auto mt-4 flex flex-col" id="answerContainer">
+            <form id="answer-form" action="/answerQuestion" method="POST"
+            class="flex flex-col lg:sticky lg:-top-12">
+                <input type="hidden" id="questionId" name="questionId" value="<%= question._id %>">
+                <input type="hidden" id="question" name="question" value="<%= JSON.stringify(question) %>">
+                 <div>
+                    <h2 class="font-bold underline text-sky-200 text-md/2 md:text-2xl/4 lg:text-xl/4 mb-3">Question:</h2>
+                    <p class="m-auto text-center text-gray-200 flex flex-col place-content-center items-center min-h-50 pt-1 md:pt-3 pb-10 px-2 md:px-4 border-1 border-violet-500 bg-zinc-900 rounded-2xl text-lg md:text-xl lg:text-2xl"><%= question.content %></p>
                 </div>
-                <div class="w-12 h-12 p-2 bg-blue-600 hover:bg-blue-800 active:bg-blue-400 rounded-full">
-                    <img class="block" src="/images/pause.svg" alt="Pause">
+                <ul class="flex place-content-evenly items-center gap-3 order-2 transition-all duration-400 gap-4 m-auto w-full h-fit mt-3 mb-3 text-center">
+                    <li class="flex flex-col place-content-center items-center m-auto h-fit min-h-full">
+                        <button id="view-saved" type="button" class="view-saved px-3 py-2 flex-1 text-xs md:text-lg lg:text-xl bg-sky-900 outline-2 outline-green-400 hover:outline-green-600 hover:bg-cyan-950 text-shadow-sky-400 hover:text-shadow-sm hover:cursor-pointer active:outline-green-800 rounded-2xl">View Previous Answer</button>
+                    </li>
+                    <li class="flex flex-col place-content-center items-center m-auto h-fit min-h-full">
+                        <button id="submit-answer-btn" type="submit" class="view-saved px-3 py-2 flex-1 text-xs md:text-lg lg:text-xl bg-sky-900 outline-2 outline-green-400 hover:outline-green-600 hover:bg-cyan-950 text-shadow-sky-400 hover:text-shadow-sm hover:cursor-pointer active:outline-green-800 rounded-2xl">Submit Current Answer</button>
+                    </li>
+                    <li id="view-fb" class="view-fb flex flex-col place-content-center items-center m-auto h-fit min-h-full">
+                        <button type="button" class="view-fb px-3 py-2 flex-1 text-xs md:text-lg lg:text-xl bg-sky-900 outline-2 outline-green-400 hover:outline-green-600 hover:bg-cyan-950 text-shadow-sky-400 hover:text-shadow-sm hover:cursor-pointer active:outline-green-800 rounded-2xl">View Saved Feedback</button>
+                    </li>
+                </ul>
+                <div id="record-box" class="m-auto my-4 p-3 w-full flex flex-wrap items-center place-content-evenly gap-2 border-1 border-green-600 bg-slate-900 rounded-xl">
+                    <div id="record" class="w-12 flex flex-col place-content-center items-center p-2.5 border-1 border-gray-400 bg-red-600 hover:bg-red-800 hover:cursor-pointer active:bg-red-400 rounded-full">
+                        <img class="block m-auto w-7 h-7" src="/images/microphone.svg" alt="Record">
+                    </div>
+                    <div class="w-12 h-12 w-12 flex flex-col items-center place-content-center border-1 border-white bg-blue-800 rounded-full">
+                        <p id="timer" class="text-white font-bold text-xl md:text-2xl">60</p>
+                    </div>
+                    <div id="stop" class="w-12 flex flex-col place-content-center items-center p-2.5 border-1 border-gray-400 bg-red-600 hover:bg-red-800 hover:cursor-pointer active:bg-red-400 rounded-full">
+                        <img class="block m-auto w-7 h-7" src="/images/stop.svg" alt="Stop">
+                    </div>
+                    <div id="record-container" class="hidden flex place-content-evenly items-center gap-4 w-full h-fit">
+                        <label for="audio-file" class="m-auto w-1/4 md:w-1/6 px-3 py-1 text-xs md:text-sm border-1 border-white bg-stone-900 hover:bg-lime-900 hover:cursor-pointer rounded-xl flex place-content-evenly gap-3"><input class="block m-auto h-3 w-3" id="audio-file" type="checkbox" value="">Store Audio</label>
+                        <audio class="w-2/3 md:w-4/5 m-auto" id="recording" src=""></audio>
+                    </div>
                 </div>
-                <div id="stop" class="w-12 h-12 p-3 bg-red-600 hover:bg-red-800 active:bg-red-400 rounded-full">
-                    <img class="block" src="/images/stop.svg" alt="Stop">
+                <textarea class="w-full text-xs md:text-lg order-3 h-25 min-h-fit mt-10 focus:h-140 lg:focus:h-80 transition-all duration-300 resize-none px-2 py-1 mx-auto mb-6 border-2 border-gray-700 outline-0 bg-slate-900 focus:outline-2 focus:outline-blue-600 rounded-lg" name="answer" id="answer"></textarea>
+            </form>
+        </div>
+    </div>
+        
+    <div id="saved-answer" class="hidden fixed z-1 top-0 left-0 w-full h-svh flex flex-col place-content-center opacity-0 transition-opacity duration-300 ease-in-out">
+        <div class="saved-answer m-auto py-2 px-3 w-9/10 lg:w-1/2 flex-col gap-2 bg-gray-700 border-1 border-sky-600 rounded-xl justify-content-center items-center">
+            <div class="saved-answer w-full prev-answer-portion text-xs md:text-lg">
+              <h2 class="saved-answer font-bold underline text-sky-200  text:md md:text-2xl lg:text-xl mb-3">Previously saved answer:</h2>
+              <p class="saved-answer m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-2 border-blue-800 bg-zinc-900 rounded-lg"><%= question.answer %></p>
+            </div>
+            <button id="dismiss" class="dismiss text-white bg-blue-600 hover:bg-blue-900 hover:cursor-pointer focus:ring-4 focus:outline-none rounded-lg text-xs px-3 py-1.5 mt-2 text-center border-white focus:ring-white">Dismiss</button>
+        </div>
+    </div>
+        
+    <div id="saved-feedback" class="hidden fixed z-1 top-0 left-0 w-full h-svh flex flex-col place-content-center opacity-0 transition-opacity duration-300 ease-in-out">
+        <div class="saved-feedback m-auto py-2 px-3 w-9/10 lg:w-1/2 flex-col gap-2 bg-gray-700 border-1 border-sky-600 rounded-xl justify-content-center items-center">
+            <div class="saved-feedback prev-answer-portion text-xs md:text-lg">
+              <h2 class="saved-feedback font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3">Stored Feedback:</h2>
+              <div class="saved-feedback m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 border-1 border-violet-800 bg-zinc-900 rounded-lg">
+                <%- question.feedback %>
+              </div>
+            </div>
+            <button id="dismiss-fb" class="dismiss-fb text-white bg-blue-600 hover:bg-blue-900 hover:cursor-pointer focus:ring-4 focus:outline-none rounded-lg text-xs px-3 py-1.5 mt-2 text-center border-white focus:ring-white">Dismiss</button>
+        </div>
+    </div>
+        
+    <div id="error-message" class="hidden fixed z-1 top-0 left-0 w-full h-svh flex flex-col place-content-center opacity-0 transition-opacity duration-300 ease-in-out">
+        <div class="m-auto py-6 px-3 h-1/2 w-9/10 w-4/5 md:w-1/2 lg:w-1/4 flex-col gap-2 bg-gray-700 border-1 border-red-600 bg-rose-950 rounded-xl justify-content-center items-center">
+            <div class="m-auto h-full flex flex-col gap-3 place-content-between p-4 min-w-8/10 w-9/10 min-h-4/10 text-red-600 border border-white rounded-lg bg-gray-800" role="alert">
+                <div class="flex flex-1 items-center">
+                    <svg class="shrink-0 w-6 h-6 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                    </svg>
+                    <span class="sr-only">Info</span>
+                    <h3 class="text-lg font-medium border-b-2 border-b-red-700">Oh no!</h3>
                 </div>
-                <div id="record-container" class="hidden w-fit max-w-1/3 h-hit">
-                    <label for="audio-file" class="w-full px-3 border-1 border-white mb-1 py-1 bg-stone-900 hover:bg-lime-900 rounded-xl space-content-evenly"><input class="mr-5 mb-1" id="audio-file" type="checkbox" value="">Store Audio</label>
-                    <audio class="mt-2" id="recording" src=""></audio>
+                <div class="message flex flex-3 min-w-9/10 text-center place-content-center items-center px-3 pt-2 pb-10 m-auto text-sm md:text-lg text-wrap text-gray-200 border-1 border-red-800 bg-slate-900 rounded-2xl"></div>
+                <div class="flex">
+                    <button type="button" class="dismiss text-red-800 bg-transparent border-1 border-red-800 hover:bg-red-900 hover:text-white hover:cursor-pointer focus:ring-4 focus:ring-white font-medium rounded-lg text-xs px-3 py-1.5 text-center hover:bg-red-600 border-red-600 text-red-500" data-dismiss-target="#alert-additional-content-2" aria-label="Close">
+                    Dismiss
+                    </button>
                 </div>
             </div>
-            <textarea class="w-90/100 text-xs md:text-lg lg:text-lg order-3 h-25 mt-10 focus:mt-30 focus:h-140 lg:focus:h-80 transition-all duration-300 resize-none px-2 py-1 mx-auto mb-6 border-2 border-gray-700 outline-0 focus:outline-2 focus:outline-blue-600 focus:bg-slate-800 rounded-lg" name="answer" id="answer"></textarea>
-        </form>
+        </div>
     </div>
-</div>
-
-<div id="saved-answer" class="saved-answer hidden w-80/100 flex-col gap-2 opacity-0 transition-opacity duration-300 ease-in-out left-1/2 top-1/2 -translate-x-1/2 justify-content-center items-center fixed z-1">
-    <div class="saved-answer prev-answer-portion text-xs md:text-lg">
-      <h2 class="saved-answer font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3">Previously saved answer:</h2>
-      <p class="saved-answer m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg"><%= question.answer %></p>
-    </div>
-    <button id="dismiss" class="dismiss text-blue-800 bg-transparent border border-blue-800 hover:bg-blue-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-xs px-3 py-1.5 text-center dark:hover:bg-blue-600 dark:border-blue-600 dark:text-blue-400 dark:hover:text-white dark:focus:ring-blue-800">Dismiss</button>
-</div>
-
-<div id="saved-feedback" class="saved-feedback m-auto mb-20 hidden h-fit w-80/100 flex-col gap-2 opacity-0 transition-opacity duration-300 ease-in-out justify-content-center items-center">
-    <div class="saved-feedback prev-answer-portion text-xs md:text-lg">
-      <h2 class="saved-feedback font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3">Stored Feedback:</h2>
-      <div class="saved-feedback m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 border-1 border-violet-800 bg-zinc-900 rounded-lg">
-        <%- question.feedback %>
-      </div>
-    </div>
-    <button id="dismiss-fb" class="dismiss-fb text-blue-800 bg-transparent border border-blue-800 hover:bg-blue-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-xs px-3 py-1.5 text-center dark:hover:bg-blue-600 dark:border-blue-600 dark:text-blue-400 dark:hover:text-white dark:focus:ring-blue-800">Dismiss</button>
-</div>
-
-<div id="error-message" class="hidden flex-col opacity-0 transition-opacity duration-300 ease-in-out h-screen w-8/10 md:w-7/10 lg:w-1/2 left-55/100 top-2/5 -translate-x-1/2 justify-content-center items-center fixed z-1">
-  <div class="flex flex-col gap-3 place-content-between p-4 mb-4 min-w-8/10 w-9/10 min-h-4/10 text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">
-    <div class="flex flex-1 items-center">
-      <svg class="shrink-0 w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-      </svg>
-      <span class="sr-only">Info</span>
-      <h3 class="text-lg font-medium">Oh no!</h3>
-    </div>
-    <div class="message flex flex-3 min-w-9/10 text-center place-content-center p-3 m-auto text-sm md:text-lg text-wrap border-1 border-sky-800 bg-slate-900">
-      
-    </div>
-    <div class="flex">
-      <button type="button" class="dismiss text-red-800 bg-transparent border border-red-800 hover:bg-red-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:hover:bg-red-600 dark:border-red-600 dark:text-red-500 dark:hover:text-white dark:focus:ring-red-800" data-dismiss-target="#alert-additional-content-2" aria-label="Close">
-        Dismiss
-      </button>
-    </div>
-  </div>
 </div>
 
 <script src="/singleQuestion.js"></script>

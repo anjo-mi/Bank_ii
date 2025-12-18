@@ -11,6 +11,7 @@ const answerForm = document.getElementById('answer-form');
 
 const recordBtn = document.getElementById('record');
 const stopBtn = document.getElementById('stop');
+const timer = document.getElementById('timer');
 const recordBox = document.getElementById('record-box');
 const audioFile = document.getElementById('audio-file');
 const audioContainer = document.getElementById('record-container');
@@ -60,7 +61,7 @@ document.addEventListener('click', (e) => {
   let feedback,answer,error;
   while (elm){
     if (elm.classList.contains('saved-feedback') || elm.classList.contains('view-fb')) feedback = true;
-    if (elm.classList.contains('view-saved') || elm.id === 'saved-answer') answer = true;
+    if (elm.classList.contains('view-saved') || elm.classList.contains('saved-answer')) answer = true;
     if (elm.id === "submit-answer-btn") error = true;
     elm = elm.parentElement;
   }
@@ -172,6 +173,7 @@ if (navigator.mediaDevices?.getUserMedia){
         if (this.recorder.state !== 'recording') return;
         this.time++;
         console.log(60 - this.time);
+        timer.textContent = 60 - this.time;
         if (this.time > 60){
           audioContainer.classList.remove('hidden');
           const recording = await this.stop();
@@ -181,6 +183,7 @@ if (navigator.mediaDevices?.getUserMedia){
           audio.src = recordedUrl;
           audio.controls = true;
           audioFile.value = recordedUrl;
+          timer.parentElement.style.backgroundColor = 'blue';
         }
         else this.count();
       },1000)
@@ -222,6 +225,7 @@ if (navigator.mediaDevices?.getUserMedia){
 
     recorder.start();
     transcriber.start();
+    timer.parentElement.style.backgroundColor = 'green';
     stopBtn.addEventListener('click', async (e) => {
       audioContainer.classList.remove('hidden');
       const recording = await recorder.stop();
@@ -231,6 +235,7 @@ if (navigator.mediaDevices?.getUserMedia){
       const audio = document.getElementById('recording');
       audio.src = recordedUrl;
       audio.controls = true;
+      timer.parentElement.style.backgroundColor = 'blue';
     });
   })
 }else recordBox.style.display = "none";
