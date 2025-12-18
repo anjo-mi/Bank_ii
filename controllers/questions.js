@@ -607,7 +607,7 @@ export default {
       // make sure question exists and is the user's
       const checkQuestion = await Question.findById(questionId);
       if (!checkQuestion) return res.status(500).json({message:'failed to locate question'});
-      if (checkQuestion.userId.toString() !== req.user.id) return res.status(403).json({message:'tsk tsk, this is not yours to remove'});
+      if (checkQuestion.userId?.toString() !== req.user.id) return res.status(403).json({message:'tsk tsk, this is not yours to remove'});
 
       // delete the question, but extract the categories
       const deletedQuestion = await Question.findByIdAndDelete(questionId);

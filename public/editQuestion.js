@@ -276,23 +276,14 @@ deleteBtn.addEventListener('click', async (e) => {
   const data = await response.json();
     
   if (response.ok){
-      // fadeout the question, wait for transition, switch display to none
-    
-
-    const questionEditingBox = document.getElementById('edit-question-container');
-    questionEditingBox.style.display = 'none';
-
-    handleGood(data.message)
-
     // show a success message that fades in and fades out
-    console.log('the question was deleted!!!');
+    handleGood(data.message);
+    // redirect
     setTimeout(() => {
       window.location.href = '/questions/edit/select'
     },1500);
 
-  }
-  // otherwise 
-  else handleBad(data.message);
+  } else handleBad(data.message);
 })
 
 viewFeedbackBtn.addEventListener('click', (e) => {
@@ -328,7 +319,7 @@ document.addEventListener('click', (e) => {
 document.addEventListener('click', (e) => {
   let elm = e.target;
   while (elm){
-    if (elm.id === 'submit') return
+    if (elm.id === 'submit' || elm.id === 'delete-btn') return
     elm = elm.parentElement;
   }
   errorMessage.style.opacity = 0;
