@@ -963,6 +963,9 @@
   .border-blue-200 {
     border-color: var(--color-blue-200);
   }
+  .border-blue-300 {
+    border-color: var(--color-blue-300);
+  }
   .border-blue-400 {
     border-color: var(--color-blue-400);
   }
@@ -1516,6 +1519,9 @@
   .outline-green-400 {
     outline-color: var(--color-green-400);
   }
+  .outline-white {
+    outline-color: var(--color-white);
+  }
   .filter {
     filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
   }
@@ -1826,6 +1832,21 @@
     &:hover {
       @media (hover: hover) {
         text-decoration-line: underline;
+      }
+    }
+  }
+  .hover\:outline-1 {
+    &:hover {
+      @media (hover: hover) {
+        outline-style: var(--tw-outline-style);
+        outline-width: 1px;
+      }
+    }
+  }
+  .hover\:outline-blue-600 {
+    &:hover {
+      @media (hover: hover) {
+        outline-color: var(--color-blue-600);
       }
     }
   }
@@ -2165,11 +2186,6 @@
   .md\:h-80 {
     @media (width >= 48rem) {
       height: calc(var(--spacing) * 80);
-    }
-  }
-  .md\:h-fit {
-    @media (width >= 48rem) {
-      height: fit-content;
     }
   }
   .md\:min-h-30 {

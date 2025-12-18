@@ -9,20 +9,20 @@
     </form>
     <form id="edit-question-form" action="/questions/edit/update" method="POST"
     class="flex-9 flex flex-col place-content-evenly gap-1.5">
-      <div class="w-9/10 h-fit flex flex-col place-content-evenly items-center mx-auto my-3">
-        <ul id="category-list" class="flex flex-wrap border-1 border-dashed mt-3 border-gray-400 rounded-sm gap-3 m-auto p-1 py-2 w-full justify-end justify-evenly items-center text-center">
+      <div class="w-9/10 border-1 border-sky-400 bg-stone-900 rounded-2xl h-fit flex flex-col place-content-evenly items-center mx-auto my-3 py-2 px-1">
+        <ul id="category-list" class="flex flex-wrap border-1 border-dashed mt-3 border-gray-400 bg-neutral-800 rounded-sm gap-3 m-auto p-1 py-2 w-95/100 justify-evenly items-center text-center">
             <% categori.forEach(cat => {%>
               <li class="min-w-3/10 text-xs md:text-lg lg:text-lg text-sky-200 font-bold">
-                <label for="<%= cat %>" class="flex py-1 px-2 mr-auto place-content-evenly items-center bg-slate-700 rounded-lg border-1 border-gray-200">
+                <label for="<%= cat %>" class="flex gap-1 py-1 px-2 mr-auto place-content-evenly items-center bg-gray-700 hover:bg-cyan-950 hover:cursor-pointer rounded-lg border-1 border-blue-300">
                   <input id="<%= cat %>" type="checkbox" name="categori" value="<%= cat %>" checked="true"
-                  class="w-4 h-4 md:w-6 md:h-6 accent-indigo-800">
+                  class="w-4 h-4 md:w-6 md:h-6 accent-indigo-800 outline-1 outline-white">
                 <%= cat %></label>
               </li>
             <% })%>
           </ul>
           <div class="w-2/3 mt-4 relative">
-            <input type="text" id="new-category" placeholder="Add New Category" class="p-2 min-h-4 w-1/1 block text-center text-xs md:text-lg lg:text-lg bg-slate-950 border-1 border-gray-300 focus:outline-2 focus:outline-green-400">
-            <button type="button" id="add-new-category" class="flex flex-col justify-center items-center w-6 h-6 md:w-8 md:h-fit m-auto items-center p-1.5 text-lg text-center text-white bg-lime-600 rounded-lg focus:ring-2 focus:ring-green-950 hover:bg-lime-800 active:bg-lime-950 hover:font-bold text-shadow-md hover:text-shadow-sky-400 border-1 border-yellow-500 hover:border-yellow-700 active:border-yellow-900 hover:cursor-pointer absolute right-0 top-0">
+            <input type="text" id="new-category" placeholder="Add New Category" class="p-2 min-h-4 w-1/1 block text-center text-xs md:text-lg lg:text-lg bg-slate-950 border-1 border-gray-300 rounded-sm focus:outline-2 focus:outline-green-400">
+            <button type="button" id="add-new-category" class="flex flex-col justify-center items-center w-6 h-6 md:w-8 h-full m-auto items-center p-1.5 text-lg text-center text-white bg-lime-600 rounded-lg focus:ring-2 focus:ring-green-950 hover:bg-lime-800 active:bg-lime-950 hover:font-bold text-shadow-md hover:text-shadow-sky-400 border-1 border-yellow-500 hover:border-yellow-700 active:border-yellow-900 hover:cursor-pointer absolute right-0 top-0">
                +
             </button>
           </div>
@@ -35,7 +35,7 @@
          Update Question
      </button>
       <div>
-        <label for="question" class="block font-bold m-auto mt-5 text-xs md:text-lg text-sky-300 underline">Question:</label>
+        <label for="question" class="block font-bold m-auto mt-3 text-xs md:text-lg text-sky-300 underline">Question:</label>
         <textarea class="w-90/100 text-xs md:text-lg lg:text-lg order-3 h-35 mt-2 focus:h-140 lg:focus:h-80 transition-all duration-300 resize-none px-2 py-1 mx-auto mb-6 border-2 border-violet-600 outline-0 focus:outline-2 focus:border-blue-600 bg-zinc-800 rounded-lg" name="question" id="question" required><%= question.content%></textarea>
       </div>
       <% if (audio) { %>
@@ -44,7 +44,7 @@
       </div>
       <% } %>
       <div>
-        <label for="answer" class="block font-bold m-auto mt-5 text-xs md:text-lg text-sky-300 underline">Answer:</label>
+        <label for="answer" class="block font-bold m-auto mt-3 text-xs md:text-lg text-sky-300 underline">Answer:</label>
         <textarea class="w-90/100 text-xs md:text-lg lg:text-lg order-3 h-35 mt-2 focus:h-140 lg:focus:h-80 transition-all duration-300 resize-none px-2 py-1 mx-auto mb-6 border-2 border-violet-600 outline-0 focus:outline-2 focus:border-blue-600 bg-zinc-800 rounded-lg" name="answer" id="answer"><%= question.answer || ''%></textarea>
       </div>
       <input type="hidden" id="possible-new-categories" name="newCategories" value="">

@@ -33,12 +33,6 @@ const handleGood = (message) => {
   }, 100)
 }
 
-// const showSuccess = (message) => {
-//   const successMessage = document.getElementById('success-message');
-//   successMessage.textContent = message;
-//   successMessage.style.display = 'block';
-// }
-
 newCategoryBox.addEventListener('keydown', (e) => {
   if (e.key === 'Enter'){
     e.preventDefault();
@@ -57,7 +51,7 @@ newCategoryBox.addEventListener('keydown', (e) => {
     li.className = "min-w-3/10 text-xs md:text-lg lg:text-lg text-sky-200 font-bold";
     
     const label = document.createElement('label');
-    label.className = "flex py-1 px-2 mr-auto place-content-evenly items-center bg-slate-700 rounded-lg border-1 border-gray-200";
+    label.className = "flex py-1 px-2 mr-auto place-content-evenly items-center bg-gray-700 hover:bg-cyan-950 hover:cursor-pointer rounded-lg border-1 border-blue-300";
     label.htmlFor = category;
     
     const input = document.createElement('input');
@@ -66,7 +60,7 @@ newCategoryBox.addEventListener('keydown', (e) => {
     input.id = category;
     input.value = category; 
     input.checked = true; 
-    input.className = "w-4 h-4 md:w-6 md:h-6 accent-indigo-800"
+    input.className = "w-4 h-4 md:w-6 md:h-6 accent-indigo-800 outline-1 outline-white"
     
     label.appendChild(input);
     li.appendChild(label);
@@ -96,7 +90,7 @@ newCategoryBtn.addEventListener('click', (e) => {
   li.className = "min-w-3/10 text-xs md:text-lg lg:text-lg text-sky-200 font-bold";
   
   const label = document.createElement('label');
-  label.className = "flex py-1 px-2 mr-auto place-content-evenly items-center bg-slate-700 rounded-lg border-1 border-gray-200";
+  label.className = "flex py-1 px-2 mr-auto place-content-evenly items-center bg-gray-700 hover:bg-cyan-950 hover:cursor-pointer rounded-lg border-1 border-blue-300";
   label.htmlFor = category;
   
   const input = document.createElement('input');
@@ -105,7 +99,7 @@ newCategoryBtn.addEventListener('click', (e) => {
   input.id = category;
   input.value = category; 
   input.checked = true; 
-  input.className = "w-4 h-4 md:w-6 md:h-6 accent-indigo-800"
+  input.className = "w-4 h-4 md:w-6 md:h-6 accent-indigo-800 outline-1 outline-white"
   
   label.appendChild(input);
   li.appendChild(label);

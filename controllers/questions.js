@@ -417,6 +417,19 @@ export default {
           }
         }
       }
+      const oldCats = quest.categories;
+      for (const category of oldCats){
+        const questionsInCategory = await Question.find({
+          userId: req.user.id,
+          categories: {$in: [category]},
+        })
+        if (!questionsInCategory.length) {
+          const removedCategory = await Category.deleteOne({
+            description: category,
+            userId: req.user.id
+          });
+        }
+      }
       return res.status(201).json({message: 'question updated!'})
     }catch(updateQuestionError){
       console.log({updateQuestionError});

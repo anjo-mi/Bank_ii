@@ -8,6 +8,7 @@ const prevFeedbackBox = document.getElementById('saved-feedback');
 const errorMessageBox = document.getElementById('error-message');
 
 const answerForm = document.getElementById('answer-form');
+const answerArea = document.getElementById('answer');
 
 const recordBtn = document.getElementById('record');
 const stopBtn = document.getElementById('stop');
@@ -136,6 +137,15 @@ answerForm.addEventListener('submit', async (e) => {
       handleBad(response.message);
     }
   }
+})
+
+answerArea.addEventListener('click', (e) => {
+  setTimeout(() => {
+    answerArea.scrollIntoView({
+      block: "center",
+      behavior: 'smooth',
+    })
+  }, 300)
 })
 
 if (navigator.mediaDevices?.getUserMedia){
