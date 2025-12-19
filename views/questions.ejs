@@ -2,71 +2,98 @@
 <input id="incomingSearch" type="hidden" value="<%= incomingSearch %>">
 <%} %>
 
-<div class="mx-auto w-full max-w-9/10 mt-5 mb-3">
-    <div class="mx-auto flex flex-wrap gap-3 h-fit w-full mt-5 items-center text-center">
-        <p class="m-auto text-xs md:text-lg lg:text-lg w-30/100 h-fit bg-red-900 hover:bg-red-600 active:bg-red-950 text-white py-2 px-5 rounded-full mt-5"><a class="block" href="/questions">Clear All Filters</a></p>
-        <p class="m-auto text-xs md:text-lg lg:text-lg w-30/100 h-fit bg-green-400 hover:bg-green-600 active:bg-green-950 text-white py-2 px-5 rounded-full mt-5"><a class="block" href="/">Main Search</a></p>
-        <button id="clear-btn" class="m-auto text-xs md:text-lg lg:text-lg w-30/100 h-full bg-red-900 hover:bg-red-600 active:bg-red-950 text-white py-2 px-5 rounded-full mt-5">Clear Keyword Search</button>
-        <div class="m-auto flex place-content-center gap-5 w-full text-white py-2 px-5 rounded-full mt-5">
-           <input type="text" name="search" id="search-bar" placeholder="Search"
-           class="px-2 w-7/10 text-xs md:text-lg lg:text-lg border-1 border-gray-300 focus:outline-2 focus:outline-green-400">
-           <button class="p-2 text-xs md:text-lg lg:text-lg w-2/10 border-1 border-gray-300 bg-orange-700 rounded-lg" id="search-btn">Search</button>
+<h1 class="mx-auto mt-6 flex-1 text-gray-300 text-shadow-lg text-shadow-sky-500 text-4xl md:text-6xl">QUESTIONS</h1>
+
+<div id="show-search" class="fixed top-2 right-2 z-3 h-fit w-fit">
+  <button class="w-fit h-fit py-2 px-1 bg-lime-700 hover:bg-lime-900 active:bg-green-950 border-1 border-yellow-300 hover:border-yellow-600 hover:cursor-pointer text-white text-shadow-md hover:text-shadow-green-400 text-xs md:text-base rounded-lg">Deeper Search</button>
+</div>
+
+<div id="search-container" class="fixed z-1 top-0 left-0 w-full h-svh hidden flex-col place-content-center opacity-0 transition-opacity duration-300 ease-in-out">
+    <div id="search-box" class="m-auto w-9/10 lg:w-2/3 h-1/4 flex flex-col place-content-evenly gap-2 border-1 border-sky-400 bg-stone-900 rounded-2xl">
+        <div class="m-auto flex gap-3 h-1/2 w-9/10 p-2 items-center text-center">
+            <p class="m-auto flex flex-col place-content-center items-center text-xs md:text-sm w-3/10 h-13 min-h-fit">
+                <a class="w-full h-full p-2 flex flex-col place-content-center items-center bg-red-900 hover:bg-rose-700 active:bg-rose-950 border-2 border-red-600 hover:border-white active:border-red-400 hover:cursor-pointer text-white rounded-full" href="/questions">Clear All Filters</a>
+            </p>
+            <p class="m-auto flex flex-col place-content-center items-center text-xs md:text-sm w-3/10 h-13 min-h-fit">
+                <a class="w-full h-full p-2 flex flex-col place-content-center items-center bg-lime-900 hover:bg-lime-700 active:bg-lime-600 hover:cursor-pointer border-2 border-green-600 hover:border-white active:border-green-400 text-white rounded-full" href="/">Main Search</a>
+            </p>
+            <button id="clear-btn" class="m-auto p-2 text-center text-xs md:text-sm w-3/10 h-13 min-h-fit bg-red-900 hover:bg-rose-700 active:bg-rose-950 hover:cursor-pointer border-2 border-red-600 hover:border-white active:border-red-400 text-white rounded-full">Clear Content Search</button>
+        </div>
+        <div class="m-auto flex place-content-center gap-5 w-full text-white py-2 px-5 rounded-full">
+           <input type="text" name="search" id="search-bar" placeholder="Search Question Content"
+           class="px-2 w-7/10 text-xs md:text-lg border-1 border-gray-300 bg-black rounded-lg focus:outline-2 focus:outline-green-400">
+           <button class="p-2 text-xs md:text-lg lg:text-lg w-2/10 border-1 border-gray-300 hover:border-cyan-500 active:border-cyan-800 bg-orange-700 hover:bg-orange-900 active:bg-orange-500 hover:cursor-pointer rounded-lg" id="search-btn">Search</button>
         </div>
     </div>
-    <ul class="m-auto mt-5 border-solid border-black-500 grid grid-cols-3 gap-4 text-center">
-    <% allQuestions.forEach(question =>{ %>
-        <li class="question-list-item my-3 opacity-0 transition-opacity ease-in-out duration-300 rounded-md p-2 h-fit w-full flex flex-col place-content-center gap-2 items-center col-span-3 border-solid border-2 border-black-700">
-            <ul class="flex flex-wrap gap-y-1 md:gap-y-3 p-2 m-auto border-b-1 border-dashed w-full max-w-10/10 place-content-around text-center">
-                <% question.categories.forEach(cat =>{ %>
-                <li class="w-3/10 max-w-4/10 min-w-fit">
-                    <form action="/questions/byCategory" method="POST" 
-                    class="block m-auto">
-                        <input type="hidden" name="categori" value="<%= cat%>">
-                        <input  type="submit" value="<%= cat %>" 
-                        class="block m-auto w-full bg-slate-700 hover:bg-slate-800 active:outline-1 active:outline-blue-400 p-1 rounded-lg border-1 border-gray-200 text-xs md:text-lg md:mt-0 lg:mt-0 text-sky-200 font-bold">
+</div>
+
+<div class="h-svh min-h-fit flex flex-col place-content-center mt-3">
+    <div class="m-auto min-h-fit w-full w-95/100 lg:w-2/3 py-4 px-2 border-1 border-gray-300 rounded-xl flex flex-col place-content-evenly gap-2">
+        <ul class="m-auto py-3 flex flex-col gap-4 text-center">
+        <% allQuestions.forEach(question =>{ %>
+            <li class="question-list-item my-3 opacity-0 transition-opacity ease-in-out duration-300 rounded-lg p-2 h-fit w-full flex flex-col place-content-center bg-stone-900 gap-2 items-center border-2 border-white">
+                <ul class="flex flex-wrap gap-y-1 md:gap-y-3 p-2 m-auto border-1 md:border-2 border-dashed border-sky-500 bg-blue-950 rounded-lg w-full max-w-95/100 place-content-around text-center">
+                    <% question.categories.forEach(cat =>{ %>
+                    <li class="w-3/10 max-w-4/10 min-w-fit">
+                        <form action="/questions/byCategory" method="POST"
+                        class="block m-auto">
+                            <input type="hidden" name="categori" value="<%= cat%>">
+                            <input  type="submit" value="<%= cat %>"
+                            class="block m-auto w-full bg-slate-700 hover:bg-indigo-800 active:bg-indigo-950 p-1 rounded-lg border-1 border-blue-500 hover:border-gray-200 active:border-blue-700 hover:cursor-pointer text-shadow-md hover:text-shadow-sky-700 text-xs md:text-lg text-sky-200 font-bold">
+                        </form>
+                    </li>
+                    <% })%>
+                </ul>
+                <div class="m-auto flex w-95/100 p-2 border-1 border-cyan-800 min-h-25 md:min-h-40 bg-gray-700 my-5 rounded-lg">
+                    <p class="question-content m-auto pb-8 text-sm md:text-lg lg:text-xl"><%= question.content%></p>
+                </div>
+                <div class="flex items-center place-content-evenly w-full my-3">
+                    <form action="/questions/byId" method="POST" class="w-1/3">
+                        <div class="m-auto text-center w-full">
+                            <input type="hidden" name="id" value="<%= question._id %>">
+                            <input type="submit" class="text-center w-full bg-lime-900 active:bg-lime-500 hover:bg-lime-700 border-2 border-yellow-900 active:border-yellow-500 hover:border-yellow-700 hover:cursor-pointer py-1 px-5 rounded-xl" value="Answer">
+                        </div>
                     </form>
-                </li>
-                <% })%>
-            </ul>
-            <div class="flex p-2 border-1 border-cyan-800 min-h-15 bg-gray-700 my-5 rounded-lg">
-                <p class="question-content m-auto text-sm md:text-2xl"><%= question.content%></p>
+                    <form action="/questions/edit" method="POST" class="w-1/3">
+                        <div class="m-auto text-center w-full">
+                            <input type="hidden" name="questionId" value="<%= question._id %>">
+                            <input type="submit" class="text-center w-full bg-lime-900 active:bg-lime-500 hover:bg-lime-700 border-2 border-yellow-900 active:border-yellow-500 hover:border-yellow-700 hover:cursor-pointer py-1 px-5 rounded-xl" value="Edit">
+                        </div>
+                    </form>
+                </div>
+            </li>
+        <% }) %>
+        </ul>
+        <div id="noResultsBox" class="no-results-box opacity-0 transition-opacity ease-in-out duration-300 m-auto border-2 border-orange-400 rounded-lg bg-gray-800 flex items-center h-fit w-full text-center py-4 px-3">
+            
+            <p
+            class="m-auto min-h-1/4 px-2 pt-1 pb-12 text-sm md:text-lg text-center border-1 border-orange-900 rounded-lg bg-black font-bold text-orange-800 h-fit w-full relative">
+            <svg class="shrink-0 w-6 h-6 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="orange" viewBox="0 0 20 20" class="absolute top-1 left-1">
+                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+            </svg>
+            No Results Matched Your Query. You May Try:
+            </p>
+            <div class="m-auto flex flex-col h-4/5 min-h-fit mb-10 gap-2 py-3 w-full items-center text-center">
+                <p class="m-auto my-2 text-sm md:text-lg w-1/3 h-fit">
+                    <a class="block w-full h-full bg-lime-900 active:bg-lime-500 hover:bg-lime-700 border-2 border-yellow-900 active:border-yellow-500 hover:border-yellow-700 hover:cursor-pointer py-2 rounded-xl" href="/questions">Clear All Filters</a>
+                </p>
+                <p class="m-auto mt-2 text-sm md:text-lg w-1/3 h-fit">
+                    <a class="block w-full h-full bg-lime-900 active:bg-lime-500 hover:bg-lime-700 border-2 border-yellow-900 active:border-yellow-500 hover:border-yellow-700 hover:cursor-pointer py-2 rounded-xl" href="/">Return Home</a>
+                </p>
+                <button id="clear-btn-two" class="m-auto text-sm md:text-lg w-3/5 h-12 bg-lime-900 active:bg-lime-500 hover:bg-lime-700 border-2 border-yellow-900 active:border-yellow-500 hover:border-yellow-700 hover:cursor-pointer py-2 rounded-xl">Clear Content Search</button>
             </div>
-            <div class="flex items-center place-content-evenly w-full my-3">
-                <form action="/questions/byId" method="POST" class="w-1/3">
-                    <div class="m-auto text-center w-full">
-                        <input type="hidden" name="id" value="<%= question._id %>">
-                        <input type="submit" class="text-center w-full bg-green-400 active:bg-green-950 hover:bg-green-600 focus:outline-4 focus:outline-offset-2 focus:outline-green-700 text-white font-bold py-1 px-5 rounded-full" value="Answer">
-                    </div>
-                </form>
-                <form action="/questions/edit" method="POST" class="w-1/3">
-                    <div class="m-auto text-center w-full">
-                        <input type="hidden" name="questionId" value="<%= question._id %>">
-                        <input type="submit" class="text-center w-full bg-green-400 active:bg-green-950 hover:bg-green-600 focus:outline-4 focus:outline-offset-2 focus:outline-green-700 text-white font-bold py-1 px-5 rounded-full" value="Edit">
-                    </div>
-                </form>
-            </div>
-        </li>
-    <% }) %>
-    </ul>
-    <div id="noResultsBox" class="no-results-box opacity-0 transition-opacity ease-in-out duration-300 mx-auto border-1 border-gray-400 flex items-center h-fit w-full text-center py-1 pb-5 px-5">
-        <p
-        class="m-auto text-lg md:text-xl lg:text-xl text-center text-orange-800 h-full w-full">
-        No Results Matched Your Query. You May Try:
-        </p>
-        <div class="mx-auto flex flex-col gap-3 h-fit w-full mt-5 items-center text-center">
-            <p class="m-auto text-sm md:text-lg lg:text-lg w-60/100 h-full bg-green-400 hover:bg-green-600 active:bg-green-950 text-white py-2 px-5 rounded-full mt-5"><a class="w-fit" href="/questions">Clear All Filters</a></p>
-            <p class="m-auto w-60/100 text-sm md:text-lg lg:text-lg bg-green-400 hover:bg-green-600 text-white py-2 px-5 rounded-full mt-5"><a class="block" href="/">Return Home</a></p>
-            <button id="clear-btn-two" class="m-auto text-sm md:text-lg lg:text-lg w-60/100 h-full bg-green-400 hover:bg-green-600 active:bg-green-950 text-white py-2 px-3 rounded-full mt-5">Clear Keyword Search</button>
         </div>
-    </div>
-    <div id="tooStrictBox" class="too-strict-box opacity-0 transition-opacity ease-in-out duration-300 mx-auto border-1 border-gray-400 flex items-center h-fit w-full text-center py-1 pb-5 px-5">
-        <p
-        class="m-auto text-lg md:text-xl lg:text-xl text-center text-orange-800 h-full w-full">
-        Your Category Search Didn't Yield Any Results.
-        Loosen your category restraints!
-        </p>
-        <div class="mx-auto flex flex-col gap-3 h-fit w-full mt-5 items-center text-center">            
-            <p class="m-auto w-60/100 text-sm md:text-lg lg:text-lg bg-green-400 hover:bg-green-600 text-white py-2 px-5 rounded-full mt-5"><a class="block" href="/">Return Home</a></p>
+        <div id="tooStrictBox" class="too-strict-box opacity-0 transition-opacity ease-in-out duration-300 mx-auto border-1 border-orange-600 bg-gray-800 rounded-xl flex items-center h-fit w-full text-center py-1 pb-5 px-5">
+            <p
+            class="m-auto text-lg md:text-xl lg:text-xl text-center text-orange-800 font-bold h-fit p-2 pb-7 w-full">
+            Your Category Search Didn't Yield Any Results.
+            Loosen your category restraints!
+            </p>
+            <div class="mx-auto flex flex-col gap-3 h-fit w-full mt-5 items-center text-center">
+                <p class="m-auto mt-2 text-sm md:text-lg w-1/3 h-fit">
+                    <a class="block w-full h-full bg-lime-900 active:bg-lime-500 hover:bg-lime-700 border-2 border-yellow-900 active:border-yellow-500 hover:border-yellow-700 hover:cursor-pointer py-2 rounded-xl" href="/">Return Home</a>
+                </p>
+            </div>
         </div>
     </div>
 </div>

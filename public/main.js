@@ -61,6 +61,12 @@ const filterSearch = () => {
 const filterSearchEnter = (e) => {
   if (e.key !== "Enter") return;
   e.preventDefault();
+  const searchContainer = document.getElementById('search-container');
+  searchContainer.style.opacity = 0;
+  setTimeout(() => {
+    searchContainer.style.display = 'none';
+  }, 300)
+  document.body.scrollIntoView({block:'start', behavior: 'smooth'});
   const searchItems = incomingSearch 
                       ? incomingSearch.split(' ')
                       : document.getElementById('search-bar').value.split(' ');
@@ -181,3 +187,34 @@ document.addEventListener('keydown', filterSearchEnter);
 searchButton.addEventListener('click', filterSearch);
 clearButton.addEventListener('click', clearFilters);
 clearButtonTwo.addEventListener('click', clearFilters);
+
+document.addEventListener('click', (e) => {
+  let elm = e.target;
+  while (elm){
+    if (elm.id === 'search-box' || elm.id === 'show-search') return;
+    elm = elm.parentElement;
+  }
+  const searchContainer = document.getElementById('search-container');
+  searchContainer.style.opacity = 0;
+  setTimeout(() => {
+    searchContainer.style.display = 'none';
+  }, 300)
+})
+
+document.getElementById('show-search').addEventListener('click', () => {
+  const searchContainer = document.getElementById('search-container');
+  searchContainer.style.display = 'flex';
+  setTimeout(() => {searchContainer.style.opacity = 1;},0)
+})
+
+document.addEventListener('click', (e) => {
+  const id = e.target.id;
+  if (id === 'search-btn' || id === 'clear-btn'){
+    const searchContainer = document.getElementById('search-container');
+    searchContainer.style.opacity = 0;
+    setTimeout(() => {
+      searchContainer.style.display = 'none';
+    }, 300)
+    document.body.scrollIntoView({block:'start', behavior: 'smooth'});
+  }
+})

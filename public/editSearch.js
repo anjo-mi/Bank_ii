@@ -117,7 +117,7 @@ document.addEventListener('click', (e) => {
     elm = elm.parentElement;
   }
   successBox.style.opacity = 0;
-  errorBox.style.opactiy = 0;
+  errorBox.style.opacity = 0;
   setTimeout(() => {
     successBox.style.display = 'none';
     errorBox.style.display = 'none';

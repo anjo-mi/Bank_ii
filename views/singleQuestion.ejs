@@ -56,48 +56,49 @@
             </form>
         </div>
     </div>
-        
-    <div id="saved-answer" class="hidden fixed z-1 top-0 left-0 w-full h-svh flex flex-col place-content-center opacity-0 transition-opacity duration-300 ease-in-out">
-        <div class="saved-answer m-auto py-2 px-3 w-9/10 lg:w-1/2 flex-col gap-2 bg-gray-700 border-1 border-sky-600 rounded-xl justify-content-center items-center">
-            <div class="saved-answer w-full prev-answer-portion text-xs md:text-lg">
-              <h2 class="saved-answer font-bold underline text-sky-200  text:md md:text-2xl lg:text-xl mb-3">Previously saved answer:</h2>
-              <p class="saved-answer m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-2 border-blue-800 bg-zinc-900 rounded-lg"><%= question.answer %></p>
-            </div>
-            <button id="dismiss" class="dismiss text-white bg-blue-600 hover:bg-blue-900 hover:cursor-pointer focus:ring-4 focus:outline-none rounded-lg text-xs px-3 py-1.5 mt-2 text-center border-white focus:ring-white">Dismiss</button>
+</div>        
+
+<div id="saved-answer" class="hidden absolute z-1 top-0 left-0 w-full h-svh flex flex-col place-content-center opacity-0 transition-opacity duration-300 ease-in-out">
+    <div class="saved-answer m-auto py-2 px-3 w-9/10 lg:w-1/2 flex-col gap-2 bg-gray-700 border-1 border-sky-600 rounded-xl justify-content-center items-center">
+        <div class="saved-answer w-full prev-answer-portion text-xs md:text-lg">
+          <h2 class="saved-answer font-bold underline text-sky-200  text:md md:text-2xl lg:text-xl mb-3">Previously saved answer:</h2>
+          <p class="saved-answer m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-2 border-blue-800 bg-zinc-900 rounded-lg"><%= question.answer %></p>
         </div>
+        <button id="dismiss" class="dismiss text-white bg-blue-600 hover:bg-blue-900 hover:cursor-pointer focus:ring-4 focus:outline-none rounded-lg text-xs px-3 py-1.5 mt-2 text-center border-white focus:ring-white">Dismiss</button>
     </div>
-        
-    <div id="saved-feedback" class="hidden fixed z-1 top-0 left-0 w-full h-svh flex flex-col place-content-center opacity-0 transition-opacity duration-300 ease-in-out">
-        <div class="saved-feedback m-auto py-2 px-3 w-9/10 lg:w-1/2 flex-col gap-2 bg-gray-700 border-1 border-sky-600 rounded-xl justify-content-center items-center">
-            <div class="saved-feedback prev-answer-portion text-xs md:text-lg">
-              <h2 class="saved-feedback font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3">Stored Feedback:</h2>
-              <div class="saved-feedback m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 border-1 border-violet-800 bg-zinc-900 rounded-lg">
-                <%- question.feedback %>
-              </div>
-            </div>
-            <button id="dismiss-fb" class="dismiss-fb text-white bg-blue-600 hover:bg-blue-900 hover:cursor-pointer focus:ring-4 focus:outline-none rounded-lg text-xs px-3 py-1.5 mt-2 text-center border-white focus:ring-white">Dismiss</button>
+</div>
+    
+<div id="saved-feedback" class="hidden absolute z-1 top-3 bottom-5 left-0 w-full h-svh min-h-fit flex flex-col place-content-center opacity-0 transition-opacity duration-300 ease-in-out">
+    <div class="saved-feedback m-auto py-2 px-3 w-9/10 lg:w-1/2 flex-col gap-2 bg-gray-700 border-1 border-sky-600 rounded-xl justify-content-center items-center">
+        <div class="saved-feedback prev-answer-portion min-h-fit text-xs md:text-lg">
+          <h2 class="saved-feedback font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3">Stored Feedback:</h2>
+          <div class="saved-feedback m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 border-1 border-violet-800 bg-zinc-900 rounded-lg">
+            <%- question.feedback %>
+          </div>
         </div>
+        <button id="dismiss-fb" class="dismiss-fb text-white bg-blue-600 hover:bg-blue-900 hover:cursor-pointer focus:ring-4 focus:outline-none rounded-lg text-xs px-3 py-1.5 mt-2 text-center border-white focus:ring-white">Dismiss</button>
     </div>
-        
-    <div id="error-message" class="hidden fixed z-1 top-0 left-0 w-full h-svh flex flex-col place-content-center opacity-0 transition-opacity duration-300 ease-in-out">
-        <div class="m-auto py-6 px-3 h-1/2 w-9/10 w-4/5 md:w-1/2 lg:w-1/4 flex-col gap-2 bg-gray-700 border-1 border-red-600 bg-rose-950 rounded-xl justify-content-center items-center">
-            <div class="m-auto h-full flex flex-col gap-3 place-content-between p-4 min-w-8/10 w-9/10 min-h-4/10 text-red-600 border border-white rounded-lg bg-gray-800" role="alert">
-                <div class="flex flex-1 items-center">
-                    <svg class="shrink-0 w-6 h-6 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-                    </svg>
-                    <span class="sr-only">Info</span>
-                    <h3 class="text-lg font-medium border-b-2 border-b-red-700">Oh no!</h3>
-                </div>
-                <div class="message flex flex-3 min-w-9/10 text-center place-content-center items-center px-3 pt-2 pb-10 m-auto text-sm md:text-lg text-wrap text-gray-200 border-1 border-red-800 bg-slate-900 rounded-2xl"></div>
-                <div class="flex">
-                    <button type="button" class="dismiss text-red-800 bg-transparent border-1 border-red-800 hover:bg-red-900 hover:text-white hover:cursor-pointer focus:ring-4 focus:ring-white font-medium rounded-lg text-xs px-3 py-1.5 text-center hover:bg-red-600 border-red-600 text-red-500" data-dismiss-target="#alert-additional-content-2" aria-label="Close">
-                    Dismiss
-                    </button>
-                </div>
+</div>
+    
+<div id="error-message" class="hidden fixed z-1 top-0 left-0 w-full h-svh flex flex-col place-content-center opacity-0 transition-opacity duration-300 ease-in-out">
+    <div class="m-auto py-6 px-3 h-1/2 w-9/10 w-4/5 md:w-1/2 lg:w-1/4 flex-col gap-2 bg-gray-700 border-1 border-red-600 bg-rose-950 rounded-xl justify-content-center items-center">
+        <div class="m-auto h-full flex flex-col gap-3 place-content-between p-4 min-w-8/10 w-9/10 min-h-4/10 text-red-600 border border-white rounded-lg bg-gray-800" role="alert">
+            <div class="flex flex-1 items-center">
+                <svg class="shrink-0 w-6 h-6 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                </svg>
+                <span class="sr-only">Info</span>
+                <h3 class="text-lg font-medium border-b-2 border-b-red-700">Oh no!</h3>
+            </div>
+            <div class="message flex flex-3 min-w-9/10 text-center place-content-center items-center px-3 pt-2 pb-10 m-auto text-sm md:text-lg text-wrap text-gray-200 border-1 border-red-800 bg-slate-900 rounded-2xl"></div>
+            <div class="flex">
+                <button type="button" class="dismiss text-red-800 bg-transparent border-1 border-red-800 hover:bg-red-900 hover:text-white hover:cursor-pointer focus:ring-4 focus:ring-white font-medium rounded-lg text-xs px-3 py-1.5 text-center hover:bg-red-600 border-red-600 text-red-500" data-dismiss-target="#alert-additional-content-2" aria-label="Close">
+                Dismiss
+                </button>
             </div>
         </div>
     </div>
 </div>
+
 
 <script src="/singleQuestion.js"></script>
