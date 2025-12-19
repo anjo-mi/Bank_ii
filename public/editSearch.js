@@ -4,8 +4,8 @@ const searchBar = document.getElementById('search-bar');
 const noResultsBox = document.getElementById('no-results-box');
 const questionListItems = Array.from(document.querySelectorAll('.question-list-item'));
 const categoryBoxes = Array.from(document.querySelectorAll('.category-input'));
-const successBox = document.getElementById('success-message-del');
-const errorBox = document.getElementById('error-message-del');
+const successBox = document.getElementById('success-message');
+const errorBox = document.getElementById('error-message');
 
 const handleGood = (message) => {
   console.log({message})
@@ -27,6 +27,11 @@ const handleBad = (message) => {
 const filterQuestions = (e) => {
   if (e.key === 'Enter' || e.detail){
     e.preventDefault();
+    const searchContainer = document.getElementById('search-container');
+    searchContainer.style.opacity = 0;
+    setTimeout(() => {
+      searchContainer.style.display = 'none';
+    }, 300)
     noResultsBox.style.opacity = 0;
     const contentSearch = searchBar.value.trim().split(' ').map(word => word.toLowerCase());
     const categorySearch = categoryBoxes.filter(box => box.checked).map(input => input.value);
@@ -55,7 +60,7 @@ const filterQuestions = (e) => {
       setTimeout(() => questionList.style.opacity = 1 ,0);
       if (!matchingQuestions.length) setTimeout(() => noResultsBox.style.opacity = 1 ,0)
     } ,300)
-
+    document.body.scrollIntoView({block: 'start', behavior: 'smooth'});
   }
 }
 
@@ -78,9 +83,7 @@ for (const deleteBtn of deleteButtons){
     const defaultValue = listItem.querySelector('input[name="isDefault"]').value;
     const isDefault = Boolean(+defaultValue);
     if (isDefault){
-      const dikembe = listItem.querySelector('.error-message');
-      dikembe.textContent = 'default questions stay, this is the way';
-      dikembe.style.display = 'block';
+      handleBad('default questions stay, this is the way');
       return;
     }
     
@@ -94,14 +97,8 @@ for (const deleteBtn of deleteButtons){
     })
     const data = await response.json();
     if (response.ok){
-      // fadeout the question, wait for transition, switch display to none
-      const successage = document.getElementById('success-message');
-      successage.textContent = data.message;
-      successage.style.display= 'block';
-
       // show a success message that fades in and fades out
       handleGood('the question was deleted!!!')
-      console.log('the question was deleted!!!')
 
       listItem.style.display = 'none';
     }
@@ -125,4 +122,23 @@ document.addEventListener('click', (e) => {
     successBox.style.display = 'none';
     errorBox.style.display = 'none';
   }, 300);
+})
+
+document.addEventListener('click', (e) => {
+  let elm = e.target;
+  while (elm){
+    if (elm.id === 'search-box' || elm.id === 'show-search') return;
+    elm = elm.parentElement;
+  }
+  const searchContainer = document.getElementById('search-container');
+  searchContainer.style.opacity = 0;
+  setTimeout(() => {
+    searchContainer.style.display = 'none';
+  }, 300)
+})
+
+document.getElementById('show-search').addEventListener('click', () => {
+  const searchContainer = document.getElementById('search-container');
+  searchContainer.style.display = 'flex';
+  setTimeout(() => {searchContainer.style.opacity = 1;},0)
 })

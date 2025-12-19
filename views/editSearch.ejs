@@ -1,109 +1,117 @@
-
-<div 
-class="mx-auto h-fit w-full max-w-9/10 mt-5 mb-3 p-3 dark:bg-gray-700 dark:border-gray-200 dark:text-white">
-    <ul 
-    class="m-auto flex h-full flex-wrap gap-4 items-center text-center">
-    <% allCats.forEach(cat =>{ %>
-        <li 
-        class="m-auto h-fit min-h-full w-3/10 flex flex-col place-content-center gap-2 items-center border border-gray-200 rounded-3xl dark:border-gray-200">
-        <label for="<%= cat %>"
-        class="px-1 py-2 text-xs md:text-xl lg:text-2xl md:text-md lg:text-2xl h-full w-full text-gray-900 dark:text-gray-300 hover:bg-cyan-950 hover:cursor-pointer rounded-3xl">
-            <input type="checkbox" id="<%= cat %>" name="categori" value="<%= cat %>" 
-            class="category-input checkbox break-normal text-blue-600 mt-2 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-            <p><%= cat %></p>
-        </label>
-        </li>
-    <% }) %>
-    </ul>
+<div id="show-search" class="fixed top-2 right-2 z-3 h-fit w-fit">
+  <button class="w-fit h-fit py-2 px-1 bg-lime-700 hover:bg-lime-900 active:bg-green-950 border-1 border-yellow-300 hover:border-yellow-600 hover:cursor-pointer text-white text-shadow-md hover:text-shadow-green-400 text-xs md:text-base rounded-lg">Apply Filters</button>
 </div>
 
-<div class="m-auto flex place-content-center gap-5 w-full h-20 text-white py-2 px-5 rounded-full mt-5">
-    <input type="text" name="search" id="search-bar" placeholder="Search Question Content"
-    class="px-2 h-full text-center w-7/10 text-xs md:text-lg lg:text-lg border-1 border-gray-300 focus:outline-2 focus:outline-green-400">
+<div id="search-container" class="fixed z-1 top-0 left-0 w-full h-svh flex flex-col place-content-center transition-opacity duration-300 ease-in-out">
+  <div id="search-box" class="mx-auto w-9/10 lg:w-2/3 flex flex-col place-content-evenly items-center h-1/2 md:h-7/10 min-h-fit border-1 border-sky-400 bg-stone-900 rounded-2xl">
+    <div
+    class="mx-auto h-fit flex flex-col place-content-evenly items-center my-3 py-2 px-1">
+        <ul
+        class="flex flex-wrap border-1 border-dashed border-gray-400 bg-neutral-950 rounded-2xl gap-3 m-auto p-1 py-5 w-95/100 justify-evenly items-center text-center">
+        <% allCats.forEach(cat =>{ %>
+            <li
+            class="min-w-3/10 text-xs md:text-lg lg:text-lg text-sky-200 font-bold">
+            <label for="<%= cat %>"
+            class="flex gap-1 py-1 px-2 mr-auto place-content-evenly items-center bg-gray-700 hover:bg-cyan-950 hover:cursor-pointer rounded-lg border-1 border-blue-300">
+                <input type="checkbox" id="<%= cat %>" name="categori" value="<%= cat %>"
+                class="category-input checkbox w-4 h-4 md:w-6 md:h-6 accent-indigo-800 outline-1 outline-white">
+                <p><%= cat %></p>
+            </label>
+            </li>
+        <% }) %>
+        </ul>
+    </div>
+    <div
+    class="mx-auto w-full max-w-9/10 text-center">
+      <input type="submit" id="filter-search" value="Filter Questions"
+    class="text-center text-xs md:text-lg bg-lime-900 active:bg-lime-500 hover:bg-lime-700 border-1 border-yellow-600 hover:border-yellow-800 active:border-yellow-900 hover:border-2 active:border-2 hover:cursor-pointer py-2 px-4 rounded-full">
+    </div>
+  
+    <div class="mx-auto flex place-content-center gap-5 w-full h-13 md:h-20 text-white py-2 px-5 rounded-full">
+        <input type="text" name="search" id="search-bar" placeholder="Search Question Content"
+        class="px-2 h-full text-center w-7/10 text-xs md:text-lg lg:text-lg border-1 border-gray-300 focus:outline-2 focus:outline-green-400 bg-neutral-950">
+    </div>
+  
+  </div>
 </div>
 
-<div id="success-message" class="hidden w-80/100 m-auto mb-5 text-green-400 text-center p-2 bg-gray-600 border-1 border-gray-200 rounded-lg "></div>
-<div 
-class="mx-auto w-full max-w-9/10 text-center">
-    <input type="submit" id="filter-search" value="Filter Questions"
-    class="text-center bg-green-400 active:bg-green-800 hover:bg-green-600 focus:outline-4 focus:outline-offset-2 focus:outline-green-700 text-white font-bold py-2 px-4 rounded-full">
+
+<div class="h-svh min-h-fit flex flex-col place-content-center mt-3">
+  <div class="m-auto w-full w-95/100 lg:w-2/3 py-4 px-2 border-1 border-gray-300 rounded-xl">
+    <ul id="questions-list" class="m-auto py-3 opacity-0 transition-opacity ease-in-out duration-300 flex flex-col gap-4 text-center">
+      <% allQuestions.forEach(question =>{ %>
+          <li class="question-list-item relative my-3 rounded-lg p-2 h-fit w-full flex flex-col place-content-center bg-stone-900 gap-2 items-center border-2 border-white">
+              <input type="hidden" name="isDefault" value="<%= question.isDefault ? 1 : 0 %>">
+              <ul class="flex flex-wrap gap-y-1 md:gap-y-3 p-2 m-auto border-1 md:border-3 border-dashed border-sky-500 bg-cyan-950 rounded-lg w-full max-w-95/100 place-content-around text-center">
+                  <% question.categories.forEach(cat =>{ %>
+                  <li class="w-3/10 max-w-4/10 min-w-fit">
+                    <P type="submit" value="<%= cat %>" class="category-quick-search inline-block bg-gray-700 p-2 w-full rounded-lg border-1 border-gray-200 border-dashed text-xs md:text-lg lg:text-lg md:mt-0 lg:mt-0 text-sky-200 font-bold"><%= cat%></P>
+                  </li>
+                  <% })%>
+              </ul>
+              <form action="/questions/edit" method="POST" class="w-full">
+                  <div class="m-auto flex w-95/100 p-2 border-1 border-cyan-800 min-h-25 md:min-h-40 bg-gray-700 my-5 rounded-lg">
+                      <p id="question-content" class="question-content m-auto pb-8 text-sm md:text-lg lg:text-xl"><%= question.content%></p>
+                  </div>
+                  <div class="m-auto text-center my-3">
+                      <input type="hidden" name="questionId" value="<%= question._id %>">
+                      <input type="submit" class="text-center w-1/3 md:w-1/5 min-h-7 md:min-h-12 bg-lime-900 active:bg-lime-500 hover:bg-lime-700 border-2 border-yellow-900 active:border-yellow-500 hover:border-yellow-700 hover:cursor-pointer py-1 px-5 rounded-xl" value="Edit">
+                  </div>
+              </form>
+              <div class="error-message hidden w-80/100 m-auto mb-5 text-red-400 text-center p-2 bg-gray-600 border-1 border-gray-200 rounded-lg "></div>
+              <div class="absolute left-2 bottom-2">
+                  <button type="submit" class="delete-question-btn text-center bg-red-400 active:bg-red-950 hover:bg-red-600 hover:cursor-pointer hover:border-white hover:border-1 active:border-2 text-white font-bold py-1 px-5 rounded-full"><img src="/images/trash.svg" alt="Delete" class="h-5 w-5"></button>
+              </div>
+          </li>
+      <% }) %>
+      </ul>
+      <div id="no-results-box" class="no-results-box my-10 opacity-0 transition-opacity ease-in-out duration-300 mx-auto border-1 border-orange-700 rounded-2xl flex items-center h-fit w-full text-center p-5 bg-gray-700">
+          <p
+          class="m-auto w-8/10 h-fit px-2 pt-8 pb-15 text-lg md:text-xl lg:text-xl text-center text-sm md:text-xl text-orange-400">
+          <strong>No questions matched your search. Try a new search.<strong>
+          </p>
+      </div>
+  </div>
 </div>
 
-
-<div class="mx-auto w-full max-w-9/10 mt-5 mb-3">
-    <ul id="questions-list" class="m-auto mt-5 opacity-0 transition-opacity ease-in-out duration-300 border-solid border-black-500 grid grid-cols-3 gap-4 text-center">
-    <% allQuestions.forEach(question =>{ %>
-        <li class="question-list-item relative my-3 rounded-md p-2 h-fit w-full flex flex-col place-content-center gap-2 items-center col-span-3 border-solid border-2 border-black-700">
-            <input type="hidden" name="isDefault" value="<%= question.isDefault ? 1 : 0 %>">
-            <ul class="flex flex-wrap gap-y-1 md:gap-y-3 p-2 m-auto border-b-1 border-dashed w-full max-w-10/10 place-content-around text-center">
-                <% question.categories.forEach(cat =>{ %>
-                <li class="w-3/10 max-w-4/10 min-w-fit">
-                  <P type="submit" value="<%= cat %>" class="category-quick-search inline-block bg-gray-700 p-2 w-full rounded-lg border-1 border-gray-200 border-dashed text-xs md:text-lg lg:text-lg md:mt-0 lg:mt-0 text-sky-200 font-bold"><%= cat%></P>
-                </li>
-                <% })%>
-            </ul>
-            <form action="/questions/edit" method="POST" class="w-full">
-                <div class="m-auto flex w-95/100 p-2 border-1 border-cyan-800 min-h-15 bg-gray-700 my-5 rounded-lg">
-                    <p id="question-content" class="question-content m-auto text-sm md:text-lg lg:text-2xl"><%= question.content%></p>
-                </div>
-                <div class="m-auto text-center my-3">
-                    <input type="hidden" name="questionId" value="<%= question._id %>">
-                    <input type="submit" class="text-center bg-green-400 active:bg-green-950 hover:bg-green-600 focus:outline-4 focus:outline-offset-2 focus:outline-green-700 text-white font-bold py-1 px-5 rounded-full" value="Edit">
-                </div>
-            </form>
-            <div class="error-message hidden w-80/100 m-auto mb-5 text-red-400 text-center p-2 bg-gray-600 border-1 border-gray-200 rounded-lg "></div>
-            <div class="absolute left-2 bottom-2">
-                <button type="submit" class="delete-question-btn text-center bg-red-400 active:bg-red-950 hover:bg-red-600 focus:outline-2 focus:outline-offset-2 focus:outline-red-700 text-white font-bold py-1 px-5 rounded-full"><img src="/images/trash.svg" alt="Delete" class="h-5 w-5"></button>
+<div id="error-message" class="hidden fixed z-1 top-0 left-0 w-full h-svh flex flex-col place-content-center opacity-0 transition-opacity duration-300 ease-in-out">
+    <div class="m-auto py-6 px-3 h-1/2 w-9/10 w-4/5 md:w-1/2 lg:w-1/4 flex-col gap-2 bg-gray-700 border-1 border-red-600 bg-rose-950 rounded-xl justify-content-center items-center">
+        <div class="m-auto h-full flex flex-col gap-3 place-content-between p-4 min-w-8/10 w-9/10 min-h-4/10 text-red-600 border border-white rounded-lg bg-gray-800" role="alert">
+            <div class="flex flex-1 items-center">
+                <svg class="shrink-0 w-6 h-6 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                </svg>
+                <span class="sr-only">Info</span>
+                <h3 class="text-lg font-medium border-b-2 border-b-red-700">Oh no!</h3>
             </div>
-        </li>
-    <% }) %>
-    </ul>
-    <div id="no-results-box" class="no-results-box opacity-0 transition-opacity ease-in-out duration-300 mx-auto border-1 border-gray-400 flex items-center h-fit w-full text-center p-5 bg-gray-700">
-        <p
-        class="m-auto w-8/10 h-30 p-5 text-lg md:text-xl lg:text-xl text-center text-orange-400">
-        <strong>No questions matched your search. Try a new search.<strong>
-        </p>
+            <div id="message" class="message flex flex-3 min-w-9/10 text-center place-content-center items-center px-3 pt-2 pb-10 m-auto text-sm md:text-lg text-wrap text-gray-200 border-1 border-red-800 bg-slate-900 rounded-2xl"></div>
+            <div class="flex">
+                <button type="button" class="dismiss text-red-800 bg-transparent border-1 border-red-800 hover:bg-red-900 hover:text-white hover:cursor-pointer focus:ring-4 focus:ring-white font-medium rounded-lg text-xs px-3 py-1.5 text-center hover:bg-red-600 border-red-600 text-red-500" data-dismiss-target="#alert-additional-content-2" aria-label="Close">
+                Dismiss
+                </button>
+            </div>
+        </div>
     </div>
 </div>
 
-<div id="error-message-del" class="hidden flex-col opacity-0 transition-opacity duration-300 ease-in-out h-screen w-full left-1/2 top-1/2 -translate-x-1/2 justify-content-center items-center fixed z-1">
-  <div class="flex flex-col gap-3 place-content-between p-4 mb-4 min-w-8/10 w-9/10 min-h-4/10 text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">
-    <div class="flex flex-1 items-center">
-      <svg class="shrink-0 w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-      </svg>
-      <span class="sr-only">Info</span>
-      <h3 class="text-lg font-medium">Oh no!</h3>
+<div id="success-message" class="hidden fixed z-1 top-0 left-0 w-full h-svh flex flex-col place-content-center opacity-0 transition-opacity duration-300 ease-in-out">
+    <div class="m-auto py-6 px-3 h-1/2 w-9/10 w-4/5 md:w-1/2 lg:w-1/4 flex-col gap-2 bg-gray-700 border-1 border-green-600 bg-lime-950 rounded-xl justify-content-center items-center">
+        <div class="m-auto h-full flex flex-col gap-3 place-content-between p-4 min-w-8/10 w-9/10 min-h-4/10 text-emerald-600 border border-white rounded-lg bg-gray-800" role="alert">
+            <div class="flex flex-1 items-center">
+                <svg class="shrink-0 w-6 h-6 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                </svg>
+                <span class="sr-only">Info</span>
+                <h3 class="text-lg font-medium border-b-2 border-b-green-700">Oh no!</h3>
+            </div>
+            <div class="message flex flex-3 min-w-9/10 text-center place-content-center items-center px-3 pt-2 pb-10 m-auto text-sm md:text-lg text-wrap text-gray-200 border-1 border-green-800 bg-slate-900 rounded-2xl"></div>
+            <div class="flex">
+                <button type="button" class="dismiss text-green-800 bg-transparent border-1 border-green-800 hover:bg-green-900 hover:text-white hover:cursor-pointer focus:ring-4 focus:ring-white rounded-lg text-xs px-3 py-1.5 text-center hover:bg-green-600 border-green-600 text-green-500" data-dismiss-target="#alert-additional-content-2" aria-label="Close">
+                Dismiss
+                </button>
+            </div>
+        </div>
     </div>
-    <div class="message flex flex-3 min-w-9/10 text-center place-content-center p-3 m-auto text-sm md:text-lg text-wrap border-1 border-sky-800 bg-slate-900">
-      
-    </div>
-    <div class="flex">
-      <button type="button" class="dismiss text-red-800 bg-transparent border border-red-800 hover:bg-red-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:hover:bg-red-600 dark:border-red-600 dark:text-red-500 dark:hover:text-white dark:focus:ring-red-800" data-dismiss-target="#alert-additional-content-2" aria-label="Close">
-        Dismiss
-      </button>
-    </div>
-  </div>
-</div>
-
-<div id="success-message-del" class="hidden flex-col opacity-0 transition-opacity duration-300 ease-in-out h-screen w-full left-1/2 top-1/2 -translate-x-1/2 justify-content-center items-center fixed z-1">
-  <div class="flex flex-col gap-3 place-content-between p-4 mb-4 min-w-8/10 w-9/10 min-h-4/10 text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert">
-    <div class="flex flex-1 items-center">
-      <svg class="shrink-0 w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-      </svg>
-      <span class="sr-only">Info</span>
-      <h3 class="text-lg font-medium">Hooray!</h3>
-    </div>
-    <div class="message flex flex-3 min-w-9/10 text-center place-content-center p-3 m-auto text-sm md:text-lg text-wrap border-1 border-sky-800 bg-slate-900">
-      
-    </div>
-    <div class="flex">
-      <button type="button" class="dismiss text-green-800 bg-transparent border border-green-800 hover:bg-green-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:hover:bg-green-600 dark:border-green-600 dark:text-green-400 dark:hover:text-white dark:focus:ring-green-800" data-dismiss-target="#alert-additional-content-3" aria-label="Close">
-        Dismiss
-      </button>
-    </div>
-  </div>
 </div>
 
 <script src="../../editSearch.js"></script>
