@@ -194,6 +194,7 @@ if (navigator.mediaDevices?.getUserMedia){
           audio.controls = true;
           audioFile.value = recordedUrl;
           timer.parentElement.style.backgroundColor = 'blue';
+          timer.textContent = 60;
         }
         else this.count();
       },1000)
@@ -246,6 +247,7 @@ if (navigator.mediaDevices?.getUserMedia){
       audio.src = recordedUrl;
       audio.controls = true;
       timer.parentElement.style.backgroundColor = 'blue';
+      timer.textContent = 60;
     });
   })
 }else recordBox.style.display = "none";

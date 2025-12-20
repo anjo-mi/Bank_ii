@@ -1,38 +1,35 @@
-<div class="">
-   
-    <div class="w-95/100 py-5 m-auto mt-4 flex flex-col" id="answerContainer">
-        <form id="answerSubmission" action="/practice/next" method="POST"
-        class="flex flex-col px-3 lg:sticky lg:-top-12 w-full opacity-100 transition-w-opacity duration-350 ease-in-out">
-        <input type="hidden" id="questions" name="questions" value="<%= JSON.stringify(questions) %>">
-        <input type="hidden" id="sessionId" name="sessionId" value="<%= sessionId %>">
-        <input type="hidden" id="current" name="current" value="<%= current %>">
-        <input type="hidden" id="answers" name="answers" value="<%= JSON.stringify(answers) %>">
-             <div>
-                <h2 class="font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3">Question <span id="questionNumber" class="inline-block text-center p-2 border-1 border-teal-500 bg-slate-800 text-white rounded-lg"><%= current + 1%></span> of <span id="totalQuestions" class="inline-block p-2 border-1 border-teal-500 bg-slate-800 text-white rounded-lg"><%= questions.length%></span></h2>
-                <p class="question-content m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 font-bold border-1 border-violet-800 bg-zinc-900 rounded-lg text-lg md:text-xl lg:text-2xl"><%= questions[current].content%></p>
-            </div>
-            <ul class="flex order-2 transition-all duration-400 gap-4 m-auto w-full h-12 lg:h-16 mt-3 mb-3 place-content-around text-center">
-                <li class="m-auto px-2 py-1 h-12 w-32/100 font-bold text-sm md:text-lg lg:text-xl bg-green-400 hover:bg-green-600 active:bg-green-950 outline-2 outline-grey-200 hover:outline-green-400 active:outline-green-800 rounded-full">
-                    <input class="m-auto inline-block h-full w-full items-center" type="submit" value="End Response">
-                </li>
-            </ul>
-            <div id="record-box"  class="m-auto my-4 p-3 w-full flex items-center place-content-evenly border-1 border-green-900 bg-slate-800 rounded-xl">
-                <div id="record" class="w-12 h-12 p-2 bg-red-600 hover:bg-red-800 active:bg-red-400 rounded-full">
-                    <img class="block" src="/images/microphone.svg" alt="Record">
+<div class="mx-auto w-full md:w-4/5 lg:w-2/3 flex flex-col place-content-center h-svh min-h-fit">
+    <div class="mx-auto w-full flex flex-col place-content-evenly h-fit min-h-9/10 border-1 border-blue-950 bg-gray-800 border-1 border-white rounded-2xl" id="answerContainer">
+        <div class="w-95/100 flex-6 m-auto mt-4 flex flex-col" id="answerContainer">
+            <form id="answerSubmission" action="/practice/next" method="POST"
+            class="flex flex-col gap-3 px-3 lg:sticky lg:-top-12 w-full opacity-100 transition-w-opacity duration-350 ease-in-out">
+                <input type="hidden" id="questions" name="questions" value="<%= JSON.stringify(questions) %>">
+                <input type="hidden" id="sessionId" name="sessionId" value="<%= sessionId %>">
+                <input type="hidden" id="current" name="current" value="<%= current %>">
+                <input type="hidden" id="answers" name="answers" value="<%= JSON.stringify(answers) %>">
+                 <div>
+                    <h2 class="font-bold m-auto underline text-sky-200 text-lg md:text-3xl w-fit mb-3 py-3 px-7 border-1 border-white bg-blue-950 rounded-3xl">Question <span id="questionNumber" class="inline-block text-center p-2 border-1 border-teal-500 bg-zinc-900 text-white rounded-lg"><%= current + 1%></span> of <span id="totalQuestions" class="inline-block p-2 border-1 border-teal-500 bg-zinc-900 text-white rounded-lg"><%= questions.length%></span></h2>
+                    <p class="question-content m-auto text-sm md:text-md lg:text-lg text-center text-gray-200 flex flex-col place-content-center items-center min-h-50 pt-1 md:pt-3 pb-10 px-2 md:px-4 border-1 border-violet-500 bg-zinc-900 rounded-2xl text-lg md:text-xl lg:text-2xl"><%= questions[current].content%></p>
                 </div>
-                <div class="w-12 h-12 p-2 bg-blue-600 hover:bg-blue-800 active:bg-blue-400 rounded-full">
-                    <img class="block" src="/images/pause.svg" alt="Pause">
+                <button class="m-auto w-1/3 md:w-1/5 lg:w-1/6 min-w-fit px-3 py-2 flex-1 text-xs md:text-lg lg:text-xl bg-sky-900 outline-2 outline-green-400 hover:outline-green-600 hover:bg-cyan-950 text-shadow-sky-400 hover:text-shadow-sm hover:cursor-pointer active:outline-green-800 rounded-2xl" type="submit">End Response</button>
+                <div id="record-box"  class="m-auto my-4 p-3 w-full flex flex-wrap items-center place-content-evenly gap-2 border-1 border-green-600 bg-slate-900 rounded-xl">
+                    <div id="record" class="w-12 flex flex-col place-content-center items-center p-2.5 border-1 border-gray-400 bg-red-600 hover:bg-red-800 hover:cursor-pointer active:bg-red-400 rounded-full">
+                        <img class="block m-auto w-7 h-7" src="/images/microphone.svg" alt="Record">
+                    </div>
+                    <div class="w-12 h-12 w-12 flex flex-col items-center place-content-center border-1 border-white bg-blue-800 rounded-full">
+                        <p id="timer" class="text-white font-bold text-xl md:text-2xl">60</p>
+                    </div>
+                    <div id="stop" class="w-12 flex flex-col place-content-center items-center p-2.5 border-1 border-gray-400 bg-red-600 hover:bg-red-800 hover:cursor-pointer active:bg-red-400 rounded-full">
+                        <img class="block m-auto w-7 h-7" src="/images/stop.svg" alt="Stop">
+                    </div>
+                    <div id="record-container" class="hidden flex place-content-evenly items-center gap-4 w-full h-fit">
+                        <label for="audio-file" class="m-auto w-1/4 md:w-1/6 px-3 py-1 text-xs md:text-sm border-1 border-white bg-stone-900 hover:bg-lime-900 hover:cursor-pointer rounded-xl flex place-content-evenly gap-3"><input class="block m-auto h-3 w-3" id="audio-file" type="checkbox" value="">Store Audio</label>
+                        <audio class="w-2/3 md:w-4/5 m-auto" id="recording" src=""></audio>
+                    </div>
                 </div>
-                <div id="stop" class="w-12 h-12 p-3 bg-red-600 hover:bg-red-800 active:bg-red-400 rounded-full">
-                    <img class="block" src="/images/stop.svg" alt="Stop">
-                </div>
-                <div id="record-container" class="hidden w-fit max-w-1/3 h-hit">
-                    <label for="audio-file" class="w-full px-3 border-1 border-white mb-1 py-1 bg-stone-900 hover:bg-lime-900 rounded-xl space-content-evenly"><input class="mr-5 mb-1" id="audio-file" type="checkbox" value="">Store Audio</label>
-                    <audio class="mt-2" id="recording" src=""></audio>
-                </div>
-            </div>
-            <textarea class="w-90/100 text-xs md:text-lg lg:text-lg order-3 h-25 mt-10 focus:mt-30 focus:h-140 lg:focus:h-80 transition-all duration-300 resize-none px-2 py-1 mx-auto mb-6 border-2 border-gray-700 outline-0 focus:outline-2 focus:outline-blue-600 focus:bg-slate-800 rounded-lg" name="answer" id="answer"></textarea>
-        </form>
+                <textarea class="w-full text-xs md:text-lg order-3 h-25 min-h-fit mt-10 focus:h-140 lg:focus:h-80 transition-all duration-300 resize-none px-2 py-1 mx-auto mb-6 border-2 border-gray-700 outline-0 bg-slate-900 focus:outline-2 focus:outline-blue-600 hover:outline-1 hover:outline-blue-600 rounded-lg" name="answer" id="answer"></textarea>
+            </form>
+        </div>
     </div>
 </div>
 

@@ -3,6 +3,7 @@ const answerForm = document.getElementById('answerSubmission');
 
 const recordBtn = document.getElementById('record');
 const stopBtn = document.getElementById('stop');
+const timer = document.getElementById('timer');
 const recordBox = document.getElementById('record-box');
 const audioFile = document.getElementById('audio-file');
 const audioContainer = document.getElementById('record-container');
@@ -167,6 +168,7 @@ if (navigator.mediaDevices?.getUserMedia){
         if (this.recorder.state !== 'recording') return;
         this.time++;
         console.log(60 - this.time);
+        timer.textContent = 60 - this.time;
         if (this.time > 60){
           audioContainer.classList.remove('hidden');
           const recording = await this.stop();
@@ -176,6 +178,8 @@ if (navigator.mediaDevices?.getUserMedia){
           audio.src = recordedUrl;
           audio.controls = true;
           audioFile.value = recordedUrl;
+          timer.parentElement.style.backgroundColor = 'blue';
+          timer.textContent = 60;
         }
         else this.count();
       },1000)
@@ -216,6 +220,7 @@ if (navigator.mediaDevices?.getUserMedia){
 
     recorder.start();
     transcriber.start();
+    timer.parentElement.style.backgroundColor = 'green';
     stopBtn.addEventListener('click', async (e) => {
       audioContainer.classList.remove('hidden');
       const recording = await recorder.stop();
@@ -225,6 +230,8 @@ if (navigator.mediaDevices?.getUserMedia){
       const audio = document.getElementById('recording');
       audio.src = recordedUrl;
       audio.controls = true;
+      timer.parentElement.style.backgroundColor = 'blue';
+      timer.textContent = 60;
     });
 
   })
