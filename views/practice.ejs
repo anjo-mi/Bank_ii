@@ -1,39 +1,46 @@
-<h1 class="mx-auto w-60/100 md:w-70/100 lg:w-50/100 text-lg md:text-2xl lg:text:3xl mt-5 mb-5 text-center text-gray-400 underline bg-indigo-950" >Select the Topics the Interview May Span</h1>
-
-<form action="/practice/start" method="POST">
-    
-    <div 
-    class="mx-auto w-full max-w-9/10 mt-5 mb-3">
-      <div class="border-1 w-7/10 md:w-full lg:w-full m-auto rounded-lg border-gray-300">
-        <label for="limit"
-            class="flex items-center place-content-center text-xs md:text-xl lg:text-2xl h-full w-full py-3 gap-3 text-gray-900 dark:text-gray-300" >
-            Interview Length:
-            <input type="number" id="limit" name="limit" value="7" placeholder="Default: 7"
-            class="w-35/100 md:w-35/100 lg:w-35/100 h-full p-1 md:p-2 lg:p-3 text-center text-gray-300 bg-zinc-900 border-1 border-gray-300 rounded-sm dark:bg-zinc-900 dark:border-gray-500">
-        </label>
-      </div>
-    </div>
-    <div 
-    class="mx-auto h-fit w-full max-w-9/10 mt-5 mb-3 p-3 dark:bg-gray-700 dark:border-gray-200 dark:text-white">
-        <ul 
-        class="m-auto flex h-full flex-wrap gap-4 items-center text-center">
-        <% allCats.forEach(cat =>{ %>
-            <li 
-            class="m-auto h-fit min-h-full w-3/10 flex flex-col place-content-center gap-2 items-center border border-gray-200 rounded-3xl dark:border-gray-200">
-            <label for="<%= cat %>"
-            class="px-1 py-2 text-xs md:text-xl lg:text-2xl md:text-md lg:text-2xl h-full w-full text-gray-900 dark:text-gray-300 hover:bg-cyan-950 hover:cursor-pointer rounded-3xl">
-                <input type="checkbox" id="<%= cat %>" name="categori" value="<%= cat %>" 
-                class="checkbox break-normal text-blue-600 mt-2 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <p><%= cat %></p>
+<div class="mx-auto w-full flex flex-col h-svh min-h-fit gap-2.5 place-content-evenly items-center">
+    <h1 class="mx-auto text-gray-300 text-shadow-lg text-shadow-orange-600 text-4xl md:text-6xl">PRACTICE INTERVIEW</h1>
+    <form action="/practice/start" method="POST" class="w-95/100 xl:w-2/3 h-fit min-h-2/3 py-3 flex flex-col place-content-evenly mx-auto border-2 border-gray-400 bg-neutral-800 rounded-2xl">
+        <div class="mx-auto w-full max-w-9/10 mt-5 mb-3">
+          <div class="border-1 w-7/10 md:w-full lg:w-full m-auto rounded-lg border-sky-800 bg-emerald-950">
+            <label for="limit"
+                class="flex items-center place-content-center text-xs md:text-md xl:text-lg h-full w-full py-3 gap-3 text-gray-300" >
+                Interview Length:
+                <input type="number" id="limit" name="limit" value="7" placeholder="Default: 7"
+                class="w-1/3 h-full p-2 text-center text-xs md:text-lg xl:text-xl text-gray-300 border-1 rounded-lg bg-zinc-900 border-gray-500">
             </label>
-            </li>
-        <% }) %>
-        </ul>
-    </div>
+          </div>
+        </div>
+        <div class="flex items-center place-content-evenly my-2">
+            <button type="button" id="select-all" class="block w-1/3 m-auto items-center px-3 py-2.5 text-xs md:text-base font-medium text-center text-white bg-lime-800 rounded-lg hover:bg-lime-950 active:bg-lime-600 hover:cursor-pointer border-1 border-yellow-400">
+               Select All
+            </button>
+            <button type="reset" id="reset" class="block w-1/3 m-auto items-center px-2 md:px-3 py-2.5 text-xs md:text-base text-center text-white bg-rose-800 rounded-lg hover:bg-rose-950 active:bg-rose-600 hover:cursor-pointer border-1 border-yellow-400">
+               Un-Select All
+            </button>
+        </div>
+        <div class="mx-auto w-95/100 h-fit p-3 bg-zinc-900 border-2 border-stone-400 text-white rounded-3xl">
+            <ul
+            class="m-auto flex flex-wrap gap-2 place-content-evenly items-stretch text-center h-fit w-full">
+            <% allCats.forEach(cat =>{ %>
+                <li
+                class="m-auto my-1 md:my-2 w-3/10 flex flex-col place-content-center items-center">
+                <label for="<%= cat %>"
+                class="py-2 px-3 flex flex-col items-center place-content-evenly text-xs md:text-lg lg:text-2xl h-full w-full text-white hover:bg-cyan-950 hover:cursor-pointer bg-emerald-600 border-2 border-cyan-400 rounded-2xl">
+                    <input type="checkbox" id="<%= cat %>" name="categori" value="<%= cat %>"
+                    class="h-3 w-3 md:h-5 md:w-5 checkbox accent-indigo-800 break-normal">
+                    <p><%= cat %></p>
+                </label>
+                </li>
+            <% }) %>
+            </ul>
+        </div>
+    
+        <div class="w-1/3 mx-auto">
+            <input type="submit" value="Begin Interview"
+                class="text-center h-full w-full text-xs md:text-lg block bg-indigo-800 active:bg-indigo-950 hover:bg-indigo-600 text-white py-2.5 px-2 rounded-full border-1 border-white hover:cursor-pointer hover:font-bold text-shadow-sky-400 hover:text-shadow-sm">
+        </div>
+    </form>
+</div>
 
-    <div 
-    class="mx-auto w-full max-w-9/10 text-center">
-        <input type="submit" value="Begin Interview"
-        class="text-center bg-green-400 active:bg-green-950 hover:bg-green-700 focus:outline-4 focus:outline-offset-2 focus:outline-green-700 text-white font-bold py-2 px-4 rounded-full">
-    </div>
-</form>
+<script src="../index.js"></script>
