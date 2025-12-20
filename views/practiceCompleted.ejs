@@ -13,10 +13,10 @@
     </ul>
   </div>
 
-  <h1 class="mx-auto flex-1 mb-6 h-fit flex-1 text-gray-300 text-shadow-lg text-shadow-orange-800 text-4xl md:text-6xl">INTERVIEW RESULTS:</h1>
+  <h1 class="mx-auto flex-1 mb-6 h-fit flex-1 text-gray-300 text-shadow-lg text-shadow-orange-800 text-4xl md:text-6xl">RESULTS:</h1>
 
-  <div id="interview-results" class="flex h-screen m-auto justify-center items-center text-xs md:text-lg">
-    <section id="resultCarousel" class="result-card-carousel m-auto flex flex-col w-full border-1 rounded-lg border-gray-300 bg-zinc-800 p-3 gap-6 items-center place-content-center">
+  <div id="interview-results" class="flex w-full h-dvh min-h-fit m-auto justify-center items-center text-xs md:text-lg">
+    <section id="resultCarousel" class="result-card-carousel m-auto flex flex-col w-full border-1 rounded-lg border-gray-300 bg-zinc-800 py-3 px-1 lg-px-3 gap-6 items-center place-content-center">
       <% 
       const answers = updatedSession.answers;
       const responses = updatedSession.aiResponse?.questionResponse
@@ -78,7 +78,7 @@
           <ul class="min-h-24 max-h-80 overflow-y-scroll p-2 border border-2 border-sky-600 bg-stone-950 rounded-xl">
             <% for (const resource of resources){ %>
             <li class="flex items-center my-2 text-center place-content-evenly w-full relative">
-              <div class="practice-date w-full h-full w-full text-center mx-auto border-slate-900"><a href="<%= resource %>" target="_blank" class="block w-full h-full py-1.5 border-1 border-blue-500 bg-indigo-600 hover:bg-indigo-900 active:indigo-400 hover:cursor-pointer rounded-xl"><%= resource %>></a></div>
+              <div class="practice-date w-full h-full w-full text-center mx-auto border-slate-900"><a href="<%= resource %>" target="_blank" class="block w-full h-full py-1.5 border-1 border-blue-500 bg-indigo-600 hover:bg-indigo-900 active:indigo-400 text-gray-200 hover:cursor-pointer rounded-xl"><%= resource %>></a></div>
               <form action="/saveResource" method="POST" class="save-resource absolute right-0 top-0 w-fit h-full">
                 <input type="hidden" name="resource" class="resource save-resource" value="<%= resource %>">
                 <button class="save-resource m-auto w-fit h-full bg-lime-700 hover:bg-lime-900 active:bg-lime-500 text-white py-1 px-3 border-1 border-yellow-500 hover:border-yellow-700 hover:cursor-pointer rounded-lg">Save</button>
@@ -92,7 +92,7 @@
           <ul class="min-h-24 max-h-80 overflow-y-scroll p-2 border border-2 border-sky-600 bg-stone-950 rounded-xl">
             <% for (const question of followUps){ %>
             <li class="flex items-center my-2.5 text-center place-content-around w-full pl-2 pr-2/10 border-1 border-gray-200 bg-blue-700 rounded-xl">
-              <div class="practice-date w-full h-full min-w-8/10 text-center m-auto border-slate-900"><%= question %></div>
+              <div class="practice-date w-full h-full min-w-8/10 text-center m-auto border-slate-900 text-gray-200"><%= question %></div>
               <form action="/questions/create" id="create-new" method="POST" class="save-follow-up h-fit">
                 <input type="hidden" name="follow-up" class="follow-up" value="<%= question %>">
                 <input type="hidden" name="categori" class="categori" value="<%= JSON.stringify(q.categories) %>">

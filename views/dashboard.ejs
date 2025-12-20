@@ -1,22 +1,28 @@
+<h1 id="welcome-message" class="mx-auto flex-1 mt-5 mb-8 h-fit flex-1 text-gray-300 text-shadow-lg text-shadow-lime-600 shadow-lg shadow-sky-700 hover:shadow-orange-700 text-4xl md:text-6xl rounded-xl transition-color duration-200 ease-in-out">
+  Welcome, <%= user.username%>!
+</h1>
+
 <div id="stats-page-container" class="m-auto text-center text-white">
   <section id="heading-container" class="m-auto mb-3 flex flex-wrap gap-2 text-center w-full">
-    <h1 id="welcome-message" class="w-8/10 m-auto mt-10 mb-2 bg-cyan-800 text-gray-200 rounded-lg">
-      Welcome, <%= user.username%>!
-    </h1>
-    <p class="mx-auto my-2 text-xs md:text-lg lg:text-lg w-30/100 h-fit bg-green-400 hover:bg-green-600 active:bg-green-950 text-white py-2 px-5 rounded-full mt-5"><a class="block" href="/">Main Search</a></p>
-    <p class="mx-auto my-2 text-xs md:text-lg lg:text-lg w-30/100 h-fit bg-green-400 hover:bg-green-600 active:bg-green-950 text-white py-2 px-5 rounded-full mt-5"><a class="block" href="/practice/history">Session History</a></p>
+
+    <p class="m-auto w-30/100">
+      <a class="block w-full h-full bg-green-700 hover:bg-lime-900 active:bg-lime-500 border-1 border-yellow-500 hover:border-yellow-700 text-white py-2 px-1 rounded-xl" href="/">Main Search</a>
+    </p>
+    <p class="m-auto w-30/100">
+      <a class="block w-full h-full bg-green-700 hover:bg-lime-900 active:bg-lime-500 border-1 border-yellow-500 hover:border-yellow-700 text-white py-2 px-1 rounded-xl" href="/practice/history">Session History</a>
+    </p>
   </section>
-  <div id="user-info-container" class="w-95/100 m-auto md:w-9/10 h-full lg:w-9/10 border border-1 border-emerald-600 rounded-2xl">
+  <div id="user-info-container" class="w-95/100 m-auto w-full lg:w-9/10 h-full border border-1 border-emerald-600 bg-gray-700 rounded-2xl">
     <dl class="grid grid-cols-1 xl:grid-cols-2 gap-3 p-2">
-      <div>
-        <dt class="w-9/10 text-left ml-4">Resources Accrued:</dt>
-        <div class="w-9/10 m-auto h-40 md:h-80 overflow-y-scroll p-2 border border-2 border-sky-600 bg-stone-950 rounded-xl">
+      <div class="mx-2 my-1 py-3 border-1 border-sky-500 bg-teal-950 rounded-xl">
+        <dt class="w-95/100 text-md lg:text-lg xl:text-xl text-left ml-4">Resources Accrued:</dt>
+        <div class="w-95/100 m-auto h-40 md:h-80 overflow-y-scroll p-2 border border-2 border-sky-600 bg-stone-950 rounded-xl">
           <dd>
             <section id="user-stats-container" class="w-full min-h-24 m-auto">
               <ul>
                 <% for (const resource of user.resources.slice(0).reverse()){ %>
-                <li class="resource-li block opacity-100 transition-opacity duration-300 ease-out h-fit mb-2 relative">
-                  <a href="<%= resource %>" target="_blank" class="block m-auto truncate w-9/10 px-4 py-2 text-xs md:text-lg text-left rtl:text-right border-1 border-blue-200 cursor-pointer border-gray-600 bg-indigo-500 hover:bg-green-600 hover:text-white focus:ring-gray-500 focus:text-white rounded-xl"><%= resource %>
+                <li class="resource-li block opacity-100 transition-opacity duration-300 ease-out h-fit my-1.5 relative">
+                  <a href="<%= resource %>" target="_blank" class="block m-auto truncate w-95/100 px-4 py-2 text-xs md:text-lg text-left py-1.5 border-1 border-blue-500 bg-indigo-900 hover:bg-green-800 active:indigo-400 text-gray-200 hover:cursor-pointer rounded-xl"><%= resource %>
                   </a>
                   <button type="button" id="<%= resource %>" class="delete-btn h-5/6 inline p-1 rounded-full border-1 border-black hover:border-white hover:pointer bg-red-700 hover:bg-red-900 active:bg-red-400 absolute right-1 top-1 z-10 hover:cursor-pointer">
                     <img class="max-h-full" src="/images/trash.svg" alt="Delete">
@@ -29,73 +35,67 @@
         </div>
       </div>
 
-      <div>
-        <dt class="w-9/10 text-left ml-4">Previous Practice Sessions: <span id="session-count"><%= sessions.length %></span></dt>
-        <div  class="w-9/10 m-auto h-40 md:h-80 overflow-y-scroll p-2 border border-2 border-sky-600 bg-stone-950 rounded-xl">
+      <div class="mx-2 my-1 py-3 border-1 border-sky-500 bg-teal-950 rounded-xl">
+        <dt class="w-95/100 text-md lg:text-lg xl:text-xl text-left ml-4">Previous Practice Sessions: <span id="session-count"><%= sessions.length %></span></dt>
+        <div  class="w-95/100 m-auto h-40 md:h-80 overflow-y-scroll p-2 border border-2 border-sky-600 bg-stone-950 rounded-xl flex flex-col place-content-evenly gap-5">
           <% for (const session of sessions.slice(0).reverse()){ %>
-          <dd>
-            <form action="/getSession" method="POST" class="relative session-form opacity-100 transition-opacity duration-300 ease-in-out">
+            <dd class="w-full h-fit m-auto">
+            <form action="/getSession" method="POST" class="relative w-full session-form opacity-100 transition-opacity duration-300 ease-in-out">
               <input type="hidden" name="sessionId" value="<%= session._id %>">
               <button type="submit" class="block m-auto w-full">
-                <section id="user-questions-container" class="w-9/10  m-auto">
-                  <ul>
-                    <li class="flex my-1 items-center text-center text-xs md:text-lg place-content-around px-4 py-2 text-left rtl:text-right border-1 border-blue-200 cursor-pointer border-gray-600 bg-indigo-500 hover:bg-green-600 hover:text-white focus:ring-gray-500 focus:text-white rounded-xl">
+                <section id="user-sessions-container" class="w-95/100 m-auto">
+                    <div class="flex my-1 w-full h-full px-4 py-1.5 text-xs md:text-lg border-1 border-blue-500 bg-indigo-900 hover:bg-green-800 active:indigo-400 text-gray-200 hover:cursor-pointer rounded-xl">
                       <div class="practice-date h-full w-5/10 text-center border-r-1 border-slate-900"><%= session.completedAt.toString().slice(4,15) %></div>
-                      <div class="practice-length h-full w-5/10 text-center border-l-1 border-slate-900"><%= session.questions.length %> Questions</div>
-                    </li>
-                  </ul>
-                </section>
-              </button>
-              <button type="button" id="<%= session._id.toString() %>" class="delete-session h-3/4 inline p-1 rounded-full border-1 border-black hover:border-white hover:pointer bg-red-700 hover:bg-red-900 active:bg-red-400 absolute -right-1 top-1 z-10 hover:cursor-pointer">
-                <img class="max-h-full" src="/images/trash.svg" alt="Delete">
-              </button>
-            </form>
+                      <div class="practice-length h-full w-5/10 text-center border-l-1 border-slate-900"><%= session.questions.length %> Question(s)</div>
+                    </div>
+                  </section>
+                </button>
+                <button type="button" id="<%= session._id.toString() %>" class="delete-session h-3/4 inline p-1 rounded-full border-1 border-black hover:border-white hover:pointer bg-red-700 hover:bg-red-900 active:bg-red-400 absolute -right-1 top-1 z-10 hover:cursor-pointer">
+                  <img class="max-h-full" src="/images/trash.svg" alt="Delete">
+                </button>
+              </form>
           </dd>
           <%}%>
         </div>
       </div>
 
-      <div>
-        <dt class="w-95/100 text-left ml-4">Questions</dt>
-        <div class="w-9/10 m-auto h-40 md:h-80 overflow-y-scroll p-2 border border-2 border-sky-600 bg-stone-950 rounded-xl">
+      <div class="mx-2 my-1 py-3 border-1 border-sky-500 bg-teal-950 rounded-xl">
+        <dt class="w-95/100 text-md lg:text-lg xl:text-xl text-left ml-4">Questions</dt>
+        <div class="w-95/100 m-auto h-40 md:h-80 overflow-y-scroll p-2 border border-2 border-sky-600 bg-stone-950 rounded-xl flex flex-col place-content-evenly gap-3">
         <% for (const q of questions.reverse()){ %>
-          <dd class="my-1">
-            <section id="user-session-container" class="w-95/100 m-auto">
-              <ul>
-                <li>
-                  <form action="/questions/byId" method="POST">
-                    <input type="hidden" name="id" value="<%= q._id %>">
-                    <button type="submit" class="w-full px-4 py-2 truncate text-sm md:text-lg lg:text-lg text-left rtl:text-right border-1 border-blue-200 cursor-pointer border-gray-600 bg-indigo-500 hover:bg-green-600 hover:text-white focus:ring-gray-500 focus:text-white rounded-xl"><%= q.content %>
-                    </button>
-                  </form>
-                </li>
-              </ul>
+          <dd>
+            <section id="user-question-container" class="w-full h-fit m-auto">
+              <form action="/questions/byId" method="POST">
+                <input type="hidden" name="id" value="<%= q._id %>">
+                <button type="submit" class="w-95/100 px-4 py-2 truncate text-xs md:text-base xl:text-lg border-1 border-gray-200 bg-blue-700 hover:bg-blue-900 hover:border-white active:bg-blue-600 hover:cursor-pointer rounded-xl"><%= q.content %>
+                </button>
+              </form>
             </section>
           </dd>
           <%}%>
         </div>
       </div>
       
-      <div>
-        <dt class="w-9/10 text-left ml-4">Need Something Else?</dt>
+      <div class="mx-2 my-1 py-3 border-1 border-sky-500 bg-teal-950 rounded-xl">
+        <dt class="w-95/100 text-md lg:text-lg xl:text-xl text-left ml-4">Need Something Else?</dt>
         <dd>
-          <section id="user-nav-container" class="w-9/10 h-fit m-auto">
-            <ul class="grid grid-cols-2 text-xs md:text-lg gap-1 md:gap-3 p-2 min-h-24 md:h-80 border border-2 border-sky-600 bg-stone-950 rounded-xl">
-              <li class="p-2 h-fit w-full m-auto">
-                <a href="/questions/form" class="block m-auto text-center h-full p-2 font-medium border-1 border-blue-200 cursor-pointer border-gray-600 bg-indigo-500 hover:bg-green-600 hover:text-white focus:text-white rounded-xl">Add New Question
+          <section id="user-nav-container" class="w-95/100 h-fit m-auto">
+            <ul class="flex flex-wrap items-stretch place-content-evenly w-full text-xs md:text-lg gap-3 py-5 p-2 xl:h-80 border border-2 border-sky-600 bg-stone-950 rounded-xl">
+              <li class="h-fit w-2/5 m-auto">
+                <a href="/questions/form" class="block m-auto text-center h-full w-full p-2 text-sm md:text-base xl:text-lg border-1 cursor-pointer border-gray-300 bg-teal-700 hover:bg-cyan-950 hover:border-blue-400 active:bg-green-700 rounded-xl">Add New Question
                 </a>
               </li>
-              <li class="p-2 h-fit w-full m-auto">
-                <a href="/practice" class="block m-auto text-center h-full p-2 font-medium border-1 border-blue-200 cursor-pointer border-gray-600 bg-indigo-500 hover:bg-green-600 hover:text-white focus:text-white rounded-xl">New Practice
+              <li class="h-fit w-2/5 m-auto">
+                <a href="/practice" class="block m-auto text-center h-full w-full p-2 text-sm md:text-base xl:text-lg border-1 cursor-pointer border-gray-300 bg-teal-700 hover:bg-cyan-950 hover:border-blue-400 active:bg-green-700 rounded-xl">New Practice
                 </a>
               </li>
-              <li class="p-2 h-fit w-full m-auto">
-                <a href="/questions/edit/select" class="block m-auto text-center h-full p-2 font-medium border-1 border-blue-200 cursor-pointer border-gray-600 bg-indigo-500 hover:bg-green-600 hover:text-white focus:text-white rounded-xl">Edit Questions
+              <li class="h-fit w-2/5 m-auto">
+                <a href="/questions/edit/select" class="block m-auto text-center h-full w-full p-2 text-sm md:text-base xl:text-lg border-1 cursor-pointer border-gray-300 bg-teal-700 hover:bg-cyan-950 hover:border-blue-400 active:bg-green-700 rounded-xl">Edit Questions
                 </a>
               </li>
-              <li class="p-2 h-fit w-full m-auto">
+              <li class="h-fit w-2/5 m-auto">
                 <form action="/questions/getSingleRandom" method="POST">
-                  <button class="block w-full m-auto text-center h-full p-2 font-medium border-1 border-blue-200 cursor-pointer border-gray-600 bg-indigo-500 hover:bg-green-600 hover:text-white focus:text-white rounded-xl">Random Question
+                  <button class="block m-auto text-center h-full w-full p-2 text-sm md:text-base xl:text-lg border-1 cursor-pointer border-gray-300 bg-teal-700 hover:bg-cyan-950 hover:border-blue-400 active:bg-green-700 rounded-xl">Random Question
                   </button>
                 </form>
               </li>
@@ -112,10 +112,10 @@
    <img class="settings w-6 h-6" src="/images/settings.svg" alt="settings">
 </button>
 
-<section id="settings-menu" class="settings-menu settings hidden opacity-0 transition-opacity duration-300 ease-in-out h-fit w-1/2 md:w-1/4 lg:w-1/6 fixed top-15 right-2 z-50 p-2 text-sm text-white bg-gray-600 border-1 border-white rounded-xl">
+<section id="settings-menu" class="settings-menu settings hidden opacity-0 transition-opacity duration-300 ease-in-out h-fit w-2/3 sm:w-1/2 md:w-1/3 xl:w-1/6 fixed top-15 right-2 z-50 p-2 text-sm text-white bg-gray-600 border-1 border-white rounded-xl">
   <form id="user-settings" class="settings" action="/updateUser" method="PATCH">
     <div id="user-info" class="hidden"><%= JSON.stringify(user) %></div>
-    <h5 class="settings text-sm bg-teal-900 w-fit py-1 px-4 text-center rounded-full"><%= user.username %></h5>
+    <h5 class="settings text-sm bg-teal-900 w-fit py-1 px-4 outline-1 outline-b-white text-center rounded-full"><%= user.username %></h5>
     <p class="settings text-sm bg-blue-900 w-fit mt-2 py-1 px-4 text-center rounded-full">Career Level:</p>
     <ul>
       <li class="settings block my-2"><label class="settings m-auto block h-full w-full hover:bg-gray-500 hover:cursor-pointer rounded-lg relative" for="early"><input class="settings block absolute left-2 top-1" id="early" name="status" type="radio" value="early" required>Early</label></li>
@@ -126,7 +126,7 @@
     </ul>
     <p class="settings text-sm bg-blue-900 w-fit mt-2 py-1 px-4 text-center rounded-full">Position Title:</p>
     <div class="settings block my-2">
-      <input id="title" name="title" type="text" value="<%= user.info?.title || 'software engineer' %>" class="settings w-full px-2 py-1 bg-gray-900 text-white border-1 border-blue-400 rounded-xl" minlength="3" maxlength="30" required>
+      <input id="title" name="title" type="text" value="<%= user.info?.title || 'software engineer' %>" class="settings w-full px-2 py-1 bg-gray-900 text-white text-center border-1 border-blue-400 rounded-xl" minlength="3" maxlength="30" required>
     </div>
     <div class="settings block mt-5 mb-10">
       <label class="settings m-auto block h-full w-full hover:bg-gray-500 hover:cursor-pointer rounded-lg relative" for="optOut"><input class="settings block absolute left-2 top-1" id="optOut" name="optOut" type="checkbox">Exclude 100 Devs ?'s</label>

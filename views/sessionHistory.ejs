@@ -1,4 +1,8 @@
-<div class="mt-15">
+<h1 id="welcome-message" class="mx-auto flex-1 mt-5 mb-8 h-fit flex-1 text-gray-300 text-shadow-lg text-shadow-orange-600 shadow-lg shadow-sky-700 hover:shadow-green-800 text-4xl md:text-6xl rounded-xl transition-color duration-200 ease-in-out">
+  SESSION HISTORY:
+</h1>
+
+<div class="mt-10 mx-auto w-full xl:w-3/4">
   <h1 class="w-full text-left ml-4">Previous Practice Sessions: <%= sessions.length %></h1>
   <div class="w-full m-auto h-svh min-h-fit px-2 py-4 border border-2 border-sky-600 bg-stone-950 rounded-xl">
     <dl class="flex flex-col place-content-evenly gap-6 m-auto">
@@ -8,7 +12,7 @@
         const categories = new Set();
         for (const q of questions) for (const cat of q.categories) if (!categories.has(cat)) categories.add(cat);
       %>
-      <form action="/practice/<%= session._id %>" method="GET" class="form border-1 border-yellow-500 hover:border-blue-600 hover:border-2 bg-stone-800 rounded-lg cursor-pointer hover:bg-gray-600">
+      <form action="/practice/<%= session._id %>" method="GET" class="form border-1 border-yellow-500 hover:border-blue-600 hover:border-2 bg-stone-800 rounded-lg cursor-pointer hover:bg-gray-600 transition-color duration-200 ease-in-out">
         <input type="hidden" name="sessionId" value="<%= session._id %>">
         <button type="submit" class="block m-auto px-1 py-4 w-full h-full hover:cursor-pointer">
           <dt class="-ml-2 mb-1.5 text-left p-1 w-fit bg-indigo-800 rounded-lg border-1 border-gray-300"><%= session.completedAt.toString().slice(4,15) %>: <%= session.questions.length %> Question(s)</dt>
