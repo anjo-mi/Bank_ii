@@ -1,28 +1,28 @@
 <div class="mt-15">
   <h1 class="w-full text-left ml-4">Previous Practice Sessions: <%= sessions.length %></h1>
-  <div  class="w-full m-auto h-svh min-h-fit p-2 border border-2 border-sky-600 bg-stone-950 rounded-xl">
-    <dl>
+  <div class="w-full m-auto h-svh min-h-fit px-2 py-4 border border-2 border-sky-600 bg-stone-950 rounded-xl">
+    <dl class="flex flex-col place-content-evenly gap-6 m-auto">
     <% for (const session of sessions.slice(0).reverse()){ 
 
         const questions = session.questions;
         const categories = new Set();
         for (const q of questions) for (const cat of q.categories) if (!categories.has(cat)) categories.add(cat);
       %>
-      <form action="/practice/<%= session._id %>" method="GET" class="mt-5 md:mt-15 border-1 p-1 border-yellow-500 bg-teal-950 rounded-lg">
+      <form action="/practice/<%= session._id %>" method="GET" class="form border-1 border-yellow-500 hover:border-blue-600 hover:border-2 bg-stone-800 rounded-lg cursor-pointer hover:bg-gray-600">
         <input type="hidden" name="sessionId" value="<%= session._id %>">
-        <button type="submit" class="block m-auto w-95/100">
-          <dt class="-ml-2 text-left p-1 w-fit bg-orange-800 rounded-sm border-1 border-zinc-950"><%= session.completedAt.toString().slice(4,15) %>: <%= session.questions.length %> Question(s)</dt>
-          <dd class="w-97/100 m-auto max-h-3/10 p-2 border border-2 border-indigo-600 bg-neutral-950 rounded-xl">
+        <button type="submit" class="block m-auto px-1 py-4 w-full h-full hover:cursor-pointer">
+          <dt class="-ml-2 mb-1.5 text-left p-1 w-fit bg-indigo-800 rounded-lg border-1 border-gray-300"><%= session.completedAt.toString().slice(4,15) %>: <%= session.questions.length %> Question(s)</dt>
+          <dd class="w-full m-auto max-h-3/10 p-2 border border-2 border-indigo-700 bg-neutral-900 rounded-xl">
             <h3>Categories Covered:</h3>
-            <ul class="flex gap-2 my-1 items-center text-center place-content-around p-2 font-medium text-left rtl:text-right border-1 rounded-lg overflow-x-scroll bg-gray-900">
+            <ul class="flex flex-wrap border-1 border-dashed border-gray-400 bg-slate-950 rounded-2xl gap-3 m-auto p-1 py-2 mb-2 w-95/100 justify-evenly items-center text-center">
               <% for (const category of categories){ %>
-              <li class="p-2 min-w-30/100 border-1 border-sky-600 bg-blue-900 text-center m-auto rounded-lg"><%= category %></li>
+              <li class="min-w-3/10 w-fit text-xs md:text-lg text-sky-200 font-bold place-content-evenly items-center bg-gray-700 rounded-lg border-1 border-blue-300"><%= category %></li>
               <% } %>
             </ul>
             <h3>Questions Asked:</h3>
-            <ul class="flex flex-wrap h-20 md:h-40 gap-2 my-1 items-center text-center place-content-around p-1 font-medium text-left rtl:text-right border-1 rounded-lg overflow-y-scroll bg-gray-900">
+            <ul class="flex flex-col h-fit gap-4 my-3 py-3 items-center text-center place-content-around p-1 font-medium text-left rtl:text-right border-1 rounded-lg bg-gray-900">
               <% for (const question of questions){ %>
-              <li class="p-2 w-96/100 truncate border-1 border-sky-600 bg-blue-900 text-center m-auto rounded-lg"><%= question.content %></li>
+              <li class="p-2 w-96/100 h-fit max-h-25 truncate border-1 border-sky-600 bg-blue-900 text-center m-auto rounded-lg"><%= question.content %></li>
               <% } %>
             </ul>
           </dd>
