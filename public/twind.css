@@ -1147,9 +1147,6 @@
   .bg-blue-100 {
     background-color: var(--color-blue-100);
   }
-  .bg-blue-500 {
-    background-color: var(--color-blue-500);
-  }
   .bg-blue-600 {
     background-color: var(--color-blue-600);
   }
@@ -1221,9 +1218,6 @@
   }
   .bg-indigo-950 {
     background-color: var(--color-indigo-950);
-  }
-  .bg-lime-500 {
-    background-color: var(--color-lime-500);
   }
   .bg-lime-600 {
     background-color: var(--color-lime-600);
@@ -1320,9 +1314,6 @@
   }
   .bg-zinc-900 {
     background-color: var(--color-zinc-900);
-  }
-  .bg-zinc-950 {
-    background-color: var(--color-zinc-950);
   }
   .fill-current {
     fill: currentcolor;
