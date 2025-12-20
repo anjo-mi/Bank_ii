@@ -29,10 +29,10 @@
 
 <div class="h-svh min-h-fit flex flex-col place-content-center mt-3">
     <div class="m-auto min-h-fit w-full w-95/100 lg:w-2/3 py-4 px-2 border-1 border-gray-300 rounded-xl flex flex-col place-content-evenly gap-2">
-        <ul class="m-auto py-3 flex flex-col gap-4 text-center">
+        <ul class="m-auto w-full py-3 flex flex-col gap-4 text-center">
         <% allQuestions.forEach(question =>{ %>
             <li class="question-list-item my-3 opacity-0 transition-opacity ease-in-out duration-300 rounded-lg p-2 h-fit w-full flex flex-col place-content-center bg-stone-900 gap-2 items-center border-2 border-white">
-                <ul class="flex flex-wrap gap-y-1 md:gap-y-3 p-2 m-auto border-1 md:border-2 border-dashed border-sky-500 bg-blue-950 rounded-lg w-full max-w-95/100 place-content-around text-center">
+                <ul class="flex flex-wrap gap-y-1 md:gap-y-3 p-2 m-auto border-1 md:border-2 border-sky-500 bg-blue-950 rounded-lg w-full max-w-95/100 place-content-around text-center">
                     <% question.categories.forEach(cat =>{ %>
                     <li class="w-3/10 max-w-4/10 min-w-fit">
                         <form action="/questions/byCategory" method="POST"

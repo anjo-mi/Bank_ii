@@ -11,7 +11,7 @@ const dismissFeedbackBtn = document.getElementById('dismiss-fb');
 const prevFeedbackBox = document.getElementById('saved-feedback');
 
 const errorMessage = document.getElementById('error-message');
-const successBox = document.getElementById('success-message')
+const successBox = document.getElementById('success-message');
 
 const categories = new Set(Array.from(document.querySelectorAll('input[name="categori"]')).map(cat => cat.value));
 
@@ -188,81 +188,73 @@ updateQuestionForm.addEventListener('submit', async (e) => {
   })
 
 updateQuestionForm.addEventListener('keydown', async (e) => {
-    if (e.key !== 'Enter') return;
-    if (e.shiftKey) return;
- // block form submission
-    e.preventDefault();
-    if (e.target === newCategoryBox || e.target === newCategoryBtn) return;
-
-    // hide the input / display the load indicator
-    document.getElementById('submit').style.display = 'none';
-    document.getElementById('load-indicator').style.display = 'block';
-
-    const selectedCategories = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(input => input.value);
-    const question = document.getElementById('question').value;
-    const answer = document.getElementById('answer').value;
-    const newCategories = document.getElementById('possible-new-categories').value;
-
-    if (!selectedCategories.length){
-      handleBad('questions each need at least 1 category')
-      // hide the load indicator / display the button
-      document.getElementById('load-indicator').style.display = 'none';
-      document.getElementById('submit').style.display = 'block';
-      return;
-    }
-
-    if (!question.trim().length){
-      handleBad('questions need content')
-      // hide the load indicator / display the button
-      document.getElementById('load-indicator').style.display = 'none';
-      document.getElementById('submit').style.display = 'block';
-      return;
-    }
-
-    if (question.trim().split(' ').length > 60){
-      handleBad('questions shouldnt be so verbose')
-      // hide the load indicator / display the button
-      document.getElementById('load-indicator').style.display = 'none';
-      document.getElementById('submit').style.display = 'block';
-      return;
-    }
-
-    try{
-      // now attempt form submission
-      // action="/questions/edit/update"
-      const response = await fetch('/questions/edit/update', {
-        method: "POST",
-        headers: {"Content-Type": 'application/json'},
-        body: JSON.stringify({
-          question,
-          questionId,
-          categori: selectedCategories,
-          answer: answer.trim() || null,
-          newCategories,
-        })
+  if (e.key !== 'Enter') return;
+  if (e.shiftKey) return;
+  // block form submission
+  e.preventDefault();
+  if (e.target === newCategoryBox || e.target === newCategoryBtn) return;
+  // hide the input / display the load indicator
+  document.getElementById('submit').style.display = 'none';
+  document.getElementById('load-indicator').style.display = 'block';
+  const selectedCategories = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(input => input.value);
+  const question = document.getElementById('question').value;
+  const answer = document.getElementById('answer').value;
+  const newCategories = document.getElementById('possible-new-categories').value;
+  if (!selectedCategories.length){
+    handleBad('questions each need at least 1 category')
+    // hide the load indicator / display the button
+    document.getElementById('load-indicator').style.display = 'none';
+    document.getElementById('submit').style.display = 'block';
+    return;
+  }
+  if (!question.trim().length){
+    handleBad('questions need content')
+    // hide the load indicator / display the button
+    document.getElementById('load-indicator').style.display = 'none';
+    document.getElementById('submit').style.display = 'block';
+    return;
+  }
+  if (question.trim().split(' ').length > 60){
+    handleBad('questions shouldnt be so verbose')
+    // hide the load indicator / display the button
+    document.getElementById('load-indicator').style.display = 'none';
+    document.getElementById('submit').style.display = 'block';
+    return;
+  }
+  try{
+    // now attempt form submission
+    // action="/questions/edit/update"
+    const response = await fetch('/questions/edit/update', {
+      method: "POST",
+      headers: {"Content-Type": 'application/json'},
+      body: JSON.stringify({
+        question,
+        questionId,
+        categori: selectedCategories,
+        answer: answer.trim() || null,
+        newCategories,
       })
-
-      const data = await response.json();
-
-      // if were good, go to practice (login occurs in registration method)
-      if (response.ok){
-        handleGood(data.message);
-        
-        setTimeout(() => {window.location.href = '/questions/edit/select'}, 1500)
-      }
-      // register sends data.message, login sends data.error
-      else handleBad(data.message || data.error);
-      // redisplay input for next attempt
-      document.getElementById('load-indicator').style.display = 'none';
-      document.getElementById('submit').style.display = 'block';
+    })
+    const data = await response.json();
+    // if were good, go to practice (login occurs in registration method)
+    if (response.ok){
+      handleGood(data.message);
+      
+      setTimeout(() => {window.location.href = '/questions/edit/select'}, 1500)
     }
-    catch(e){
-      console.log({e});
-      handleBad(e.message);
-      document.getElementById('load-indicator').style.display = 'none';
-      document.getElementById('submit').style.display = 'block';
-    }
-  })
+    // register sends data.message, login sends data.error
+    else handleBad(data.message || data.error);
+    // redisplay input for next attempt
+    document.getElementById('load-indicator').style.display = 'none';
+    document.getElementById('submit').style.display = 'block';
+  }
+  catch(e){
+    console.log({e});
+    handleBad(e.message);
+    document.getElementById('load-indicator').style.display = 'none';
+    document.getElementById('submit').style.display = 'block';
+  }
+})
 
 deleteBtn.addEventListener('click', async (e) => {
   e.preventDefault();

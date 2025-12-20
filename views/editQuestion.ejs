@@ -11,16 +11,16 @@
     class="flex-9 flex flex-col place-content-evenly gap-1.5">
       <div class="w-9/10 border-1 border-sky-400 bg-stone-900 rounded-2xl h-fit flex flex-col place-content-evenly items-center mx-auto my-3 py-2 px-1">
         <ul id="category-list" class="flex flex-wrap border-1 border-dashed mt-3 border-gray-400 bg-neutral-800 rounded-sm gap-3 m-auto p-1 py-2 w-95/100 justify-evenly items-center text-center">
-            <% categori.forEach(cat => {%>
-              <li class="min-w-3/10 text-xs md:text-lg lg:text-lg text-sky-200 font-bold">
-                <label for="<%= cat %>" class="flex gap-1 py-1 px-2 mr-auto place-content-evenly items-center bg-gray-700 hover:bg-cyan-950 hover:cursor-pointer rounded-lg border-1 border-blue-300">
-                  <input id="<%= cat %>" type="checkbox" name="categori" value="<%= cat %>" checked="true"
+        <% categori.forEach(cat => {%>
+          <li class="min-w-3/10 text-xs md:text-lg lg:text-lg text-sky-200 font-bold">
+            <label for="<%= cat %>" class="flex gap-1 py-1 px-2 mr-auto place-content-evenly items-center bg-gray-700 hover:bg-cyan-950 hover:cursor-pointer rounded-lg border-1 border-blue-300">
+            <input id="<%= cat %>" type="checkbox" name="categori" value="<%= cat %>" checked="true"
                   class="w-4 h-4 md:w-6 md:h-6 accent-indigo-800 outline-1 outline-white">
-                <%= cat %>
-                </label>
-              </li>
-            <% })%>
-          </ul>
+              <%= cat %>
+            </label>
+          </li>
+        <% })%>
+        </ul>
           <div class="w-2/3 mt-4 relative">
             <input type="text" id="new-category" placeholder="Add New Category" class="p-2 min-h-4 w-1/1 block text-center text-xs md:text-lg lg:text-lg bg-slate-950 border-1 border-gray-300 rounded-sm focus:outline-2 focus:outline-green-400">
             <button type="button" id="add-new-category" class="flex flex-col justify-center items-center w-6 h-6 md:w-8 h-full m-auto items-center p-1.5 text-lg text-center text-white bg-lime-600 rounded-lg focus:ring-2 focus:ring-green-950 hover:bg-lime-800 active:bg-lime-950 hover:font-bold text-shadow-md hover:text-shadow-sky-400 border-1 border-yellow-500 hover:border-yellow-700 active:border-yellow-900 hover:cursor-pointer absolute right-0 top-0">
@@ -101,7 +101,7 @@
                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                 </svg>
                 <span class="sr-only">Info</span>
-                <h3 class="text-lg font-medium border-b-2 border-b-green-700">Oh no!</h3>
+                <h3 class="text-lg font-medium border-b-2 border-b-green-700">Hooray!</h3>
             </div>
             <div class="message flex flex-3 min-w-9/10 text-center place-content-center items-center px-3 pt-2 pb-10 m-auto text-sm md:text-lg text-wrap text-gray-200 border-1 border-green-800 bg-slate-900 rounded-2xl"></div>
             <div class="flex">
