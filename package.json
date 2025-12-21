@@ -43,6 +43,7 @@
     "@tailwindcss/postcss": "^4.1.13",
     "bcrypt": "^6.0.0",
     "connect-mongo": "^5.1.0",
+    "cors": "^2.8.5",
     "dompurify": "^3.3.0",
     "dotenv": "^17.2.2",
     "ejs": "^3.1.10",

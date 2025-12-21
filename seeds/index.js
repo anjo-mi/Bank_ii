@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import { categories } from "./categories.js";
-import { users } from "./users.js";
 import { questions } from "./questions.js";
 import models from "../models/index.js";
 const { Category, User, Question, PracticeSession } = models;
