@@ -3,6 +3,7 @@
 # Adjust NODE_VERSION as desired
 ARG NODE_VERSION=22.15.1
 FROM node:${NODE_VERSION}-slim AS base
+RUN apt-get update && apt-get install -y ca-certificates && rm -rf /var/lib/apt/lists/*
 
 LABEL fly_launch_runtime="Node.js"
 
