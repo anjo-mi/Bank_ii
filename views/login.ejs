@@ -1,10 +1,14 @@
+<div class="mx-auto mt-18 w-4/5 text-gray-300 text-shadow-lg text-shadow-orange-600 text-4xl md:text-6xl rounded-xl shadow-lg shadow-sky-700 hover:shadow-orange-700 transition-color duration-200 ease-in-out">
+    <h1 class="mx-auto text-xs lg:text-sm text-shadow-lg text-shadow-blue-600">TAKE IT TO THE</h1>
+    <h1 class="mx-auto">SPANK THE BANK</h1>
+</div>
+
 <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto h-svh">
     <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
         <div class="border-1 border-blue-200 rounded-lg bg-gray-900 p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Log In
             </h1>
-            <div id="error-message" class="hidden w-80/100 m-auto mb-5 text-red-400 text-center p-2 bg-gray-600 border-1 border-gray-200 rounded-lg "></div>
             <form id="login-form" class="space-y-4 md:space-y-6" action="/auth/login" method="POST">
                 <div>
                     <label for="provided-info" class="block mb-2 text-sm md:text-lg text-sky-400">Username or Email</label>
@@ -26,6 +30,26 @@
                     No Account? <a href="/auth/signup" class="font-medium text-primary-600 hover:underline text-sky-400">Sign Up Here</a>
                 </p>
             </form>
+        </div>
+    </div>
+</div>
+
+<div id="error-message" class="hidden fixed z-1 top-0 left-0 w-full h-svh flex flex-col place-content-center opacity-0 transition-opacity duration-300 ease-in-out">
+    <div class="m-auto py-6 px-3 h-1/2 w-4/5 xl:w-1/4 flex-col gap-2 bg-gray-700 border-1 border-red-600 bg-rose-950 rounded-xl justify-content-center items-center">
+        <div class="m-auto h-full flex flex-col gap-3 place-content-between p-4 min-w-8/10 w-9/10 min-h-4/10 text-red-600 border border-white rounded-lg bg-gray-800" role="alert">
+            <div class="flex flex-1 items-center">
+                <svg class="shrink-0 w-6 h-6 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                </svg>
+                <span class="sr-only">Info</span>
+                <h3 class="text-lg font-medium border-b-2 border-b-red-700">Oh no!</h3>
+            </div>
+            <div class="message flex flex-3 min-w-9/10 text-center place-content-center items-center px-3 pt-2 pb-10 m-auto text-sm md:text-lg text-wrap text-gray-200 border-1 border-red-800 bg-slate-900 rounded-2xl"></div>
+            <div class="flex">
+                <button type="button" class="dismiss text-red-800 bg-transparent border-1 border-red-800 hover:bg-red-900 hover:text-white hover:cursor-pointer focus:ring-4 focus:ring-white font-medium rounded-lg text-xs px-3 py-1.5 text-center hover:bg-red-600 border-red-600 text-red-500" data-dismiss-target="#alert-additional-content-2" aria-label="Close">
+                Dismiss
+                </button>
+            </div>
         </div>
     </div>
 </div>

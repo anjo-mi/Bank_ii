@@ -1,11 +1,28 @@
 const registerForm = document.getElementById('register-form');
 const loginForm = document.getElementById('login-form');
 
-const showError = (message) => {
-  const errorMessage = document.getElementById('error-message');
-  errorMessage.textContent = message;
-  errorMessage.style.display = 'block';
+const handleBad = (message) => {
+  const errorBox = document.getElementById('error-message');
+  console.log({errorBox});
+  errorBox.querySelector('.message').textContent = message;
+  errorBox.style.display = 'flex';
+  setTimeout(() => {
+    errorBox.style.opacity = 100;
+  }, 100)
 }
+
+document.addEventListener('click', (e) => {
+  let targ = e.target;
+  while (targ){
+    if (targ.id === 'submit') return;
+    targ = targ.parentElement;
+  }
+  const errorBox = document.getElementById('error-message');
+  errorBox.style.opacity = 0;
+  setTimeout(() => {
+    errorBox.style.display = 'none';
+  }, 300);
+})
 
 // if were on the register page
 if (registerForm){
@@ -23,7 +40,7 @@ if (registerForm){
     const email = document.getElementById('email').value;
 
     if (password !== confirmation){
-      showError('Which password do you want?');
+      handleBad('Which password do you want?');
       // hide the load indicator / display the input
       document.getElementById('load-indicator').style.display = 'none';
       document.getElementById('submit').style.display = 'block';
@@ -36,7 +53,7 @@ if (registerForm){
     const passwordUsesValidChars = password.toLowerCase().split('').every(char => validChars.has(char));
 
     if (!nameUsesValidChars){
-      showError('Your username may only contain alpha-numeric characters or ,./+=-!@#$%^&*_')
+      handleBad('Your username may only contain alpha-numeric characters or ,./+=-!@#$%^&*_')
       // redisplay input for next attempt
       document.getElementById('load-indicator').style.display = 'none';
       document.getElementById('submit').style.display = 'block';
@@ -44,7 +61,7 @@ if (registerForm){
     }
 
     if (!passwordUsesValidChars){
-      showError('Your password may only contain alpha-numeric characters or ,./+=-!@#$%^&*_');
+      handleBad('Your password may only contain alpha-numeric characters or ,./+=-!@#$%^&*_');
       // redisplay input for next attempt
       document.getElementById('load-indicator').style.display = 'none';
       document.getElementById('submit').style.display = 'block';
@@ -66,14 +83,14 @@ if (registerForm){
       // if were good, go to dashboard (login occurs in registration method)
       if (response.ok) window.location.href = '/dashboard'
       // register sends data.message, login sends data.error
-      else showError(data.message || data.error);
+      else handleBad(data.message || data.error);
       // redisplay input for next attempt
       document.getElementById('load-indicator').style.display = 'none';
       document.getElementById('submit').style.display = 'block';
     }
     catch(e){
       console.log({e});
-      showError(e.message);
+      handleBad(e.message);
       document.getElementById('load-indicator').style.display = 'none';
       document.getElementById('submit').style.display = 'block';
     }
@@ -87,6 +104,19 @@ if (registerForm){
       // - #provided-info is not confined to entry restraints, validated for match on back-end
 // same logic, translate from above
 if (loginForm){
+  document.addEventListener('click', (e) => {
+    let targ = e.target;
+    while (targ){
+      if (targ.id === 'submit') return;
+      targ = targ.parentElement;
+    }
+    const errorBox = document.getElementById('error-message');
+    errorBox.style.opacity = 0;
+    setTimeout(() => {
+      errorBox.style.display = 'none';
+    }, 300);
+  })
+
   loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -101,7 +131,7 @@ if (loginForm){
     const usesValidChars = provided.toLowerCase().split('').every(char => validChars.has(char));
 
     if (!usesValidChars){
-      showError('Your username may only contain alpha-numeric characters or ,./+=-!@#$%^&*_');
+      handleBad('Your username may only contain alpha-numeric characters or ,./+=-!@#$%^&*_');
       document.getElementById('load-indicator').style.display = 'none';
       document.getElementById('submit').style.display = 'block';
       return;
@@ -120,15 +150,15 @@ if (loginForm){
       const data = await response.json();
 
       if (response.ok) window.location.href = '/dashboard';
-      else showError(data.message || data.error);
+      else handleBad(data.message || data.error);
       document.getElementById('load-indicator').style.display = 'none';
       document.getElementById('submit').style.display = 'block';
     }
     catch(e){
       console.log({e});
-      showError(e.message);
+      handleBad(e.message);
       document.getElementById('load-indicator').style.display = 'none';
-      document.getElementById('submit').style.display = 'block';
+      setTimeout(() => {document.getElementById('submit').style.display = 'block';},100)
     }
   })
 }

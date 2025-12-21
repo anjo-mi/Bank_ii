@@ -1,11 +1,6 @@
-<!-- 
-<div id="error-message" class="hidden w-80/100 m-auto mt-4 mb-5 text-red-400 text-center p-2 bg-gray-600 border-1 border-gray-200 rounded-lg "></div>
-
-<div id="success-message" class="hidden w-80/100 m-auto mt-4 mb-5 text-green-400 text-center p-2 bg-gray-600 border-1 border-gray-200 rounded-lg "></div> -->
-
 <div class="mx-auto w-full xl:w-2/3 flex flex-col place-content-evenly items-center h-svh min-h-fit">
   <div class="mx-auto w-full flex flex-col place-content-evenly h-fit min-h-9/10 border-1 border-blue-950 bg-gray-800 border-1 border-white rounded-2xl" id="question-creation-container">
-    <h1 class="mx-auto flex-1 my-6 h-fit flex-1 text-gray-300 text-shadow-lg text-shadow-sky-500 text-4xl md:text-6xl">CREATE</h1>
+    <h1 class="mx-auto min-w-9/10 flex-1 my-6 h-fit flex-1 text-gray-300 text-shadow-lg text-shadow-sky-500 text-4xl md:text-6xl rounded-xl shadow-lg shadow-lime-700 hover:shadow-blue-700 transition-color duration-200 ease-in-out">CREATE</h1>
     <form id="create-question-form" action="/questions/create" method="POST"
     class="flex-15 flex flex-col place-content-evenly gap-1.5">
       <div class="w-9/10 border-1 border-sky-400 bg-stone-900 rounded-2xl h-fit flex flex-col place-content-evenly items-center mx-auto my-3 py-2 px-1">
@@ -50,7 +45,7 @@
 </div>
 
 <div id="error-message" class="hidden fixed z-1 top-0 left-0 w-full h-svh flex flex-col place-content-center opacity-0 transition-opacity duration-300 ease-in-out">
-    <div class="m-auto py-6 px-3 h-1/2 w-9/10 w-4/5 md:w-3/4 lg:w-1/4 flex-col gap-2 bg-gray-700 border-1 border-red-600 bg-rose-950 rounded-xl justify-content-center items-center">
+    <div class="m-auto py-6 px-3 h-1/2 w-9/10 w-4/5 xl:w-1/4 flex-col gap-2 bg-gray-700 border-1 border-red-600 bg-rose-950 rounded-xl justify-content-center items-center">
         <div class="m-auto h-full flex flex-col gap-3 place-content-between p-4 min-w-8/10 w-9/10 min-h-4/10 text-red-600 border border-white rounded-lg bg-gray-800" role="alert">
             <div class="flex flex-1 items-center">
                 <svg class="shrink-0 w-6 h-6 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -70,7 +65,7 @@
 </div>
 
 <div id="success-message" class="hidden fixed z-1 top-0 left-0 w-full h-svh flex flex-col place-content-center opacity-0 transition-opacity duration-300 ease-in-out">
-    <div class="m-auto py-6 px-3 h-1/2 w-9/10 w-4/5 md:w-1/2 lg:w-1/4 flex-col gap-2 bg-gray-700 border-1 border-green-600 bg-lime-950 rounded-xl justify-content-center items-center">
+    <div class="m-auto py-6 px-3 h-1/2 w-9/10 w-4/5 xl:w-1/4 flex-col gap-2 bg-gray-700 border-1 border-green-600 bg-lime-950 rounded-xl justify-content-center items-center">
         <div class="m-auto h-full flex flex-col gap-3 place-content-between p-4 min-w-8/10 w-9/10 min-h-4/10 text-emerald-600 border border-white rounded-lg bg-gray-800" role="alert">
             <div class="flex flex-1 items-center">
                 <svg class="shrink-0 w-6 h-6 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
