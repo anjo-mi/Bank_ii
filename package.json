@@ -2,7 +2,7 @@
   "name": "btwoo",
   "version": "1.0.0",
   "description": "",
-  "license": "ISC",
+  "license": "GPL-3.0",
   "author": "",
   "type": "module",
   "main": "index.js",

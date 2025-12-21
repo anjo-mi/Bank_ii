@@ -50,7 +50,7 @@ app.use(session({
     secure: false,
   },
   store: MongoStore.create({
-    mongoUrl: process.env.DB_TEST_STR,
+    mongoUrl: process.env.DB_STR,
     collectionName: 'sessions',
   }),
 }));

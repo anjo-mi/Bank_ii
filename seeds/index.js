@@ -10,7 +10,7 @@ dotenv.config();
 
 const populateDB = async () => {
   try {
-    await mongoose.connect(process.env.DB_TEST_STR);
+    await mongoose.connect(process.env.DB_STR);
     await Question.deleteMany({});
     await Category.deleteMany({});
     await User.deleteMany({});
