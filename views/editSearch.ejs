@@ -41,7 +41,7 @@
   <div class="m-auto w-full w-95/100 xl:w-2/3 py-4 px-2 border-1 border-gray-300 rounded-xl">
     <ul id="questions-list" class="m-auto w-full py-3 opacity-0 transition-opacity ease-in-out duration-300 flex flex-col gap-4 text-center">
       <% allQuestions.forEach(question =>{ %>
-          <li class="question-list-item relative my-3 rounded-lg p-2 h-fit w-full flex flex-col place-content-center bg-stone-900 gap-2 items-center border-2 border-white">
+          <li class="question-list-item opacity-100 transition-opacity duration-300 relative my-3 rounded-lg p-2 h-fit w-full flex flex-col place-content-center bg-stone-900 gap-2 items-center border-2 border-white">
               <input type="hidden" name="isDefault" value="<%= question.isDefault ? 1 : 0 %>">
               <ul class="flex flex-wrap gap-y-1 md:gap-y-3 p-2 m-auto border-1 md:border-3 border-dashed border-sky-500 bg-cyan-950 rounded-lg w-full max-w-95/100 place-content-around text-center">
                   <% question.categories.forEach(cat =>{ %>
@@ -103,7 +103,7 @@
                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                 </svg>
                 <span class="sr-only">Info</span>
-                <h3 class="text-lg font-medium border-b-2 border-b-green-700">Oh no!</h3>
+                <h3 class="text-lg font-medium border-b-2 border-b-green-700">Hooray!</h3>
             </div>
             <div class="message flex flex-3 min-w-9/10 text-center place-content-center items-center px-3 pt-2 pb-10 m-auto text-sm md:text-lg text-wrap text-gray-200 border-1 border-green-800 bg-slate-900 rounded-2xl"></div>
             <div class="flex">

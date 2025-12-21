@@ -151,7 +151,8 @@ if (navigator.mediaDevices?.getUserMedia){
     }
 
     start(){
-      this.recorder.start()
+      this.recorder.start();
+      answerBox.focus();
       this.count();
     };
 

@@ -99,8 +99,11 @@ for (const deleteBtn of deleteButtons){
     if (response.ok){
       // show a success message that fades in and fades out
       handleGood('the question was deleted!!!')
-
-      listItem.style.display = 'none';
+      listItem.style.opacity = 0;
+      setTimeout(() => {
+        listItem.style.display = 'none';
+        listItem.remove();
+      },300)
     }
     // otherwise 
     else {

@@ -166,7 +166,8 @@ if (navigator.mediaDevices?.getUserMedia){
     }
   
     start(){
-      this.recorder.start()
+      this.recorder.start();
+      answerArea.focus();
       this.count();
     };
   
