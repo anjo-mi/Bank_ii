@@ -299,6 +299,9 @@
   }
 }
 @layer utilities {
+  .visible {
+    visibility: visible;
+  }
   .sr-only {
     position: absolute;
     width: 1px;
@@ -1132,9 +1135,6 @@
   }
   .bg-gray-900 {
     background-color: var(--color-gray-900);
-  }
-  .bg-green-400 {
-    background-color: var(--color-green-400);
   }
   .bg-green-700 {
     background-color: var(--color-green-700);
@@ -2188,11 +2188,6 @@
   .active\:bg-green-700 {
     &:active {
       background-color: var(--color-green-700);
-    }
-  }
-  .active\:bg-green-900 {
-    &:active {
-      background-color: var(--color-green-900);
     }
   }
   .active\:bg-green-950 {

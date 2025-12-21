@@ -16,7 +16,6 @@ import categoriesRoutes from "./routes/category.js";
 import questionsRoutes from "./routes/questions.js";
 import practiceRoutes from "./routes/practice.js";
 import authRoutes from "./routes/auth.js";
-import testConfig from "./routes/test-config.js";
 
 // database connection logic
 import connectDB from "./config/database.js";
@@ -62,9 +61,6 @@ app.use("/auth", authRoutes);
 app.use("/categories", categoriesRoutes);
 app.use("/practice", practiceRoutes);
 app.use("/questions", questionsRoutes);
-
-// test configuration (/test/pw-auth/login-reg)
-app.use("/test", testConfig);
 
 app.listen(process.env.PORT || 3000, '0.0.0.0', () => {
   console.log("server successfully running!");
