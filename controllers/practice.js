@@ -38,7 +38,7 @@ export default {
               && limit.toString().split('').map(Number).every(dig => arab.has(dig)) 
                   ? Math.floor(limit)
                   : 7;
-
+      limit = Math.min(limit, 10);
       // poor time complexity, but both variables should theoretically be small
       //    (categories per question, categories included in an interview)
       // ultimately, retrieve all questions

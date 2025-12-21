@@ -12,8 +12,8 @@
         const categories = new Set();
         for (const q of questions) for (const cat of q.categories) if (!categories.has(cat)) categories.add(cat);
       %>
-      <form action="/practice/<%= session._id %>" method="GET" class="form border-1 border-yellow-500 hover:border-blue-600 hover:border-2 bg-stone-800 rounded-lg cursor-pointer hover:bg-gray-600 transition-color duration-200 ease-in-out">
-        <input type="hidden" name="sessionId" value="<%= session._id %>">
+      <form action="/getSession" method="POST" class="form border-1 border-yellow-500 hover:border-blue-600 hover:border-2 bg-stone-800 rounded-lg cursor-pointer hover:bg-gray-600 transition-color duration-200 ease-in-out">
+        <input type="hidden" name="sessionId" value="<%= session._id.toString() %>">
         <button type="submit" class="block m-auto px-1 py-4 w-full h-full hover:cursor-pointer">
           <dt class="-ml-2 mb-1.5 text-left p-1 w-fit bg-indigo-800 rounded-lg border-1 border-gray-300"><%= session.completedAt.toString().slice(4,15) %>: <%= session.questions.length %> Question(s)</dt>
           <dd class="w-full m-auto max-h-3/10 p-2 border border-2 border-indigo-700 bg-neutral-900 rounded-xl">
