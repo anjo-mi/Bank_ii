@@ -66,7 +66,7 @@ app.use("/questions", questionsRoutes);
 // test configuration (/test/pw-auth/login-reg)
 app.use("/test", testConfig);
 
-app.listen(process.env.PORT || 3000, () => {
+app.listen(process.env.PORT || 3000, '0.0.0.0', () => {
   console.log("server successfully running!");
 });
 
