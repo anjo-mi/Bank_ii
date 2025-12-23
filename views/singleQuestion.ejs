@@ -1,5 +1,5 @@
-<div class="mx-auto w-95/100 xl:w-2/3 flex flex-col place-content-center h-svh min-h-fit">
-    <div class="mx-auto w-full flex flex-col place-content-evenly h-fit min-h-9/10 border-1 border-blue-950 bg-gray-800 border-1 border-white rounded-2xl">
+<div class="mx-auto w-95/100 xl:w-2/3 flex flex-col place-content-center min-h-fit">
+    <div class="mx-auto w-full flex flex-col place-content-evenly min-h-fit border-1 border-blue-950 bg-gray-800 border-1 border-white rounded-2xl">
         <div class="flex-1">
             <ul class="flex flex-wrap gap-y-1 md:gap-y-3 p-2 m-auto border-1 border-dashed border-sky-500 rounded-lg bg-gray-900 gap-1 m-auto mt-5 m-auto py-4 px-1 w-80/100 justify-evenly items-center text-center place-content-evenly">
                 <% question.categories.forEach(cat => {%>
@@ -12,6 +12,23 @@
                 </li>
                 <% })%>
             </ul>
+        </div>
+        <div class="m-auto p-1.5 w-fit max-w-4/5 h-fit my-0.5 text-white absolute top-0 right-0">
+            <h3 class="text-sm md:text-md xl:text-lg text-gray-400 shadow-md shadow-blue-600">Search By Category:</h3>
+            <div class="random-container flex flex-wrap gap-2 border-1 border-gray-600 rounded-lg">
+                <% for (const cat of question.categories){ %>
+                <form class="m-auto w-fit h-fit my-4 text-white" action="/questions/getSingleRandom" method="POST">
+                    <input type="hidden" name="matchAll" value="0">
+                    <input type="submit" name="categori" value="<%= cat %>"
+                    class="text-center h-full w-full text-xs md:text-lg block bg-indigo-800 active:bg-indigo-950 hover:bg-indigo-600 text-white py-2.5 px-2 rounded-full border-1 border-white hover:cursor-pointer text-shadow-sky-400 hover:text-shadow-sm">
+                </form>
+                <% } %>
+                <form class="m-auto w-fit h-fit my-4 text-white" action="/questions/getSingleRandom" method="POST">
+                    <input type="hidden" name="matchAll" value="0">
+                    <input type="submit" value="Get Random"
+                    class="text-center h-full w-full text-xs md:text-lg block bg-indigo-800 active:bg-indigo-950 hover:bg-indigo-600 text-white py-2.5 px-2 rounded-full border-1 border-white hover:cursor-pointer text-shadow-sky-400 hover:text-shadow-sm">
+                </form>
+            </div>
         </div>
         <form id="edit-this" action="/questions/edit" method="POST" class="m-auto w-fit h-fit my-4 bg-lime-700 hover:bg-lime-600 active:bg-lime-900 border-1 border-gray-400 rounded-xl text-white absolute top-15 left-3">
             <input type="hidden" name="questionId" value="<%= question._id.toString() %>">
