@@ -337,11 +337,14 @@
   .top-3 {
     top: calc(var(--spacing) * 3);
   }
-  .top-5 {
-    top: calc(var(--spacing) * 5);
+  .top-12 {
+    top: calc(var(--spacing) * 12);
   }
   .top-15 {
     top: calc(var(--spacing) * 15);
+  }
+  .top-22 {
+    top: calc(var(--spacing) * 22);
   }
   .top-100 {
     top: calc(var(--spacing) * 100);
@@ -415,9 +418,6 @@
   .mx-auto {
     margin-inline: auto;
   }
-  .my-0\.5 {
-    margin-block: calc(var(--spacing) * 0.5);
-  }
   .my-1 {
     margin-block: calc(var(--spacing) * 1);
   }
@@ -450,6 +450,9 @@
   }
   .me-2 {
     margin-inline-end: calc(var(--spacing) * 2);
+  }
+  .mt-0 {
+    margin-top: calc(var(--spacing) * 0);
   }
   .mt-2 {
     margin-top: calc(var(--spacing) * 2);
@@ -516,6 +519,9 @@
   }
   .ml-4 {
     margin-left: calc(var(--spacing) * 4);
+  }
+  .ml-auto {
+    margin-left: auto;
   }
   .block {
     display: block;
@@ -1259,6 +1265,9 @@
   .bg-white {
     background-color: var(--color-white);
   }
+  .bg-yellow-700 {
+    background-color: var(--color-yellow-700);
+  }
   .bg-zinc-800 {
     background-color: var(--color-zinc-800);
   }
@@ -1300,6 +1309,9 @@
   }
   .px-1 {
     padding-inline: calc(var(--spacing) * 1);
+  }
+  .px-1\.5 {
+    padding-inline: calc(var(--spacing) * 1.5);
   }
   .px-2 {
     padding-inline: calc(var(--spacing) * 2);
@@ -1676,6 +1688,12 @@
       --tw-text-shadow-color: color-mix(in oklab, var(--color-sky-500) var(--tw-text-shadow-alpha), transparent);
     }
   }
+  .text-shadow-yellow-700 {
+    --tw-text-shadow-color: oklch(55.4% 0.135 66.442);
+    @supports (color: color-mix(in lab, red, red)) {
+      --tw-text-shadow-color: color-mix(in oklab, var(--color-yellow-700) var(--tw-text-shadow-alpha), transparent);
+    }
+  }
   .group-hover\:text-white {
     &:is(:where(.group):hover *) {
       @media (hover: hover) {
@@ -1984,6 +2002,13 @@
       }
     }
   }
+  .hover\:bg-yellow-900 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-yellow-900);
+      }
+    }
+  }
   .hover\:font-bold {
     &:hover {
       @media (hover: hover) {
@@ -2278,6 +2303,11 @@
   .active\:bg-teal-800 {
     &:active {
       background-color: var(--color-teal-800);
+    }
+  }
+  .active\:bg-yellow-600 {
+    &:active {
+      background-color: var(--color-yellow-600);
     }
   }
   .active\:outline-1 {

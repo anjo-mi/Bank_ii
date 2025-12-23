@@ -3,13 +3,12 @@
 </h1>
 
 <div id="stats-page-container" class="m-auto text-center text-white">
-  <section id="heading-container" class="m-auto mb-3 flex flex-wrap gap-2 text-center w-full">
-
-    <p class="m-auto w-30/100">
-      <a class="block w-full h-full bg-green-700 hover:bg-lime-900 active:bg-lime-500 border-1 border-yellow-500 hover:border-yellow-700 text-white py-2 px-1 rounded-xl" href="/">Main Search</a>
+  <section id="heading-container" class="mb-3 flex flex-wrap gap-2 text-center items-stretch justify-evenly w-full">
+    <p class="w-3/10 flex">
+      <a class="flex-1 flex items-center justify-center bg-green-700 hover:bg-lime-900 active:bg-lime-500 border-1 border-yellow-500 hover:border-yellow-700 text-white py-2 px-1 rounded-xl" href="/">Main Search</a>
     </p>
-    <p class="m-auto w-30/100">
-      <a class="block w-full h-full bg-green-700 hover:bg-lime-900 active:bg-lime-500 border-1 border-yellow-500 hover:border-yellow-700 text-white py-2 px-1 rounded-xl" href="/practice/history">Session History</a>
+    <p class="w-3/10 flex">
+      <a class="flex-1 flex items-center justify-center bg-green-700 hover:bg-lime-900 active:bg-lime-500 border-1 border-yellow-500 hover:border-yellow-700 text-white py-2 px-1 rounded-xl" href="/practice/history">Session History</a>
     </p>
   </section>
   <div id="user-info-container" class="w-95/100 m-auto w-full lg:w-9/10 h-full border border-1 border-emerald-600 bg-gray-700 rounded-2xl">
@@ -80,22 +79,22 @@
         <dt class="w-95/100 text-md lg:text-lg xl:text-xl text-left ml-4">Need Something Else?</dt>
         <dd>
           <section id="user-nav-container" class="w-95/100 h-fit m-auto">
-            <ul class="flex flex-wrap items-stretch place-content-evenly w-full text-xs md:text-lg gap-3 py-5 p-2 xl:h-80 border border-2 border-sky-600 bg-stone-950 rounded-xl">
-              <li class="h-fit w-2/5 m-auto">
-                <a href="/questions/form" class="block m-auto text-center h-full w-full p-2 text-sm md:text-base xl:text-lg border-1 cursor-pointer border-gray-300 bg-teal-700 hover:bg-cyan-950 hover:border-blue-400 active:bg-green-700 rounded-xl">Add New Question
+            <ul class="flex flex-wrap items-stretch justify-evenly w-full text-xs md:text-lg gap-3 py-5 p-2 xl:h-80 border border-2 border-sky-600 bg-stone-950 rounded-xl">
+              <li class="w-2/5 flex">
+                <a href="/questions/form" class="flex-1 flex items-center justify-center p-2 text-sm md:text-base xl:text-lg border-1 cursor-pointer border-gray-300 bg-teal-700 hover:bg-cyan-950 hover:border-blue-400 active:bg-green-700 rounded-xl">Add New Question
                 </a>
               </li>
-              <li class="h-fit w-2/5 m-auto">
-                <a href="/practice" class="block m-auto text-center h-full w-full p-2 text-sm md:text-base xl:text-lg border-1 cursor-pointer border-gray-300 bg-teal-700 hover:bg-cyan-950 hover:border-blue-400 active:bg-green-700 rounded-xl">New Practice
+              <li class="w-2/5 flex">
+                <a href="/practice" class="flex-1 flex items-center justify-center p-2 text-sm md:text-base xl:text-lg border-1 cursor-pointer border-gray-300 bg-teal-700 hover:bg-cyan-950 hover:border-blue-400 active:bg-green-700 rounded-xl">New Practice
                 </a>
               </li>
-              <li class="h-fit w-2/5 m-auto">
-                <a href="/questions/edit/select" class="block m-auto text-center h-full w-full p-2 text-sm md:text-base xl:text-lg border-1 cursor-pointer border-gray-300 bg-teal-700 hover:bg-cyan-950 hover:border-blue-400 active:bg-green-700 rounded-xl">Edit Questions
+              <li class="w-2/5 flex">
+                <a href="/questions/edit/select" class="flex-1 flex items-center justify-center p-2 text-sm md:text-base xl:text-lg border-1 cursor-pointer border-gray-300 bg-teal-700 hover:bg-cyan-950 hover:border-blue-400 active:bg-green-700 rounded-xl">Edit Questions
                 </a>
               </li>
-              <li class="h-fit w-2/5 m-auto">
+              <li class="w-2/5 flex">
                 <form action="/questions/getSingleRandom" method="POST">
-                  <button class="block m-auto text-center h-full w-full p-2 text-sm md:text-base xl:text-lg border-1 cursor-pointer border-gray-300 bg-teal-700 hover:bg-cyan-950 hover:border-blue-400 active:bg-green-700 rounded-xl">Random Question
+                  <button class="flex-1 flex items-center justify-center p-2 text-sm md:text-base xl:text-lg border-1 cursor-pointer border-gray-300 bg-teal-700 hover:bg-cyan-950 hover:border-blue-400 active:bg-green-700 rounded-xl">Random Question
                   </button>
                 </form>
               </li>
