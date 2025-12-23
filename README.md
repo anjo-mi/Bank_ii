@@ -33,6 +33,11 @@
       - Chrome and Edge
    - Firefox and Safari will allow recording, but not SpeechRecognition API
 
+#### Voice To Text (Mobile and Tablet)
+Issues: While recording works on these devices. Transcribing is inconsistent. There are 2 recommended approaches:
+- Focus on typing out a thoughtful answer, practice your dictation by recording and re-recording audio.
+- Record audio, listen to yourself and workshop your own response from the audience's point of view.
+
 > Were you looking for more???
 >
 > THEN SIGN UP!!!!
