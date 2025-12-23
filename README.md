@@ -1,5 +1,6 @@
 ### Table of Contents
 - [Guests](#guest-users)
+- [Voice-to-Text](#voice-to-text)
 - [User Features](#user-features)
 - [Building Your Dash](#dash-building)
 - [Practice Session](#practice-session)
@@ -25,6 +26,12 @@
    * List All Questions
    * Retrieve a question randomly to practice on your own
    * Applying No Filters effectively selects Match Any with All available Categories and No Keywords
+
+#### Voice To Text
+- Due to Browser Restraints:
+   - Transcriptions are only available for:
+      - Chrome and Edge
+   - Firefox and Safari will allow recording, but not SpeechRecognition API
 
 > Were you looking for more???
 >

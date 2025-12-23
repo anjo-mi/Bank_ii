@@ -2185,6 +2185,11 @@
       background-color: var(--color-blue-600);
     }
   }
+  .active\:bg-gray-400 {
+    &:active {
+      background-color: var(--color-gray-400);
+    }
+  }
   .active\:bg-green-700 {
     &:active {
       background-color: var(--color-green-700);

@@ -173,7 +173,7 @@ if (navigator.mediaDevices?.getUserMedia){
         if (this.time > 60){
           audioContainer.classList.remove('hidden');
           const recording = await this.stop();
-          this.transcriber.stop();
+          this.transcriber?.stop();
           const recordedUrl = URL.createObjectURL(recording);
           const audio = document.getElementById('recording');
           audio.src = recordedUrl;
@@ -203,29 +203,32 @@ if (navigator.mediaDevices?.getUserMedia){
   recordBtn.addEventListener('click', async (e) => {
     const recorder = await new Recorder().create();
 
-    recorder.transcriber = new SpeechRecognition();
-    const transcriber = recorder.transcriber;
-    transcriber.continuous = true;
-    transcriber.interimResults = true;
-    transcriber.lang = 'en-US';
-    transcriber.onresult = (e) => {
-      let transcript = '';
-      const res = e.results;
-
-      for (let i = e.resultIndex ; i < res.length ; i++){
-        if (res[i].isFinal) transcript += res[i][0].transcript;
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    let transcriber;
+    if (SpeechRecognition){
+      recorder.transcriber = new SpeechRecognition();
+      transcriber = recorder.transcriber;
+      transcriber.continuous = true;
+      transcriber.interimResults = true;
+      transcriber.lang = 'en-US';
+      transcriber.onresult = (e) => {
+        let transcript = '';
+        const res = e.results;
+        for (let i = e.resultIndex ; i < res.length ; i++){
+          if (res[i].isFinal) transcript += res[i][0].transcript;
+        }
+        const answerBox = document.getElementById('answer');
+        answerBox.textContent += transcript ? transcript + ' ' : '';
       }
-      const answerBox = document.getElementById('answer');
-      answerBox.textContent += transcript ? transcript + ' ' : '';
     }
 
     recorder.start();
-    transcriber.start();
+    transcriber?.start();
     timer.parentElement.style.backgroundColor = 'green';
     stopBtn.addEventListener('click', async (e) => {
       audioContainer.classList.remove('hidden');
       const recording = await recorder.stop();
-      transcriber.stop();
+      transcriber?.stop();
       const recordedUrl = URL.createObjectURL(recording);
       audioFile.value = recordedUrl;
       const audio = document.getElementById('recording');
@@ -234,6 +237,7 @@ if (navigator.mediaDevices?.getUserMedia){
       timer.parentElement.style.backgroundColor = 'blue';
       timer.textContent = 60;
     });
-
+    
   })
+  
 }else recordBox.style.display = "none";
