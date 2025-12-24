@@ -8,6 +8,20 @@ const recordBox = document.getElementById('record-box');
 const audioFile = document.getElementById('audio-file');
 const audioContainer = document.getElementById('record-container');
 
+const transcribeAudio = async (audio) => {
+  const audioData = await fetch(audio);
+  const formData = new FormData();
+  const audioBlob = await audioData.blob();
+  formData.append('audio', audioBlob);
+  const response = await fetch('/services/transcribe', {
+    method: 'POST',
+    body: formData,
+  })
+  const data = await response.json();
+  console.log({data});
+  return data?.text || data;
+}
+
 answerBox.addEventListener('focusin', (e) =>{
   answerBox.scrollIntoView({
     behavior:"smooth",
@@ -43,7 +57,7 @@ answerForm.addEventListener('submit', async (e) => {
     }, 500);
     return;
   }
-  if (answer.trim().split(' ').length > 300){
+  if (answer.trim().split(' ').length > 300 || answer.length > 3000){
     console.log('keep words to a 300 maximum');
     setTimeout(() => {
       answerForm.style.width = '100%';
@@ -91,7 +105,6 @@ answerForm.addEventListener('submit', async (e) => {
         answerBox.value = '';
         audioContainer.classList.add('hidden');
         document.getElementById('answers').value = JSON.stringify(data.answers);
-        // document.getElementById('questions').value = JSON.stringify(data.questions);
         document.getElementById('current').value = data.current;
         document.getElementById('sessionId').value = data.sessionId;
         audioFile.value = '';
@@ -120,7 +133,6 @@ document.addEventListener('DOMContentLoaded', async() => {
       answerBox.value = '';
       audioContainer.classList.add('hidden');
       document.getElementById('answers').value = JSON.stringify(data.answers);
-      // document.getElementById('questions').value = JSON.stringify(data.questions);
       document.getElementById('current').value = data.current;
       document.getElementById('sessionId').value = data.sessionId;
       audioFile.value = '';
@@ -139,7 +151,6 @@ if (navigator.mediaDevices?.getUserMedia){
       this.recorder = null;
       this.chunks = [];
       this.stream = null;
-      this.transcriber = null;
       this.time = 0;
     }
 
@@ -173,7 +184,6 @@ if (navigator.mediaDevices?.getUserMedia){
         if (this.time > 60){
           audioContainer.classList.remove('hidden');
           const recording = await this.stop();
-          this.transcriber?.stop();
           const recordedUrl = URL.createObjectURL(recording);
           const audio = document.getElementById('recording');
           audio.src = recordedUrl;
@@ -181,6 +191,11 @@ if (navigator.mediaDevices?.getUserMedia){
           audioFile.value = recordedUrl;
           timer.parentElement.style.backgroundColor = 'blue';
           timer.textContent = 60;
+          const text = await transcribeAudio(recordedUrl);
+          answerBox.value = text;
+          answerBox.value = answerBox.value
+            ? answerBox.value + ' ' + text
+            : text;
         }
         else this.count();
       },1000)
@@ -195,40 +210,17 @@ if (navigator.mediaDevices?.getUserMedia){
           resolve(blob)
         }
         this.recorder.stop();
-        this.transcriber?.stop();
       });
     };
   }
 
   recordBtn.addEventListener('click', async (e) => {
     const recorder = await new Recorder().create();
-
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    let transcriber;
-    if (SpeechRecognition){
-      recorder.transcriber = new SpeechRecognition();
-      transcriber = recorder.transcriber;
-      transcriber.continuous = true;
-      transcriber.interimResults = true;
-      transcriber.lang = 'en-US';
-      transcriber.onresult = (e) => {
-        let transcript = '';
-        const res = e.results;
-        for (let i = e.resultIndex ; i < res.length ; i++){
-          if (res[i].isFinal) transcript += res[i][0].transcript;
-        }
-        const answerBox = document.getElementById('answer');
-        answerBox.textContent += transcript ? transcript + ' ' : '';
-      }
-    }
-
     recorder.start();
-    transcriber?.start();
     timer.parentElement.style.backgroundColor = 'green';
     stopBtn.addEventListener('click', async (e) => {
       audioContainer.classList.remove('hidden');
       const recording = await recorder.stop();
-      transcriber?.stop();
       const recordedUrl = URL.createObjectURL(recording);
       audioFile.value = recordedUrl;
       const audio = document.getElementById('recording');
@@ -236,6 +228,10 @@ if (navigator.mediaDevices?.getUserMedia){
       audio.controls = true;
       timer.parentElement.style.backgroundColor = 'blue';
       timer.textContent = 60;
+      const text = await transcribeAudio(recordedUrl);
+      answerBox.value = answerBox.value
+        ? answerBox.value + ' ' + text
+        : text;
     });
     
   })

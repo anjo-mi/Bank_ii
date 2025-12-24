@@ -28,15 +28,12 @@
    * Applying No Filters effectively selects Match Any with All available Categories and No Keywords
 
 #### Voice To Text
-- Due to Browser Restraints:
-   - Transcriptions are only available for:
-      - Chrome and Edge
-   - Firefox and Safari will allow recording, but not SpeechRecognition API
-
-#### Voice To Text (Mobile and Tablet)
-Issues: While recording works on these devices. Transcribing is inconsistent. There are 2 recommended approaches:
-- Focus on typing out a thoughtful answer, practice your dictation by recording and re-recording audio.
-- Record audio, listen to yourself and workshop your own response from the audience's point of view.
+RECENT UPDATE:
+- SpeechRecognition has been Removed
+- Cross-Browser Compatibility Using Google's Speech-To-Text API
+   - Google Does not store ANY audio in Buckets!
+   - The transcription is made
+   - Audio is Stored Locally, unless otherwise specified
 
 > Were you looking for more???
 >
@@ -207,10 +204,11 @@ Please, treat this as though you are mentoring someone who is typically an [USER
    - Node.js, Express.js, MongoDB, Mongoose
 - Authorization:
    - Passport.js
-- Services:
+- AI Services:
    - Gemini 2.5
 - Cloud Services
    - AWS S3
+   - Google Speech To Text API
 
 ### User Flow
 1. SIGN UP!!!
@@ -225,6 +223,13 @@ Please, treat this as though you are mentoring someone who is typically an [USER
    - Deepen Initial Answer
    - Prepare for Concepts Previously Unencountered
 8. Repeat with New Questions and New Sessions
+
+##### This Can Also Be Used as a Learning Tool for New Subjects!
+1. Load any Questions Into the Database
+2. Attempt Answering Them to the Best of Your Knowledge
+3. Let Bot Botterson Critique Your Answer and Suggest Resources
+4. Study the Resources, Ensure Understanding of the Topic
+5. Repeat the Process on Relevant Follow-Ups (Deepen or Span Knowledge)
 
 ### Dev Note
 Good Luck!!! And May We All ***Break the Bank!!!***

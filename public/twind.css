@@ -342,8 +342,14 @@
   .top-15 {
     top: calc(var(--spacing) * 15);
   }
+  .top-16 {
+    top: calc(var(--spacing) * 16);
+  }
   .top-22 {
     top: calc(var(--spacing) * 22);
+  }
+  .top-25 {
+    top: calc(var(--spacing) * 25);
   }
   .top-100 {
     top: calc(var(--spacing) * 100);
@@ -368,9 +374,6 @@
   }
   .bottom-2 {
     bottom: calc(var(--spacing) * 2);
-  }
-  .bottom-5 {
-    bottom: calc(var(--spacing) * 5);
   }
   .left-0 {
     left: calc(var(--spacing) * 0);
