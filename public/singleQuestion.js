@@ -25,6 +25,20 @@ const handleBad = (message) => {
   }, 300)
 }
 
+const transcribeAudio = async (audio) => {
+  const audioData = await fetch(audio);
+  const formData = new FormData();
+  const audioBlob = await audioData.blob();
+  formData.append('audio', audioBlob);
+  const response = await fetch('/services/transcribe', {
+    method: 'POST',
+    body: formData,
+  })
+  const data = await response.json();
+  console.log({data});
+  return data?.text || data;
+}
+
 viewSavedBtn.addEventListener('click', (e) => {
   e.preventDefault();
   prevAnswerBox.style.display = 'flex';
@@ -100,8 +114,8 @@ answerForm.addEventListener('submit', async (e) => {
       handleBad('lets not waste calls with blank data chief');
       return;
     }
-    if (answer.trim().split(' ').length > 300){
-      handleBad('lets not waste calls with blank data chief');
+    if (answer.trim().split(' ').length > 300 || answer.length > 3000){
+      handleBad('interviews are conversations, not soliloquys');
       console.log('interviews are conversations, not soliloquys');
       return;
     }
@@ -154,7 +168,6 @@ if (navigator.mediaDevices?.getUserMedia){
       this.recorder = null;
       this.chunks = [];
       this.stream = null;
-      this.transcriber = null;
       this.time = 0;
     }
   
@@ -188,7 +201,6 @@ if (navigator.mediaDevices?.getUserMedia){
         if (this.time > 60){
           audioContainer.classList.remove('hidden');
           const recording = await this.stop();
-          this.transcriber?.stop();
           const recordedUrl = URL.createObjectURL(recording);
           const audio = document.getElementById('recording');
           audio.src = recordedUrl;
@@ -196,6 +208,11 @@ if (navigator.mediaDevices?.getUserMedia){
           audioFile.value = recordedUrl;
           timer.parentElement.style.backgroundColor = 'blue';
           timer.textContent = 60;
+          const text = await transcribeAudio(recordedUrl);
+          answerArea.value = text;
+          answerArea.value = answerArea.value
+            ? answerArea.value + ' ' + text
+            : text;
         }
         else this.count();
       },1000)
@@ -210,7 +227,6 @@ if (navigator.mediaDevices?.getUserMedia){
           resolve(blob)
         }
         this.recorder.stop();
-        this.transcriber?.stop()
       });
     };
   }
@@ -218,33 +234,11 @@ if (navigator.mediaDevices?.getUserMedia){
 
   recordBtn.addEventListener('click', async (e) => {
     const recorder = await new Recorder().create();
-
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    let transcriber;
-    if (SpeechRecognition){
-      recorder.transcriber = new SpeechRecognition();
-      transcriber = recorder.transcriber;
-      transcriber.continuous = true;
-      transcriber.interimResults = true;
-      transcriber.lang = 'en-US';
-      transcriber.onresult = (e) => {
-        let transcript = '';
-        const res = e.results;
-        for (let i = e.resultIndex ; i < res.length ; i++){
-          if (res[i].isFinal) transcript += res[i][0].transcript;
-        }
-        const answerBox = document.getElementById('answer');
-        answerBox.textContent += transcript ? transcript + ' ' : '';
-      }
-    }
-    
     recorder.start();
-    transcriber?.start();
     timer.parentElement.style.backgroundColor = 'green';
     stopBtn.addEventListener('click', async (e) => {
       audioContainer.classList.remove('hidden');
       const recording = await recorder.stop();
-      transcriber?.stop();
       const recordedUrl = URL.createObjectURL(recording);
       audioFile.value = recordedUrl;
       const audio = document.getElementById('recording');
@@ -252,6 +246,10 @@ if (navigator.mediaDevices?.getUserMedia){
       audio.controls = true;
       timer.parentElement.style.backgroundColor = 'blue';
       timer.textContent = 60;
+      const text = await transcribeAudio(recordedUrl);
+      answerArea.value = answerArea.value
+        ? answerArea.value + ' ' + text
+        : text;
     });
   })
 }else recordBox.style.display = "none";

@@ -38,6 +38,7 @@
     "@aws-sdk/client-s3": "^3.940.0",
     "@aws-sdk/s3-request-presigner": "^3.943.0",
     "@datadog/pprof": "^5.10.0",
+    "@google-cloud/speech": "^7.2.1",
     "@google/genai": "^1.29.0",
     "@platformatic/flame": "^1.0.0",
     "@tailwindcss/postcss": "^4.1.13",
