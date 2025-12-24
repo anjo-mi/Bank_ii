@@ -80,7 +80,7 @@
     </div>
 </div>        
 
-<div id="saved-answer" class="hidden absolute z-1 top-0 left-0 w-full h-svh flex flex-col place-content-center opacity-0 transition-opacity duration-300 ease-in-out">
+<div id="saved-answer" class="hidden absolute z-1 top-0 left-0 w-full flex flex-col place-content-center opacity-0 transition-opacity duration-300 ease-in-out">
     <div class="saved-answer m-auto py-2 px-3 w-9/10 xl:w-1/2 flex-col gap-2 bg-gray-700 border-1 border-sky-600 rounded-xl justify-content-center items-center">
         <div class="saved-answer w-full prev-answer-portion text-xs md:text-lg">
           <h2 class="saved-answer font-bold underline text-sky-200  text:md md:text-2xl lg:text-xl mb-3">Previously saved answer:</h2>
@@ -90,9 +90,9 @@
     </div>
 </div>
     
-<div id="saved-feedback" class="hidden absolute z-1 top-3 bottom-5 left-0 w-full h-svh min-h-fit flex flex-col place-content-center opacity-0 transition-opacity duration-300 ease-in-out">
-    <div class="saved-feedback m-auto py-2 px-3 w-9/10 xl:w-1/2 flex-col gap-2 bg-gray-700 border-1 border-sky-600 rounded-xl justify-content-center items-center">
-        <div class="saved-feedback prev-answer-portion min-h-fit text-xs md:text-lg">
+<div id="saved-feedback" class="hidden absolute z-1 top-3 left-0 w-full flex flex-col place-content-center opacity-0 transition-opacity duration-300 ease-in-out">
+    <div class="saved-feedback mx-auto py-2 px-3 w-9/10 xl:w-1/2 flex-col gap-2 bg-gray-700 border-1 border-sky-600 rounded-xl justify-content-center items-center">
+        <div class="saved-feedback prev-answer-portion text-xs md:text-lg">
           <h2 class="saved-feedback font-bold underline text-sky-200 text:md md:text-2xl lg:text-xl mb-3">Stored Feedback:</h2>
           <div class="saved-feedback m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 border-1 border-violet-800 bg-zinc-900 rounded-lg">
             <%- question.feedback %>
