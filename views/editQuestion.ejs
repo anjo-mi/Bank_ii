@@ -13,7 +13,7 @@
         <ul id="category-list" class="flex flex-wrap border-1 border-dashed mt-3 border-gray-400 bg-neutral-800 rounded-sm gap-3 m-auto p-1 py-2 w-95/100 justify-evenly items-center text-center">
         <% categori.forEach(cat => {%>
           <li class="min-w-3/10 text-xs md:text-lg lg:text-lg text-sky-200 font-bold">
-            <label for="<%= cat %>" class="flex gap-1 py-1 px-2 mr-auto place-content-evenly items-center bg-gray-700 hover:bg-cyan-950 hover:cursor-pointer rounded-lg border-1 border-blue-300">
+            <label for="<%= cat %>" class="flex gap-1 py-1 px-2 mr-auto place-content-evenly items-center bg-gray-700 hover:bg-cyan-950 active:bg-blue-900 hover:cursor-pointer rounded-lg border-1 border-blue-300">
             <input id="<%= cat %>" type="checkbox" name="categori" value="<%= cat %>" checked="true"
                   class="w-4 h-4 md:w-6 md:h-6 accent-indigo-800 outline-1 outline-white">
               <%= cat %>
@@ -29,7 +29,7 @@
           </div>
       </div>
       <div class="flex h-fit w-4/5 gap-3 my-3 place-content-evenly items-center mx-auto">
-        <button type="button" id="view-fb" class="view-fb h-fit min-h-full block w-4/10 m-auto items-center p-1.5 text-xs md:text-lg text-center text-white bg-sky-800 hover:bg-cyan-950 hover:cursor-pointer border-2 border-green-400 hover:border-green-600 rounded-lg">View Saved Feedback</button>
+        <button type="button" id="view-fb" class="view-fb h-fit min-h-full block w-4/10 m-auto items-center p-1.5 text-xs md:text-lg text-center text-white bg-sky-800 hover:bg-cyan-950 active:bg-emerald-500 hover:cursor-pointer border-2 border-green-400 hover:border-green-600 rounded-lg">View Saved Feedback</button>
         <button type="button" id="delete-btn" class="delete-question-btn h-fit min-h-full block w-4/10 m-auto items-center p-1.5 text-xs md:text-lg text-center text-white bg-rose-700 hover:bg-rose-900 active:bg-rose-600 hover:cursor-pointer border-2 border-red-400 hover:border-red-600 active:border-red-800 rounded-lg">Delete</button>
       </div>
       <button type="submit" id="submit" class="block max-h-fit w-4/10 mx-auto my-2 items-center px-5 py-2.5 text-xs md:text-lg text-center text-white border-1 border-yellow-600 hover:border-yellow-800 active:border-yellow-500 bg-green-950 hover:bg-green-700 active:bg-lime-700 hover:cursor-pointer rounded-lg hover:bg-green-800">

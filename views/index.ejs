@@ -12,7 +12,7 @@
                 <li
                 class="text-xs md:text-md lg:text-2xl w-1/2 md:w-4/10 h-12 md:h-15" >
                     <label for="matchAll"
-                        class="flex items-center h-full w-full place-content-center text-xs md:text-xl lg:text-2xl text-gray-300 gap-3 hover:cursor-pointer border-1 border-sky-400 bg-gray-800 hover:bg-sky-900 rounded-2xl" >
+                        class="flex items-center h-full w-full place-content-center text-xs md:text-xl lg:text-2xl text-gray-300 gap-3 hover:cursor-pointer border-1 border-sky-400 bg-gray-800 hover:bg-sky-900 active:bg-green-800 rounded-2xl" >
                         <input type="radio" id="matchAll" name="matchAll" value="1"
                         class="w-4 h-4 accent-green-500 rounded-sm">
                         Match All
@@ -21,7 +21,7 @@
                 <li
                 class="text-xs md:text-md lg:text-2xl w-1/2 md:w-4/10 h-12 md:h-15">
                     <label for="matchAny"
-                        class="flex items-center h-full w-full place-content-center text-xs md:text-xl lg:text-2xl text-gray-300 gap-3 hover:cursor-pointer border-1 border-sky-400 bg-gray-800 hover:bg-sky-900 rounded-2xl">
+                        class="flex items-center h-full w-full place-content-center text-xs md:text-xl lg:text-2xl text-gray-300 gap-3 hover:cursor-pointer border-1 border-sky-400 bg-gray-800 hover:bg-sky-900 active:bg-green-800 rounded-2xl">
                         <input type="radio" id="matchAny" name="matchAll" value="0"
                         class="w-4 h-4 accent-green-500 rounded-sm" >
                         Match Any
@@ -60,7 +60,7 @@
                 <li
                 class="m-auto my-1 md:my-2 w-3/10 flex flex-col place-content-center items-center">
                 <label for="<%= cat %>"
-                class="py-2 px-3 flex flex-col items-center place-content-evenly text-xs md:text-lg lg:text-2xl h-full w-full text-white hover:bg-cyan-950 hover:cursor-pointer bg-emerald-600 border-2 border-cyan-400 rounded-2xl">
+                class="py-2 px-3 flex flex-col items-center place-content-evenly text-xs md:text-lg lg:text-2xl h-full w-full text-white hover:bg-cyan-950 active:bg-yellow-600 transition-color duration-120 ease-in-out hover:cursor-pointer bg-emerald-600 border-2 border-cyan-400 rounded-2xl">
                     <input type="checkbox" id="<%= cat %>" name="categori" value="<%= cat %>"
                     class="h-3 w-3 md:h-5 md:w-5 checkbox accent-indigo-800 break-normal">
                     <%= cat %>

@@ -40,7 +40,10 @@
     --color-green-800: oklch(44.8% 0.119 151.328);
     --color-green-900: oklch(39.3% 0.095 152.535);
     --color-green-950: oklch(26.6% 0.065 152.934);
+    --color-emerald-500: oklch(69.6% 0.17 162.48);
     --color-emerald-600: oklch(59.6% 0.145 163.225);
+    --color-emerald-900: oklch(37.8% 0.077 168.94);
+    --color-emerald-950: oklch(26.2% 0.051 172.552);
     --color-teal-500: oklch(70.4% 0.14 182.503);
     --color-teal-600: oklch(60% 0.118 184.704);
     --color-teal-700: oklch(51.1% 0.096 186.391);
@@ -69,6 +72,7 @@
     --color-blue-800: oklch(42.4% 0.199 265.638);
     --color-blue-900: oklch(37.9% 0.146 265.522);
     --color-blue-950: oklch(28.2% 0.091 267.935);
+    --color-indigo-400: oklch(67.3% 0.182 276.935);
     --color-indigo-600: oklch(51.1% 0.262 276.966);
     --color-indigo-700: oklch(45.7% 0.24 277.023);
     --color-indigo-800: oklch(39.8% 0.195 277.366);
@@ -333,23 +337,14 @@
   .top-2 {
     top: calc(var(--spacing) * 2);
   }
-  .top-3 {
-    top: calc(var(--spacing) * 3);
-  }
   .top-12 {
     top: calc(var(--spacing) * 12);
   }
   .top-15 {
     top: calc(var(--spacing) * 15);
   }
-  .top-16 {
-    top: calc(var(--spacing) * 16);
-  }
   .top-22 {
     top: calc(var(--spacing) * 22);
-  }
-  .top-25 {
-    top: calc(var(--spacing) * 25);
   }
   .top-100 {
     top: calc(var(--spacing) * 100);
@@ -1617,6 +1612,18 @@
     --tw-duration: 75ms;
     transition-duration: 75ms;
   }
+  .duration-100 {
+    --tw-duration: 100ms;
+    transition-duration: 100ms;
+  }
+  .duration-120 {
+    --tw-duration: 120ms;
+    transition-duration: 120ms;
+  }
+  .duration-150 {
+    --tw-duration: 150ms;
+    transition-duration: 150ms;
+  }
   .duration-200 {
     --tw-duration: 200ms;
     transition-duration: 200ms;
@@ -1632,6 +1639,10 @@
   .duration-400 {
     --tw-duration: 400ms;
     transition-duration: 400ms;
+  }
+  .duration-700 {
+    --tw-duration: 700ms;
+    transition-duration: 700ms;
   }
   .ease-in-out {
     --tw-ease: var(--ease-in-out);
@@ -2234,6 +2245,26 @@
       background-color: var(--color-blue-600);
     }
   }
+  .active\:bg-blue-900 {
+    &:active {
+      background-color: var(--color-blue-900);
+    }
+  }
+  .active\:bg-emerald-500 {
+    &:active {
+      background-color: var(--color-emerald-500);
+    }
+  }
+  .active\:bg-emerald-900 {
+    &:active {
+      background-color: var(--color-emerald-900);
+    }
+  }
+  .active\:bg-emerald-950 {
+    &:active {
+      background-color: var(--color-emerald-950);
+    }
+  }
   .active\:bg-gray-300 {
     &:active {
       background-color: var(--color-gray-300);
@@ -2244,9 +2275,19 @@
       background-color: var(--color-green-700);
     }
   }
+  .active\:bg-green-800 {
+    &:active {
+      background-color: var(--color-green-800);
+    }
+  }
   .active\:bg-green-950 {
     &:active {
       background-color: var(--color-green-950);
+    }
+  }
+  .active\:bg-indigo-400 {
+    &:active {
+      background-color: var(--color-indigo-400);
     }
   }
   .active\:bg-indigo-950 {

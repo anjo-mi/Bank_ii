@@ -21,7 +21,7 @@
               <ul>
                 <% for (const resource of user.resources.slice(0).reverse()){ %>
                 <li class="resource-li block opacity-100 transition-opacity duration-300 ease-out h-fit my-1.5 relative">
-                  <a href="<%= resource %>" target="_blank" class="block m-auto truncate w-95/100 px-4 py-2 text-xs md:text-lg text-left py-1.5 border-1 border-blue-500 bg-indigo-900 hover:bg-green-800 active:indigo-400 text-gray-200 hover:cursor-pointer rounded-xl"><%= resource %>
+                  <a href="<%= resource %>" target="_blank" class="block m-auto truncate w-95/100 px-4 py-2 text-xs md:text-lg text-left py-1.5 border-1 border-blue-500 bg-indigo-900 hover:bg-green-800 active:bg-indigo-400 text-gray-200 hover:cursor-pointer rounded-xl"><%= resource %>
                   </a>
                   <button type="button" id="<%= resource %>" class="delete-btn h-5/6 inline p-1 rounded-full border-1 border-black hover:border-white hover:pointer bg-red-700 hover:bg-red-900 active:bg-red-400 absolute right-1 top-1 z-10 hover:cursor-pointer">
                     <img class="max-h-full" src="/images/trash.svg" alt="Delete">
@@ -43,7 +43,7 @@
               <input type="hidden" name="sessionId" value="<%= session._id %>">
               <button type="submit" class="block m-auto w-full">
                 <section id="user-sessions-container" class="w-95/100 m-auto">
-                    <div class="flex my-1 w-full h-full px-4 py-1.5 text-xs md:text-lg border-1 border-blue-500 bg-indigo-900 hover:bg-green-800 active:indigo-400 text-gray-200 hover:cursor-pointer rounded-xl">
+                    <div class="flex my-1 w-full h-full px-4 py-1.5 text-xs md:text-lg border-1 border-blue-500 bg-indigo-900 hover:bg-green-800 active:bg-indigo-400 text-gray-200 hover:cursor-pointer rounded-xl">
                       <div class="practice-date h-full w-5/10 text-center border-r-1 border-sky-400"><%= session.completedAt.toString().slice(4,15) %></div>
                       <div class="practice-length h-full w-5/10 text-center border-l-1 border-sky-400"><%= session.questions.length %> Question(s)</div>
                     </div>
