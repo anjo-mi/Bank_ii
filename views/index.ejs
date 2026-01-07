@@ -10,22 +10,24 @@
             <ul
             class="m-auto flex p-4 place-content-evenly gap-3 md:gap-0 text-center w-full text-white">
                 <li
-                class="text-xs md:text-md lg:text-2xl w-1/2 md:w-4/10 h-12 md:h-15" >
+                class="text-xs md:text-md lg:text-2xl w-1/2 md:w-4/10 h-12 md:h-15 relative" >
                     <label for="matchAll"
                         class="flex items-center h-full w-full place-content-center text-xs md:text-xl lg:text-2xl text-gray-300 gap-3 hover:cursor-pointer border-1 border-sky-400 bg-gray-800 hover:bg-sky-900 active:bg-green-800 rounded-2xl" >
                         <input type="radio" id="matchAll" name="matchAll" value="1"
                         class="w-4 h-4 accent-green-500 rounded-sm">
                         Match All
                     </label>
+                    <p id="match-all-popover" class="absolute hidden opacity-0 transition-opacity duration-200 ease-in-out mx-auto -top-12 md:-top-5 w-fit py-0.5 px-1.5 text-xs text-slate-950 border-1 border-blue-800 bg-yellow-300 rounded-lg">Question(s) will have <em>each</em> category selected.</p>
                 </li>
                 <li
-                class="text-xs md:text-md lg:text-2xl w-1/2 md:w-4/10 h-12 md:h-15">
+                class="text-xs md:text-md lg:text-2xl w-1/2 md:w-4/10 h-12 md:h-15 relative">
                     <label for="matchAny"
                         class="flex items-center h-full w-full place-content-center text-xs md:text-xl lg:text-2xl text-gray-300 gap-3 hover:cursor-pointer border-1 border-sky-400 bg-gray-800 hover:bg-sky-900 active:bg-green-800 rounded-2xl">
                         <input type="radio" id="matchAny" name="matchAll" value="0"
                         class="w-4 h-4 accent-green-500 rounded-sm" >
                         Match Any
                     </label>
+                    <p id="match-any-popover" class="absolute hidden opacity-0 transition-opacity duration-200 ease-in-out mx-auto -top-12 md:-top-5 w-fit py-0.5 px-1.5 text-xs text-slate-950 border-1 border-blue-800 bg-yellow-300 rounded-lg">Question(s) will have <em>at least one</em> selected category.</p>
                 </li>
             </ul>
         </div>

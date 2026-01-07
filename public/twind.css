@@ -326,6 +326,9 @@
   .static {
     position: static;
   }
+  .-top-12 {
+    top: calc(var(--spacing) * -12);
+  }
   .top-0 {
     top: calc(var(--spacing) * 0);
   }
@@ -1260,6 +1263,9 @@
   .bg-transparent {
     background-color: transparent;
   }
+  .bg-yellow-300 {
+    background-color: var(--color-yellow-300);
+  }
   .bg-yellow-700 {
     background-color: var(--color-yellow-700);
   }
@@ -1507,6 +1513,9 @@
   }
   .text-sky-400 {
     color: var(--color-sky-400);
+  }
+  .text-slate-950 {
+    color: var(--color-slate-950);
   }
   .text-white {
     color: var(--color-white);
@@ -2373,6 +2382,11 @@
   .sm\:p-8 {
     @media (width >= 40rem) {
       padding: calc(var(--spacing) * 8);
+    }
+  }
+  .md\:-top-5 {
+    @media (width >= 48rem) {
+      top: calc(var(--spacing) * -5);
     }
   }
   .md\:right-7 {
