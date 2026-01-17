@@ -253,3 +253,10 @@ if (navigator.mediaDevices?.getUserMedia){
     });
   })
 }else recordBox.style.display = "none";
+
+document.addEventListener('DOMContentLoaded', () => {
+  Array.from(document.querySelectorAll('code')).forEach(pre => {
+    pre.style.whiteSpace = 'pre-wrap';
+    pre.style.wordBreak = 'break-word';
+  })
+})

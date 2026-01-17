@@ -248,3 +248,10 @@ newQuestionForms.forEach(form => form.addEventListener('submit', async (e) => {
   if (response.ok) handleGood(data.message);
   else handleBad(data.message);
 }))
+
+document.addEventListener('DOMContentLoaded', () => {
+  Array.from(document.querySelectorAll('code')).forEach(pre => {
+    pre.style.whiteSpace = 'pre-wrap';
+    pre.style.wordBreak = 'break-word';
+  })
+})
