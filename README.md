@@ -2,7 +2,9 @@
 [Try It Out Here!](https://bank-breakers.com)
 
 <div align="center">
-  <video src="https://www.youtube.com/watch?v=wz8TzK8rgcA" width="400" controls loop muted></video>
+  <video width="400" controls autoplay loop muted>
+    <source src="https://www.youtube.com/watch?v=wz8TzK8rgcA">
+  </video>
 </div>
 
 ### Table of Contents
