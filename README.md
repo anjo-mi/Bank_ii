@@ -1,5 +1,10 @@
+<div align="center">
 # BANK-BREAKERS
 [Try It Out Here!](https://bank-breakers.com)
+
+<div align="center">
+  <video src="https://www.youtube.com/watch?v=wz8TzK8rgcA" width="400" controls loop muted></video>
+</div>
 
 ### Table of Contents
 - [Guests](#guest-users)
@@ -240,3 +245,4 @@ Good Luck!!! And May We All ***Break the Bank!!!***
       - <https://communitytaught.org/>
       - Look For Us On Discord
       - Give anjomi a shout out!
+</div>
