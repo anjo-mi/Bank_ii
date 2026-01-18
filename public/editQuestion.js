@@ -336,8 +336,15 @@ answerArea.addEventListener('click', (e) => {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-  Array.from(document.querySelectorAll('code')).forEach(pre => {
-    pre.style.whiteSpace = 'pre-wrap';
-    pre.style.wordBreak = 'break-word';
+  Array.from(document.querySelectorAll('code')).forEach(code => {
+    code.style.whiteSpace = 'pre-wrap';
+    code.style.wordBreak = 'break-word';
+  })
+  Array.from(document.querySelectorAll('pre')).forEach(pre => {
+      pre.style.backgroundColor = 'black';
+      pre.style.border = '1px solid white';
+      pre.style.borderRadius = '5%';
+      pre.style.textAlign = 'start';
+      pre.style.padding = '.8rem';
   })
 })
