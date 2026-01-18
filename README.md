@@ -31,7 +31,6 @@
    * Applying No Filters effectively selects Match Any with All available Categories and No Keywords
 
 #### Voice To Text
-RECENT UPDATE:
 - SpeechRecognition has been Removed
 - Cross-Browser Compatibility Using Google's Speech-To-Text API
    - Google Does not store ANY audio in Buckets!
@@ -163,7 +162,7 @@ Use Comprehensive Search Features to Locate a Question
 ### Recording
 - Uses `navigator.mediaDevices` when available (otherwise hide content)
    - Only allows Recording with Explicit Permission
-- On start, Voice-To-Text Leveraged Via SpeechRecognition API.
+- On start, Recorder will leverage Google Cloud's Speech-To-Text API.
 - DEFAULT BEHAVIOR:
    - Audio file is made locally via a blob, while content is transcribed.
    - File **WILL NOT BE STORED** unless the user explicitly checks the box EACH TIME.
@@ -207,11 +206,10 @@ Please, treat this as though you are mentoring someone who is typically an [USER
    - Node.js, Express.js, MongoDB, Mongoose
 - Authorization:
    - Passport.js
-- AI Services:
-   - Gemini 2.5
 - Cloud Services
+   - Gemini 2.5 (GCP)
+   - Speech-To-Text API (GCP)
    - AWS S3
-   - Google Speech To Text API
 
 ### User Flow
 1. SIGN UP!!!
