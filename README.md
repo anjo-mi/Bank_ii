@@ -1,4 +1,3 @@
-<div align="center">
 # BANK-BREAKERS
 [Try It Out Here!](https://bank-breakers.com)
 
@@ -245,4 +244,3 @@ Good Luck!!! And May We All ***Break the Bank!!!***
       - <https://communitytaught.org/>
       - Look For Us On Discord
       - Give anjomi a shout out!
-</div>
