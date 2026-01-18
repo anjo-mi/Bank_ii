@@ -1,11 +1,7 @@
 # BANK-BREAKERS
 [Try It Out Here!](https://bank-breakers.com)
 
-<div align="center">
-  <video width="400" controls autoplay loop muted>
-    <source src="https://www.youtube.com/watch?v=wz8TzK8rgcA">
-  </video>
-</div>
+[![Watch the video](https://img.youtube.com/vi/wz8TzK8rgcA/maxresdefault.jpg)](https://www.youtube.com/watch?v=wz8TzK8rgcA "Application Walk-Through")
 
 ### Table of Contents
 - [Guests](#guest-users)
