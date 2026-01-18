@@ -1,6 +1,7 @@
 # BANK-BREAKERS
 [Try It Out Here!](https://bank-breakers.com)
 
+## Watch The Walk-Through
 [![Watch the video](https://img.youtube.com/vi/wz8TzK8rgcA/maxresdefault.jpg)](https://www.youtube.com/watch?v=wz8TzK8rgcA "Application Walk-Through")
 
 ### Table of Contents
@@ -79,7 +80,7 @@ Immediate Navigation to Personalized User Dashboard
          - Saving an answer, feedback or audio file from a [View Results](#view-results) page.
       - [Add Question](#add-question)
 
-# Practice Session
+## Practice Session
 - Choose the topics that you'd like to possibly be covered.
    - Choosing No Parameters Will Equate to Allowing all available questions into the Selection Pool.
 - Choose the number of questions you'd like to attempt.
