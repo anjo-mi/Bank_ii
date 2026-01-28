@@ -1,6 +1,9 @@
 # BANK-BREAKERS
 [Try It Out Here!](https://bank-breakers.com)
 
+## For Developers
+- [Getting Started](#getting-started)
+
 ## Watch The Walk-Through
 [![Watch the video](https://img.youtube.com/vi/wz8TzK8rgcA/maxresdefault.jpg)](https://www.youtube.com/watch?v=wz8TzK8rgcA "Application Walk-Through")
 
@@ -20,6 +23,7 @@
 - [User Restraints](#user-restraints)
 - [Tech](#tech)
 - [Recommended User Flow](#user-flow)
+- [Getting Started](#getting-started)
 - [Note from the Dev](#dev-note)
 
 
@@ -234,6 +238,28 @@ Please, treat this as though you are mentoring someone who is typically an [USER
 3. Let Bot Botterson Critique Your Answer and Suggest Resources
 4. Study the Resources, Ensure Understanding of the Topic
 5. Repeat the Process on Relevant Follow-Ups (Deepen or Span Knowledge)
+
+## Getting Started
+
+#### Prerequisites:
+- Node version 22+
+- Mongo Atlas Account and Database Setup
+- Amazon Web Services Account
+- Google Cloud Platform Account
+
+#### Setting Up Your Environment
+- Get your credentials from Amazon, Google and MongoDB
+- Follow the blueprint laid out in `.env.example` while building your own `.env`
+
+#### Installation
+- Run `npm install` in the root of the project.
+
+#### Running Locally
+- Run `npm run dev` in the terminal.
+
+##### Deployment (Fly.io)
+- Install fly.io CLI
+- Upload NODE_ENV variables via fly.io's CLI specifics
 
 ### Dev Note
 Good Luck!!! And May We All ***Break the Bank!!!***
