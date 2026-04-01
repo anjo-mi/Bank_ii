@@ -1463,6 +1463,9 @@
   .whitespace-nowrap {
     white-space: nowrap;
   }
+  .whitespace-pre-wrap {
+    white-space: pre-wrap;
+  }
   .text-emerald-600 {
     color: var(--color-emerald-600);
   }
