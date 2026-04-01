@@ -19,7 +19,7 @@ export default {
         config: {
           autoDecodingConfig: {},
           languageCodes: ["en-US"],
-          model: "short",
+          model: "long",
           features: {
             enableAutomaticPunctuation: true,
             enableWordTimeOffsets: true,
@@ -31,7 +31,8 @@ export default {
       const text =
         response.results
           ?.map((res) => res.alternatives[0].transcript)
-          .join(" ") || "Your data was lost, sawwwwy";
+          .join(" ") ||
+        "We're sorry, the text got lost in translation! Your recording should be unaffected by this mishap.";
 
       console.log({ text });
       return res.json({ text });
