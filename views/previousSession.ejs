@@ -83,7 +83,7 @@
           <ul class="min-h-24 max-h-80 overflow-y-scroll p-2 border border-2 border-sky-600 bg-stone-950 rounded-xl">
             <% for (const question of followUps){ %>
             <li class="flex items-center my-2.5 text-center place-content-around w-full pl-2 pr-2/10 border-1 border-gray-200 bg-blue-700 rounded-xl">
-              <div class="practice-date w-full h-full min-w-8/10 text-center m-auto border-slate-900 text-gray-200"><%= question %></div>
+              <div class="practice-date w-full h-full min-w-8/10 text-center m-auto border-slate-900 text-gray-200 selection:text-gray-800 selection:bg-yellow-400"><%= question %></div>
               <form action="/questions/create" id="create-new" method="POST" class="save-follow-up h-fit">
                 <input type="hidden" name="follow-up" class="follow-up" value="<%= question %>">
                 <input type="hidden" name="categori" class="categori" value="<%= JSON.stringify(qs[i].categories) %>">
