@@ -1732,6 +1732,22 @@
       display: block;
     }
   }
+  .selection\:bg-yellow-400 {
+    & *::selection {
+      background-color: var(--color-yellow-400);
+    }
+    &::selection {
+      background-color: var(--color-yellow-400);
+    }
+  }
+  .selection\:text-gray-800 {
+    & *::selection {
+      color: var(--color-gray-800);
+    }
+    &::selection {
+      color: var(--color-gray-800);
+    }
+  }
   .hover\:cursor-pointer {
     &:hover {
       @media (hover: hover) {
