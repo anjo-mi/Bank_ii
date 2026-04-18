@@ -1,4 +1,6 @@
-<div class="mx-auto w-full flex flex-col flex-1 min-h-fit gap-2.5 place-content-evenly items-center">
+<input class="hidden" name="newSession" id="newSession" value="<%= newSession %>"/>
+<input class="hidden" name="loggedIn" id="loggedIn" value="<%= loggedIn %>"/>
+<div id="main" class="mx-auto w-full flex flex-col flex-1 min-h-fit gap-2.5 place-content-evenly transition-blur duration-400 ease-in-out items-center">
     <div class="mx-auto w-4/5 text-gray-300 text-shadow-lg text-shadow-orange-600 text-4xl md:text-6xl rounded-xl shadow-lg shadow-sky-700 hover:shadow-orange-700 transition-color duration-200 ease-in-out">
         <h1 class="mx-auto -mb-3 text-xs lg:text-lg text-shadow-lg text-shadow-blue-600">BANK-</h1>
         <h1 class="mx-auto">BREAKERS</h1>
@@ -73,6 +75,31 @@
         </div>
     
     </form>
+</div>
+
+<div id="log-in" class="hidden fixed z-1 top-0 left-0 w-full h-svh flex flex-col place-content-center opacity-0 transition-opacity duration-300 ease-in-out">
+    <div id="warning" class="m-auto py-6 px-3 h-1/2 w-4/5 md:w-2/3 lg:w-1/3 flex-col gap-2 bg-gray-700 border-1 border-yellow-600 bg-yellow-900 rounded-xl justify-content-center items-center">
+        <div class="m-auto h-full flex flex-col gap-3 place-content-between p-4 min-w-8/10 w-9/10 min-h-4/10 text-emerald-600 border border-white rounded-lg bg-gray-800" role="alert">
+            <div class="flex flex-1 items-center">
+                <svg class="shrink-0 w-6 h-6 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="yellow" viewBox="0 0 20 20">
+                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                </svg>
+                <span class="sr-only">Info</span>
+                <h3 class="text-base md:text-lg text-yellow-800 font-semibold border-b-2 border-b-yellow-700">Your are not logged in!</h3>
+            </div>
+            <div class="message text-base md:text-lg text-wrap text-yellow-800 flex flex-col flex-3 min-w-9/10 text-center place-content-evenly items-center px-3 pt-2 pb-10 m-auto border-1 border-yellow-800 bg-slate-900 rounded-2xl">
+                <p>To unlock features like <span class="text-indigo-500 font-extrabold">AI Assistance</span> and more:</p>
+                <p class="text-sky-600 font-semibold"><a href="/auth">Log In</a></p>
+                <p>OR</p>
+                <p class="text-sky-600 font-semibold"><a href="/auth/signup">Sign Up</a></p>
+            </div>
+            <div class="flex">
+                <button id="dismiss" type="button" class="dismiss text-yellow-800 bg-transparent border-1 border-yellow-800 hover:bg-yellow-900 hover:text-white hover:cursor-pointer focus:ring-4 focus:ring-white rounded-lg text-xs px-3 py-1.5 text-center hover:bg-yellow-600 border-yellow-600 text-yellow-500" data-dismiss-target="#alert-additional-content-2" aria-label="Close">
+                Dismiss
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script src="../index.js"></script>
