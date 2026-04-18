@@ -29,7 +29,6 @@ connectDB();
 
 const app = express();
 
-
 app.set("view engine", "ejs");
 app.use(expressLayouts);
 app.set("layout", "layout");
@@ -40,21 +39,24 @@ app.use(logger("combined"));
 app.use(cors());
 
 // sessions
-app.use(session({
-  secret: process.env.SECRET,
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    maxAge: 1000 * 60 * 60 * 3,
-    httpOnly: true,
-    secure: false,
-  },
-  store: MongoStore.create({
-    mongoUrl: process.env.DB_STR,
-    collectionName: 'sessions',
+app.use(
+  session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      maxAge: 1000 * 60 * 2,
+      httpOnly: true,
+      secure: false,
+      newSession: true,
+    },
+    store: MongoStore.create({
+      mongoUrl: process.env.DB_STR,
+      collectionName: "sessions",
+    }),
   }),
-}));
-app.use(passport.authenticate('session'));
+);
+app.use(passport.authenticate("session"));
 
 // routes
 app.use("/", homeRoutes);
@@ -64,7 +66,7 @@ app.use("/practice", practiceRoutes);
 app.use("/questions", questionsRoutes);
 app.use("/services", serviceRoutes);
 
-app.listen(process.env.PORT || 3000, '0.0.0.0', () => {
+app.listen(process.env.PORT || 3000, "0.0.0.0", () => {
   console.log("server successfully running!");
 });
 
