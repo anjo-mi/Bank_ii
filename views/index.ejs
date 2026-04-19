@@ -38,11 +38,11 @@
             class="px-2 h-full text-center w-7/10 text-xs md:text-lg lg:text-lg border-1 border-gray-300 bg-zinc-900 focus:outline-2 focus:outline-green-400 rounded-lg">
         </div>
         <div class="flex items-center place-content-evenly my-2">
-            <button type="button" id="select-all" class="block w-1/3 m-auto items-center px-3 py-2.5 text-xs md:text-base font-medium text-center text-white bg-lime-800 rounded-lg hover:bg-lime-950 active:bg-lime-600 hover:cursor-pointer border-1 border-yellow-400">
-               Select All
+            <button type="button" id="select-all" class="block w-1/3 m-auto items-center px-3 py-2.5 text-xs md:text-base font-medium text-center text-white bg-lime-800/20 rounded-lg hover:bg-lime-950 active:bg-lime-600 hover:cursor-pointer border-1 border-yellow-400">
+               Select All Categories
                </button>
-            <button type="reset" id="reset" class="block w-1/3 m-auto items-center px-2 md:px-3 py-2.5 text-xs md:text-base text-center text-white bg-rose-800 rounded-lg hover:bg-rose-950 active:bg-rose-600 hover:cursor-pointer border-1 border-yellow-400">
-               Un-Select All
+            <button type="reset" id="reset" class="block w-1/3 m-auto items-center px-2 md:px-3 py-2.5 text-xs md:text-base text-center text-white bg-rose-800/20 rounded-lg hover:bg-rose-950 active:bg-rose-600 hover:cursor-pointer border-1 border-yellow-400">
+               Un-Select All Categories
                </button>
         </div>
         <div
@@ -78,27 +78,53 @@
 </div>
 
 <div id="log-in" class="hidden fixed z-1 top-0 left-0 w-full h-svh flex flex-col place-content-center opacity-0 transition-opacity duration-300 ease-in-out">
-    <div id="warning" class="m-auto py-6 px-3 h-1/2 w-4/5 md:w-2/3 lg:w-1/3 flex-col gap-2 bg-gray-700 border-1 border-yellow-600 bg-yellow-900 rounded-xl justify-content-center items-center">
-        <div class="m-auto h-full flex flex-col gap-3 place-content-between p-4 min-w-8/10 w-9/10 min-h-4/10 text-emerald-600 border border-white rounded-lg bg-gray-800" role="alert">
-            <div class="flex flex-1 items-center">
-                <svg class="shrink-0 w-6 h-6 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="yellow" viewBox="0 0 20 20">
-                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-                </svg>
-                <span class="sr-only">Info</span>
-                <h3 class="text-base md:text-lg text-yellow-800 font-semibold border-b-2 border-b-yellow-700">Your are not logged in!</h3>
-            </div>
-            <div class="message text-base md:text-lg text-wrap text-yellow-800 flex flex-col flex-3 min-w-9/10 text-center place-content-evenly items-center px-3 pt-2 pb-10 m-auto border-1 border-yellow-800 bg-slate-900 rounded-2xl">
-                <p>To unlock features like <span class="text-indigo-500 font-extrabold">AI Assistance</span> and more:</p>
-                <p class="text-sky-600 font-semibold"><a href="/auth">Log In</a></p>
-                <p>OR</p>
-                <p class="text-sky-600 font-semibold"><a href="/auth/signup">Sign Up</a></p>
-            </div>
-            <div class="flex">
-                <button id="dismiss" type="button" class="dismiss text-yellow-800 bg-transparent border-1 border-yellow-800 hover:bg-yellow-900 hover:text-white hover:cursor-pointer focus:ring-4 focus:ring-white rounded-lg text-xs px-3 py-1.5 text-center hover:bg-yellow-600 border-yellow-600 text-yellow-500" data-dismiss-target="#alert-additional-content-2" aria-label="Close">
-                Dismiss
-                </button>
-            </div>
+    <div id="warning" class="m-auto py-8 px-5 h-fit min-h-3/4 md:min-h-3/5 w-11/12 md:w-4/5 lg:w-1/2 flex flex-col gap-4 bg-gray-900 border-1 border-sky-600 rounded-2xl shadow-2xl shadow-sky-900 items-center place-content-evenly">
+        <h1 class="text-sky-400 text-lg md:text-2xl font-semibold text-center px-4">Welcome to:</h1>
+        <div class="text-gray-300 text-shadow-lg text-shadow-orange-600 text-4xl md:text-5xl rounded-xl text-center">
+            <h2 class="mx-auto -mb-2 text-xs md:text-sm text-shadow-lg text-shadow-blue-600">BANK-</h2>
+            <h2 class="mx-auto">BREAKERS!</h2>
         </div>
+
+        <h3 class="text-sky-400 text-sm md:text-lg font-semibold text-center px-4">
+            An AI-Assisted platform that guides you on your learning journey!
+        </h3>
+
+        <div class="w-full text-center px-4 py-4 bg-zinc-900 border-1 border-indigo-700 rounded-2xl text-gray-300 text-sm md:text-base leading-relaxed">
+            <p>
+                To unlock features such as <span class="text-indigo-400 font-extrabold">AI Assistance</span>,
+                <span class="text-indigo-400 font-extrabold">Audio</span> and
+                <span class="text-indigo-400 font-extrabold">Data Storage</span>,
+                <span class="text-indigo-400 font-extrabold">Personalized Questions</span>,
+                <span class="text-indigo-400 font-extrabold">Custom User Settings</span> and
+                <span class="text-indigo-400 font-extrabold">MORE</span>, please
+                <p>
+                    <a href="/auth" class="text-sky-400 font-semibold hover:text-sky-300 underline underline-offset-2">Log In</a>
+                    or
+                    <a href="/auth/signup" class="text-sky-400 font-semibold hover:text-sky-300 underline underline-offset-2">Sign Up</a>!
+                </p>
+            </p>
+        </div>
+
+        <p class="text-gray-400 text-xs md:text-sm text-center px-4">
+            Otherwise, feel free to explore the default questions by clicking Dismiss!
+        </p>
+        
+        <p class="text-gray-400 text-xs md:text-sm text-center px-4">
+            Not sure where to start?
+            <p>
+                <a href="https://github.com/anjo-mi/Bank_ii/blob/main/README.md" target="_blank" class="text-sky-400 font-semibold hover:text-sky-300 underline underline-offset-2">Read the README</a>
+            </p>
+            OR
+            <p>
+                <a href="https://youtu.be/wz8TzK8rgcA" target="_blank" class="text-sky-400 font-semibold hover:text-sky-300 underline underline-offset-2">Watch the video!</a>
+            </p>
+        </p>
+
+        <button id="dismiss" type="button"
+            class="dismiss text-white bg-indigo-800 hover:bg-indigo-600 active:bg-indigo-950 border-1 border-sky-400 hover:cursor-pointer focus:ring-2 focus:ring-sky-400 rounded-lg text-sm px-6 py-2 transition-colors duration-150">
+            Dismiss
+        </button>
+
     </div>
 </div>
 
