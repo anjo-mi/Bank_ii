@@ -10,10 +10,11 @@ dotenv.config();
 const populateDB = async () => {
   try {
     await mongoose.connect(process.env.DB_STR);
-    await Question.deleteMany({});
-    await Category.deleteMany({});
-    await User.deleteMany({});
     await PracticeSession.deleteMany({});
+    await Question.deleteMany({ parentId: { $ne: null } });
+    await Question.deleteMany({ isDefault: true });
+    await Category.deleteMany({ isDefault: true });
+    // await User.deleteMany({});
     console.log("removed any residual data");
 
     await Question.insertMany(questions);

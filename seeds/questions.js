@@ -1,1378 +1,2331 @@
-// Questions Array
 export const questions = [
-  // Behavioral Questions
-  {
-    content: "Give me an example of the project or initiative that you started on your own. It can be a non-business one. What prompted you to get started?",
-    categories: ["Behavioral"],
-    answer: null,
-    isDefault: true,
-    userId: null
-  },
-  {
-    content: "Tell me about a time you had to work on several projects at once. How did you handle this?",
-    categories: ["Behavioral"],
-    answer: null,
-    isDefault: true,
-    userId: null
-  },
-  {
-    content: "Describe a situation in which you felt you had not communicated well enough. What did you do? How did you handle it?",
-    categories: ["Behavioral"],
-    answer: null,
-    isDefault: true,
-    userId: null
-  },
-  {
-    content: "Tell me about when you had to deal with conflict within your team. How was the conflict solved? How did you handle that? How would you deal with it now?",
-    categories: ["Behavioral"],
-    answer: null,
-    isDefault: true,
-    userId: null
-  },
-  {
-    content: "Give me an example of a time you had to take a creative and unusual approach to solve problem. How did this idea come to your mind? Why do you think it was unusual?",
-    categories: ["Behavioral"],
-    answer: null,
-    isDefault: true,
-    userId: null
-  },
-  {
-    content: "Describe a situation in which you worked diligently on a project and it did not produce the desired results. Why didn't you get the desired results? What did you learn from the experience?",
-    categories: ["Behavioral"],
-    answer: null,
-    isDefault: true,
-    userId: null
-  },
-  {
-    content: "Give an example of an important project goal you reached and how you achieved it.",
-    categories: ["Behavioral"],
-    answer: null,
-    isDefault: true,
-    userId: null
-  },
-  {
-    content: "Describe a situation in which you experienced difficulty in getting others to accept your ideas? What was your approach? How did this work? Were you able to successfully persuade someone to see things your way",
-    categories: ["Behavioral"],
-    answer: null,
-    isDefault: true,
-    userId: null
-  },
-  {
-    content: "Tell me about a situation when you were responsible for project planning. Did everything go according to your plan? If not, then why and what kind of counteractions did you have to take?",
-    categories: ["Behavioral"],
-    answer: null,
-    isDefault: true,
-    userId: null
-  },
-  {
-    content: "Tell me about a situation when you made a mistake at work. What happened exactly and how did you deal with it? What steps did you take to improve the situation?",
-    categories: ["Behavioral"],
-    answer: null,
-    isDefault: true,
-    userId: null
-  },
-  {
-    content: "Tell me about a time when you worked with someone who was not completing his or her share of the work. How did you handle the situation?",
-    categories: ["Behavioral"],
-    answer: null,
-    isDefault: true,
-    userId: null
-  },
-  {
-    content: "Describe a situation when you worked effectively under pressure. How did you feel when working under pressure? What was going on, and how did you get through it?",
-    categories: ["Behavioral"],
-    answer: null,
-    isDefault: true,
-    userId: null
-  },
   {
     content: "Tell me about yourself.",
     categories: ["Behavioral"],
     answer: null,
     isDefault: true,
-    userId: null
+    userId: null,
+    is100Devs: false,
   },
   {
-    content: "Tell me about your experience at your current place of employment.",
+    content:
+      "Walk me through your most recent project. What did you build, what was your part, and what would you do differently?",
     categories: ["Behavioral"],
     answer: null,
     isDefault: true,
-    userId: null
+    userId: null,
+    is100Devs: false,
+  },
+  {
+    content: "Why did you move into software engineering?",
+    categories: ["Behavioral"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: false,
   },
   {
     content: "What do you know about our company?",
     categories: ["Behavioral"],
     answer: null,
     isDefault: true,
-    userId: null
+    userId: null,
+    is100Devs: false,
   },
   {
-    content: "Why do you want to work for us?",
+    content: "Why do you want to work here, and why this role specifically?",
     categories: ["Behavioral"],
     answer: null,
     isDefault: true,
-    userId: null
+    userId: null,
+    is100Devs: false,
   },
   {
-    content: "Why are you interested in this opportunity?",
+    content:
+      "Tell me about a time you had to learn a new technology or an unfamiliar codebase quickly. How did you approach it?",
     categories: ["Behavioral"],
     answer: null,
     isDefault: true,
-    userId: null
+    userId: null,
+    is100Devs: false,
   },
   {
-    content: "Tell me about your dream job? What do you really want to do with your career?",
+    content:
+      "Give me an example of a project or initiative you started on your own. What prompted it?",
     categories: ["Behavioral"],
     answer: null,
     isDefault: true,
-    userId: null
+    userId: null,
+    is100Devs: false,
   },
   {
-    content: "Tell me a time when you failed.",
+    content:
+      "Tell me about a time you were juggling several projects or deadlines at once. How did you prioritize?",
     categories: ["Behavioral"],
     answer: null,
     isDefault: true,
-    userId: null
+    userId: null,
+    is100Devs: false,
   },
   {
-    content: "What do you read on a regular basis?",
+    content:
+      "Describe a situation where you didn't communicate well enough. What happened, and what did you change?",
     categories: ["Behavioral"],
     answer: null,
     isDefault: true,
-    userId: null
+    userId: null,
+    is100Devs: false,
   },
   {
-    content: "What's some critical feedback you've gotten recently?",
+    content:
+      "Tell me about a conflict on your team. How was it resolved, and what would you do differently now?",
     categories: ["Behavioral"],
     answer: null,
     isDefault: true,
-    userId: null
+    userId: null,
+    is100Devs: false,
   },
   {
-    content: "Do you have any questions?",
+    content:
+      "Tell me about a time you were given an ambiguous or under-specified task. What did you do first?",
     categories: ["Behavioral"],
     answer: null,
     isDefault: true,
-    userId: null
-  },
-  
-  // HTML Questions
-  {
-    content: "What does a doctype do?",
-    categories: ["Technical", "HTML"],
-    answer: null,
-    isDefault: true,
-    is100Devs: true,
-    userId: null
+    userId: null,
+    is100Devs: false,
   },
   {
-    content: "How do you serve a page with content in multiple languages?",
-    categories: ["Technical", "HTML"],
+    content:
+      "Describe a project you worked hard on that still didn't get the result you wanted. Why, and what did you learn?",
+    categories: ["Behavioral"],
     answer: null,
     isDefault: true,
-    is100Devs: true,
-    userId: null
+    userId: null,
+    is100Devs: false,
   },
   {
-    content: "What kind of things must you be wary of when design or developing for multilingual sites?",
-    categories: ["Technical", "HTML"],
+    content:
+      "Tell me about a time you had trouble getting others to accept your idea. How did you approach it? Did it work?",
+    categories: ["Behavioral"],
     answer: null,
     isDefault: true,
-    is100Devs: true,
-    userId: null
+    userId: null,
+    is100Devs: false,
   },
   {
-    content: "What are data- attributes good for?",
-    categories: ["Technical", "HTML"],
+    content:
+      "Tell me about a time you were responsible for planning a piece of work. Did it go to plan? What did you adjust?",
+    categories: ["Behavioral"],
     answer: null,
     isDefault: true,
-    is100Devs: true,
-    userId: null
+    userId: null,
+    is100Devs: false,
   },
   {
-    content: "Consider HTML5 as an open web platform. What are the building blocks of HTML5?",
-    categories: ["Technical", "HTML"],
+    content:
+      "Tell me about a mistake you made at work. How did you handle it, and what did you change?",
+    categories: ["Behavioral"],
     answer: null,
     isDefault: true,
-    is100Devs: true,
-    userId: null
+    userId: null,
+    is100Devs: false,
   },
   {
-    content: "Describe the difference between a cookie, sessionStorage and localStorage.",
-    categories: ["Technical", "HTML"],
+    content:
+      "Tell me about a time you worked with someone who wasn't pulling their weight. Did you talk to them? To your manager?",
+    categories: ["Behavioral"],
     answer: null,
     isDefault: true,
-    is100Devs: true,
-    userId: null
+    userId: null,
+    is100Devs: false,
   },
   {
-    content: "Describe the difference between <script>, <script async> and <script defer>.",
-    categories: ["Technical", "HTML"],
+    content:
+      "Describe a time you worked well under pressure. What was going on, and how did you get through it?",
+    categories: ["Behavioral"],
     answer: null,
     isDefault: true,
-    is100Devs: true,
-    userId: null
+    userId: null,
+    is100Devs: false,
   },
   {
-    content: "Why is it generally a good idea to position CSS <link>s between <head></head> and JS <script>s just before </body>? Do you know any exceptions?",
-    categories: ["Technical", "HTML"],
+    content: "Tell me about a time you failed.",
+    categories: ["Behavioral"],
     answer: null,
     isDefault: true,
-    is100Devs: true,
-    userId: null
+    userId: null,
+    is100Devs: false,
   },
   {
-    content: "What is progressive rendering?",
-    categories: ["Technical", "HTML"],
+    content:
+      "Tell me about a time you disagreed with a decision but committed to it anyway.",
+    categories: ["Behavioral"],
     answer: null,
     isDefault: true,
-    is100Devs: true,
-    userId: null
+    userId: null,
+    is100Devs: false,
   },
   {
-    content: "Why you would use a srcset attribute in an image tag? Explain the process the browser uses when evaluating the content of this attribute.",
-    categories: ["Technical", "HTML"],
+    content:
+      "Tell me about a time you had to deliver bad news — a slipped deadline, a bug in production — to a stakeholder.",
+    categories: ["Behavioral"],
     answer: null,
     isDefault: true,
-    is100Devs: true,
-    userId: null
+    userId: null,
+    is100Devs: false,
   },
   {
-    content: "Have you used different HTML templating languages before?",
-    categories: ["Technical", "HTML"],
+    content:
+      "Tell me about a time you had to push back on scope or say no. How did you do it?",
+    categories: ["Behavioral"],
     answer: null,
     isDefault: true,
-    is100Devs: true,
-    userId: null
-  },
-
-  // CSS Questions
-  {
-    content: "What is CSS selector specificity and how does it work?",
-    categories: ["Technical", "CSS"],
-    answer: null,
-    isDefault: true,
-    is100Devs: true,
-    userId: null
+    userId: null,
+    is100Devs: false,
   },
   {
-    content: "What's the difference between \"resetting\" and \"normalizing\" CSS? Which would you choose, and why?",
-    categories: ["Technical", "CSS"],
+    content:
+      "How do you decide when to ask for help versus keep digging on your own?",
+    categories: ["Behavioral"],
     answer: null,
     isDefault: true,
-    is100Devs: true,
-    userId: null
+    userId: null,
+    is100Devs: false,
   },
   {
-    content: "Describe floats and how they work.",
-    categories: ["Technical", "CSS"],
+    content:
+      "Tell me about a time you used an AI tool to move faster. How did you check its output?",
+    categories: ["Behavioral"],
     answer: null,
     isDefault: true,
-    is100Devs: true,
-    userId: null
+    userId: null,
+    is100Devs: false,
   },
   {
-    content: "Describe z-index and how stacking context is formed.",
-    categories: ["Technical", "CSS"],
+    content:
+      "Describe how you've worked with people in other time zones or mostly asynchronously. What worked, and what didn't?",
+    categories: ["Behavioral"],
     answer: null,
     isDefault: true,
-    is100Devs: true,
-    userId: null
+    userId: null,
+    is100Devs: false,
   },
   {
-    content: "Describe BFC (Block Formatting Context) and how it works.",
-    categories: ["Technical", "CSS"],
+    content:
+      "What's some critical feedback you've gotten recently, and what did you do with it?",
+    categories: ["Behavioral"],
     answer: null,
     isDefault: true,
-    is100Devs: true,
-    userId: null
+    userId: null,
+    is100Devs: false,
   },
   {
-    content: "What are the various clearing techniques and which is appropriate for what context?",
-    categories: ["Technical", "CSS"],
+    content: "How do you stay current? What do you read, watch, or build?",
+    categories: ["Behavioral"],
     answer: null,
     isDefault: true,
-    is100Devs: true,
-    userId: null
+    userId: null,
+    is100Devs: false,
   },
   {
-    content: "Explain CSS sprites, and how you would implement them on a page or site.",
-    categories: ["Technical", "CSS"],
+    content:
+      "Where do you want your career to be in five years? What does your ideal role look like?",
+    categories: ["Behavioral"],
     answer: null,
     isDefault: true,
-    is100Devs: true,
-    userId: null
+    userId: null,
+    is100Devs: false,
   },
   {
-    content: "How would you approach fixing browser-specific styling issues?",
-    categories: ["Technical", "CSS"],
+    content:
+      "Give me an example of a time you had to take a creative and unusual approach to solve a problem. How did this idea come to your mind? Why do you think it was unusual?",
+    categories: ["Behavioral"],
     answer: null,
     isDefault: true,
-    is100Devs: true,
-    userId: null
+    userId: null,
+    is100Devs: false,
   },
   {
-    content: "How do you serve your pages for feature-constrained browsers? What techniques/processes do you use?",
-    categories: ["Technical", "CSS"],
+    content:
+      "Give an example of an important project goal you reached and how you achieved it.",
+    categories: ["Behavioral"],
     answer: null,
     isDefault: true,
-    is100Devs: true,
-    userId: null
+    userId: null,
+    is100Devs: false,
   },
   {
-    content: "What are the different ways to visually hide content (and make it available only for screen readers)?",
-    categories: ["Technical", "CSS"],
+    content:
+      "Tell me about your experience at your current place of employment.",
+    categories: ["Behavioral"],
     answer: null,
     isDefault: true,
-    is100Devs: true,
-    userId: null
+    userId: null,
+    is100Devs: false,
   },
   {
-    content: "Have you ever used a grid system, and if so, what do you prefer?",
-    categories: ["Technical", "CSS"],
+    content: "Do you have any questions for me?",
+    categories: ["Behavioral"],
     answer: null,
     isDefault: true,
-    is100Devs: true,
-    userId: null
+    userId: null,
+    is100Devs: false,
   },
   {
-    content: "Have you used or implemented media queries or mobile specific layouts/CSS?",
-    categories: ["Technical", "CSS"],
+    content: "What does `<!DOCTYPE html>` do?",
+    categories: ["HTML"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Are you familiar with styling SVG?",
-    categories: ["Technical", "CSS"],
+    content:
+      "What is semantic HTML, and why does it matter for accessibility, SEO, and maintainability?",
+    categories: ["HTML", "Accessibility"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Can you give an example of an @media property other than screen?",
-    categories: ["Technical", "CSS"],
+    content:
+      "What's the difference between `<button>`, `<a>`, and a `<div>` with a click handler? When is each correct?",
+    categories: ["HTML"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What are some of the \"gotchas\" for writing efficient CSS?",
-    categories: ["Technical", "CSS"],
+    content: "What are `data-*` attributes good for?",
+    categories: ["HTML"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What are the advantages/disadvantages of using CSS preprocessors?",
-    categories: ["Technical", "CSS"],
+    content:
+      "Describe the difference between a cookie, `sessionStorage`, and `localStorage`.",
+    categories: ["HTML", "JavaScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Describe what you like and dislike about the CSS preprocessors you have used.",
-    categories: ["Technical", "CSS"],
+    content:
+      'Describe the difference between `<script>`, `<script async>`, `<script defer>`, and `<script type="module">`. Where do scripts and stylesheets go in the document, and why?',
+    categories: ["HTML"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "How would you implement a web design comp that uses non-standard fonts?",
-    categories: ["Technical", "CSS"],
+    content: "What does the viewport meta tag do?",
+    categories: ["HTML"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Explain how a browser determines what elements match a CSS selector.",
-    categories: ["Technical", "CSS"],
+    content:
+      "Why would you use `srcset`/`sizes` or `<picture>`? How does the browser decide which image to load?",
+    categories: ["HTML"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Describe pseudo-elements and discuss what they are used for.",
-    categories: ["Technical", "CSS"],
+    content:
+      "How do you serve a page in multiple languages, and what do you have to watch out for on multilingual sites?",
+    categories: ["HTML", "Accessibility"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Explain your understanding of the box model and how you would tell the browser in CSS to render your layout in different box models.",
-    categories: ["Technical", "CSS"],
+    content:
+      "What makes a form accessible? (labels, required fields, error messages, focus management)",
+    categories: ["HTML", "Accessibility"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What does * { box-sizing: border-box; } do? What are its advantages?",
-    categories: ["Technical", "CSS"],
+    content: "What is ARIA, and when should you *not* use it?",
+    categories: ["Accessibility"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What is the CSS display property and can you give a few examples of its use?",
-    categories: ["Technical", "CSS"],
+    content:
+      "How do you visually hide content but keep it available to screen readers?",
+    categories: ["HTML", "Accessibility"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What's the difference between inline and inline-block?",
-    categories: ["Technical", "CSS"],
+    content:
+      "How do you make a custom component — a modal, a dropdown, tabs — keyboard-accessible?",
+    categories: ["HTML", "Accessibility"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What's the difference between a relative, fixed, absolute and statically positioned element?",
-    categories: ["Technical", "CSS"],
+    content:
+      "What is progressive enhancement? What breaks for your users if your JavaScript fails to load?",
+    categories: ["HTML", "Accessibility"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What existing CSS frameworks have you used locally, or in production? How would you change/improve them?",
-    categories: ["Technical", "CSS"],
+    content: "What is CSS specificity, and how is it calculated?",
+    categories: ["CSS"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Have you played around with the new CSS Flexbox or Grid specs?",
-    categories: ["Technical", "CSS"],
+    content:
+      "Explain the box model. What does `* { box-sizing: border-box; }` do, and why is it the default in most projects?",
+    categories: ["CSS"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Can you explain the difference between coding a web site to be responsive versus using a mobile-first strategy?",
-    categories: ["Technical", "CSS"],
+    content:
+      "What's the difference between `static`, `relative`, `absolute`, `fixed`, and `sticky` positioning?",
+    categories: ["CSS"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
+  },
+  {
+    content:
+      "What is the `display` property? What's the difference between `block`, `inline`, and `inline-block`?",
+    categories: ["CSS"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "When do you reach for Flexbox, and when do you reach for Grid?",
+    categories: ["CSS"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "Explain `z-index`. How is a stacking context formed, and why does `z-index: 9999` sometimes not work?",
+    categories: ["CSS"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "What is the cascade? What are cascade layers (`@layer`) for?",
+    categories: ["CSS"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "What are CSS custom properties, and how do they differ from Sass variables?",
+    categories: ["CSS"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "Explain pseudo-classes vs pseudo-elements, with examples of each.",
+    categories: ["CSS"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "`rem` vs `em` vs `%` vs `vh`/`vw` — when do you use each? What does `clamp()` do?",
+    categories: ["CSS"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "What is mobile-first design, and how do media queries support it?",
+    categories: ["CSS"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
   },
   {
     content: "How is responsive design different from adaptive design?",
-    categories: ["Technical", "CSS"],
+    categories: ["CSS"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Have you ever worked with retina graphics? If so, when and what techniques did you use?",
-    categories: ["Technical", "CSS"],
+    content:
+      "What are container queries, and how do they differ from media queries?",
+    categories: ["CSS"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Is there any reason you'd want to use translate() instead of absolute positioning, or vice-versa? And why?",
-    categories: ["Technical", "CSS"],
+    content: "What does `:has()` let you do that you couldn't before?",
+    categories: ["CSS"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
-
-  // Javascript Questions
   {
-    content: "Explain event delegation",
-    categories: ["Technical", "Javascript"],
+    content:
+      "What are the tradeoffs of utility-first CSS (Tailwind) vs CSS Modules vs CSS-in-JS vs plain CSS?",
+    categories: ["CSS"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Explain how this works in JavaScript",
-    categories: ["Technical", "Javascript"],
+    content:
+      "How do you load a custom web font without a flash of invisible text? What does `font-display` do?",
+    categories: ["CSS"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Explain how prototypal inheritance works",
-    categories: ["Technical", "Javascript"],
+    content:
+      "Why animate with `transform` and `opacity` instead of `top`/`left`/`width`?",
+    categories: ["CSS"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What do you think of AMD vs CommonJS?",
-    categories: ["Technical", "Javascript"],
+    content:
+      "What are `prefers-reduced-motion` and `prefers-color-scheme`, and how do you respect them?",
+    categories: ["CSS", "Accessibility"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Explain why the following doesn't work as an IIFE: function foo(){ }();. What needs to be changed to properly make it an IIFE?",
-    categories: ["Technical", "Javascript"],
+    content: "Walk me through how you debug a layout bug in DevTools.",
+    categories: ["CSS"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What's the difference between a variable that is: null, undefined or undeclared? How would you go about checking for any of these states?",
-    categories: ["Technical", "Javascript"],
+    content:
+      "What are JavaScript's data types? What's the difference between primitives and reference types?",
+    categories: ["JavaScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What is a closure, and how/why would you use one?",
-    categories: ["Technical", "Javascript"],
+    content: "What's the difference between `var`, `let`, and `const`?",
+    categories: ["JavaScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Can you describe the main difference between a .forEach loop and a .map() loop and why you would pick one versus the other?",
-    categories: ["Technical", "Javascript"],
+    content: "What's the difference between `==` and `===`?",
+    categories: ["JavaScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What's a typical use case for anonymous functions?",
-    categories: ["Technical", "Javascript"],
+    content:
+      "What are the falsy values in JavaScript? What bugs does truthiness cause?",
+    categories: ["JavaScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "How do you organize your code? (module pattern, classical inheritance?)",
-    categories: ["Technical", "Javascript"],
+    content:
+      "What's the difference between `null`, `undefined`, and undeclared? How do you check for each?",
+    categories: ["JavaScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What's the difference between host objects and native objects?",
-    categories: ["Technical", "Javascript"],
+    content:
+      "Explain hoisting. How does it differ for `var`, `let`/`const`, function declarations, and function expressions?",
+    categories: ["JavaScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Difference between: function Person(){}, var person = Person(), and var person = new Person()?",
-    categories: ["Technical", "Javascript"],
+    content:
+      "What is scope? Explain global, function, block, and lexical scope.",
+    categories: ["JavaScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What's the difference between .call and .apply?",
-    categories: ["Technical", "Javascript"],
+    content: 'What is a closure? Give a real use case (not just "a counter").',
+    categories: ["JavaScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Explain Function.prototype.bind.",
-    categories: ["Technical", "Javascript"],
+    content:
+      "Explain how `this` works. How do `call`, `apply`, and `bind` change it?",
+    categories: ["JavaScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "When would you use document.write()?",
-    categories: ["Technical", "Javascript"],
+    content:
+      "How do arrow functions differ from regular functions (`this`, `arguments`, `new`)?",
+    categories: ["JavaScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What's the difference between feature detection, feature inference, and using the UA string?",
-    categories: ["Technical", "Javascript"],
+    content: "Explain prototypal inheritance and the prototype chain.",
+    categories: ["JavaScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Explain Ajax in as much detail as possible.",
-    categories: ["Technical", "Javascript"],
+    content:
+      "What are ES6 classes? How do they differ from constructor functions? What are static members and private fields (`#`)?",
+    categories: ["JavaScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What are the advantages and disadvantages of using Ajax?",
-    categories: ["Technical", "Javascript"],
+    content:
+      "What's the difference between a function declaration and a function expression?",
+    categories: ["JavaScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Explain how JSONP works (and how it's not really Ajax).",
-    categories: ["Technical", "Javascript"],
+    content:
+      "What is an IIFE, why was it used, and why do you see it less now?",
+    categories: ["JavaScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Have you ever used JavaScript templating? If so, what libraries have you used?",
-    categories: ["Technical", "Javascript"],
+    content:
+      "What is a higher-order function? Name several from the standard library.",
+    categories: ["JavaScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Explain \"hoisting\".",
-    categories: ["Technical", "Javascript"],
+    content:
+      "`forEach` vs `map` vs `filter` vs `reduce` — when do you use each, and which ones return a new array?",
+    categories: ["JavaScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Describe event bubbling.",
-    categories: ["Technical", "Javascript"],
+    content:
+      "What is destructuring? Give an object example and an array example.",
+    categories: ["JavaScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What's the difference between an \"attribute\" and a \"property\"?",
-    categories: ["Technical", "Javascript"],
+    content: "What's the difference between spread and rest syntax?",
+    categories: ["JavaScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Why is extending built-in JavaScript objects not a good idea?",
-    categories: ["Technical", "Javascript"],
+    content:
+      "What do optional chaining (`?.`) and nullish coalescing (`??`) solve? How does `??` differ from `||`?",
+    categories: ["JavaScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Difference between document load event and document DOMContentLoaded event?",
-    categories: ["Technical", "Javascript"],
+    content:
+      "Mutable vs immutable; shallow vs deep copy. How do you copy an object or array (spread vs `structuredClone`)?",
+    categories: ["JavaScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What is the difference between == and ===?",
-    categories: ["Technical", "Javascript"],
+    content:
+      "What's the difference between `Map`/`Set` and plain objects/arrays? When would you use `WeakMap`?",
+    categories: ["JavaScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Explain the same-origin policy with regards to JavaScript.",
-    categories: ["Technical", "Javascript"],
+    content: "What is currying / partial application, and when is it useful?",
+    categories: ["JavaScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Make this work: duplicate([1,2,3,4,5]); // [1,2,3,4,5,1,2,3,4,5]",
-    categories: ["Technical", "Javascript"],
+    content: "What are iterators and generators?",
+    categories: ["JavaScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Why is it called a Ternary expression, what does the word \"Ternary\" indicate?",
-    categories: ["Technical", "Javascript"],
+    content:
+      "Why is extending built-in objects a bad idea? Why should you leave the global scope alone?",
+    categories: ["JavaScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What is \"use strict\";? what are the advantages and disadvantages to using it?",
-    categories: ["Technical", "Javascript"],
+    content:
+      "What's the difference between CommonJS and ES modules? How do you import and export?",
+    categories: ["JavaScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Create a for loop that iterates up to 100 while outputting \"fizz\" at multiples of 3, \"buzz\" at multiples of 5 and \"fizzbuzz\" at multiples of 3 and 5",
-    categories: ["Technical", "Javascript"],
+    content:
+      'What does `"use strict"` do, and why don\'t you write it much anymore?',
+    categories: ["JavaScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Why is it, in general, a good idea to leave the global scope of a website as-is and never touch it?",
-    categories: ["Technical", "Javascript"],
+    content:
+      "How does garbage collection work at a high level? What causes memory leaks in JavaScript (listeners, timers, closures)?",
+    categories: ["JavaScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Why would you use something like the load event? Does this event have disadvantages? Do you know any alternatives, and why would you use those?",
-    categories: ["Technical", "Javascript"],
+    content:
+      "Make this work: `duplicate([1,2,3,4,5]); // [1,2,3,4,5,1,2,3,4,5]`",
+    categories: ["JavaScript", "Coding warm-ups"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Explain what a single page app is and how to make one SEO-friendly.",
-    categories: ["Technical", "Javascript"],
+    content:
+      'FizzBuzz to 100: "fizz" at multiples of 3, "buzz" at multiples of 5, "fizzbuzz" at both.',
+    categories: ["JavaScript", "Coding warm-ups"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What is the extent of your experience with Promises and/or their polyfills?",
-    categories: ["Technical", "Javascript"],
+    content: "Reverse a string without `.reverse()`.",
+    categories: ["JavaScript", "Coding warm-ups"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What are the pros and cons of using Promises instead of callbacks?",
-    categories: ["Technical", "Javascript"],
+    content:
+      "Count the frequency of each word in a string and return the top three.",
+    categories: ["JavaScript", "Coding warm-ups"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What are some of the advantages/disadvantages of writing JavaScript code in a language that compiles to JavaScript?",
-    categories: ["Technical", "Javascript"],
+    content: "Flatten a nested array. Then do it without `.flat()`.",
+    categories: ["JavaScript", "Coding warm-ups"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What tools and techniques do you use debugging JavaScript code?",
-    categories: ["Technical", "Javascript"],
+    content:
+      "Remove duplicates from an array. Then from an array of objects, by `id`.",
+    categories: ["JavaScript", "Coding warm-ups"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What language constructions do you use for iterating over object properties and array items?",
-    categories: ["Technical", "Javascript"],
+    content: "Implement `debounce(fn, ms)`.",
+    categories: ["JavaScript", "Coding warm-ups"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Explain the difference between mutable and immutable objects.",
-    categories: ["Technical", "Javascript"],
+    content:
+      "Group an array of objects by a key — with `reduce`, then with `Object.groupBy`.",
+    categories: ["JavaScript", "Coding warm-ups"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Explain the difference between synchronous and asynchronous functions.",
-    categories: ["Technical", "Javascript"],
+    content:
+      "Explain the event loop: call stack, task queue, microtask queue. Why doesn't `setTimeout(fn, 0)` run immediately?",
+    categories: ["Async"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What is event loop? What is the difference between call stack and task queue?",
-    categories: ["Technical", "Javascript"],
+    content:
+      "What's the difference between synchronous and asynchronous code? Why does JavaScript need async at all?",
+    categories: ["Async"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Explain the differences on the usage of foo between function foo() {} and var foo = function() {}",
-    categories: ["Technical", "Javascript"],
+    content:
+      "What is a callback? What is callback hell, and how did Promises and async/await fix it?",
+    categories: ["Async"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What are the differences between variables created using let, var or const?",
-    categories: ["Technical", "Javascript"],
+    content: "What is a Promise? What states can it be in?",
+    categories: ["Async"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What are the differences between ES6 class and ES5 function constructors?",
-    categories: ["Technical", "Javascript"],
+    content:
+      "`Promise.all` vs `allSettled` vs `race` vs `any` — when do you use each?",
+    categories: ["Async", "Performance"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Can you offer a use case for the new arrow => function syntax? How does this new syntax differ from other functions?",
-    categories: ["Technical", "Javascript"],
+    content: "How does async/await work, and how do you handle errors with it?",
+    categories: ["Async"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What advantage is there for using the arrow syntax for a method in a constructor?",
-    categories: ["Technical", "Javascript"],
+    content:
+      "In what order does this log — synchronous code, a `setTimeout(…, 0)`, and a resolved promise's `.then`? Why?",
+    categories: ["Async", "Performance"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What is the definition of a higher-order function?",
-    categories: ["Technical", "Javascript"],
+    content:
+      "How do you make an HTTP request with `fetch`? Why doesn't `fetch` reject on a 404?",
+    categories: ["Async", "Browser"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Can you give an example for destructuring an object or an array?",
-    categories: ["Technical", "Javascript"],
+    content: "What is `AbortController`, and when do you use it?",
+    categories: ["Async", "Browser"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "ES6 Template Literals offer a lot of flexibility in generating strings, can you give an example?",
-    categories: ["Technical", "Javascript"],
+    content:
+      "What is the DOM? What's the difference between an attribute and a property?",
+    categories: ["Browser"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Can you give an example of a curry function and why this syntax offers an advantage?",
-    categories: ["Technical", "Javascript"],
+    content: "Explain event bubbling, capturing, and delegation.",
+    categories: ["Browser"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What are the benefits of using spread syntax and how is it different from rest syntax?",
-    categories: ["Technical", "Javascript"],
+    content: "`event.preventDefault()` vs `event.stopPropagation()`?",
+    categories: ["Browser"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "How can you share code between files?",
-    categories: ["Technical", "Javascript"],
+    content:
+      "`innerHTML` vs `textContent` — why is `innerHTML` with user input dangerous?",
+    categories: ["Browser"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Why you might want to create static class members?",
-    categories: ["Technical", "Javascript"],
+    content:
+      "What happens when you type a URL and press Enter? (DNS → TCP/TLS → HTTP → parse → render)",
+    categories: ["Browser"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
-
-  // Javascript General Questions
   {
-    content: "Can you name two programming paradigms important for JavaScript app developers?",
-    categories: ["Technical", "Javascript General"],
+    content:
+      "What is the critical rendering path? What's the difference between reflow and repaint?",
+    categories: ["Browser", "Performance"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What is functional programming?",
-    categories: ["Technical", "Javascript General"],
+    content:
+      "What is progressive rendering (lazy-loading images, prioritizing above-the-fold content, streaming HTML from the server)? What does each one improve for the user?",
+    categories: ["Browser", "Performance"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What is the difference between classical inheritance and prototypal inheritance?",
-    categories: ["Technical", "Javascript General"],
+    content:
+      "What are Core Web Vitals (LCP, INP, CLS), and what improves each one?",
+    categories: ["Performance"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What are the pros and cons of functional programming vs object-oriented programming?",
-    categories: ["Technical", "Javascript General"],
+    content:
+      "Debounce vs throttle — what's the difference, and when do you use each?",
+    categories: ["Performance"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What are two-way data binding and one-way data flow, and how are they different?",
-    categories: ["Technical", "Javascript General"],
+    content: "What are lazy loading, code splitting, and tree shaking?",
+    categories: ["Performance"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What is asynchronous programming, and why is it important in JavaScript?",
-    categories: ["Technical", "Javascript General"],
+    content:
+      "What is the same-origin policy? What is CORS, and does the client or the server fix a CORS error?",
+    categories: ["Browser"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
-
-  // Node Questions
   {
-    content: "What is Node.js? Where can you use it?",
-    categories: ["Technical", "Node"],
+    content:
+      "When would you use WebSockets or server-sent events instead of polling?",
+    categories: ["Async", "Browser"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Why use Node.js?",
-    categories: ["Technical", "Node"],
+    content:
+      "What is TypeScript? What does it catch, and what does it *not* catch?",
+    categories: ["TypeScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What are the features of Node.js?",
-    categories: ["Technical", "Node"],
+    content: "`interface` vs `type` — when do you use each?",
+    categories: ["TypeScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "How do you update NPM to a new version in Node.js?",
-    categories: ["Technical", "Node"],
+    content:
+      "What are union and intersection types? What is a discriminated union?",
+    categories: ["TypeScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Why is Node.js Single-threaded?",
-    categories: ["Technical", "Node"],
+    content: "What are generics? Write `first<T>(arr: T[]): T | undefined`.",
+    categories: ["TypeScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Explain callback in Node.js.",
-    categories: ["Technical", "Node"],
+    content:
+      "What is type narrowing? (`typeof`, `in`, `instanceof`, discriminants, type predicates)",
+    categories: ["TypeScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What is callback hell in Node.js?",
-    categories: ["Technical", "Node"],
+    content:
+      "What are `any`, `unknown`, and `never`? Why avoid `any`, and what do you use instead?",
+    categories: ["TypeScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "How do you prevent/fix callback hell?",
-    categories: ["Technical", "Node"],
+    content:
+      "What are utility types (`Partial`, `Pick`, `Omit`, `Record`, `ReturnType`)?",
+    categories: ["TypeScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Explain the role of REPL in Node.js.",
-    categories: ["Technical", "Node"],
+    content:
+      "How do you type a function that takes a callback? A React component's props?",
+    categories: ["TypeScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Name the types of API functions in Node.js.",
-    categories: ["Technical", "Node"],
+    content:
+      "`enum` vs a union of string literals — which do you prefer, and why?",
+    categories: ["TypeScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What are the functionalities of NPM in Node.js?",
-    categories: ["Technical", "Node"],
+    content:
+      "What is structural typing, and how does it differ from nominal typing?",
+    categories: ["TypeScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What is the difference between Node.js and Ajax?",
-    categories: ["Technical", "Node"],
+    content:
+      "What does `strict: true` turn on, and why does `strictNullChecks` matter?",
+    categories: ["TypeScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What are \"streams\" in Node.js? Explain the different types of streams present in Node.js.",
-    categories: ["Technical", "Node"],
+    content:
+      "What happens to types at runtime? Why do you still need runtime validation (Zod) at API boundaries?",
+    categories: ["TypeScript"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Explain chaining in Node.js.",
-    categories: ["Technical", "Node"],
+    content:
+      "What is React? What problem does it solve, and what are the virtual DOM and reconciliation?",
+    categories: ["React"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What are Globals in Node.js?",
-    categories: ["Technical", "Node"],
+    content: "What is JSX, and what does it compile to?",
+    categories: ["React"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What is Event-driven programming?",
-    categories: ["Technical", "Node"],
+    content: "What's the difference between state and props?",
+    categories: ["React"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What is Event loop in Node.js work? And How does it work?",
-    categories: ["Technical", "Node"],
+    content: "What is a controlled vs uncontrolled component?",
+    categories: ["React"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What is the purpose of module.exports in Node.js?",
-    categories: ["Technical", "Node"],
+    content: "What are the rules of hooks, and why do they exist?",
+    categories: ["React"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What is the difference between Asynchronous and Non-blocking?",
-    categories: ["Technical", "Node"],
+    content:
+      "`useState`: what does calling the setter actually do? When do you use the functional update form? Why must state be treated as immutable?",
+    categories: ["React"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What is Tracing in Node.js?",
-    categories: ["Technical", "Node"],
+    content:
+      "`useEffect`: what does the dependency array control? What is the cleanup function for? What are the common mistakes?",
+    categories: ["React"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "How will you debug an application in Node.js?",
-    categories: ["Technical", "Node"],
+    content:
+      "Why does React need `key`s, and why is the array index usually a bad key?",
+    categories: ["React"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Difference between setImmediate() vs setTimeout()?",
-    categories: ["Technical", "Node"],
+    content: "`useRef` — give two different use cases.",
+    categories: ["React"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What is process.nextTick()",
-    categories: ["Technical", "Node"],
+    content:
+      "`useMemo` and `useCallback` — when do they help, when are they premature, and what does the React Compiler change?",
+    categories: ["React"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What is package.json? What is it used for?",
-    categories: ["Technical", "Node"],
+    content: "`useReducer` vs `useState` — when would you switch?",
+    categories: ["React"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What is libuv?",
-    categories: ["Technical", "Node"],
+    content: "What is context? What are its pitfalls?",
+    categories: ["React"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What are some of the most popular modules of Node.js?",
-    categories: ["Technical", "Node"],
+    content:
+      "Local state vs context vs an external store (Zustand/Redux) vs server state (TanStack Query) — how do you decide?",
+    categories: ["React"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What is EventEmitter in Node.js?",
-    categories: ["Technical", "Node"],
+    content:
+      'What is "lifting state up"? What is prop drilling, and how do you fix it (composition, context)?',
+    categories: ["React"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
-
-  // CS Theory Questions
   {
-    content: "What is recursion and give an example using javascript?",
-    categories: ["Technical", "CS Theory"],
+    content:
+      "What are two-way data binding and one-way data flow, and how are they different?",
+    categories: ["React"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What are types?",
-    categories: ["Technical", "CS Theory"],
+    content:
+      "How do you fetch data in React? What are the pitfalls (race conditions, waterfalls, Strict Mode double-invoke)?",
+    categories: ["React"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What are data structures?",
-    categories: ["Technical", "CS Theory"],
+    content: "What are error boundaries?",
+    categories: ["React"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What is an algorithm?",
-    categories: ["Technical", "CS Theory"],
+    content:
+      "What is a re-render? What triggers one, and how do you find unnecessary ones?",
+    categories: ["React"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What is scope / lexical scope in javascript?",
-    categories: ["Technical", "CS Theory"],
+    content: "What is Suspense, and what does it enable?",
+    categories: ["React"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What is polymorphism?",
-    categories: ["Technical", "CS Theory"],
+    content:
+      "CSR vs SSR vs SSG vs ISR — what are the tradeoffs? What is hydration?",
+    categories: ["React"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What is encapsulation?",
-    categories: ["Technical", "CS Theory"],
+    content:
+      "What are React Server Components, and how do they differ from client components?",
+    categories: ["React"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What is a Linked List",
-    categories: ["Technical", "CS Theory"],
+    content:
+      "What's new in React 19 — Actions, `useActionState`, `useOptimistic`, the `use` hook, form actions?",
+    categories: ["React"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What is a Doubly Linked List",
-    categories: ["Technical", "CS Theory"],
+    content: "How do you handle forms in React?",
+    categories: ["React"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What is a Queue",
-    categories: ["Technical", "CS Theory"],
+    content:
+      "How does client-side routing work (React Router / Next.js App Router)?",
+    categories: ["React"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What is a Stack",
-    categories: ["Technical", "CS Theory"],
+    content:
+      "How do you test React components? What's the React Testing Library philosophy?",
+    categories: ["React"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What is a Hash Table",
-    categories: ["Technical", "CS Theory"],
+    content: "What are some React anti-patterns you've learned to avoid?",
+    categories: ["React"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What is a Heap",
-    categories: ["Technical", "CS Theory"],
+    content: "What is Node.js? What is it good at, and what is it bad at?",
+    categories: ["Node"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What is a Trie",
-    categories: ["Technical", "CS Theory"],
+    content:
+      'Why is Node "single-threaded," and how does it handle many concurrent requests? (event loop, libuv, thread pool)',
+    categories: ["Node"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What is a Tree",
-    categories: ["Technical", "CS Theory"],
+    content:
+      "What are `package.json` and `package-lock.json`? Dependencies vs devDependencies? What do `^` and `~` mean?",
+    categories: ["Node"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What is a Binary Search Tree",
-    categories: ["Technical", "CS Theory"],
+    content:
+      "What does `npx` do? What's the difference between `npm install` and `npm ci`?",
+    categories: ["Node"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What is a Disjoint Set",
-    categories: ["Technical", "CS Theory"],
+    content:
+      "CommonJS vs ESM in Node — how do you choose, and what breaks when you mix them?",
+    categories: ["Node"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "What is a Bloom Filter",
-    categories: ["Technical", "CS Theory"],
+    content:
+      "What are streams and buffers? When would you use a stream instead of reading a whole file?",
+    categories: ["Node"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Demonstrate Bubble Sort and explain when you might use it?",
-    categories: ["Technical", "CS Theory"],
+    content: "What is `EventEmitter`, and what is event-driven programming?",
+    categories: ["Node"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Demonstrate Insertion Sort and explain when you might use it?",
-    categories: ["Technical", "CS Theory"],
+    content: "`setTimeout` vs `setImmediate` vs `process.nextTick`?",
+    categories: ["Node"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Demonstrate Merge Sort and explain when you might use it?",
-    categories: ["Technical", "CS Theory"],
+    content:
+      "What is middleware in Express? How does `next()` work? Write a logging middleware.",
+    categories: ["Express"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
   },
   {
-    content: "Demonstrate Quicksort and explain when you might use it?",
-    categories: ["Technical", "CS Theory"],
+    content:
+      "How does Express handle errors, including errors thrown in async route handlers?",
+    categories: ["Express"],
     answer: null,
     isDefault: true,
+    userId: null,
     is100Devs: true,
-    userId: null
-  }
-]
+  },
+  {
+    content: "What is REST? What makes an API RESTful?",
+    categories: ["APIs"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "Explain the HTTP methods and idempotency: GET, POST, PUT, PATCH, DELETE.",
+    categories: ["APIs"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "Which status codes do you return for: created, no content, bad input, unauthenticated, forbidden, not found, conflict, server error?",
+    categories: ["APIs"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "How do you design a good endpoint — naming, versioning, pagination, filtering, sorting?",
+    categories: ["APIs"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "REST vs GraphQL — when would you choose each?",
+    categories: ["APIs"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "How do you validate request bodies (Zod/Joi), and why do you never trust the client?",
+    categories: ["Express", "APIs"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "What are environment variables? How do you keep secrets out of the repo and out of the client bundle?",
+    categories: ["Node"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "How do you structure a Node project (routes / controllers / services / models)?",
+    categories: ["Node", "Express"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "What is rate limiting, and why does every public API need it?",
+    categories: ["APIs"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "What are serverless and edge functions? What are their tradeoffs (cold starts, timeouts, state)?",
+    categories: ["APIs"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "SQL vs NoSQL — how do you decide?",
+    categories: ["Databases"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "What are primary keys, foreign keys, and indexes? When does an index hurt?",
+    categories: ["Databases"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "Explain `INNER JOIN` vs `LEFT JOIN` with an example.",
+    categories: ["Databases"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "What is normalization? When would you denormalize?",
+    categories: ["Databases"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "What is a transaction? What does ACID mean?",
+    categories: ["Databases"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "What are database constraints (unique, not null, check), and why enforce them in the database instead of only in code?",
+    categories: ["Databases"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "What is an ORM (Prisma, Drizzle, Mongoose)? What are the tradeoffs vs raw SQL?",
+    categories: ["Databases"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "What is a migration, and why do you need them?",
+    categories: ["Databases"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "What is the N+1 query problem, and how do you fix it?",
+    categories: ["Databases"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "Offset vs cursor pagination — what are the tradeoffs?",
+    categories: ["Databases"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "In MongoDB, when do you embed a document vs reference it?",
+    categories: ["Databases"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "What is caching (Redis)? What's hard about cache invalidation?",
+    categories: ["Databases"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "Model users, posts, and comments. Now add likes. Now add followers. (data modeling out loud)",
+    categories: ["Databases"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "Authentication vs authorization?",
+    categories: ["Auth"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "Sessions + cookies vs JWTs — how does each work, and what are the tradeoffs?",
+    categories: ["Auth"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      'What is OAuth doing under the hood when you "Sign in with Google"?',
+    categories: ["Auth"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "How do you store passwords? (salted hashing with bcrypt/argon2 — never encryption)",
+    categories: ["Auth", "Security"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "What do the `HttpOnly`, `Secure`, and `SameSite` cookie flags do?",
+    categories: ["Auth", "Security"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "What is XSS, and how do you prevent it?",
+    categories: ["Security"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "What is CSRF, and how do you mitigate it?",
+    categories: ["Security"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "What is SQL injection, and how do parameterized queries prevent it?",
+    categories: ["Security"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "What is CORS actually protecting? Why is `Access-Control-Allow-Origin: *` a problem with credentials?",
+    categories: ["Security"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "What is a Content Security Policy?",
+    categories: ["Security"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "Name a few of the OWASP Top 10 and how you'd defend against each.",
+    categories: ["Security"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "What must never end up in a Git repo, a log line, or a client bundle?",
+    categories: ["Security"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "How do you implement role-based access control in an API? Where do you check it?",
+    categories: ["Auth"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "What is DNS?",
+    categories: ["Networking"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "What's in an HTTP request and response? (method, path, headers, body, status)",
+    categories: ["HTTP"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "What is HTTPS/TLS doing? What is a certificate?",
+    categories: ["HTTP", "Networking"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "What are caching headers (`Cache-Control`, `ETag`), and what is a CDN?",
+    categories: ["HTTP", "Networking"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "What is a port? What is a reverse proxy (nginx), and why do you put one in front of Node?",
+    categories: ["Networking", "Deployment"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "What happens between `git push` and production? Explain CI/CD.",
+    categories: ["Deployment"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "What is Docker, and why containerize an app?",
+    categories: ["Deployment"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "Dev vs staging vs production — what's different, and how are secrets and env vars handled per environment?",
+    categories: ["Deployment"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "How would you deploy a full-stack app today (Vercel/Netlify/Render/Railway/Fly vs raw AWS)? What's the PaaS tradeoff?",
+    categories: ["Deployment"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "What is a load balancer? Horizontal vs vertical scaling?",
+    categories: ["Networking", "Deployment"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "Logs, metrics, traces — what do you check first when production is down?",
+    categories: ["Deployment"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "What is a webhook, and how does it differ from polling?",
+    categories: ["HTTP"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "Unit vs integration vs end-to-end tests — what does each catch, and how many of each do you want?",
+    categories: ["Testing"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "What tools do you use? (Vitest/Jest, React Testing Library, Playwright/Cypress, Supertest)",
+    categories: ["Testing"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "What is TDD? When do you practice it?",
+    categories: ["Testing"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "What are mocks, stubs, and spies? When is heavy mocking a smell?",
+    categories: ["Testing"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "How do you test async code and API calls?",
+    categories: ["Testing"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "What makes a test good, and what makes one brittle?",
+    categories: ["Testing"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "What does code coverage measure, and what does 100% *not* tell you?",
+    categories: ["Testing"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "Walk me through debugging a bug you can't reproduce.",
+    categories: ["Debugging"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "How do you use DevTools — breakpoints, the Network tab, the Performance tab?",
+    categories: ["Debugging"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "Explain your Git workflow: branch, commit, PR, review, merge.",
+    categories: ["Git", "Workflow"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "`merge` vs `rebase` — when do you use each?",
+    categories: ["Git"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "How do you resolve a merge conflict?",
+    categories: ["Git"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "`fetch` vs `pull`? `reset` vs `revert`? When is rewriting history okay?",
+    categories: ["Git"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "What makes a good commit message and a good PR description?",
+    categories: ["Git", "Workflow"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "How do you review someone else's code? What do you look for?",
+    categories: ["Workflow"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "How does Agile/Scrum work — standup, sprint planning, retro? What is a ticket's lifecycle?",
+    categories: ["Workflow"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "How do you estimate a task, and what do you do the moment you know you'll miss the estimate?",
+    categories: ["Workflow"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "How do you use AI coding tools day to day? Where do they help, and where do they hurt?",
+    categories: ["AI-Assisted Engineering"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "How do you verify AI-generated code before you commit it?",
+    categories: ["AI-Assisted Engineering"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "Tell me about a time an AI tool was confidently wrong. How did you catch it?",
+    categories: ["AI-Assisted Engineering"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "What must never go into a third-party model — secrets, customer PII, proprietary code — and how do you enforce that on a team?",
+    categories: ["AI-Assisted Engineering"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "What is an LLM, in plain terms? What are tokens and a context window, and why do they matter when you paste in a codebase?",
+    categories: ["AI-Assisted Engineering"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "What is a hallucination? How do you design a feature so a hallucination can't hurt the user?",
+    categories: ["AI-Assisted Engineering"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "What is prompt injection, and why does it matter the moment your app feeds untrusted content (emails, web pages, user input) to a model?",
+    categories: ["AI-Assisted Engineering"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "Explain RAG in plain terms. When do you use retrieval vs fine-tuning vs just a better prompt?",
+    categories: ["AI-Assisted Engineering"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "What is an embedding? What is a vector database for?",
+    categories: ["AI-Assisted Engineering"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "What is tool/function calling? How would you let a model call your API safely — and what's the difference between one completion call and an agent loop?",
+    categories: ["AI-Assisted Engineering"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "How do you know a prompt or model change made things better? (evals, golden sets, A/B tests)",
+    categories: ["AI-Assisted Engineering"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "How do you control cost and latency in an LLM feature? (caching, smaller models, streaming, trimming context)",
+    categories: ["AI-Assisted Engineering"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      'Walk me through adding "summarize this support ticket" to a CRUD app — request flow, where the model sits, failure handling, and how you ship it safely.',
+    categories: ["AI-Assisted Engineering"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "What is Big O? Give examples of O(1), O(log n), O(n), O(n log n), and O(n²).",
+    categories: ["CS Theory"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "What's the difference between time and space complexity? What's the classic tradeoff with hash maps?",
+    categories: ["CS Theory"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "What is recursion? What's a base case? Give a JavaScript example. When does it overflow the stack?",
+    categories: ["CS Theory"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "What is a data structure? What is an algorithm?",
+    categories: ["CS Theory", "Data Structures"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "Arrays vs linked lists — tradeoffs, and the complexity of access, insert, and delete.",
+    categories: ["Data Structures"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "What is a stack? Where does JavaScript use one?",
+    categories: ["Data Structures"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "What is a queue? Where do you see one (event loop, BFS)?",
+    categories: ["Data Structures"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "What is a hash table? How does hashing work, and what is a collision?",
+    categories: ["Data Structures"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      'What is a tree? Binary tree vs binary search tree? What does "balanced" mean, and why does it matter?',
+    categories: ["Data Structures"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "What is a heap, and what is it used for (priority queues)?",
+    categories: ["Data Structures"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "What is a graph? Directed vs undirected, weighted, adjacency list vs matrix?",
+    categories: ["Data Structures"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "BFS vs DFS — how do they work, and when do you use each?",
+    categories: ["CS Theory", "Data Structures"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "What is a trie, and when would you use one?",
+    categories: ["Data Structures"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "What is union-find (disjoint set), and what problem does it solve?",
+    categories: ["Data Structures"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "What is a Bloom filter?",
+    categories: ["Data Structures"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "What is binary search? What does it require of the input?",
+    categories: ["CS Theory"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "Explain bubble sort, insertion sort, merge sort, and quicksort — complexity, and when each is acceptable. What does `Array.prototype.sort` use?",
+    categories: ["CS Theory"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content: "What is a stable sort, and when does stability matter?",
+    categories: ["CS Theory"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "What are the two-pointer and sliding-window techniques, and what problems do they solve?",
+    categories: ["CS Theory"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "What is memoization? What is dynamic programming, at a high level?",
+    categories: ["CS Theory"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      'What are polymorphism, encapsulation, and inheritance? Why "composition over inheritance"?',
+    categories: ["CS Theory"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "What is functional programming? Pure functions, side effects, immutability — and the tradeoffs vs OOP.",
+    categories: ["CS Theory"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+  {
+    content:
+      "Static vs dynamic typing, strong vs weak — where does JavaScript sit, and where does TypeScript move it?",
+    categories: ["CS Theory"],
+    answer: null,
+    isDefault: true,
+    userId: null,
+    is100Devs: true,
+  },
+];
