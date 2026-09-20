@@ -1,20 +1,28 @@
-import {GoogleGenAI} from '@google/genai';
+import { GoogleGenAI } from "@google/genai";
 import models from "../models/index.js";
 const { User, Category, Question, PracticeSession } = models;
 import dotenv from "dotenv";
 
 dotenv.config();
 
-export const ai = new GoogleGenAI({apiKey: process.env.GEMINI_KEY});
+export const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_KEY });
 
 export default {
-  getAnswerFeedback: async (question,answer,current = 0,sessionId, level,title,userId) => {
-    try{
+  getAnswerFeedback: async (
+    question,
+    answer,
+    current = 0,
+    sessionId,
+    level,
+    title,
+    userId,
+  ) => {
+    try {
       // TODO at a later date:
       //  - this is prolly where a rate limiter check will be initiated, and the error response will be handled below |||||ctrl F: rate-limiter||||||
       const response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash',
-        contents: `Please, treat this as though you are mentoring someone who is typically an ${level || 'early'} level / career ${title || 'developer'}. When in an interview they were given the question "${question.content}." The person you're mentoring gave the answer, "${answer}." Remembering to stay positive with critiques, suggest those improvements.
+        model: "gemini-2.5-flash",
+        contents: `Please, treat this as though you are mentoring someone who is typically an ${level || "early"} level / career ${title || "developer"}. When in an interview they were given the question "${question.content}." The person you're mentoring gave the answer, "${answer}." Remembering to stay positive with critiques, suggest those improvements.
         a.) When a question is fact-based, operate under the pretense that a user should hit three main points:
          Remember that these three points need not always be separate (ie. what suffices for 1a, may also suffice for 2a and/or 3a, etc.).
          1a. Display an understanding of the concept via a brief explanation.
@@ -33,6 +41,10 @@ export default {
         If there are free and reputable resources [mdn, github repos, youtube, medium, official documentation, etc.] available that a user can use in order to strengthen their knowledge on the given subject, please look up ones that may help the user strengthen their answer.
         
         Please return your response in the JSON format specified in the config file, with your advice and suggested improvements or acknowledgement of sufficiency in the "feedback" property, the full URLs of any of the free and reputable resources as the items of the resources array and the content of any follow-up questions as the items of the followUps array (if there are no resources or follow-ups that are valid or necessary, send resources or followUps as an empty array, respectively). If there is an error, send back in JSON format with a 'message' property.
+
+        If the answer is obviously presented in a format where the user is taking notes (bullet points, broken sentences, and/or just overall ideas), the main points of your mission remain the same, but don't critique the grammar or style of the answer, as this means the user is attempting to use this in a study-mode. The goal is to work with what they have and get them to a point of understanding a concept they very likely do not fully grasp.
+
+        Also, a wall of text in any scenario does not benefit anyone. Try to treat your responses as though the user has ADHD and will lose focus if you include too much context around the main point. Focus on the essential points.
         
         IMPORTANT: Please format the feedback portion of your response with TRIPLE line breaks and markdown formats:
           - to display any lists
@@ -43,23 +55,23 @@ export default {
           responseJsonSchema: {
             type: "object",
             properties: {
-              feedback: {type:"string"},
+              feedback: { type: "string" },
               resources: {
                 type: "array",
-                items: {type: "string"},
+                items: { type: "string" },
               },
               followUps: {
                 type: "array",
-                items: {type: "string"},
+                items: { type: "string" },
               },
-            }
-          }
+            },
+          },
         },
-      })
+      });
 
       const data = await JSON.parse(response.text);
 
-      const {feedback, resources, followUps} = data;
+      const { feedback, resources, followUps } = data;
 
       // TODO at a later date:
       //  - |||||ctrl F: rate-limiter|||||| populate the practice session with limit or error message
@@ -73,32 +85,32 @@ export default {
             [`aiResponse.questionResponse.${current}.questionId`]: question._id,
           },
         },
-        {new:true}
-      )
+        { new: true },
+      );
 
-      console.log({feedback, resources})
-
-    }catch(feedbackError){
-      console.log({feedbackError});
+      console.log({ feedback, resources });
+    } catch (feedbackError) {
+      console.log({ feedbackError });
       const updatedSession = await PracticeSession.findByIdAndUpdate(
         sessionId,
         {
           $set: {
-            [`aiResponse.questionResponse.${current}.feedback`]: `SAAAAWWWWWYYY :(` +'\n\n\n'+ `${feedbackError.message}`,
+            [`aiResponse.questionResponse.${current}.feedback`]:
+              `SAAAAWWWWWYYY :(` + "\n\n\n" + `${feedbackError.message}`,
             [`aiResponse.questionResponse.${current}.resources`]: [],
             [`aiResponse.questionResponse.${current}.questionId`]: question._id,
           },
         },
-        {new:true}
-      )
+        { new: true },
+      );
       const user = await User.findByIdAndUpdate(
         userId,
         {
-          $inc: { tokens: 1}
+          $inc: { tokens: 1 },
         },
-        {new:true}
-      )
+        { new: true },
+      );
       // res.status(400).json({message: feedbackError.message})
     }
   },
-}
+};
