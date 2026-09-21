@@ -1,6 +1,7 @@
 import { GoogleGenAI } from "@google/genai";
 import models from "../models/index.js";
-const { User, Category, Question, PracticeSession } = models;
+import { checkUrl } from "./urlVerification.js";
+const { User, Category, Question, PracticeSession, Usage } = models;
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -20,8 +21,9 @@ export default {
     try {
       // TODO at a later date:
       //  - this is prolly where a rate limiter check will be initiated, and the error response will be handled below |||||ctrl F: rate-limiter||||||
+      answer = (answer || "").slice(0, 10000);
       const response = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
+        model: "gemini-3.8-flash",
         contents: `Please, treat this as though you are mentoring someone who is typically an ${level || "early"} level / career ${title || "developer"}. When in an interview they were given the question "${question.content}." The person you're mentoring gave the answer, "${answer}." Remembering to stay positive with critiques, suggest those improvements.
         a.) When a question is fact-based, operate under the pretense that a user should hit three main points:
          Remember that these three points need not always be separate (ie. what suffices for 1a, may also suffice for 2a and/or 3a, etc.).
@@ -51,6 +53,9 @@ export default {
           - Between paragraphs
           - After colons introducing lists`,
         config: {
+          tools: [{ googleSearch: {} }],
+          thinkingConfig: { thinkingLevel: "medium" },
+          maxOutputTokens: 10000,
           responseMimeType: "application/json",
           responseJsonSchema: {
             type: "object",
@@ -69,9 +74,38 @@ export default {
         },
       });
 
+      const usage = response.usageMetadata || {};
+      const query =
+        response.candidates?.[0]?.groundingMetadata?.webSearchQueries?.length ||
+        0;
+      const tokenCost =
+        ((usage.promptTokenCount || 0) + (usage.toolUsePromptTokenCount || 0)) *
+          0.75 +
+        ((usage.candidatesTokenCount || 0) + (usage.thoughtsTokenCount || 0)) *
+          3.75;
+      await Usage.findOneAndUpdate(
+        { month: new Date().toISOString().slice(0, 7) },
+        { $inc: { tokenCost, searches: query } },
+        { upsert: true },
+      );
+      console.log({ usage, query, tokenCost });
+
       const data = await JSON.parse(response.text);
 
-      const { feedback, resources, followUps } = data;
+      const { feedback, followUps } = data;
+
+      const chunks =
+        response.candidates?.[0]?.groundingMetadata?.groundingChunks || [];
+      const urls = chunks.map((chunk) => chunk.web?.uri).filter(Boolean);
+
+      const [checked, verified] = await Promise.all([
+        Promise.all(urls.map(checkUrl)),
+        Promise.all((data.resources || []).map(checkUrl)),
+      ]);
+      const resources = verified.filter(Boolean);
+      const sources = checked.filter(Boolean);
+
+      const allSources = [...new Set([...resources, ...sources])].slice(0, 5);
 
       // TODO at a later date:
       //  - |||||ctrl F: rate-limiter|||||| populate the practice session with limit or error message
@@ -80,7 +114,7 @@ export default {
         {
           $set: {
             [`aiResponse.questionResponse.${current}.feedback`]: feedback,
-            [`aiResponse.questionResponse.${current}.resources`]: resources,
+            [`aiResponse.questionResponse.${current}.resources`]: allSources,
             [`aiResponse.questionResponse.${current}.followUps`]: followUps,
             [`aiResponse.questionResponse.${current}.questionId`]: question._id,
           },
@@ -96,7 +130,9 @@ export default {
         {
           $set: {
             [`aiResponse.questionResponse.${current}.feedback`]:
-              `SAAAAWWWWWYYY :(` + "\n\n\n" + `${feedbackError.message}`,
+              `My bad, something went wrong with the model, please try again.` +
+              "\n\n\n" +
+              `${feedbackError.message}`,
             [`aiResponse.questionResponse.${current}.resources`]: [],
             [`aiResponse.questionResponse.${current}.questionId`]: question._id,
           },
