@@ -30,12 +30,9 @@ answerBox.addEventListener("focusin", (e) => {
 });
 
 answerBox.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    if (!e.shiftKey) {
-      e.preventDefault();
-      answerForm.requestSubmit();
-    }
-  }
+  if (e.key !== "Enter" || !(e.ctrlKey || e.metaKey)) return;
+  e.preventDefault();
+  answerForm.requestSubmit();
 });
 
 answerForm.addEventListener("submit", async (e) => {
