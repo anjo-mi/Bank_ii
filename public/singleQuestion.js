@@ -110,6 +110,12 @@ document.addEventListener("click", (e) => {
   }
 });
 
+answerArea.addEventListener("keydown", (e) => {
+  if (e.key !== "Enter" || !(e.ctrlKey || e.metaKey)) return;
+  e.preventDefault();
+  answerForm.requestSubmit();
+});
+
 answerForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   if ((e.target.id = "submit-answer")) {
