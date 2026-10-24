@@ -149,6 +149,7 @@
     --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
     --animate-spin: spin 1s linear infinite;
     --blur-sm: 8px;
+    --blur-lg: 16px;
     --default-transition-duration: 150ms;
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --default-font-family: var(--font-sans);
@@ -690,11 +691,17 @@
   .min-h-9\/10 {
     min-height: calc(9/10 * 100%);
   }
+  .min-h-10 {
+    min-height: calc(var(--spacing) * 10);
+  }
   .min-h-24 {
     min-height: calc(var(--spacing) * 24);
   }
   .min-h-25 {
     min-height: calc(var(--spacing) * 25);
+  }
+  .min-h-30 {
+    min-height: calc(var(--spacing) * 30);
   }
   .min-h-50 {
     min-height: calc(var(--spacing) * 50);
@@ -810,11 +817,17 @@
   .max-w-4\/10 {
     max-width: calc(4/10 * 100%);
   }
+  .max-w-8 {
+    max-width: calc(var(--spacing) * 8);
+  }
   .max-w-9\/10 {
     max-width: calc(9/10 * 100%);
   }
   .max-w-10\/10 {
     max-width: calc(10/10 * 100%);
+  }
+  .max-w-15 {
+    max-width: calc(var(--spacing) * 15);
   }
   .max-w-95\/100 {
     max-width: calc(95/100 * 100%);
@@ -1675,6 +1688,10 @@
   }
   .outline-white {
     outline-color: var(--color-white);
+  }
+  .blur-lg {
+    --tw-blur: blur(var(--blur-lg));
+    filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
   }
   .blur-sm {
     --tw-blur: blur(var(--blur-sm));

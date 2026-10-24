@@ -53,6 +53,7 @@
         </div>
         <% if (ais && ais.length){ %>
         <div class="ai-response mt-6 border-1 border-sky-400 rounded-2xl pt-2 pb-10 px-3 bg-black">
+          <div class="min-h-10 max-w-8 hover:cursor-pointer"><img class="show-answer" src="../images/hidden.png" alt="Hidden Icon"></div>
           <h2 class="font-bold underline text-sky-200 text:md md:text-lg lg:text-xl mb-3">Bot Botterson says:</h2>
           <form action="/questions/saveFeedback" method="POST" class="save-feedback">
             <input type="hidden" name="answer" class="answer" value="<%= as[i] %>">
@@ -61,7 +62,7 @@
             <input type="hidden" name="feedback" class="feedback" value="<%= feedback[i] %>">
             <button type="submit" class="save-response block max-h-fit w-2/5 lg:w-1/4 m-auto my-6 items-center px-5 py-2.5 text-xs md:text-lg text-center text-white border-1 border-yellow-600 hover:border-yellow-800 active:border-yellow-500 bg-green-950 hover:bg-green-700 active:bg-lime-700 hover:cursor-pointer rounded-lg hover:bg-green-800">Save</button>
           </form>
-          <div class="feedback m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 border-1 border-violet-800 bg-zinc-900 rounded-lg"><%- feedback[i] %></div>
+          <div class="feedback blur-lg m-auto text-center items-center min-h-50 py-1 md:py-3 px-2 md:px-4 border-1 border-violet-800 bg-zinc-900 rounded-lg"><%- feedback[i] %></div>
         </div>
         <div class="ai-resources mt-6 border-1 border-sky-400 rounded-2xl pt-2 pb-10 px-3 bg-black">
           <% if (ais[i]?.resources?.length) %> <h2 class="font-bold mx-auto my-3 underline text-sky-200 text:md md:text-lg lg:text-xl">Suggested Resources:</h2>

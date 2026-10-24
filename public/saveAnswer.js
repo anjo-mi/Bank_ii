@@ -1,61 +1,87 @@
-const successBox = document.getElementById('success-message');
-const errorBox = document.getElementById('error-message');
-const dismisses = document.querySelectorAll('.dismiss');
-const resultCards = Array.from(document.querySelectorAll('.result-card'));
-const prevBtn = document.getElementById('prev');
-const nextBtn = document.getElementById('next');
+const successBox = document.getElementById("success-message");
+const errorBox = document.getElementById("error-message");
+const dismisses = document.querySelectorAll(".dismiss");
+const resultCards = Array.from(document.querySelectorAll(".result-card"));
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
 
-const newQuestionForms = document.querySelectorAll('.save-follow-up');
+const newQuestionForms = document.querySelectorAll(".save-follow-up");
 
-if (dismisses) dismisses.forEach(dismissBox => {
-  dismissBox.addEventListener('click', (e) => {
-    successBox.style.opacity = 0;
-    errorBox.style.opacity = 0;
-    setTimeout(() => {
-      successBox.style.display = 'none';
-      errorBox.style.display = 'none';
-    }, 300)
-  })
-})
+const feedbacks = document.querySelectorAll(".feedback");
+const visibilityToggle = document.querySelectorAll(".show-answer");
+
+const hide = () => {
+  feedbacks.forEach((fb) => fb.classList.add("blur-lg"));
+  visibilityToggle.forEach((toggle) => {
+    toggle.addEventListener("click", show);
+    toggle.removeEventListener("click", hide);
+    toggle.src = "../images/hidden.png";
+    toggle.alt = "Hidden Icon";
+  });
+};
+
+const show = () => {
+  feedbacks.forEach((fb) => fb.classList.remove("blur-lg"));
+  visibilityToggle.forEach((toggle) => {
+    toggle.addEventListener("click", hide);
+    toggle.removeEventListener("click", show);
+    toggle.src = "../images/visible.png";
+    toggle.alt = "Visible Icon";
+  });
+};
+
+visibilityToggle.forEach((toggle) => toggle.addEventListener("click", show));
+
+if (dismisses)
+  dismisses.forEach((dismissBox) => {
+    dismissBox.addEventListener("click", (e) => {
+      successBox.style.opacity = 0;
+      errorBox.style.opacity = 0;
+      setTimeout(() => {
+        successBox.style.display = "none";
+        errorBox.style.display = "none";
+      }, 300);
+    });
+  });
 
 const handleGood = (message) => {
-  console.log({message})
-  successBox.querySelector('.message').textContent = message;
-  successBox.style.display = 'flex';
+  console.log({ message });
+  successBox.querySelector(".message").textContent = message;
+  successBox.style.display = "flex";
   setTimeout(() => {
     successBox.style.opacity = 100;
-  }, 100)
-}
+  }, 100);
+};
 
 const handleBad = (message) => {
-  errorBox.querySelector('.message').textContent = message;
-  errorBox.style.display = 'flex';
+  errorBox.querySelector(".message").textContent = message;
+  errorBox.style.display = "flex";
   setTimeout(() => {
     errorBox.style.opacity = 100;
-  }, 100)
-}
+  }, 100);
+};
 
 const makeList = (array) => {
   class Node {
-    constructor(val){
+    constructor(val) {
       this.val = val;
       this.next = null;
       this.prev = null;
     }
   }
   let head = null,
-      tail = null;
-  
-  for (let i = 0 ; i < array.length ; i++){
+    tail = null;
+
+  for (let i = 0; i < array.length; i++) {
     const n = new Node(array[i]);
-    if (!head){
+    if (!head) {
       head = n;
       tail = n;
       head.next = tail;
       head.prev = tail;
       tail.prev = head;
       tail.next = head;
-    }else{
+    } else {
       n.prev = tail;
       tail.next = n;
       tail = tail.next;
@@ -64,201 +90,202 @@ const makeList = (array) => {
     }
   }
   return head;
-}
+};
 
 let current;
 
-document.addEventListener('DOMContentLoaded', (e) => {
+document.addEventListener("DOMContentLoaded", (e) => {
   const resultsList = makeList(resultCards);
   current = resultsList;
-  current.val.style.display = 'block';
+  current.val.style.display = "block";
   current.val.style.opacity = 100;
-})
+});
 
-prevBtn.addEventListener('click', (e) => {
+prevBtn.addEventListener("click", (e) => {
   e.preventDefault();
   if (!current.prev) return;
   current.val.style.opacity = 0;
   setTimeout(() => {
-    current.val.style.display = 'none'
-    setTimeout(() =>{
+    current.val.style.display = "none";
+    setTimeout(() => {
       current = current.prev;
-      current.val.style.display = 'block';
+      current.val.style.display = "block";
       current.val.style.opacity = 100;
-    })
+    });
   }, 300);
-})
+});
 
-nextBtn.addEventListener('click', (e) => {
+nextBtn.addEventListener("click", (e) => {
   e.preventDefault();
   if (!current.next) return;
   current.val.style.opacity = 0;
   setTimeout(() => {
-    current.val.style.display = 'none'
-    setTimeout(() =>{
+    current.val.style.display = "none";
+    setTimeout(() => {
       current = current.next;
-      current.val.style.display = 'block';
+      current.val.style.display = "block";
       current.val.style.opacity = 100;
-    })
+    });
   }, 300);
-})
+});
 
-document.addEventListener('submit', async (e) => {
-  if (e.target.classList.contains('save-answer')){
+document.addEventListener("submit", async (e) => {
+  if (e.target.classList.contains("save-answer")) {
     e.preventDefault();
-    const answer = e.target.querySelector('.answer').value;
-    const content = e.target.querySelector('.content').value;
-    const questionId = e.target.querySelector('.questionId').value;
-    const isDefault = e.target.querySelector('.isDefault') ? e.target.querySelector('.isDefault').value : null;
+    const answer = e.target.querySelector(".answer").value;
+    const content = e.target.querySelector(".content").value;
+    const questionId = e.target.querySelector(".questionId").value;
+    const isDefault = e.target.querySelector(".isDefault")
+      ? e.target.querySelector(".isDefault").value
+      : null;
 
-    const response = await fetch('/questions/saveAnswer', {
+    const response = await fetch("/questions/saveAnswer", {
       method: "POST",
-      headers: {"Content-Type": 'application/json'},
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         answer,
         content,
         questionId,
         isDefault,
-      })
-    })
+      }),
+    });
 
     const data = await response.json();
 
-    if (response.ok){
-
+    if (response.ok) {
       handleGood(data.message);
-    }
-    else handleBad(data.message);
+    } else handleBad(data.message);
   }
-})
+});
 
-document.addEventListener('submit', async (e) => {
-  if (e.target.classList.contains('save-feedback')){
+document.addEventListener("submit", async (e) => {
+  if (e.target.classList.contains("save-feedback")) {
     e.preventDefault();
-    const answer = e.target.querySelector('.answer').value;
-    const content = e.target.querySelector('.content').value;
-    const questionId = e.target.querySelector('.questionId').value;
-    const feedback = e.target.querySelector('.feedback')?.value;
+    const answer = e.target.querySelector(".answer").value;
+    const content = e.target.querySelector(".content").value;
+    const questionId = e.target.querySelector(".questionId").value;
+    const feedback = e.target.querySelector(".feedback")?.value;
 
-    const response = await fetch('/questions/saveFeedback', {
+    const response = await fetch("/questions/saveFeedback", {
       method: "POST",
-      headers: {"Content-Type": 'application/json'},
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         answer,
         content,
         questionId,
         feedback,
-      })
-    })
+      }),
+    });
 
     const data = await response.json();
 
-    if (response.ok){
-
+    if (response.ok) {
       handleGood(data.message);
-    }
-    else handleBad(data.message);
+    } else handleBad(data.message);
   }
-})
+});
 
-document.addEventListener('submit', async (e) => {
-  if (e.target.id === "record-container"){
+document.addEventListener("submit", async (e) => {
+  if (e.target.id === "record-container") {
     e.preventDefault();
-    const answer = e.target.querySelector('.answer').value;
-    const content = e.target.querySelector('.content').value;
-    const questionId = e.target.querySelector('.questionId').value;
-    const feedback = e.target.querySelector('.feedback')?.value;
+    const answer = e.target.querySelector(".answer").value;
+    const content = e.target.querySelector(".content").value;
+    const questionId = e.target.querySelector(".questionId").value;
+    const feedback = e.target.querySelector(".feedback")?.value;
 
-    const response = await fetch('/questions/saveAudio', {
+    const response = await fetch("/questions/saveAudio", {
       method: "POST",
-      headers: {"Content-Type": 'application/json'},
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         answer,
         content,
         questionId,
         feedback,
-      })
-    })
+      }),
+    });
 
     const data = await response.json();
 
     if (response.ok) handleGood(data.message);
     else handleBad(data.message);
   }
-})
+});
 
-document.addEventListener('submit', async (e) => {
-  if (e.target.classList.contains('save-resource')){
+document.addEventListener("submit", async (e) => {
+  if (e.target.classList.contains("save-resource")) {
     e.preventDefault();
-    const resource = e.target.querySelector('.resource').value;
-    
-    const response = await fetch('/saveResource', {
+    const resource = e.target.querySelector(".resource").value;
+
+    const response = await fetch("/saveResource", {
       method: "POST",
-      headers: {"Content-Type": 'application/json'},
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         resource,
-      })
-    })
+      }),
+    });
 
     const data = await response.json();
-    
+
     if (response.ok) handleGood(data.message);
     else handleBad(data.message);
   }
-})
+});
 
-document.addEventListener('click', (e) => {
+document.addEventListener("click", (e) => {
   let targ = e.target;
-  while (targ){
-    if (targ.classList.contains('save-response') 
-          || targ.classList.contains('save-answer')
-          || targ.classList.contains('save-resource')
-          || targ.classList.contains('save-audio')
-          || targ.classList.contains('save-follow-up')
-    ) return;
+  while (targ) {
+    if (
+      targ.classList.contains("save-response") ||
+      targ.classList.contains("save-answer") ||
+      targ.classList.contains("save-resource") ||
+      targ.classList.contains("save-audio") ||
+      targ.classList.contains("save-follow-up")
+    )
+      return;
     targ = targ.parentElement;
-
   }
   successBox.style.opacity = 0;
   errorBox.style.opacity = 0;
   setTimeout(() => {
-    successBox.style.display = 'none';
-    errorBox.style.display = 'none';
-  },300)
-})
+    successBox.style.display = "none";
+    errorBox.style.display = "none";
+  }, 300);
+});
 
-newQuestionForms.forEach(form => form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const targ = e.target;
-  console.log({targ})
-  const question = e.target.querySelector('.follow-up').value;
-  const categori = JSON.parse(e.target.querySelector('.categori').value);
-  console.log({question, categori})
-    const response = await fetch('/questions/create', {
+newQuestionForms.forEach((form) =>
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const targ = e.target;
+    console.log({ targ });
+    const question = e.target.querySelector(".follow-up").value;
+    const categori = JSON.parse(e.target.querySelector(".categori").value);
+    console.log({ question, categori });
+    const response = await fetch("/questions/create", {
       method: "POST",
-      headers: {"Content-Type": 'application/json'},
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         question,
         categori,
         answer: null,
-      })
-    })
-  const data = await response.json();
-  console.log({response,data})
-  if (response.ok) handleGood(data.message);
-  else handleBad(data.message);
-}))
+      }),
+    });
+    const data = await response.json();
+    console.log({ response, data });
+    if (response.ok) handleGood(data.message);
+    else handleBad(data.message);
+  }),
+);
 
-document.addEventListener('DOMContentLoaded', () => {
-  Array.from(document.querySelectorAll('code')).forEach(code => {
-    code.style.whiteSpace = 'pre-wrap';
-    code.style.wordBreak = 'break-word';
-  })
-  Array.from(document.querySelectorAll('pre')).forEach(pre => {
-      pre.style.backgroundColor = 'black';
-      pre.style.border = '1px solid white';
-      pre.style.borderRadius = '5%';
-      pre.style.textAlign = 'start';
-      pre.style.padding = '.8rem';
-  })
-})
+document.addEventListener("DOMContentLoaded", () => {
+  Array.from(document.querySelectorAll("code")).forEach((code) => {
+    code.style.whiteSpace = "pre-wrap";
+    code.style.wordBreak = "break-word";
+  });
+  Array.from(document.querySelectorAll("pre")).forEach((pre) => {
+    pre.style.backgroundColor = "black";
+    pre.style.border = "1px solid white";
+    pre.style.borderRadius = "5%";
+    pre.style.textAlign = "start";
+    pre.style.padding = ".8rem";
+  });
+});
